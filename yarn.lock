@@ -2341,6 +2341,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "react-icons@npm:4.4.0"
+  peerDependencies:
+    react: "*"
+  checksum: dd93a1dcc8ac8a3cf46a2b33e80b586fa967331fa5fcb90d061abf276155a8363a331643e203d67cb9bab4261d00a757da854bcce1fce2c6e4258bf3e33f711b
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^18.0.0":
   version: 18.2.0
   resolution: "react-is@npm:18.2.0"
@@ -2541,6 +2550,7 @@ __metadata:
     postcss: ^8.4.16
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-icons: ^4.4.0
     tailwindcss: ^3.1.8
     typescript: ^4.8.3
     vite: ^3.1.0
