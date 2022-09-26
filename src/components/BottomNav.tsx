@@ -1,17 +1,29 @@
 import "./BottomNav.css";
 import { useFlow } from "../stackflow";
 
+type Navigate_Type = 'Main'|'Group'|'Community'|'MyPage';
+
+const NAVIGATE_OBJ = [
+  {action: 'Main', content: '개인'},
+  {action:'Group',content:'그룹'},
+  {action:'Community',content:'커뮤니티'},
+  {action: 'MyPage',content:'내정보'},
+];
+
+
 const BottomNav = () => {
   const { replace } = useFlow();
 
   return (
     <nav className="wrapper">
-      <div onClick={() => replace("Main", {})}>개인</div>
-      <div onClick={() => replace("Group", {})}>그룹</div>
-      <div onClick={() => replace("Community", {})}>커뮤니티</div>
-      <div onClick={() => replace("MyPage", {})}>내정보</div>
+      {
+        NAVIGATE_OBJ.map(({action,content})=>
+        (<div key={action} onClick={() => replace(action as Navigate_Type, {})}>{content}</div>))
+      }
     </nav>
   );
 };
 
 export default BottomNav;
+
+
