@@ -11,24 +11,26 @@ const NAVIGATE_OBJ = [
   {
     action: "Main",
     content: "개인",
-    image: <BiHome className="justify-center items-center w-full h-7 mt-1" />,
+    image: <BiHome className="justify-center items-center w-full h-3/6 mt-1" />,
   },
   {
     action: "Group",
     content: "그룹",
-    image: <GrGroup className="justify-center items-center w-full h-7 mt-1" />,
+    image: (
+      <GrGroup className="justify-center items-center w-full h-3/6 mt-1" />
+    ),
   },
   {
     action: "Community",
     content: "커뮤니티",
     image: (
-      <BsLayoutTextWindowReverse className="justify-center items-center w-full h-7 mt-1" />
+      <BsLayoutTextWindowReverse className="justify-center items-center w-full h-3/6 mt-1" />
     ),
   },
   {
     action: "MyPage",
     content: "내정보",
-    image: <BiUser className="justify-center items-center w-full h-7 mt-1" />,
+    image: <BiUser className="justify-center items-center w-full h-3/6 mt-1" />,
   },
 ];
 
@@ -39,7 +41,7 @@ const BottomNav = () => {
     <nav className="wrapper">
       {NAVIGATE_OBJ.map(({ action, content, image }) => (
         <div
-          className="text-xs"
+          className="text-xs h-full"
           key={action}
           onClick={() => replace(action as Navigate_Type, {})}
         >
