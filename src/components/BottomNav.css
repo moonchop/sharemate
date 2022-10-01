@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 45px;
+  height: 6%;
 }
 
 /* nav태그 아래의 자식들을 수평정렬하기 위한 설정 */
@@ -20,6 +20,5 @@ nav > div {
   text-align: center;
 
   /* 세로길이 설정 */
-  height: 45px;
-  line-height: 45px;
+  height: 6%;
 }

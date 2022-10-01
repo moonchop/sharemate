@@ -8,9 +8,7 @@ const Main: ActivityComponentType = () => {
   return (
     <AppScreen theme="cupertino">
       <TopNav />
-      <div className="h-full flex-col my-3 mx-6">
-        <Feed />
-      </div>
+      <Feed />
       <BottomNav />
     </AppScreen>
   );
