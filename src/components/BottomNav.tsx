@@ -1,13 +1,35 @@
+import React from "react";
 import "./BottomNav.css";
 import { useFlow } from "../stackflow";
-import { BiHome } from "react-icons/bi";
+import { BiHome, BiUser } from "react-icons/bi";
+import { GrGroup } from "react-icons/gr";
+import { BsLayoutTextWindowReverse } from "react-icons/bs";
+
 type Navigate_Type = "Main" | "Group" | "Community" | "MyPage";
 
 const NAVIGATE_OBJ = [
-  { action: "Main", content: "개인" },
-  { action: "Group", content: "그룹" },
-  { action: "Community", content: "커뮤니티" },
-  { action: "MyPage", content: "내정보" },
+  {
+    action: "Main",
+    content: "개인",
+    image: <BiHome className="justify-center items-center w-full h-7 mt-1" />,
+  },
+  {
+    action: "Group",
+    content: "그룹",
+    image: <GrGroup className="justify-center items-center w-full h-7 mt-1" />,
+  },
+  {
+    action: "Community",
+    content: "커뮤니티",
+    image: (
+      <BsLayoutTextWindowReverse className="justify-center items-center w-full h-7 mt-1" />
+    ),
+  },
+  {
+    action: "MyPage",
+    content: "내정보",
+    image: <BiUser className="justify-center items-center w-full h-7 mt-1" />,
+  },
 ];
 
 const BottomNav = () => {
@@ -15,10 +37,14 @@ const BottomNav = () => {
 
   return (
     <nav className="wrapper">
-      {NAVIGATE_OBJ.map(({ action, content }) => (
-        <div key={action} onClick={() => replace(action as Navigate_Type, {})}>
+      {NAVIGATE_OBJ.map(({ action, content, image }) => (
+        <div
+          className="text-xs"
+          key={action}
+          onClick={() => replace(action as Navigate_Type, {})}
+        >
+          {image}
           {content}
-          <BiHome />
         </div>
       ))}
     </nav>
