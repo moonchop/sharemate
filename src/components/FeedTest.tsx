@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import TopNav from "./TopNav";
@@ -192,76 +192,42 @@ function RowVirtualizerFixed() {
 
   return (
     <>
-      <div
-        ref={parentRef}
-        className=" my-3 mx-6 justify-center text-center"
-        style={{
-          overflow: "auto",
-        }}
-      >
-        <div
-          className=""
-          style={{
-            height: "85vh",
-            width: "100%",
-            position: "relative",
-          }}
-        >
-          {dumyData.map((v) => (
-            <div key={v.id}>
-              <div className="flex my-2 justify-between ">
-                <div className="flex flex-row">
-                  <img
-                    src={v.photo}
-                    className="flex mr-2 h-14 w-14 m-1 rounded-full"
-                  />
-                  <div className="flex flex-col  w-56 h-12">
-                    <div className="flex mb-1">
-                      <p className="">{v.name}</p>
-                      <p className="">{v.age}</p>
-                      <p className="mx-2">{v.major}</p>
-                    </div>
-                    <div className="flex space-x-3">
-                      <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(219,156,218)] text-[rgb(219,156,218)] text-sm px-2 py-1 ">
-                        {v.hashtag[0]}
-                      </p>
-                      <p className="flex items-center justify-center bg-white rounded-2xl ring-2 ring-[rgb(175,173,245)] text-[rgb(175,173,245)] text-sm px-2 py-1">
-                        {v.hashtag[1]}
-                      </p>
-                      <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(186,152,229)] text-[rgb(186,152,229)] text-sm px-2 py-1">
-                        {v.hashtag[2]}
-                      </p>
-                    </div>
-                  </div>
+      {dumyData.map((v) => (
+        <div key={v.id}>
+          <div className="flex my-2 justify-between ">
+            <div className="flex flex-row">
+              <img
+                src={v.photo}
+                className="flex mr-2 h-14 w-14 m-1 rounded-full"
+              />
+              <div className="flex flex-col  w-56 h-12">
+                <div className="flex mb-1">
+                  <p className="">{v.name}</p>
+                  <p className="">{v.age}</p>
+                  <p className="mx-2">{v.major}</p>
                 </div>
-                <button className="flex justify-center items-center w-11 h-16 focus:ring-2 rounded-md bg-slate-100 text-indigo-700 hover:bg-indigo-200 ">
-                  more
-                </button>
+                <div className="flex space-x-3">
+                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(219,156,218)] text-[rgb(219,156,218)] text-sm px-2 py-1 ">
+                    {v.hashtag[0]}
+                  </p>
+                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2 ring-[rgb(175,173,245)] text-[rgb(175,173,245)] text-sm px-2 py-1">
+                    {v.hashtag[1]}
+                  </p>
+                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(186,152,229)] text-[rgb(186,152,229)] text-sm px-2 py-1">
+                    {v.hashtag[2]}
+                  </p>
+                </div>
               </div>
-              <hr className="mt-3" />
             </div>
-          ))}
+            <button className="flex justify-center items-center w-11 h-16 focus:ring-2 rounded-md bg-slate-100 text-indigo-700 hover:bg-indigo-200 ">
+              more
+            </button>
+          </div>
+          <hr className="mt-3" />
         </div>
-      </div>
+      ))}
     </>
   );
 }
-
-// {rowVirtualizer.getVirtualItems().map((virtualRow) => (
-//     <div
-//       key={virtualRow.index}
-//       className="flex"
-//       style={{
-//         position: "absolute",
-//         top: 0,
-//         left: 0,
-//         width: "100%",
-//         height: `${virtualRow.size}px`,
-//         transform: `translateY(${virtualRow.start}px)`,
-//       }}
-//     >
-//       각 칸 {virtualRow.index}
-//     </div>
-//   ))}
 
 export default FeedTest;

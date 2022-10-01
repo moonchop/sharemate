@@ -68,7 +68,7 @@ const Feed = () => {
                 src={elem.photo}
                 className="flex mr-2 h-14 w-14 m-1 rounded-full"
               />
-              <div className="flex flex-col  w-56 h-16">
+              <div className="flex flex-col  w-4/5 h-16">
                 <div className="flex mb-1 ">
                   <p className="max-w-[70px] mr-1 overflow-hidden text-ellipsis whitespace-nowrap">
                     {elem.name}
@@ -78,22 +78,22 @@ const Feed = () => {
                     {elem.major}
                   </p>
                 </div>
-                <div className="flex space-x-3 ml-0.5">
-                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(219,156,218)] text-[rgb(219,156,218)] text-sm px-2 py-1 ">
+                <div className="flex space-x-3 ml-0.5 overflow-x-auto py-1 px-[2px] w-full">
+                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(219,156,218)] text-[rgb(219,156,218)] text-sm px-2 sm:px-2 py-1 whitespace-nowrap">
                     {elem.hashtag[0]}
                   </p>
-                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2 ring-[rgb(175,173,245)] text-[rgb(175,173,245)] text-sm px-2 py-1">
+                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2 ring-[rgb(175,173,245)] text-[rgb(175,173,245)] text-sm px-2 sm:px-2 py-1  whitespace-nowrap">
                     {elem.hashtag[1]}
                   </p>
-                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(186,152,229)] text-[rgb(186,152,229)] text-sm px-2 py-1">
+                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(186,152,229)] text-[rgb(186,152,229)] px-1 sm:px-2 py-1 text-sm whitespace-nowrap">
                     {elem.hashtag[2]}
                   </p>
                 </div>
               </div>
             </div>
-            <button className="flex justify-center items-center w-11 h-16 focus:ring-2 rounded-md bg-slate-100 text-indigo-700 hover:bg-indigo-200 ">
+            {/* <button className="flex justify-center items-center w-11 h-16 focus:ring-2 rounded-md bg-slate-100 text-indigo-700 hover:bg-indigo-200 ">
               more
-            </button>
+            </button> */}
           </div>
           <hr className="mt-3" />
         </div>
