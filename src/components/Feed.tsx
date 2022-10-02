@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from "react";
+import HashTag from "./HashTag";
 
 interface IUser {
   id: number;
@@ -15,7 +16,7 @@ const dumyData: IUser[] = [
     name: "장은학",
     age: "24",
     major: "소프트웨어학과",
-    hashtag: ["#3학년", "운동", "비염"],
+    hashtag: ["3학년", "운동", "비염"],
     photo:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
@@ -24,16 +25,16 @@ const dumyData: IUser[] = [
     name: "정희수",
     age: "24",
     major: "소프트웨어학과",
-    hashtag: ["#3학년", "여자", "개발자"],
+    hashtag: ["3학년", "여자", "개발자"],
     photo:
-      "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://user-images.githubusercontent.com/86648265/193457444-107066f9-2d74-4625-a26c-f80e541c6458.png",
   },
   {
     id: 3,
     name: "김지훈",
     age: "24",
     major: "소프트웨어학과",
-    hashtag: ["#3학년", "흑인", "잘생김"],
+    hashtag: ["3학년", "흑인", "잘생김"],
     photo:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
   },
@@ -42,7 +43,7 @@ const dumyData: IUser[] = [
     name: "문민수",
     age: "24",
     major: "소프트웨어학과",
-    hashtag: ["#3학년", "선배", "101호"],
+    hashtag: ["3학년", "선배", "101호"],
     photo:
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
@@ -51,7 +52,7 @@ const dumyData: IUser[] = [
     name: "강민혁",
     age: "24",
     major: "국방디지털융합학과",
-    hashtag: ["#음주운전", "#면허취소", "201호"],
+    hashtag: ["음주운전", "면허취소", "201호"],
     photo:
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
@@ -79,15 +80,8 @@ const Feed = () => {
                   </p>
                 </div>
                 <div className="flex space-x-3 ml-0.5 overflow-x-auto py-1 px-[2px] w-full">
-                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(219,156,218)] text-[rgb(219,156,218)] text-sm px-2 sm:px-2 py-1 whitespace-nowrap">
-                    {elem.hashtag[0]}
-                  </p>
-                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2 ring-[rgb(175,173,245)] text-[rgb(175,173,245)] text-sm px-2 sm:px-2 py-1  whitespace-nowrap">
-                    {elem.hashtag[1]}
-                  </p>
-                  <p className="flex items-center justify-center bg-white rounded-2xl ring-2  ring-[rgb(186,152,229)] text-[rgb(186,152,229)] px-1 sm:px-2 py-1 text-sm whitespace-nowrap">
-                    {elem.hashtag[2]}
-                  </p>
+                  
+                  <HashTag text={elem.hashtag} />
                 </div>
               </div>
             </div>
