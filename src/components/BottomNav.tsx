@@ -1,6 +1,5 @@
 import React from "react";
 import "./BottomNav.css";
-import { useFlow } from "../stackflow";
 import { BiHome, BiUser } from "react-icons/bi";
 import { GrGroup } from "react-icons/gr";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
@@ -11,41 +10,41 @@ const NAVIGATE_OBJ = [
   {
     action: "Main",
     content: "개인",
-    image: <BiHome className="justify-center items-center w-full h-3/6 mt-1" />,
+    image: <BiHome />,
   },
   {
     action: "Group",
     content: "그룹",
-    image: (
-      <GrGroup className="justify-center items-center w-full h-3/6 mt-1" />
-    ),
+    image: 
+      <GrGroup />
+    ,
   },
   {
     action: "Community",
     content: "커뮤니티",
-    image: (
-      <BsLayoutTextWindowReverse className="justify-center items-center w-full h-3/6 mt-1" />
-    ),
+    image: <BsLayoutTextWindowReverse />
+    ,
   },
   {
     action: "MyPage",
     content: "내정보",
-    image: <BiUser className="justify-center items-center w-full h-3/6 mt-1" />,
+    image: <BiUser  />,
   },
 ];
 
-const BottomNav = () => {
-  const { replace } = useFlow();
-
+const BottomNav = ({navigate,navigatePath}:{navigate(action:string) : void,navigatePath:Navigate_Type}) => {
+  console.log(navigatePath)
   return (
-    <nav className="wrapper">
+    <nav className="wrapper bg-white">
       {NAVIGATE_OBJ.map(({ action, content, image }) => (
         <div
-          className="text-xs h-full"
+          className={`text-xs h-full ${navigatePath===action?'opacity-100':'opacity-50'}`}
           key={action}
-          onClick={() => replace(action as Navigate_Type, {})}
+          onClick={() => navigate(action)}
         >
-          {image}
+          {React.cloneElement(image,{
+            className: `justify-center items-center w-full h-3/6 mt-1 ${navigatePath===action?'opacity-100':'opacity-30'}`
+          })}
           {content}
         </div>
       ))}

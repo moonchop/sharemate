@@ -13,6 +13,24 @@ interface IUser {
 const dumyData: IUser[] = [
   {
     id: 1,
+    name: "이수인",
+    age: "23",
+    major: "행정학과",
+    hashtag: ["팀장", "대장카리스마", "서비스기획"],
+    photo:
+      "https://user-images.githubusercontent.com/86648265/193459223-b395926e-98d0-4a2a-8787-9ec47fd5d7c6.png",
+  },
+  {
+    id: 2,
+    name: "이현조",
+    age: "22",
+    major: "경영학과",
+    hashtag: ["빠른족보브레이커", "최강디자이너", "서비스기획"],
+    photo:
+      "https://user-images.githubusercontent.com/86648265/193459183-cc7fea86-851d-492a-b537-70975de31643.png",
+  },
+  {
+    id: 3,
     name: "장은학",
     age: "24",
     major: "소프트웨어학과",
@@ -21,7 +39,7 @@ const dumyData: IUser[] = [
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
   {
-    id: 2,
+    id: 4,
     name: "정희수",
     age: "24",
     major: "소프트웨어학과",
@@ -30,7 +48,7 @@ const dumyData: IUser[] = [
       "https://user-images.githubusercontent.com/86648265/193457444-107066f9-2d74-4625-a26c-f80e541c6458.png",
   },
   {
-    id: 3,
+    id: 5,
     name: "김지훈",
     age: "24",
     major: "소프트웨어학과",
@@ -39,7 +57,7 @@ const dumyData: IUser[] = [
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80",
   },
   {
-    id: 4,
+    id: 6,
     name: "문민수",
     age: "24",
     major: "소프트웨어학과",
@@ -48,7 +66,7 @@ const dumyData: IUser[] = [
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
   {
-    id: 5,
+    id: 7,
     name: "강민혁",
     age: "24",
     major: "국방디지털융합학과",
@@ -56,13 +74,14 @@ const dumyData: IUser[] = [
     photo:
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
+
 ];
 
 const Feed = () => {
   return (
     <div className="h-3/6 flex-col my-3 mx-6">
-      {dumyData.map((elem, index) => (
-        <div key={index}>
+      {dumyData.map((elem) => (
+        <div key={elem.id}>
           <div className="flex my-2 justify-between ">
             <div className="flex flex-row">
               <img

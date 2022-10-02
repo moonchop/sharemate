@@ -10,9 +10,9 @@ const HASHTAG_OBJ = [
 
 const HashTag = ({ text }: { text: string[] }) => {
   return (
-    <div className="flex space-x-3">
+    <div className="flex gap-2">
       {text.map((elem, index) => (
-        <p key = {index} className={`flex-row  items-center justify-center bg-white rounded-2xl ring-2  ring-[${HASHTAG_OBJ[index]}] text-[${HASHTAG_OBJ[index]}] text-sm px-3 py-1`}>
+        <p key = {elem+HASHTAG_OBJ[index]} className={`items-center  bg-white rounded-2xl ring-2  ring-[${HASHTAG_OBJ[index]}] text-[${HASHTAG_OBJ[index]}] text-sm  px-3 py-1 min-w-fit`}>
           #{elem}
         </p>
       ))}

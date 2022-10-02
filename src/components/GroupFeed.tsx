@@ -1,6 +1,7 @@
 import HashTag from "./HashTag";
 
 interface IGroup {
+  id: number;
   building: "광교관" | "일신관" | "화홍관" | "용지관" | "남제관" | "국제학사";
   room: number;
   hashtag: string[];
@@ -10,28 +11,28 @@ interface IGroup {
 
 const GroupFeed = () => {
   const groupData: IGroup[] = [
-    {
+    { id:1,
       building: "광교관",
       room: 4,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
       people: ["소프트웨어학과20세", "경영학과20세", "미디어학과 28세"],
     },
-    {
+    { id:2,
       building: "일신관",
       room: 2,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
       people: ["소프트웨어학과20세", "경영학과20세", "미디어학과 28세"],
     },
-    {
+    { id:3,
       building: "국제학사",
       room: 2,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
       people: ["소프트웨어학과20세", "경영학과20세", "미디어학과 28세"],
     },
-    {
+    { id:4,
       building: "용지관",
       room: 2,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
@@ -43,7 +44,7 @@ const GroupFeed = () => {
   return (
     <div>
       {groupData.map((elem, index) => (
-        <div key={index} className="h-3/6 ">
+        <div key={elem.id} className="h-3/6 ">
           <div className="flex my-2 justify-between ">
             <div className="flex flex-col">
               <p className="flex text-black mx-2">{`[${elem.building} ${elem.room}인실]`}</p>
