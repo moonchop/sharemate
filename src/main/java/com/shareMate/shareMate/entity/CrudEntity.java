@@ -7,17 +7,18 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
 @Builder
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity(name="board")
 public class CrudEntity {
 
     @Id
+    @GeneratedValue
     @Column(nullable = false,unique = true)
     private int id;
 
@@ -26,4 +27,11 @@ public class CrudEntity {
 
     @Column(nullable = false)
     private String content;
+
+    public CrudEntity(int id, String title, String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
+
 }

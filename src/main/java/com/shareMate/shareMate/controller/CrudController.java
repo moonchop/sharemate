@@ -4,6 +4,7 @@ package com.shareMate.shareMate.controller;
 import com.shareMate.shareMate.entity.CrudEntity;
 import com.shareMate.shareMate.repository.CrudEntityRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -14,6 +15,7 @@ import javax.persistence.PersistenceContext;
 @RequestMapping("/test")
 public class CrudController {
 
+    @Autowired
     private final CrudEntityRepository crudEntityRepository;
 
     @PersistenceContext

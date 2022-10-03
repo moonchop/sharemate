@@ -1,34 +1,43 @@
 package com.shareMate.shareMate.entity;
 
 
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.xml.soap.Text;
+import lombok.*;
+import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+//@Data
+//@AllArgsConstructor
+//@Builder
+@Data
+@Entity(name="user")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class UserEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(nullable = false,unique = true)
     private int user_id;
-
-    private String name;
-
+//    @Column(nullable = false)
+    private String email;
+//    @Column(nullable = false)
     private String pwd;
-
+//    @Column(nullable = false)
+    private String name;
+//    @Column(nullable = false)
     private String major;
-
+//    @Column(nullable = false)
     private String grade;
-
+//    @Column(nullable = false)
     private Date birth;
-
+//    @Column(nullable = false)
     private String kakao_id;
-
-    private Text info;
-
+//    @Column(nullable = false)
     private String profile_photo;
-
-    private Date create_date;
+//    @Column(nullable = false)
+    private Date create_at;
 
 }
