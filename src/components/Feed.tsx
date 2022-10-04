@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from "react";
+import { HashTagColor } from "../utils/HashTagColor";
 import HashTag from "./HashTag";
 
 interface IUser {
@@ -74,7 +75,6 @@ const dumyData: IUser[] = [
     photo:
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
-
 ];
 
 const Feed = () => {
@@ -99,8 +99,10 @@ const Feed = () => {
                   </p>
                 </div>
                 <div className="flex space-x-3 ml-0.5 overflow-x-auto py-1 px-[2px] w-full">
-                  
-                  <HashTag text={elem.hashtag} />
+                  <HashTag
+                    text={elem.hashtag}
+                    color={HashTagColor as ("red" | "blue" | "green")[]}
+                  />
                 </div>
               </div>
             </div>

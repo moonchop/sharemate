@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import TopNav from "./TopNav";
 import BottomNav from "./BottomNav";
+import HashTag from "./HashTag";
 
 interface IUser {
   id: number;
