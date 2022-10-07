@@ -34,7 +34,7 @@ public class UserController {
 
     }
     @PostMapping("/register")
-    public String doUserList(@RequestBody RequestUserDto requestUserDto){
+    public Map doUserList(@RequestBody RequestUserDto requestUserDto){
         System.out.println("hello"+ requestUserDto);
 
         return userService.doInsert(requestUserDto);

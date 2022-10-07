@@ -19,7 +19,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
 
 	implementation 'org.projectlombok:lombok:1.18.22'
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	annotationProcessor('org.projectlombok:lombok')
 	testAnnotationProcessor('org.projectlombok:lombok')
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'

@@ -16,6 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 @Getter
+@Setter
 public class UserEntity {
 
     @Id

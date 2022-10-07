@@ -2,9 +2,13 @@ package com.shareMate.shareMate.dto;
 
 import com.shareMate.shareMate.entity.UserEntity;
 import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 
+@Getter
+@Setter
 public class RequestUserDto {
 
     private int user_id;
