@@ -54,5 +54,4 @@ public class RequestUserDto {
         this.profile_photo = profile_photo;
         this.create_at = create_at;
     }
-
 }

@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Getter
 public class UserEntity {
 
     @Id
@@ -39,5 +40,10 @@ public class UserEntity {
     private String profile_photo;
 //    @Column(nullable = false)
     private Date create_at;
+
+
+    public String getPwd(){
+        return this.pwd;
+    }
 
 }
