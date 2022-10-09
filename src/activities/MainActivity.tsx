@@ -4,9 +4,9 @@ import TopNav from '../components/TopNav'
 import BottomNav from '../components/BottomNav'
 import Feed from '../components/Feed'
 import { useState } from 'react'
-import Group from './GroupActivity'
-import MyPage from './MyPageActivity'
-import Community from './CommunityActivity'
+import Group from './Group'
+import MyPage from './MyPage'
+import Community from './Community'
 
 type Navigate_Type = 'Main' | 'Group' | 'Community' | 'MyPage'
 
