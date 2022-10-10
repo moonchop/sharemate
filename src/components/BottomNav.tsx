@@ -1,52 +1,53 @@
 import React from "react";
-import "./BottomNav.css";
 import { BiHome, BiUser } from "react-icons/bi";
 import { GrGroup } from "react-icons/gr";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
-
-type Navigate_Type = "Main" | "Group" | "Community" | "MyPage";
+import { Link } from "../stackflow";
+import { useActivity } from "@stackflow/react";
+import { classNames } from "../utils/class";
 
 const NAVIGATE_OBJ = [
   {
-    action: "Main",
+    action: "MainActivity" as const,
     content: "개인",
-    image: <BiHome />,
+    Icon: <BiHome />,
   },
   {
-    action: "Group",
+    action: "GroupActivity" as const,
     content: "그룹",
-    image: 
-      <GrGroup />
-    ,
+    Icon: <GrGroup />,
   },
   {
-    action: "Community",
+    action: "CommunityActivity" as const,
     content: "커뮤니티",
-    image: <BsLayoutTextWindowReverse />
-    ,
+    Icon: <BsLayoutTextWindowReverse />,
   },
   {
-    action: "MyPage",
+    action: "MyPageActivity" as const,
     content: "내정보",
-    image: <BiUser  />,
+    Icon: <BiUser />,
   },
 ];
 
-const BottomNav = ({navigate,navigatePath}:{navigate(action:string) : void,navigatePath:Navigate_Type}) => {
-  console.log(navigatePath)
+const BottomNav = () => {
+  const activity = useActivity();
+
   return (
-    <nav className="wrapper bg-white">
-      {NAVIGATE_OBJ.map(({ action, content, image }) => (
-        <div
-          className={`text-xs h-full ${navigatePath===action?'opacity-100':'opacity-50'}`}
-          key={action}
-          onClick={() => navigate(action)}
+    <nav className="fixed inset-x-0 bottom-0 h-[6%] bg-white flex justify-around border-t-2 border-gray-500">
+      {NAVIGATE_OBJ.map(({ action, content, Icon }, idx) => (
+        <Link
+          activityName={action}
+          activityParams={{}}
+          replace
+          animate={false}
+          key={`bottom-${idx}`}
+          className={classNames(`text-xs h-full text-center`, activity.name === action ? "opacity-100" : "opacity-30")}
         >
-          {React.cloneElement(image,{
-            className: `justify-center items-center w-full h-3/6 mt-1 ${navigatePath===action?'opacity-100':'opacity-30'}`
+          {React.cloneElement(Icon, {
+            className: classNames(`justify-center items-center w-full h-3/6 mt-1`, activity.name === action ? "opacity-100" : "opacity-30"),
           })}
           {content}
-        </div>
+        </Link>
       ))}
     </nav>
   );
