@@ -508,6 +508,48 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@stackflow/link@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "@stackflow/link@npm:0.12.0"
+  peerDependencies:
+    "@stackflow/core": 0
+    "@stackflow/plugin-history-sync": 0
+    "@stackflow/plugin-preload": 0
+    "@stackflow/react": 0
+    "@types/react": ">=16.8.0"
+    react: ">=16.8.0"
+  checksum: eec62b31e580d62f01e8200518862711327ec7e59eb8b64607ad1c463f95034d339035df72c4bd583034438592aded06ee94fdc8e0b27243aed6624fe546015b
+  languageName: node
+  linkType: hard
+
+"@stackflow/plugin-history-sync@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "@stackflow/plugin-history-sync@npm:0.12.0"
+  dependencies:
+    url-pattern: ^1.0.3
+  peerDependencies:
+    "@stackflow/core": 0
+    "@stackflow/react": 0
+    "@types/react": ">=16.8.0"
+    react: ">=16.8.0"
+  checksum: d02c860cdee11ca3744e018a2a99f7b759450fe4a4f75b1a417a40bb075e6b83c8f3098fe615ec47e1591c30bc82abb337fdaff0b20f4592eddf9c64fcf0eb02
+  languageName: node
+  linkType: hard
+
+"@stackflow/plugin-preload@npm:^0.12.0":
+  version: 0.12.0
+  resolution: "@stackflow/plugin-preload@npm:0.12.0"
+  dependencies:
+    "@stackflow/plugin-history-sync": ^0.12.0
+  peerDependencies:
+    "@stackflow/core": 0
+    "@stackflow/react": 0
+    "@types/react": ">=16.8.0"
+    react: ">=16.8.0"
+  checksum: 9e9ebb1724beb29e6a5484673c4b367b26ea9fb48652cb85ad643b3198d90a51e55837f13aa8293388cb21442d3fe140889861053d556c269cf9e74bb667d54e
+  languageName: node
+  linkType: hard
+
 "@stackflow/plugin-renderer-basic@npm:^0.12.0":
   version: 0.12.0
   resolution: "@stackflow/plugin-renderer-basic@npm:0.12.0"
@@ -2608,6 +2650,9 @@ __metadata:
   dependencies:
     "@stackflow/basic-ui": ^0.12.0
     "@stackflow/core": ^0.12.0
+    "@stackflow/link": ^0.12.0
+    "@stackflow/plugin-history-sync": ^0.12.0
+    "@stackflow/plugin-preload": ^0.12.0
     "@stackflow/plugin-renderer-basic": ^0.12.0
     "@stackflow/react": ^0.12.0
     "@tanstack/react-virtual": beta
@@ -2871,6 +2916,13 @@ __metadata:
   bin:
     browserslist-lint: cli.js
   checksum: f625899b236f6a4d7f62b56be1b8da230c5563d1fef84d3ef148f2e1a3f11a5a4b3be4fd7e3703e51274c116194017775b10afb4de09eb2c0d09d36b90f1f578
+  languageName: node
+  linkType: hard
+
+"url-pattern@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "url-pattern@npm:1.0.3"
+  checksum: 7f4c57707240f0eb18f4654c4206b8669de037594beb86abd090d4e3dacd4751fcb3a04e271a74cbbe2124bc573e857d8c0588c4accb17da03a62082a58559fc
   languageName: node
   linkType: hard
 

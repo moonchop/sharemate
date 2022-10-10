@@ -1,11 +1,7 @@
 import GroupFeed from "../components/GroupFeed";
 
 const Group = () => {
-  return (
-    <>
-      <GroupFeed />
-    </>
-  );
+  return <></>;
 };
 
 export default Group;

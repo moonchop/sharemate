@@ -4,7 +4,7 @@ import { GrGroup } from "react-icons/gr";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { Link } from "../stackflow";
 import { useActivity } from "@stackflow/react";
-import { classNames } from "../utils/class";
+import { classNames } from "../utils/Class";
 
 const NAVIGATE_OBJ = [
   {
