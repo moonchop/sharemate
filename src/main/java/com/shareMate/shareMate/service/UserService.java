@@ -7,6 +7,9 @@ import com.shareMate.shareMate.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -106,5 +109,14 @@ public class UserService {
     //  delete
     public void doDelete(int id) {
         userRepository.deleteById(id);
+    }
+
+    public Page<UserEntity> getUserList(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<UserEntity> postList = userRepository.findAll(pageable);
+
+        return postList;
+
+
     }
 }

@@ -3,9 +3,11 @@ package com.shareMate.shareMate.controller;
 
 import com.shareMate.shareMate.dto.RequestLoginDto;
 import com.shareMate.shareMate.dto.RequestUserDto;
+import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -50,4 +52,14 @@ public class UserController {
         System.out.println("hello2");
         return "Hello Spring!";
     }
+
+    @GetMapping("/users")
+    public Page<UserEntity> getPostList(@RequestParam("page") int page){
+        Page<UserEntity> resultList = userService.getUserList(page, 5);
+
+        return resultList;
+    }
+
+
+
 }
