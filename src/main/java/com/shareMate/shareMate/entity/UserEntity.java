@@ -8,15 +8,13 @@ import java.util.Date;
 
 //@Data
 //@AllArgsConstructor
-//@Builder
-@Data
-@Entity(name="user")
 @Builder
+@Entity(name="user")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
 @Setter
+
 public class UserEntity {
 
     @Id
@@ -41,6 +39,11 @@ public class UserEntity {
     private String profile_photo;
 //    @Column(nullable = false)
     private Date create_at;
+    @OneToOne
+    @JoinColumn(name="user_id")
+    private FavorEntity favor;
+
+
 
 
     public String getPwd(){

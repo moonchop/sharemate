@@ -11,8 +11,8 @@ public class DB_test {
         Class.forName("org.mariadb.jdbc.Driver"); // 마리아DB
         // Class.forName("com.mysql.jdbc.Driver")
 
-        Connection con = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/testdb", "root", "zxcc"); // 마리아 DB
+        //Connection con = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3306/testdb", "root", "zxcc"); // 마리아 DB
 
-        System.out.println(con);
+        //System.out.println(con);
     }
 }

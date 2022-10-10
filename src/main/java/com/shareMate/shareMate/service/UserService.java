@@ -71,9 +71,6 @@ public class UserService {
         Map json = new HashMap<String,Object>();
         System.out.println("lgser");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-
-
         Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail());
 
         if (user==null){
@@ -85,10 +82,7 @@ public class UserService {
         if (encoder.matches(requestLoginDto.toEntity().getPwd(),user.get().getPwd())) {
             json.put("status","success");
             json.put("text","로그인 성공");
-
-
             return json;
-
         }
         else {
             json.put("status","fail");
@@ -97,9 +91,6 @@ public class UserService {
             System.out.println(requestLoginDto.toEntity().getPwd().getClass());
             return json;
         }
-
-
-
     }
 
     public void doUpdate(UserEntity userEntity) {
@@ -118,5 +109,10 @@ public class UserService {
         return postList;
 
 
+    }
+
+    public Optional<UserEntity> getUserDetail(int num) {
+        Optional<UserEntity> member = userRepository.findUserEntityByUser_id(num);
+        return member;
     }
 }

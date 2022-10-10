@@ -7,11 +7,14 @@ import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 
 @RestController
@@ -58,6 +61,25 @@ public class UserController {
         Page<UserEntity> resultList = userService.getUserList(page, 5);
 
         return resultList;
+    }
+    @GetMapping("/user")
+    public Map getUserDetail(@RequestParam("userNum") int num){
+        Optional<UserEntity> member = userService.getUserDetail(num);
+        Map json = new HashMap<String,Object>();
+        Map info = new HashMap<String,Object>();
+        System.out.println(member.get());
+        json.put("status","success");
+        json.put("user_id",member.get().getUser_id());
+        info.put("cleanness",member.get().getFavor().getCleanness());
+        json.put("favor",info);
+
+
+
+
+
+
+
+        return json;
     }
 
 
