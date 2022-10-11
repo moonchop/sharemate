@@ -5,8 +5,6 @@ const DetailProfile = () => {
   const activity = useActivity();
   let value = activity.params.elem;
 
-  console.log(value.id);
-
   return (
     <div className="flex flex-col pt-24 text-center justify-center items-center">
       <img src={value.photo} className="mb-14 rounded-full justify-center items-center" />

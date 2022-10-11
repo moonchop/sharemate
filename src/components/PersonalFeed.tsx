@@ -90,7 +90,6 @@ const Feed = () => {
                   <p className="">{elem.age}</p>
                   <p className="w-[50%] overflow-hidden text-ellipsis whitespace-nowrap mx-2">{elem.major}</p>
                 </div>
-
                 <div className="flex space-x-3 ml-0.5 overflow-x-auto py-1 px-[2px] w-full">
                   <HashTag text={elem.hashtag} color={HashTagColor as ("red" | "blue" | "green")[]} />
                 </div>
@@ -104,7 +103,7 @@ const Feed = () => {
                 push("ProfileActivity", { elem });
               }}
             >
-              detail
+              Detail
             </div>
           </div>
 

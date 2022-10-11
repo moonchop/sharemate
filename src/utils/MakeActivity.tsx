@@ -9,8 +9,9 @@ import MyPage from "../activities/MyPage";
 import Community from "../activities/Community";
 import SignUp from "../components/SignUpFirst";
 import DetailProfile from "../components/DetailProfile";
+import DetailGroup from "../components/DetailGroup";
 
-type Navigate_Type = "Main" | "Group" | "Community" | "MyPage" | "SignUp" | "Profile";
+type Navigate_Type = "Main" | "Group" | "Community" | "MyPage" | "SignUp" | "Profile" | "DetailGroup";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -19,15 +20,16 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Community: <Community />,
   SignUp: <SignUp />,
   Profile: <DetailProfile />,
+  DetailGroup: <DetailGroup />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
 const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
   return (
     <AppScreen theme="cupertino">
-      {navigate === "Profile" ? <TopNav Back={true} /> : <TopNav Back={false} />}
+      {navigate === "Profile" || navigate === "DetailGroup" ? <TopNav Back={true} /> : <TopNav Back={false} />}
       {NavigateMapper[navigate]}
-      {navigate === "Profile" ? <></> : <BottomNav />}
+      {navigate === "Profile" || navigate === "DetailGroup" ? <></> : <BottomNav />}
     </AppScreen>
   );
 };
