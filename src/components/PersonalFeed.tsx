@@ -1,5 +1,6 @@
 import { HashTagColor } from "../utils/HashTagColor";
 import HashTag from "./HashTag";
+import { useFlow } from "../stackflow";
 
 interface IUser {
   id: number;
@@ -67,13 +68,15 @@ const dumyData: IUser[] = [
     name: "강민혁",
     age: "24",
     major: "국방디지털융합학과",
-    hashtag: ["사람", "인간", "남자"],
+    hashtag: ["가나다라마바사아", "인간입니다", "남자아아아아아"],
     photo:
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
 ];
 
 const Feed = () => {
+  const { push } = useFlow();
+
   return (
     <div className="h-[85%] overflow-y-scroll px-5 pt-3">
       {dumyData.map((elem) => (
@@ -81,12 +84,13 @@ const Feed = () => {
           <div className="flex my-2 justify-between">
             <div className="flex flex-row w-[85%]">
               <img src={elem.photo} className="flex mr-2 h-[90%] w-[20%] m-1 rounded-full max-h-[80px] max-w-[80px]" />
-              <div className="flex flex-col  w-[80%]">
+              <div className="flex flex-col  w-[90%]">
                 <div className="flex mb-1 ">
                   <p className="max-w-[30%] mr-1 overflow-hidden text-ellipsis whitespace-nowrap">{elem.name}</p>
                   <p className="">{elem.age}</p>
                   <p className="w-[50%] overflow-hidden text-ellipsis whitespace-nowrap mx-2">{elem.major}</p>
                 </div>
+
                 <div className="flex space-x-3 ml-0.5 overflow-x-auto py-1 px-[2px] w-full">
                   <HashTag text={elem.hashtag} color={HashTagColor as ("red" | "blue" | "green")[]} />
                 </div>
@@ -95,7 +99,15 @@ const Feed = () => {
             {/* <button className="flex justify-center items-center w-11 h-16 focus:ring-2 rounded-md bg-slate-100 text-indigo-700 hover:bg-indigo-200 ">
               more
             </button> */}
+            <div
+              onClick={() => {
+                push("ProfileActivity", { elem });
+              }}
+            >
+              detail
+            </div>
           </div>
+
           <hr className="mt-3" />
         </div>
       ))}

@@ -1,5 +1,3 @@
-import GroupFeed from "../components/GroupFeed";
-
 const Group = () => {
   return <></>;
 };
