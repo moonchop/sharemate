@@ -4,7 +4,7 @@ import { GrGroup } from "react-icons/gr";
 import { BsLayoutTextWindowReverse } from "react-icons/bs";
 import { Link } from "../stackflow";
 import { useActivity } from "@stackflow/react";
-import { classNames } from "../utils/Class";
+import { classNames } from "../utils/class";
 
 const NAVIGATE_OBJ = [
   {
@@ -41,10 +41,16 @@ const BottomNav = () => {
           replace
           animate={false}
           key={`bottom-${idx}`}
-          className={classNames(`text-xs h-full text-center`, activity.name === action ? "opacity-100" : "opacity-30")}
+          className={classNames(
+            `text-xs h-full text-center`,
+            activity.name === action ? "opacity-100" : "opacity-30"
+          )}
         >
           {React.cloneElement(Icon, {
-            className: classNames(`justify-center items-center w-full h-3/6 mt-1`, activity.name === action ? "opacity-100" : "opacity-30"),
+            className: classNames(
+              `justify-center items-center w-full h-3/6 mt-1`,
+              activity.name === action ? "opacity-100" : "opacity-30"
+            ),
           })}
           {content}
         </Link>

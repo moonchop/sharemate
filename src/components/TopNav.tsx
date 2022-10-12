@@ -13,7 +13,10 @@ const Topnav = (Back) => {
   return (
     <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
       {Back.Back === true ? (
-        <IoMdArrowRoundBack className="w-5 h-5" onClick={onClick}></IoMdArrowRoundBack>
+        <IoMdArrowRoundBack
+          className="w-5 h-5"
+          onClick={onClick}
+        ></IoMdArrowRoundBack>
       ) : (
         <div className="font-bold text-xl text-white">Share Mate</div>
       )}
