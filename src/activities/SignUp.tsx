@@ -3,7 +3,7 @@ import SignUpFirst from "../components/SignUpFirst";
 import SignUpSecond from "../components/SignUpSecond";
 
 const MAX_STAGE = 1;
-const Stage_Map = [<SignUpFirst />, <SignUpSecond />];
+const Stage_Map = [<SignUpFirst handleGoNext={() => {}} />, <SignUpSecond />];
 
 const SignUp = () => {
   const [stage, setStage] = useState(0);
@@ -18,8 +18,8 @@ const SignUp = () => {
   };
 
   return React.cloneElement(Stage_Map[stage], {
-    handleGoNext: handleGoNext,
-    handleGoPrev: handleGoPrev,
+    handleGoNext,
+    handleGoPrev,
   });
 };
 

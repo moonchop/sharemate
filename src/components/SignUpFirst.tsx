@@ -1,19 +1,20 @@
 import { useForm } from "react-hook-form";
-const SignUpFirst = (
-  {
-    onSubmit = async (data: any) => {
-      await new Promise((r) => setTimeout(r, 1000));
-      console.log(JSON.stringify(data));
-    },
-  }: any,
-  handleGoNext: any,
-  handleGoPrev: any
-) => {
+import { useSaveFormData } from "../hooks/useSaveFormData";
+
+const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const {
     register,
     handleSubmit,
     formState: { isSubmitting, isDirty, errors },
   } = useForm();
+
+  const { setData } = useSaveFormData("first");
+
+  const onSubmit = async (data: any) => {
+    await new Promise((r) => setTimeout(r, 1000));
+    setData(data);
+    handleGoNext();
+  };
 
   return (
     <div className="py-[40px] p-3 overflow-y-scroll">
@@ -40,7 +41,7 @@ const SignUpFirst = (
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
-            {errors.name.message}
+            {errors.name.message as string}
           </small>
         )}
 
@@ -66,7 +67,7 @@ const SignUpFirst = (
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
-            {errors.password.message}
+            {errors.password.message as string}
           </small>
         )}
         {/* <label htmlFor="passwordConfirm">비밀번호 확인</label>
@@ -85,9 +86,7 @@ const SignUpFirst = (
             id="email"
             type="text"
             placeholder="example@email.com"
-            aria-invalid={
-              !isDirty ? undefined : errors.email ? "true" : "false"
-            }
+            aria-invalid={!isDirty ? undefined : !!errors.email}
             {...register("email", {
               required: "이메일은 필수 입력입니다. ",
               pattern: {
@@ -105,7 +104,7 @@ const SignUpFirst = (
               className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
               role="alert"
             >
-              {errors.email.message}
+              {errors.email.message as string}
             </small>
           )}
         </div>
@@ -122,9 +121,8 @@ const SignUpFirst = (
           </button>
         </div>
         <button
-          // type="submit"
+          type="submit"
           disabled={isSubmitting}
-          onClick={handleGoNext}
           className="flex flex-wrap justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-sm text-black borde rounded-md shadow-button"
         >
           다음으로
