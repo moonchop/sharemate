@@ -1,11 +1,14 @@
 import { useForm } from "react-hook-form";
-
-const SignUpFirst = ({
-  onSubmit = async (data: any) => {
-    await new Promise((r) => setTimeout(r, 1000));
-    console.log(JSON.stringify(data));
-  },
-}) => {
+const SignUpFirst = (
+  {
+    onSubmit = async (data: any) => {
+      await new Promise((r) => setTimeout(r, 1000));
+      console.log(JSON.stringify(data));
+    },
+  }: any,
+  handleGoNext: any,
+  handleGoPrev: any
+) => {
   const {
     register,
     handleSubmit,
@@ -119,8 +122,9 @@ const SignUpFirst = ({
           </button>
         </div>
         <button
-          type="submit"
+          // type="submit"
           disabled={isSubmitting}
+          onClick={handleGoNext}
           className="flex flex-wrap justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-sm text-black borde rounded-md shadow-button"
         >
           다음으로
