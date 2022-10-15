@@ -7,11 +7,18 @@ import PersonalFeed from "../components/PersonalFeed";
 import GroupFeed from "../components/GroupFeed";
 import MyPage from "../activities/MyPage";
 import Community from "../activities/Community";
-import SignUp from "../components/SignUpFirst";
+import SignUp from "../activities/SignUp";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
 
-type Navigate_Type = "Main" | "Group" | "Community" | "MyPage" | "SignUp" | "Profile" | "DetailGroup";
+type Navigate_Type =
+  | "Main"
+  | "Group"
+  | "Community"
+  | "MyPage"
+  | "SignUp"
+  | "Profile"
+  | "DetailGroup";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -27,9 +34,17 @@ type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
 const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
   return (
     <AppScreen theme="cupertino">
-      {navigate === "Profile" || navigate === "DetailGroup" ? <TopNav Back={true} /> : <TopNav Back={false} />}
+      {navigate === "Profile" || navigate === "DetailGroup" ? (
+        <TopNav Back={true} />
+      ) : (
+        <TopNav Back={false} />
+      )}
       {NavigateMapper[navigate]}
-      {navigate === "Profile" || navigate === "DetailGroup" ? <></> : <BottomNav />}
+      {navigate === "Profile" || navigate === "DetailGroup" ? (
+        <></>
+      ) : (
+        <BottomNav />
+      )}
     </AppScreen>
   );
 };
