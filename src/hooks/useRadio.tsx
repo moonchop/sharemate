@@ -17,23 +17,24 @@ export const useRadio = (contentList: string[]) => {
     );
 
   const RadioComponent = () => {
-    <>
-      {contentList.map((content, index) => (
-        <div key={content}>
-          <p>{content}</p>
-          <input
-            type="radio"
-            onClick={() => handleClick(content)}
-            ref={(el) => (Ref.current[content] = el)}
-          />
-        </div>
-      ))}
-    </>;
+    return (
+      <>
+        {contentList.map((content, index) => (
+          <div key={content}>
+            <p>{content}</p>
+            <input
+              type="radio"
+              onClick={() => handleClick(content)}
+              ref={(el) => (Ref.current[content] = el)}
+            />
+          </div>
+        ))}
+      </>
+    );
   };
-    
+
   return {
     Component: RadioComponent,
     onSubmit: handleSubmit,
   };
 };
-
