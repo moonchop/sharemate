@@ -1,15 +1,13 @@
-package com.shareMate.shareMate.controller;
+package com.shareMate.shareMate.controller.user;
 
 
 import com.shareMate.shareMate.dto.RequestLoginDto;
-import com.shareMate.shareMate.dto.RequestUserDto;
 import com.shareMate.shareMate.entity.UserEntity;
-import com.shareMate.shareMate.service.UserService;
+import com.shareMate.shareMate.service.CustomUserDetailService;
+import com.shareMate.shareMate.service.user.UserService;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -28,9 +26,13 @@ public class UserController {
     }
 
     private final UserService userService;
+    private final CustomUserDetailService userDetailsService;
 
-    public UserController(UserService userService) {
+
+    public UserController(UserService userService,CustomUserDetailService userDetailsService) {
         this.userService = userService;
+        this.userDetailsService=userDetailsService;
+
     }
 
     @GetMapping("/main")
@@ -38,22 +40,14 @@ public class UserController {
         return "Get success : " + num;
 
     }
-    @PostMapping("/register")
-    public Map doUserList(@RequestBody RequestUserDto requestUserDto){
-        System.out.println("hello"+ requestUserDto);
 
-        return userService.doInsert(requestUserDto);
-    }
 
-    @PostMapping("/login")
-    public Map UserLogin(@RequestBody RequestLoginDto requestLoginDto){
-        System.out.println("lgcon");
-        return userService.doLogin(requestLoginDto);
-   }
+
     @PostMapping("/list2")
-    public String postMethod2() {
+    public String postMethod2(@RequestBody RequestLoginDto requestLoginDto) {
         System.out.println("hello2");
-        return "Hello Spring!";
+
+        return requestLoginDto.toEntity().getPwd();
     }
 
     @GetMapping("/users")

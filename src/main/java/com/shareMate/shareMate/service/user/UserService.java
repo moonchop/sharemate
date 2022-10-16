@@ -1,4 +1,4 @@
-package com.shareMate.shareMate.service;
+package com.shareMate.shareMate.service.user;
 
 import com.shareMate.shareMate.dto.RequestLoginDto;
 import com.shareMate.shareMate.dto.RequestUserDto;
