@@ -1,18 +1,20 @@
 import React from "react";
+import { useActivity } from "@stackflow/react";
 import { FaBell } from "react-icons/fa";
 import { ImSearch } from "react-icons/im";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useFlow } from "../stackflow";
 
-const Topnav = (Back) => {
+const Topnav = () => {
   const { pop } = useFlow();
+  const stack_Status = useActivity();
   const onClick = () => {
     pop();
   };
 
   return (
     <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
-      {Back.Back === true ? (
+      {!stack_Status.isRoot ? (
         <IoMdArrowRoundBack
           className="w-5 h-5"
           onClick={onClick}

@@ -82,7 +82,7 @@ const Feed = () => {
 
   return (
     <div className="h-[85%] overflow-y-scroll px-5 pt-3">
-      {dumyData.map((elem) => (
+      {dumyData.map((elem: IUser) => (
         <div key={elem.id} className="h-[14%]">
           <div className="flex my-2 justify-between">
             <div className="flex flex-row w-[85%]">
@@ -113,7 +113,7 @@ const Feed = () => {
             </button> */}
             <div
               onClick={() => {
-                push("ProfileActivity", { elem: JSON.stringify(elem) });
+                push("ProfileActivity", elem);
               }}
             >
               Detail

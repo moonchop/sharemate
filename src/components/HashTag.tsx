@@ -3,7 +3,7 @@ const HASHTAG_OBJ = {
   blue: "ring-[rgb(175,173,245)] text-[rgb(175,173,245)]",
   green: "ring-[rgb(186,152,229)] text-[rgb(186,152,229)]",
 };
-console.log(HASHTAG_OBJ["red"]);
+
 const HashTag = ({ text, color }: { text: string[]; color: ("red" | "blue" | "green")[] }) => {
   return (
     <div className="flex space-x-3">

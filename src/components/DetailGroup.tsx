@@ -1,25 +1,32 @@
-import { useActivity } from "@stackflow/react";
+import { useActivityParams } from "@stackflow/react";
 import React from "react";
 
+interface ParamsValue {
+  building: string;
+  hashtag: string[];
+  people: string[];
+  text: string;
+}
+
 const DetailGroup = () => {
-  const activity = useActivity();
-  let value = activity.params.elem;
+  const activity: ParamsValue = useActivityParams();
+  const props = activity;
 
   return (
     <div className="text-center">
-      <div className="text-2xl">{value.building}</div>
+      <div className="text-2xl">{props.building}</div>
       <br />
       <div>해시태그 : </div>
-      {value.hashtag.map((elem) => (
-        <div>#{elem}</div>
+      {props.hashtag.map((elem, index) => (
+        <div key={index}>#{elem}</div>
       ))}
       <br />
       <div>참여인원 : </div>
-      {value.people.map((elem) => (
-        <div>{elem}</div>
+      {props.people.map((elem, index) => (
+        <div key={index}>{elem}</div>
       ))}
       <br />
-      <div>{value.text}</div>
+      <div>{props.text}</div>
     </div>
   );
 };

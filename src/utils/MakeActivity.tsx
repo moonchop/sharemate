@@ -34,11 +34,7 @@ type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
 const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
   return (
     <AppScreen theme="cupertino">
-      {navigate === "Profile" || navigate === "DetailGroup" ? (
-        <TopNav Back={true} />
-      ) : (
-        <TopNav Back={false} />
-      )}
+      <TopNav />
       {NavigateMapper[navigate]}
       {navigate === "Profile" || navigate === "DetailGroup" ? (
         <></>

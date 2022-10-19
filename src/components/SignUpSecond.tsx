@@ -1,4 +1,4 @@
-import { useRadio } from "./useRadio";
+import { useRadio } from "../hooks/useRadio";
 
 const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
   const { Component: GanderSelectComponent, onSubmit } = useRadio([
