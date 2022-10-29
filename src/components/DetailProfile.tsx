@@ -1,5 +1,7 @@
 import { useActivityParams } from "@stackflow/react";
 import React from "react";
+import Hashtag from "./HashTag";
+import { HashTagColor } from "../utils/HashTagColor";
 
 interface ParamsValue {
   photo: string;
@@ -14,18 +16,19 @@ const DetailProfile = () => {
   const props = activity;
 
   return (
-    <div className="flex flex-col pt-24 text-center justify-center items-center">
+    <div className="flex w-[100%] h-[100%] px-4 flex-col pt-10 text-center items-center">
       <img
         src={props.photo}
         className="mb-14 rounded-full justify-center items-center"
       />
-      <div>이름 : {props.name}</div>
+      <div className="text-2xl">이름 : {props.name}</div>
       <div>나이 : {props.age}</div>
       <div>전공 : {props.major}</div>
       <div>해시태그 : </div>
-      {props.hashtag.map((elem, index) => (
-        <div key={index}>#{elem} </div>
-      ))}
+      <Hashtag
+        text={props.hashtag}
+        color={HashTagColor as ("red" | "blue" | "green")[]}
+      />
       <div>자기소개 : 안녕하세요</div>
     </div>
   );
