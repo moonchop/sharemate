@@ -100,7 +100,7 @@ const Feed = () => {
                     {elem.major}
                   </p>
                 </div>
-                <div className="flex space-x-3 ml-0.5 overflow-x-auto py-1 px-[2px] w-full">
+                <div className="flex space-x-3 overflow-x-auto py-1 px-[2px] w-full">
                   <HashTag
                     text={elem.hashtag}
                     color={HashTagColor as ("red" | "blue" | "green")[]}

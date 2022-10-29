@@ -75,10 +75,10 @@ const GroupFeed = () => {
   const { push } = useFlow();
 
   return (
-    <div className="h-[85%] overflow-y-scroll px-1">
+    <div className="h-[86%] overflow-y-scroll px-1 mt-2">
       {groupData.map((elem: IGroup) => (
-        <div key={elem.id} className="h-[20%] mt-2">
-          <div className="flex justify-between mb-2">
+        <div key={elem.id} className="h-[21%] mb-4">
+          <div className="flex justify-between mb-2 h-full">
             <div className="flex flex-row ml-1 mr-2">
               <div className="flex flex-col w-[90%] h-auto">
                 <p className="flex text-black mx-2">{`[${elem.building} ${elem.room}인실]`}</p>
