@@ -1,6 +1,8 @@
 import { useRef } from "react";
 
-export const useRadio = (contentList: string[]) => {
+type Arrange_Type = "row" | "col";
+
+export const useRadio = (contentList: string[], arrange: Arrange_Type) => {
   const Ref = useRef<any>([]);
 
   const handleClick = (content: string) => {
@@ -19,10 +21,13 @@ export const useRadio = (contentList: string[]) => {
   const RadioComponent = () => {
     return (
       <>
-        <main className="flex w-full items-center justify-center p-2">
+        <main className="flex p-2">
           <div
-            className="grid w-[40rem] grid-flow-col-dense space-x-2 rounded-xl bg-gray-100 p-2"
-            x-data="app"
+            className={`rounded-xl bg-gray-100 p-2 ${
+              arrange === "col"
+                ? "grid-flow-col-dense w-[40rem] grid"
+                : "flex-row "
+            }`}
           >
             {contentList.map((content) => (
               <div
@@ -36,7 +41,7 @@ export const useRadio = (contentList: string[]) => {
                   type="radio"
                   ref={(el) => (Ref.current[content] = el)}
                 />
-                <label className=" block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#FCABBE] peer-checked:font-bold">
+                <label className="px-6 block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#FCABBE] peer-checked:font-bold">
                   {content}
                 </label>
               </div>

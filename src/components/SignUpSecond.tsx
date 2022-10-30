@@ -1,12 +1,23 @@
 import { useRadio } from "../hooks/useRadio";
 
 const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
-  const { Component: GenderSelectComponent } = useRadio(["남", "여"]);
-  const { Component: GradeSelectComponent } = useRadio(["1", "2", "3", "4"]);
-  const { Component: ForeignSelectComponent } = useRadio(["내국인", "외국인"]);
+  const { Component: GenderSelectComponent } = useRadio(["남", "여"], "col");
+  const { Component: GradeSelectComponent } = useRadio(
+    ["1", "2", "3", "4"],
+    "col"
+  );
+  const { Component: ForeignSelectComponent } = useRadio(
+    ["내국인", "외국인"],
+    "col"
+  );
+  const { Component: EandISelectComponent } = useRadio(["E", "I"], "row");
+  const { Component: NandSSelectComponent } = useRadio(["N", "S"], "row");
+  const { Component: TandFSelectComponent } = useRadio(["T", "F"], "row");
+  const { Component: JandPSelectComponent } = useRadio(["J", "P"], "row");
+
   return (
-    <>
-      <div className="my-10">
+    <div className="h-[85%] overflow-y-scroll">
+      <div className="my-10 ">
         <p className="mt-2 ml-2">성별을 선택해주세요.</p>
         <GenderSelectComponent />
 
@@ -27,6 +38,13 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
         <p className="mt-2 ml-2">외국인 여부</p>
         <ForeignSelectComponent />
       </div>
+      <p>MBTI를 선택해주세요.</p>
+      <div className="flex">
+        <EandISelectComponent />
+        <NandSSelectComponent />
+        <TandFSelectComponent />
+        <JandPSelectComponent />
+      </div>
       <button
         onClick={handleGoPrev}
         className="w-[100px] h-[44px] m-2 float-left  bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-sm text-black rounded-md shadow-button"
@@ -39,7 +57,7 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
       >
         다음
       </button>
-    </>
+    </div>
   );
 };
 
