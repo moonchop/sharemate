@@ -1,6 +1,6 @@
 package com.shareMate.shareMate.service;
 
-import com.shareMate.shareMate.dto.RequestUserDto;
+import com.shareMate.shareMate.dto.UserDto;
 import com.shareMate.shareMate.service.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +14,19 @@ class UserServiceTest {
     UserService userService;
     @Test
     void doInsert() {
-        RequestUserDto requestUserDto = RequestUserDto.builder()
+        UserDto userDto = UserDto.builder()
                 .email("2222@naver.com")
                 .name("테스트임")
                 .pwd("1234")
                 .major("12")
                 .grade("23")
                 .birth(new Date())
-                .kakao_id("123")
+
                 .profile_photo("ssd")
                 .create_at(new Date())
                 .build();
 
-        userService.doInsert(requestUserDto);
+        userService.doInsert(userDto);
     }
 //    @Test
 //    void doUpdate(){

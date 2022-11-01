@@ -9,12 +9,13 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class RequestUserDto {
+public class UserDto {
 
     private int user_id;
+
     private String email;
 
-    private String pwd;
+
     private String name;
 
     private String major;
@@ -33,12 +34,11 @@ public class RequestUserDto {
     public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
                 .email(email)
-                .pwd(pwd)
+
                 .name(name)
                 .major(major)
                 .grade(grade)
                 .birth(birth)
-                .kakao_id(kakao_id)
                 .profile_photo(profile_photo)
                 .create_at(create_at)
                 .build();
@@ -46,15 +46,15 @@ public class RequestUserDto {
     }
 
     @Builder
-    public RequestUserDto(int user_id, String email, String pwd, String name, String major, String grade, Date birth, String kakao_id, String profile_photo, Date create_at) {
+    public UserDto(int user_id, String email, String pwd, String name, String major, String grade, Date birth, String profile_photo, Date create_at) {
         this.user_id = user_id;
         this.email = email;
-        this.pwd = pwd;
+
         this.name = name;
         this.major = major;
         this.grade = grade;
         this.birth = birth;
-        this.kakao_id = kakao_id;
+
         this.profile_photo = profile_photo;
         this.create_at = create_at;
     }

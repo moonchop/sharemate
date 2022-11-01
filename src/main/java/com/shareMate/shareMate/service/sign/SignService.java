@@ -43,8 +43,8 @@ public class SignService {
         UserEntity user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail()).orElseThrow(()-> {throw new UsernameNotFoundException("유저 없음");});
         String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.getUser_id()));
         String jwtRefToken =refTokenHelper.createToken( String.valueOf(user.getUser_id()));
-        System.out.println("사인 서비스 토큰 "+ jwtRefToken);
-        System.out.println("사인 서비스 토큰 "+ jwtAccToken);
+        //System.out.println("사인 서비스 토큰 "+ jwtRefToken);
+        //System.out.println("사인 서비스 토큰 "+ jwtAccToken);
 
 
         return new ResponseSignInDto(jwtAccToken,jwtRefToken);

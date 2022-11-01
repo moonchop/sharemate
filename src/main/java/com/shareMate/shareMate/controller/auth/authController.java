@@ -1,8 +1,7 @@
 package com.shareMate.shareMate.controller.auth;
 
 import com.shareMate.shareMate.dto.RequestLoginDto;
-import com.shareMate.shareMate.dto.RequestUserDto;
-import com.shareMate.shareMate.dto.sign.LoginSuccess;
+import com.shareMate.shareMate.dto.UserDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
@@ -19,10 +18,10 @@ public class authController {
     private final UserService userService;
     private final SignService signService;
     @PostMapping("/register")
-    public Map doUserList(@RequestBody RequestUserDto requestUserDto){
-        System.out.println("hello"+ requestUserDto);
+    public Map doUserList(@RequestBody UserDto userDto){
+        System.out.println("hello"+ userDto);
 
-        return userService.doInsert(requestUserDto);
+        return userService.doInsert(userDto);
     }
 
 

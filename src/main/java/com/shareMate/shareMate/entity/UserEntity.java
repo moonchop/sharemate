@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 //@Data
 //@AllArgsConstructor
@@ -23,7 +24,6 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(nullable = false,unique = true)
     private int user_id;
 //    @Column(nullable = false)
     private String email;
@@ -38,7 +38,7 @@ public class UserEntity implements UserDetails {
 //    @Column(nullable = false)
     private Date birth;
 //    @Column(nullable = false)
-    private String kakao_id;
+
 //    @Column(nullable = false)
     private String profile_photo;
 //    @Column(nullable = false)
@@ -46,6 +46,9 @@ public class UserEntity implements UserDetails {
     @OneToOne
     @JoinColumn(name="user_id")
     private FavorEntity favor;
+
+
+
 
 
 
