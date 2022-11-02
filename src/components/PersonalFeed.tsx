@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { HashTagColor } from "../utils/HashTagColor";
 import HashTag from "./HashTag";
 import { useFlow } from "../stackflow";
+import useIntersectionObserver from "../utils/useIntersectionObserver";
 
 interface IUser {
   id: number;
@@ -75,15 +77,61 @@ const dumyData: IUser[] = [
     photo:
       "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
+  {
+    id: 8,
+    name: "a",
+    age: "24",
+    major: "국방디지털융합학과",
+    hashtag: ["가나다라마바사아", "인간입니다", "남자아아아아아"],
+    photo:
+      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    id: 9,
+    name: "b",
+    age: "24",
+    major: "국방디지털융합학과",
+    hashtag: ["가나다라마바사아", "인간입니다", "남자아아아아아"],
+    photo:
+      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    id: 10,
+    name: "c",
+    age: "24",
+    major: "국방디지털융합학과",
+    hashtag: ["가나다라마바사아", "인간입니다", "남자아아아아아"],
+    photo:
+      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    id: 11,
+    name: "d",
+    age: "24",
+    major: "국방디지털융합학과",
+    hashtag: ["가나다라마바사아", "인간입니다", "남자아아아아아"],
+    photo:
+      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
 ];
 
 const Feed = () => {
   const { push } = useFlow();
+  const [page, setPage] = useState<number>(1);
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    console.log(`page : ${page} 감지결과 : ${isIntersecting}`);
+  };
+
+  const { setTarget } = useIntersectionObserver({ onIntersect });
+
+  const handlerRef = (id: number) => {
+    if (id == 11) return setTarget;
+  };
 
   return (
     <div className="h-[85%] overflow-y-scroll px-5 pt-3">
       {dumyData.map((elem: IUser) => (
-        <div key={elem.id} className="h-[14%]">
+        <div key={elem.id} ref={handlerRef(elem.id)} className="h-[14%]">
           <div className="flex my-2 justify-between">
             <div className="flex flex-row w-[85%]">
               <img
@@ -119,7 +167,6 @@ const Feed = () => {
               Detail
             </div>
           </div>
-
           <hr className="mt-3" />
         </div>
       ))}
