@@ -7,7 +7,6 @@ import PersonalFeed from "../components/PersonalFeed";
 import GroupFeed from "../components/GroupFeed";
 import MyPage from "../activities/MyPage";
 import Community from "../activities/Community";
-import SignUp from "../activities/SignUp";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
 
@@ -16,7 +15,6 @@ type Navigate_Type =
   | "Group"
   | "Community"
   | "MyPage"
-  | "SignUp"
   | "Profile"
   | "DetailGroup";
 
@@ -25,7 +23,6 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Group: <GroupFeed />,
   MyPage: <MyPage />,
   Community: <Community />,
-  SignUp: <SignUp />,
   Profile: <DetailProfile />,
   DetailGroup: <DetailGroup />,
 };

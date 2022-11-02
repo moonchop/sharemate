@@ -4,12 +4,12 @@ import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { createLink } from "@stackflow/link";
 import MakeActivity from "./utils/MakeActivity";
+import SignUpActivity from "./activities/SignUp";
 
 const MainActivity = MakeActivity("Main");
 const GroupActivity = MakeActivity("Group");
 const CommunityActivity = MakeActivity("Community");
 const MyPageActivity = MakeActivity("MyPage");
-const SignUpActivity = MakeActivity("SignUp");
 const ProfileActivity = MakeActivity("Profile");
 const DetailGroupActivity = MakeActivity("DetailGroup");
 

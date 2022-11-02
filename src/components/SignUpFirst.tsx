@@ -36,14 +36,14 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             },
           })}
         />
-        {errors.name && (
+        {/* {errors.name && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
             {errors.name.message as string}
           </small>
-        )}
+        )} */}
 
         <label className="text-sm text-left" htmlFor="password">
           비밀번호 *
@@ -62,14 +62,14 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             },
           })}
         />
-        {errors.password && (
+        {/* {errors.password && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
             {errors.password.message as string}
           </small>
-        )}
+        )} */}
         {/* <label htmlFor="passwordConfirm">비밀번호 확인</label>
       <input
         id="password"
@@ -77,6 +77,26 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         placeholder="******"
         {...register("password")}
       /> */}
+        <label className="text-sm text-left text-black" htmlFor="major">
+          학과 *
+        </label>
+        <input
+          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+          id="major"
+          type="text"
+          placeholder="소프트웨어학과"
+          {...register("major", {
+            required: "필수 입력입니다.",
+          })}
+        />
+        {/* {errors.major && (
+          <small
+            className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
+            role="alert"
+          >
+            {errors.major.message as string}
+          </small>
+        )} */}
         <label className=" text-sm text-left" htmlFor="email">
           이메일 *
         </label>
@@ -99,26 +119,26 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           <button className="flex flex-wrap text-xs justify-center w-[60px] text-center py-3 m-1 float-right bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-black borde rounded-md shadow-button">
             인증요청
           </button>
-          {errors.email && (
+          {/* {errors.email && (
             <small
               className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
               role="alert"
             >
               {errors.email.message as string}
             </small>
-          )}
+          )} */}
         </div>
         <div className="w-full">
           <input
             className="w-[260px] px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
             id="code"
             type="number"
-            name="code"
             placeholder="1234"
+            {...register("code")}
           />
-          <button className="flex flex-wrap text-xs justify-center w-[60px] text-center py-3 m-1 float-right bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-black borde rounded-md shadow-button">
+          <div className="flex flex-wrap text-xs justify-center w-[60px] text-center py-3 m-1 float-right bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-black borde rounded-md shadow-button">
             확인
-          </button>
+          </div>
         </div>
         <button
           type="submit"

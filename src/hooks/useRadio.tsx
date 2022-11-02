@@ -2,7 +2,11 @@ import { useRef } from "react";
 
 type Arrange_Type = "row" | "col";
 
-export const useRadio = (contentList: string[], arrange: Arrange_Type) => {
+export const useRadio = (
+  title: string,
+  contentList: string[],
+  arrange: Arrange_Type
+) => {
   const Ref = useRef<any>([]);
 
   const handleClick = (content: string) => {
@@ -17,11 +21,10 @@ export const useRadio = (contentList: string[], arrange: Arrange_Type) => {
       }),
       {}
     );
-
   const RadioComponent = () => {
     return (
       <>
-        <main className="flex p-2">
+        <main className="flex p-2 mb-[50px]">
           <div
             className={`rounded-xl bg-gray-100 p-2 ${
               arrange === "col"
