@@ -32,28 +32,10 @@ const useInfinityQuery = () => {
       }
     );
 
-  return (
-    <div className="overflow-y-scroll h-[85%]">
-      {data?.pages.map((elem: any) =>
-        elem.data.map((elem2: feeddata) => (
-          <div key={elem2.id}>
-            <div className="text-lg">{elem2.id}</div>
-            <div className="text-lg">{elem2.email}</div>
-          </div>
-        ))
-      )}
-      <button
-        onClick={() => fetchNextPage()}
-        disabled={!hasNextPage || isFetchingNextPage}
-      >
-        {isFetchingNextPage
-          ? "Loading more..."
-          : hasNextPage
-          ? "Load More"
-          : "Nothing more to load"}
-      </button>
-    </div>
-  );
+  return {
+    result: data,
+    nextFetch: () => fetchNextPage(),
+  };
 };
 
 export default useInfinityQuery;
