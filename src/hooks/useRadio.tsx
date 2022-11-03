@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 type Arrange_Type = "row" | "col";
 
 export const useRadio = (
+  content: string,
   title: string,
   contentList: string[],
   arrange: Arrange_Type
@@ -11,7 +12,14 @@ export const useRadio = (
 
   const handleClick = (content: string) => {
     contentList.map((str) => (Ref.current[str].checked = content === str));
+    sessionStorage.setItem(title, content);
   };
+
+  useEffect(() => {
+    const data = sessionStorage.getItem(title);
+    if (data === null) return;
+    contentList.map((str) => (Ref.current[str].checked = data === str));
+  });
 
   const handleSubmit = () =>
     contentList.reduce(
@@ -23,8 +31,9 @@ export const useRadio = (
     );
   const RadioComponent = () => {
     return (
-      <>
-        <main className="flex p-2 mb-[50px]">
+      <div className="mb-[100px]">
+        {content != "" && <p className="ml-3 text-xl">{content}</p>}
+        <main className="flex p-2 ">
           <div
             className={`rounded-xl bg-gray-100 p-2 ${
               arrange === "col"
@@ -44,14 +53,14 @@ export const useRadio = (
                   type="radio"
                   ref={(el) => (Ref.current[content] = el)}
                 />
-                <label className="px-6 block cursor-pointer select-none rounded-xl p-2 text-center peer-checked:bg-[#FCABBE] peer-checked:font-bold">
+                <label className="px-6 block cursor-pointer select-none rounded-xl text-lg p-2 text-center peer-checked:bg-[#ab82e084] peer-checked:font-semibold">
                   {content}
                 </label>
               </div>
             ))}
           </div>
         </main>
-      </>
+      </div>
     );
   };
 

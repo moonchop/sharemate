@@ -25,12 +25,10 @@ const SignUp: ActivityComponentType = () => {
   };
 
   return (
-    <AppScreen
-      theme="android"
-      appBar={{
-        title: "SIGN UP",
-      }}
-    >
+    <AppScreen theme="android">
+      <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
+        <div className="font-bold text-xl text-white">Share Mate</div>
+      </header>
       {React.cloneElement(Stage_Map[stage], {
         handleGoNext,
         handleGoPrev,

@@ -1,8 +1,12 @@
 import { useEffect } from "react";
+import { BsPrinterFill } from "react-icons/bs";
 
 export const useSaveFormData = (formName: string) => {
-  const setData = (data: any) =>
+  const setData = (data: any) => {
     sessionStorage.setItem(formName, JSON.stringify(data));
+
+  };
+
   useEffect(() => {
     const data = sessionStorage.getItem(formName);
     if (data === null) return;

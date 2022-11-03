@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useSaveFormData } from "../hooks/useSaveFormData";
+import SignUpButton from "./SignUpButton";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const {
@@ -18,13 +19,18 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
 
   return (
     <div className="py-[40px] p-3 overflow-y-scroll">
-      <h1 className="text-[23px] text-left text-black pb-5">회원가입</h1>
+      <h1 className="text-[33px] text-bold text-left text-black mb-14 py-5">
+        회원가입
+      </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label className="text-sm text-left text-black" htmlFor="name">
-          이름 *
-        </label>
+        <div className="flex">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-base text-left text-black" htmlFor="name">
+            이름
+          </label>
+        </div>
         <input
-          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="name"
           type="text"
           placeholder="name"
@@ -36,20 +42,23 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             },
           })}
         />
-        {/* {errors.name && (
+        {errors.name && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
             {errors.name.message as string}
           </small>
-        )} */}
+        )}
 
-        <label className="text-sm text-left" htmlFor="password">
-          비밀번호 *
-        </label>
+        <div className="flex">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-sm text-left text-black" htmlFor="password">
+            비밀번호
+          </label>
+        </div>
         <input
-          className="w-full px-4 py-2.5 mb-5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+          className="w-full px-4 py-2.5 mb-5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="password"
           type="password"
           placeholder="******"
@@ -62,14 +71,14 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             },
           })}
         />
-        {/* {errors.password && (
+        {errors.password && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
             {errors.password.message as string}
           </small>
-        )} */}
+        )}
         {/* <label htmlFor="passwordConfirm">비밀번호 확인</label>
       <input
         id="password"
@@ -77,11 +86,14 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         placeholder="******"
         {...register("password")}
       /> */}
-        <label className="text-sm text-left text-black" htmlFor="major">
-          학과 *
-        </label>
+        <div className="flex">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-sm text-left text-black" htmlFor="major">
+            학과
+          </label>
+        </div>
         <input
-          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="major"
           type="text"
           placeholder="소프트웨어학과"
@@ -89,20 +101,23 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             required: "필수 입력입니다.",
           })}
         />
-        {/* {errors.major && (
+        {errors.major && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
             {errors.major.message as string}
           </small>
-        )} */}
-        <label className=" text-sm text-left" htmlFor="email">
-          이메일 *
-        </label>
+        )}
+        <div className="flex">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-sm text-left text-black" htmlFor="email">
+            이메일
+          </label>
+        </div>
         <div className="w-full">
           <input
-            className="w-[260px] px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+            className="w-[260px] px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
             id="email"
             type="text"
             placeholder="example@email.com"
@@ -116,36 +131,43 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             })}
           />
 
-          <button className="flex flex-wrap text-xs justify-center w-[60px] text-center py-3 m-1 float-right bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-black borde rounded-md shadow-button">
+          <button className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[#ab82e0] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button">
             인증요청
           </button>
-          {/* {errors.email && (
+          {errors.email && (
             <small
               className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
               role="alert"
             >
               {errors.email.message as string}
             </small>
-          )} */}
+          )}
         </div>
         <div className="w-full">
+          <div className="flex">
+            <label
+              className="text-sm text-left ml-1 mb-1 text-black"
+              htmlFor="code"
+            >
+              인증번호
+            </label>
+          </div>
           <input
-            className="w-[260px] px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+            className="w-[260px] px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
             id="code"
             type="number"
             placeholder="1234"
             {...register("code")}
           />
-          <div className="flex flex-wrap text-xs justify-center w-[60px] text-center py-3 m-1 float-right bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-black borde rounded-md shadow-button">
+          <div className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button">
             확인
           </div>
         </div>
         <button
-          type="submit"
           disabled={isSubmitting}
-          className="flex flex-wrap justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] bg-[#FCABBE] hover:bg-[#F65B8082] font-medium text-sm text-black borde rounded-md shadow-button"
+          className="flex justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] ring-2 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
         >
-          다음으로
+          다음
         </button>
       </form>
     </div>
