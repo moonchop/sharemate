@@ -7,6 +7,8 @@ interface useIntersectionObserverProps {
   onIntersect: IntersectionObserverCallback;
 }
 
+const loadMore = () => {};
+
 const useIntersectionObserver = ({
   root,
   rootMargin = "0px",
@@ -19,11 +21,19 @@ const useIntersectionObserver = ({
     if (!target) return;
 
     const observer: IntersectionObserver = new IntersectionObserver(
-      onIntersect,
+      //onIntersect,
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // 데이터 불러오기 추가 필요
+            observer.unobserve(entry.target);
+            console.log(`상태 : ${entry.isIntersecting}`);
+          }
+        });
+      },
       { root, rootMargin, threshold }
     );
     observer.observe(target);
-
     return () => observer.unobserve(target);
   }, [onIntersect, root, rootMargin, target, threshold]);
 
