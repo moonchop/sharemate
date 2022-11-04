@@ -55,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:7.37.0"],\
             ["react-icons", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:4.4.0"],\
             ["react-router-dom", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:6.4.1"],\
+            ["tailwind-scrollbar-hide", "npm:1.1.7"],\
             ["tailwindcss", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:3.1.8"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["vite", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:3.1.3"]\
@@ -3466,6 +3467,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-hook-form", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:7.37.0"],\
             ["react-icons", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:4.4.0"],\
             ["react-router-dom", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:6.4.1"],\
+            ["tailwind-scrollbar-hide", "npm:1.1.7"],\
             ["tailwindcss", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:3.1.8"],\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"],\
             ["vite", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:3.1.3"]\
@@ -3616,6 +3618,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/supports-preserve-symlinks-flag-npm-1.0.0-f17c4d0028-53b1e247e6.zip/node_modules/supports-preserve-symlinks-flag/",\
           "packageDependencies": [\
             ["supports-preserve-symlinks-flag", "npm:1.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["tailwind-scrollbar-hide", [\
+        ["npm:1.1.7", {\
+          "packageLocation": "./.yarn/cache/tailwind-scrollbar-hide-npm-1.1.7-537baa5b75-2434a1db7a.zip/node_modules/tailwind-scrollbar-hide/",\
+          "packageDependencies": [\
+            ["tailwind-scrollbar-hide", "npm:1.1.7"]\
           ],\
           "linkType": "HARD"\
         }]\

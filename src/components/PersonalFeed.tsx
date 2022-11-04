@@ -46,30 +46,40 @@ const Feed = () => {
   };
 
   return (
-    <div className="h-[85%] overflow-y-scroll px-5 pt-3">
+    <div className="h-[85%] overflow-y-scroll scrollbar-hide px-5 pt-3">
       {tempdata?.map((elem2: InData) =>
         elem2.data.map((elem: OutData) => (
-          <div key={elem.id} ref={handlerRef(elem.id)} className="h-[20%]">
-            {/* 원래 14%, 무한스크롤 체크를 위해 임시조치 */}
-            <div className="flex my-2 justify-between">
-              <div className="flex flex-row w-[85%]">
-                <img
-                  src={elem.avatar}
-                  className="flex mr-2 h-[90%] w-[20%] m-1 rounded-full max-h-[80px] max-w-[80px]"
-                />
-                <div className="flex flex-col  w-[90%]">
-                  <div className="flex mb-1 ">
-                    <p className="max-w-[30%] mr-1 overflow-hidden text-ellipsis whitespace-nowrap">
+          <>
+            <div
+              key={elem.id}
+              ref={handlerRef(elem.id)}
+              className="h-[17%] flex justify-between items-center "
+              onClick={() => {
+                push("ProfileActivity", elem);
+              }}
+            >
+              <div className="flex flex-row h-[100%] w-[100%] items-center">
+                <div className="flex w-[20%] items-center">
+                  <img
+                    src={elem.avatar}
+                    className="mr-2 w-[58px] h-[58px] rounded-xl object-fill"
+                  />
+                </div>
+                <div className="flex flex-col ml-2 w-[80%]">
+                  <div className="flex mb-1 w-full">
+                    <p className="max-w-[78px] mr-1 overflow-hidden text-ellipsis whitespace-nowrap">
                       {elem.email}
                     </p>
                     <p className="">24</p>
                     <p className="w-[50%] overflow-hidden text-ellipsis whitespace-nowrap mx-2">
-                      {elem.last_name}
+                      {" "}
+                      {/* 9글자가 최대 */}
+                      국방디지털융합학과
                     </p>
                   </div>
-                  <div className="flex space-x-3 overflow-x-auto py-1 px-[2px] w-full">
+                  <div className="flex space-x-3 overflow-x-auto py-1 px-[2px] w-full scrollbar-hide">
                     <HashTag
-                      text={["깔끔", "청결", "아침"]}
+                      text={["깔끔쟁이", "청결쟁이", "아침쟁이"]}
                       color={HashTagColor as ("red" | "blue" | "green")[]}
                     />
                   </div>
@@ -78,16 +88,9 @@ const Feed = () => {
               {/* <button className="flex justify-center items-center w-11 h-16 focus:ring-2 rounded-md bg-slate-100 text-indigo-700 hover:bg-indigo-200 ">
               more
             </button> */}
-              <div
-                onClick={() => {
-                  push("ProfileActivity", elem);
-                }}
-              >
-                Detail
-              </div>
             </div>
-            <hr className="mt-3" />
-          </div>
+            <hr />
+          </>
         ))
       )}
     </div>
