@@ -92,7 +92,7 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
         <p className="mt-2 ml-2 text-xl">출생년도를 입력해주세요.</p>
         <div className="flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">
           <input
-            className="w-[70px] underline text-base text-coolGray-900"
+            className="w-[70px] underline text-base text-coolGray-900 bg-transparent"
             id="code"
             type="number"
             name="code"

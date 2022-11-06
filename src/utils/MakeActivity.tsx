@@ -9,6 +9,7 @@ import MyPage from "../activities/MyPage";
 import Community from "../activities/Community";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
+import CreateGroup from "../components/CreateGroup";
 
 type Navigate_Type =
   | "Main"
@@ -16,7 +17,8 @@ type Navigate_Type =
   | "Community"
   | "MyPage"
   | "Profile"
-  | "DetailGroup";
+  | "DetailGroup"
+  | "CreateGroup";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -25,6 +27,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Community: <Community />,
   Profile: <DetailProfile />,
   DetailGroup: <DetailGroup />,
+  CreateGroup: <CreateGroup />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;

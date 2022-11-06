@@ -12,6 +12,7 @@ const CommunityActivity = MakeActivity("Community");
 const MyPageActivity = MakeActivity("MyPage");
 const ProfileActivity = MakeActivity("Profile");
 const DetailGroupActivity = MakeActivity("DetailGroup");
+const CreateGroupActivity = MakeActivity("CreateGroup");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -24,6 +25,7 @@ const activities = {
   SignUpActivity,
   ProfileActivity,
   DetailGroupActivity,
+  CreateGroupActivity,
   // DetailProfile,
 };
 
@@ -41,6 +43,7 @@ export const { Stack, useFlow } = stackflow({
         SignUpActivity: "/signup",
         ProfileActivity: "/profile",
         DetailGroupActivity: "/detailgroup",
+        CreateGroupActivity: "/creategroup",
       },
       fallbackActivity: () => "MainActivity", // 오류 발생시 Home으로 이동 (404페이지 처리 할때 사용)
     }),

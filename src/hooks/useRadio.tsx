@@ -38,7 +38,7 @@ export const useRadio = (
             className={`rounded-xl bg-gray-100 p-2 ${
               arrange === "col"
                 ? "grid-flow-col-dense w-[40rem] grid"
-                : "flex-row "
+                : "flex-row w-auto"
             }`}
           >
             {contentList.map((content) => (
