@@ -25,7 +25,7 @@ public class authController {
     }
 
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<ResponseSignInDto> UserLogin(@RequestBody RequestLoginDto requestLoginDto){
         ResponseSignInDto responseSignInDto = signService.doLogin(requestLoginDto);
         System.out.println("프린트");

@@ -27,7 +27,7 @@ public class JwtHandler {
     }
 
     public String extractSubject(String encodedKey, String token) {
-//        System.out.println("토큰 내용 추출: "+Jwts.parserBuilder().setSigningKey(encodedKey).build().parseClaimsJws(token).getBody().getSubject());
+        System.out.println("토큰 내용 추출: "+Jwts.parserBuilder().setSigningKey(encodedKey).build().parseClaimsJws(token).getBody().getSubject());
         return Jwts.parserBuilder().setSigningKey(encodedKey).build().parseClaimsJws(token).getBody().getSubject();
         //토큰에서 subject를 추출함 -> 사용자 인증 위(user의 id 추출해서 저장예정)
     }
