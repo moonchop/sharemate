@@ -5,7 +5,7 @@ import { useFlow } from "../stackflow";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import useInfinityQuery from "../hooks/useInfinityQuery";
 
-interface IUser {
+export interface IUser {
   id: number;
   name: string;
   age: string;

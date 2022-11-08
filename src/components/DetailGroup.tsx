@@ -1,32 +1,46 @@
 import { useActivityParams } from "@stackflow/react";
+import { HashTagColor } from "../utils/HashTagColor";
 import React from "react";
-
+import HashTag from "./HashTag";
 interface ParamsValue {
+  id: number;
   building: string;
+  floor: number;
   hashtag: string[];
+  groupIntro: string;
+  mateIntro: string[];
   people: string[];
-  text: string;
+  room: number;
 }
 
 const DetailGroup = () => {
+  // props : elem
   const activity: ParamsValue = useActivityParams();
   const props = activity;
 
   return (
-    <div className="text-center">
-      <div className="text-2xl">{props.building}</div>
+    <div className="ml-6">
+      <p className="text-3xl pt-10">{`[ ${props.building}] `}</p>
+      <p className="text-3xl ">룸메이트를 모집합니다.</p>
       <br />
-      <div>해시태그 : </div>
-      {props.hashtag.map((elem, index) => (
-        <div key={index}>#{elem}</div>
+      <br />
+      <p>{`희망 층수: ${props.floor}층`}</p>
+      <p>{props.groupIntro}</p>
+      <div className="my-2">
+        <HashTag
+          text={props.hashtag}
+          color={HashTagColor as ("red" | "blue" | "green")[]}
+        />
+      </div>
+      <hr className="w-[90%] justify-center items-center my-10" />
+      <p className="text-2xl mb-5">이런 룸메이트를 원해요.</p>
+      {props.mateIntro.map((elem, index) => (
+        <li key={index} className={"items-center text-sm px-2 py-1 min-w-fit "}>
+          {elem}
+        </li>
       ))}
-      <br />
-      <div>참여인원 : </div>
-      {props.people.map((elem, index) => (
-        <div key={index}>{elem}</div>
-      ))}
-      <br />
-      <div>{props.text}</div>
+      <hr className="w-[90%] justify-center items-center my-10" />
+      <p className="text-2xl mb-5">모집된 룸메이트 정보</p>
     </div>
   );
 };

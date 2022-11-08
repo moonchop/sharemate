@@ -5,11 +5,13 @@ import { useFlow } from "../stackflow";
 
 interface IGroup {
   id: number;
-  building: "광교관" | "일신관" | "화홍관" | "용지관" | "남제관" | "국제학사";
-  room: number;
+  building: string;
+  floor: number;
   hashtag: string[];
-  text: string;
+  groupIntro: string;
+  mateIntro: string[];
   people: string[];
+  room: number;
 }
 
 const GroupFeed = () => {
@@ -17,58 +19,98 @@ const GroupFeed = () => {
     {
       id: 1,
       building: "광교관",
-      room: 4,
+      floor: 1,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
-      text: "동갑내기 친구들과 편하고 즐겁게 지낼 수 있으면 dkajkl asdklf;l 좋겠어요.",
-      people: ["20살", " 20살", " 28살"],
+      groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
+      mateIntro: [
+        "22살이었으면 좋겠어요.",
+        "비흡연자였으면 좋겠어요.",
+        "코를 안 골았으면 좋겠어요",
+        "친하게 지내고 싶어요.",
+        "방을 깨끗이 쓰면 좋겠어요.",
+      ],
+      people: ["정희수", "정희수", "정희수"],
+      room: 4,
     },
     {
       id: 2,
-      building: "일신관",
-      room: 2,
-      hashtag: ["청결ddddd민감", "소음민ddddd감", "아침형생ddddd활습관"],
-      text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.그룹소개글이빈다.그래보낭아",
-      people: ["20살", " 20살", " 28살"],
+      building: "광교관",
+      floor: 1,
+      hashtag: ["청결민감", "소음민감", "아침형생활습관"],
+      groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
+      mateIntro: [
+        "22살이었으면 좋겠어요.",
+        "비흡연자였으면 좋겠어요.",
+        "코를 안 골았으면 좋겠어요",
+        "친하게 지내고 싶어요.",
+        "방을 깨끗이 쓰면 좋겠어요.",
+      ],
+      people: ["정희수", "정희수", "정희수"],
+      room: 4,
     },
     {
       id: 3,
-      building: "국제학사",
-      room: 2,
+      building: "광교관",
+      floor: 1,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
-      text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
-      people: ["20살"],
+      groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
+      mateIntro: [
+        "22살이었으면 좋겠어요.",
+        "비흡연자였으면 좋겠어요.",
+        "코를 안 골았으면 좋겠어요",
+        "친하게 지내고 싶어요.",
+        "방을 깨끗이 쓰면 좋겠어요.",
+      ],
+      people: ["정희수", "정희수", "정희수"],
+      room: 4,
     },
     {
       id: 4,
-      building: "용지관",
-      room: 2,
+      building: "광교관",
+      floor: 1,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
-      text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
-      people: ["20살"],
+      groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
+      mateIntro: [
+        "22살이었으면 좋겠어요.",
+        "비흡연자였으면 좋겠어요.",
+        "코를 안 골았으면 좋겠어요",
+        "친하게 지내고 싶어요.",
+        "방을 깨끗이 쓰면 좋겠어요.",
+      ],
+      people: ["정희수", "정희수", "정희수"],
+      room: 4,
     },
     {
       id: 5,
-      building: "용지관",
-      room: 2,
-      hashtag: ["청결민감", "소음민감", "흡연 주의보"],
-      text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
-      people: ["20살"],
+      building: "광교관",
+      floor: 1,
+      hashtag: ["청결민감", "소음민감", "아침형생활습관"],
+      groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
+      mateIntro: [
+        "22살이었으면 좋겠어요.",
+        "비흡연자였으면 좋겠어요.",
+        "코를 안 골았으면 좋겠어요",
+        "친하게 지내고 싶어요.",
+        "방을 깨끗이 쓰면 좋겠어요.",
+      ],
+      people: ["정희수", "정희수", "정희수"],
+      room: 4,
     },
     {
       id: 6,
-      building: "용지관",
-      room: 4,
-      hashtag: ["청결민감", "소음민감", "아침"],
-      text: "그룹소개글입니다.",
-      people: ["20살", " 20살", " 28살"],
-    },
-    {
-      id: 7,
-      building: "용지관",
-      room: 4,
+      building: "광교관",
+      floor: 1,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
-      text: "그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다. 그룹소개글입니다.",
-      people: ["20살", " 20살", " 28살"],
+      groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
+      mateIntro: [
+        "22살이었으면 좋겠어요.",
+        "비흡연자였으면 좋겠어요.",
+        "코를 안 골았으면 좋겠어요",
+        "친하게 지내고 싶어요.",
+        "방을 깨끗이 쓰면 좋겠어요.",
+      ],
+      people: ["정희수", "정희수", "정희수"],
+      room: 4,
     },
   ];
 
@@ -78,8 +120,8 @@ const GroupFeed = () => {
     <div className="h-[86%] overflow-y-scroll px-1 mt-2">
       {groupData.map((elem: IGroup) => (
         <div
-          key={elem.id}
-          className="h-auto mb-4"
+          key={elem.id + elem.building}
+          className="h-auto mb-2"
           onClick={() => {
             push("DetailGroupActivity", elem);
           }}
@@ -87,15 +129,15 @@ const GroupFeed = () => {
           <div className="flex justify-between mb-2 h-full">
             <div className="flex flex-row ml-1 mr-2">
               <div className="flex flex-col w-full">
-                <p className="flex text-[20px] text-black mx-2">{`[ ${elem.building} ]`}</p>
-                <span className="flex space-x-3 overflow-x-auto py-2 pl-[10px] w-[95%] scrollbar-hide">
+                <p className="flex text-[22px] text-black mx-2">{`[ ${elem.building} ]`}</p>
+                <span className="flex space-x-3 overflow-x-auto p-3 w-full scrollbar-hide">
                   <HashTag
                     text={elem.hashtag}
                     color={HashTagColor as ("red" | "blue" | "green")[]}
                   />
                 </span>
                 <p className="mx-3 text-[12px] w-[92%] h-auto overflow-scroll whitespace-pre-line">
-                  {elem.text}
+                  {elem.groupIntro}
                 </p>
                 <div className="flex space-x-4 mt-2 ml-3">
                   {/* <HiUserGroup className="flex h-5 w-5 -mr-2" /> */}
