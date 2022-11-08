@@ -88,7 +88,7 @@ const GroupFeed = () => {
             <div className="flex flex-row ml-1 mr-2">
               <div className="flex flex-col w-full">
                 <p className="flex text-[20px] text-black mx-2">{`[ ${elem.building} ]`}</p>
-                <span className="flex space-x-3 overflow-x-auto py-2 pl-[10px] w-full scrollbar-hide">
+                <span className="flex space-x-3 overflow-x-auto py-2 pl-[10px] w-[95%] scrollbar-hide">
                   <HashTag
                     text={elem.hashtag}
                     color={HashTagColor as ("red" | "blue" | "green")[]}
@@ -121,7 +121,7 @@ const GroupFeed = () => {
         onClick={() => {
           push("CreateGroupActivity");
         }}
-        className=" absolute bottom-12 right-2 self-center w-[80px] h-[30px] m-2 ring-2 ring-[#ab82e0] text-[#ab82e0] bg-white bg-opacity-60 font-extrabold text-sm borde rounded-md shadow-button"
+        className=" absolute bottom-16 right-2 self-center w-[80px] h-[30px] m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm borde rounded-md shadow-button"
       >
         그룹 생성
       </button>
