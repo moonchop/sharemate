@@ -6,9 +6,11 @@ import com.shareMate.shareMate.dto.UserDto;
 import com.shareMate.shareMate.dto.FavorDto;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
+import com.shareMate.shareMate.entity.LikeEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.FavorRepository;
 import com.shareMate.shareMate.repository.HashtagRepository;
+import com.shareMate.shareMate.repository.LikeRepository;
 import com.shareMate.shareMate.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -28,6 +30,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final FavorRepository favorRepository;
     private final HashtagRepository hashtagRepository;
+
+    private final LikeRepository likeRepository;
 
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
@@ -147,5 +151,24 @@ public class UserService {
         res.setPrefered_major(member.get().getPrefered_major());
 
         return res;
+    }
+
+    public void doLike(int user_id, int target_id){
+        LikeEntity likeEntity = new LikeEntity(user_id,target_id);
+        System.out.println("dolike/" + likeEntity.getUserFromID()+ " " +likeEntity.getUserToID());
+        System.out.println();
+        likeRepository.save(likeEntity);
+
+        return ;
+
+
+    }
+
+    public void doUnLike(int user_id, int target_id){
+        Optional<LikeEntity> like =likeRepository.findLikeEntityByUserFromIDAndUserToID(user_id,target_id);
+        likeRepository.delete(like.get());
+        return;
+
+
     }
 }

@@ -17,7 +17,7 @@ public class PostEntity {
 
     @Id
     @Column(name = "post_id")
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int postId;
     //    @Column(nullable = false,unique = true)
     @Column(name = "user_id")
