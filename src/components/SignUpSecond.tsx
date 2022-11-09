@@ -83,11 +83,11 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
 
   return (
     <div className="h-[100%] overflow-y-scroll">
-      <h1 className="text-[33px] py-[50px] p-3 text-bold text-left text-black mb-14 ml-2">
+      <h1 className="text-[33px] py-[30px] p-3 text-bold text-left text-black mb-14 ml-2">
         나의 <br />
         룸메이트 취향은?
       </h1>
-      <div className="my-10 ">
+      <div className="my-10">
         <GenderSelectComponent />
         <p className="mt-2 ml-2 text-xl">출생년도를 입력해주세요.</p>
         <div className="flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">

@@ -19,7 +19,7 @@ const GroupFeed = () => {
     {
       id: 1,
       building: "광교관",
-      floor: 1,
+      floor: 4,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -51,7 +51,7 @@ const GroupFeed = () => {
     {
       id: 3,
       building: "광교관",
-      floor: 1,
+      floor: 3,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -66,8 +66,8 @@ const GroupFeed = () => {
     },
     {
       id: 4,
-      building: "광교관",
-      floor: 1,
+      building: "일신관",
+      floor: 11,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -83,7 +83,7 @@ const GroupFeed = () => {
     {
       id: 5,
       building: "광교관",
-      floor: 1,
+      floor: 2,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -99,7 +99,7 @@ const GroupFeed = () => {
     {
       id: 6,
       building: "광교관",
-      floor: 1,
+      floor: 3,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -127,24 +127,27 @@ const GroupFeed = () => {
           }}
         >
           <div className="flex justify-between mb-2 h-full">
-            <div className="flex flex-row ml-1 mr-2">
+            <div className="flex flex-row pr-2">
               <div className="flex flex-col w-full">
-                <p className="flex text-[22px] text-black mx-2">{`[ ${elem.building} ]`}</p>
-                <span className="flex space-x-3 overflow-x-auto p-3 w-full scrollbar-hide">
+                <div className="flex flex-row">
+                  <span className="flex text-[22px] mt-1 font-semibold text-black mx-2">{`[ ${elem.building} ]`}</span>
+                  <span className="pt-3 text-sm text-gray-700">
+                    {elem.floor}층
+                  </span>
+                </div>
+                <p className="mx-3 text-[15px] w-[95%] h-auto overflow-scroll whitespace-pre-line">
+                  {elem.groupIntro}
+                </p>
+
+                <span className="ml-1 float-right flex space-x-3 overflow-x-auto p-2 w-full scrollbar-hide">
                   <HashTag
                     text={elem.hashtag}
                     color={HashTagColor as ("red" | "blue" | "green")[]}
                   />
                 </span>
-                <p className="mx-3 text-[12px] w-[92%] h-auto overflow-scroll whitespace-pre-line">
-                  {elem.groupIntro}
-                </p>
-                <div className="flex space-x-4 mt-2 ml-3">
-                  {/* <HiUserGroup className="flex h-5 w-5 -mr-2" /> */}
-                  <p className="flex text-xs">
-                    {`모집 현황 : ${elem.people.length}명 / ${elem.room}명 `}
-                  </p>
-                </div>
+                <span className="text-xs text-right -mr-16 text-gray-500">
+                  {`모집 현황 : ${elem.people.length}명 / ${elem.room}명 `}
+                </span>
               </div>
             </div>
             {/* <div

@@ -18,8 +18,8 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   };
 
   return (
-    <div className="py-[40px] p-3 overflow-y-scroll">
-      <h1 className="text-[33px] text-bold text-left text-black mb-14 py-5">
+    <div className="py-[25px] p-3 overflow-y-scroll">
+      <h1 className="text-[33px] text-bold text-left text-black mb-10 py-5">
         회원가입
       </h1>
       <form onSubmit={handleSubmit(onSubmit)}>
