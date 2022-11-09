@@ -29,7 +29,7 @@ const GroupFeed = () => {
         "친하게 지내고 싶어요.",
         "방을 깨끗이 쓰면 좋겠어요.",
       ],
-      people: ["정희수", "정희수", "정희수"],
+      people: ["정희수"],
       room: 4,
     },
     {
@@ -45,7 +45,7 @@ const GroupFeed = () => {
         "친하게 지내고 싶어요.",
         "방을 깨끗이 쓰면 좋겠어요.",
       ],
-      people: ["정희수", "정희수", "정희수"],
+      people: ["정희수"],
       room: 4,
     },
     {
@@ -93,7 +93,7 @@ const GroupFeed = () => {
         "친하게 지내고 싶어요.",
         "방을 깨끗이 쓰면 좋겠어요.",
       ],
-      people: ["정희수", "정희수", "정희수"],
+      people: ["정희수"],
       room: 4,
     },
     {
@@ -109,7 +109,7 @@ const GroupFeed = () => {
         "친하게 지내고 싶어요.",
         "방을 깨끗이 쓰면 좋겠어요.",
       ],
-      people: ["정희수", "정희수", "정희수"],
+      people: ["정희수", "정희수"],
       room: 4,
     },
   ];
@@ -131,7 +131,7 @@ const GroupFeed = () => {
               <div className="flex flex-col w-full">
                 <div className="flex flex-row">
                   <span className="flex text-[22px] mt-1 font-semibold text-black mx-2">{`[ ${elem.building} ]`}</span>
-                  <span className="pt-3 text-sm text-gray-700">
+                  <span className="pt-4 -ml-0.5 text-sm text-gray-700">
                     {elem.floor}층
                   </span>
                 </div>

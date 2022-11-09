@@ -6,10 +6,11 @@ import BottomNav from "../components/BottomNav";
 import PersonalFeed from "../components/PersonalFeed";
 import GroupFeed from "../components/GroupFeed";
 import MyPage from "../activities/MyPage";
-import Community from "../activities/Community";
+import CommunityFeed from "../components/CommunityFeed";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
 import CreateGroup from "../components/CreateGroup";
+import BoardDetail from "../components/BoardDetail";
 
 type Navigate_Type =
   | "Main"
@@ -18,16 +19,18 @@ type Navigate_Type =
   | "MyPage"
   | "Profile"
   | "DetailGroup"
-  | "CreateGroup";
+  | "CreateGroup"
+  | "BoardDetail";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
   Group: <GroupFeed />,
   MyPage: <MyPage />,
-  Community: <Community />,
+  Community: <CommunityFeed />,
   Profile: <DetailProfile />,
   DetailGroup: <DetailGroup />,
   CreateGroup: <CreateGroup />,
+  BoardDetail: <BoardDetail />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;

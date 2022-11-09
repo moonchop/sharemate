@@ -1,11 +1,5 @@
-
 const Community = () => {
-  return (
-    <>
-    </>
-  );
+  return <></>;
 };
-
-
 
 export default Community;
