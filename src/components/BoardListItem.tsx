@@ -1,14 +1,13 @@
 import { useFlow } from "../stackflow";
-import BoardDetail from "./BoardDetail";
 import { IBoard } from "./CommunityFeed";
 
-const BoardComponent = ({ id, title, username, preview }: IBoard) => {
+const BoardListItem = ({ id, title, username, preview, text }: IBoard) => {
   const { push } = useFlow();
   return (
     <div
       className="m-2"
       onClick={() => {
-        push("BoardDetailActivity");
+        push("BoardDetailActivity", { id, title, username, preview, text });
       }}
     >
       <p className="font-semibold text-lg">{title}</p>
@@ -19,4 +18,4 @@ const BoardComponent = ({ id, title, username, preview }: IBoard) => {
   );
 };
 
-export default BoardComponent;
+export default BoardListItem;

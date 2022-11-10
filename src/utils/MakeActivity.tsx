@@ -11,6 +11,7 @@ import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
 import CreateGroup from "../components/CreateGroup";
 import BoardDetail from "../components/BoardDetail";
+import CreateBoard from "../components/CreateBoard";
 
 type Navigate_Type =
   | "Main"
@@ -20,7 +21,8 @@ type Navigate_Type =
   | "Profile"
   | "DetailGroup"
   | "CreateGroup"
-  | "BoardDetail";
+  | "BoardDetail"
+  | "CreateBoard";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -31,6 +33,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   DetailGroup: <DetailGroup />,
   CreateGroup: <CreateGroup />,
   BoardDetail: <BoardDetail />,
+  CreateBoard: <CreateBoard />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
