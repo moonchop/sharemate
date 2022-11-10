@@ -10,7 +10,8 @@ import { useFlow } from "../stackflow";
 const CreateGroup = () => {
   const { pop } = useFlow();
   return (
-    <div className="h-[95%] m-2 pb-28 overflow-y-scroll pt-16">
+    <div className="h-[95%] m-2 pb-28 overflow-y-scroll pt-10">
+      <div className="text-3xl m-2 pb-10">그룹 생성</div>
       <p className="mt-2 ml-2 text-xl">입사를 희망하는 건물을 입력해주세요.</p>
       <InputComponent placeholder="광교관" id="building" />
       <p className="mt-20 ml-2 text-xl">희망하는 층수를 입력해주세요.</p>
@@ -70,7 +71,7 @@ const CreateGroup = () => {
       <button
         onClick={() => pop()}
         className={
-          "flex justify-center item-center w-[90%] h-[44px] pt-3 my-10 mx-6 ring-2 ring-[#ab82e0] text-[#ab82e0] text-lg rounded-md shadow-button"
+          "flex justify-center item-center text-center w-[90%] h-[44px] pt-2 my-10 mx-6 ring-2 ring-[#ab82e0] text-[#ab82e0] text-lg rounded-md shadow-button"
         }
       >
         그룹 생성하기
