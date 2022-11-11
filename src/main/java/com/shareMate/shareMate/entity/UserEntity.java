@@ -48,11 +48,6 @@ public class UserEntity implements UserDetails {
     private FavorEntity favor;
 
 
-
-
-
-
-
     public String getPwd(){
         return this.pwd;
     }

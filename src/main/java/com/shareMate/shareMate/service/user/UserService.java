@@ -13,6 +13,7 @@ import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.repository.LikeRepository;
 import com.shareMate.shareMate.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -98,7 +99,11 @@ public class UserService {
         }
     }
 
-    public void doUpdate(UserEntity userEntity) {
+    public void doUpdate(int num , UserDto  userDto) {
+
+        UserEntity userEntity = userDto.toEntity();
+
+
         userRepository.save(userEntity);
     }
 
@@ -146,12 +151,12 @@ public class UserService {
         res.setSelf_intro(member.get().getSelf_intro());
         res.setStudy_time(member.get().getStudy_time());
         res.setSleep_time(member.get().getSleep_time());
-
         res.setWakeup_time(member.get().getWakeup_time());
         res.setPrefered_major(member.get().getPrefered_major());
-
         return res;
     }
+
+
 
     public void doLike(int user_id, int target_id){
         LikeEntity likeEntity = new LikeEntity(user_id,target_id);
@@ -168,7 +173,7 @@ public class UserService {
         Optional<LikeEntity> like =likeRepository.findLikeEntityByUserFromIDAndUserToID(user_id,target_id);
         likeRepository.delete(like.get());
         return;
-
-
     }
+
+
 }
