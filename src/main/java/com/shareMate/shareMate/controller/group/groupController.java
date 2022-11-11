@@ -62,7 +62,7 @@ public class groupController {
         System.out.println(Integer.parseInt(request.getAttribute("userid").toString()));
         Optional<GroupDetailDto> origin_group = groupService.getDetailGroup(groupID);
         //System.out.println("zz "+ origin_post.get().getUser_id() + "/"+origin_post.get().getPost_id());
-        if(Integer.parseInt(request.getAttribute("userid").toString() )==origin_group.get().get()){
+        if(Integer.parseInt(request.getAttribute("userid").toString() )==origin_group.get().getUserID()){
             System.out.println("같아");
             this.groupService.editGroup(groupID,group);
             return new ResponseEntity(group ,HttpStatus.OK);
@@ -81,7 +81,17 @@ public class groupController {
     }
 
     //참가하기 (유저)
-    //참가 취소하기 (유저)
 
+    public ResponseEntity joinGroup(HttpServletRequest request ,@RequestParam int groupId){
+        final int userid = (int) request.getAttribute("userid");
+        groupService.joinGroup(groupId,userid);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+    //참여 취소
+    public ResponseEntity leaveGroup(HttpServletRequest request ,@RequestParam int groupId){
+        final int userid = (int) request.getAttribute("userid");
+        groupService.leaveGroup(groupId,userid);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
 
 }

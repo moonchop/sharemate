@@ -4,8 +4,10 @@ package com.shareMate.shareMate.service;
 import com.shareMate.shareMate.dto.GroupDetailDto;
 import com.shareMate.shareMate.dto.PostDetailDto;
 import com.shareMate.shareMate.entity.GroupEntity;
+import com.shareMate.shareMate.entity.JoinEntity;
 import com.shareMate.shareMate.entity.PostEntity;
 import com.shareMate.shareMate.repository.GroupRepository;
+import com.shareMate.shareMate.repository.JoinRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,7 @@ public class GroupService {
 
 
     private final GroupRepository groupRepository;
+    private final JoinRepository joinRepository;
 
 
     //그룹 전체 리스트 조회
@@ -69,6 +72,19 @@ public class GroupService {
         groupRepository.deleteById(num);
         return ;
     }
+
+    public void joinGroup(int group_id, int user_id){
+        JoinEntity joinEntity= new JoinEntity(group_id,user_id);
+        joinRepository.save(joinEntity);
+        return ;
+    }
+    public void leaveGroup(int group_id, int user_id){
+        JoinEntity joinEntity= new JoinEntity(group_id,user_id);
+        joinRepository.delete(joinEntity);
+        return ;
+    }
+
+
 }
 
 
