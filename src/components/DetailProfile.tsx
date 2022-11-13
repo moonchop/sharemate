@@ -4,12 +4,21 @@ import Hashtag from "./HashTag";
 import { HashTagColor } from "../utils/HashTagColor";
 import Ajou from "../assets/Ajou.gif";
 
-interface ParamsValue {
+interface ParamsValue2 {
   id: number;
   avatar: string;
   email: string;
   first_name: string;
   last_name: string;
+}
+
+interface ParamsValue {
+  id: number;
+  name: string;
+  age: string;
+  major: string;
+  hashtag: string[];
+  photo: string;
 }
 
 const DetailProfile = () => {
@@ -21,15 +30,9 @@ const DetailProfile = () => {
       <div className="w-full h-[30%]">
         <div className="h-full relative">
           <img src={Ajou} className="absolute h-[87%] z-1 opacity-25" />
-          <div
-            className="absolute h-[87%]  w-full z-2"
-            style={{
-              background:
-                "linear-gradient(0deg,rgba(86,64,221,0.2),rgba(86,64,221,0.2) )",
-            }}
-          >
+          <div className="absolute h-[87%] w-full z-2 bg-[rgba(86,64,221,0.2)]">
             <img
-              src={props.avatar}
+              src={props.photo}
               className="absolute z-20 rounded-full shadow-xl w-[110px] h-[110px] top-[33px] left-[140px]"
             />
           </div>
@@ -39,10 +42,10 @@ const DetailProfile = () => {
                 <div className="items-center w-[110px] h-[60px]" />
               </div>
               <div className="font-bold text-2xl text-center mb-[11px]">
-                장은학
+                {props.name}
               </div>
               <div className="text-xl mb-[28px] font-medium text-[rgb(133,129,129)] text-center">
-                소프트웨어학과 &nbsp;3학년 &nbsp;24살
+                {props.major} &nbsp;3학년 &nbsp;{props.age}살
               </div>
             </div>
           </div>
