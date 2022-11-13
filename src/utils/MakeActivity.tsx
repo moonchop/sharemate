@@ -5,7 +5,7 @@ import TopNav from "../components/TopNav";
 import BottomNav from "../components/BottomNav";
 import PersonalFeed from "../components/PersonalFeed";
 import GroupFeed from "../components/GroupFeed";
-import MyPage from "../activities/MyPage";
+import MyPage from "../components/MyPage";
 import CommunityFeed from "../components/CommunityFeed";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
