@@ -12,6 +12,7 @@ import DetailGroup from "../components/DetailGroup";
 import CreateGroup from "../components/CreateGroup";
 import BoardDetail from "../components/DetailBoard";
 import CreateBoard from "../components/CreateBoard";
+import Login from "../activities/Login";
 
 type Navigate_Type =
   | "Main"
@@ -22,7 +23,8 @@ type Navigate_Type =
   | "DetailGroup"
   | "CreateGroup"
   | "BoardDetail"
-  | "CreateBoard";
+  | "CreateBoard"
+  | "Login";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -34,15 +36,18 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   CreateGroup: <CreateGroup />,
   BoardDetail: <BoardDetail />,
   CreateBoard: <CreateBoard />,
+  Login: <Login />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
 const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
   return (
     <AppScreen theme="cupertino">
-      <TopNav />
+      {navigate === "Login" ? <></> : <TopNav />}
       {NavigateMapper[navigate]}
-      {navigate === "Profile" || navigate === "DetailGroup" ? (
+      {navigate === "Profile" ||
+      navigate === "DetailGroup" ||
+      navigate === "Login" ? (
         <></>
       ) : (
         <BottomNav />

@@ -6,6 +6,7 @@ import { createLink } from "@stackflow/link";
 import MakeActivity from "./utils/MakeActivity";
 import SignUpActivity from "./activities/SignUp";
 import CreateBoardActivity from "./components/CreateBoard";
+import Login from "./activities/Login";
 
 const MainActivity = MakeActivity("Main");
 const GroupActivity = MakeActivity("Group");
@@ -15,6 +16,7 @@ const ProfileActivity = MakeActivity("Profile");
 const DetailGroupActivity = MakeActivity("DetailGroup");
 const CreateGroupActivity = MakeActivity("CreateGroup");
 const BoardDetailActivity = MakeActivity("BoardDetail");
+const LoginActivity = MakeActivity("Login");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -30,8 +32,7 @@ const activities = {
   CreateGroupActivity,
   BoardDetailActivity,
   CreateBoardActivity,
-
-  // DetailProfile,
+  LoginActivity,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -41,7 +42,8 @@ export const { Stack, useFlow } = stackflow({
     basicRendererPlugin(),
     historySyncPlugin({
       routes: {
-        MainActivity: "/",
+        LoginActivity: "/",
+        MainActivity: "/home",
         GroupActivity: "/group",
         CommunityActivity: "/community",
         MyPageActivity: "/mypage",
@@ -52,7 +54,7 @@ export const { Stack, useFlow } = stackflow({
         BoardDetailActivity: "/board",
         CreateBoardActivity: "/createboard",
       },
-      fallbackActivity: () => "MainActivity", // 오류 발생시 Home으로 이동 (404페이지 처리 할때 사용)
+      fallbackActivity: () => "LoginActivity", // 오류 발생시 Home으로 이동 (404페이지 처리 할때 사용)
     }),
   ],
 });
