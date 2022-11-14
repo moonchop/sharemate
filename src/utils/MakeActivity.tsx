@@ -10,7 +10,7 @@ import CommunityFeed from "../components/CommunityFeed";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
 import CreateGroup from "../components/CreateGroup";
-import BoardDetail from "../components/BoardDetail";
+import BoardDetail from "../components/DetailBoard";
 import CreateBoard from "../components/CreateBoard";
 
 type Navigate_Type =

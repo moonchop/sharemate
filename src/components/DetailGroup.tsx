@@ -24,8 +24,8 @@ const DetailGroup = () => {
       <p className="text-3xl ">룸메이트를 모집합니다.</p>
       <br />
       <br />
-      <p>{`희망 층수: ${props.floor}층`}</p>
-      <p>{props.groupIntro}</p>
+      <p className="text-[19px]">{`희망 층수: ${props.floor}층`}</p>
+      <p className="text-[18px]">{props.groupIntro}</p>
       <div className="my-2">
         <HashTag
           text={props.hashtag}
@@ -35,7 +35,10 @@ const DetailGroup = () => {
       <hr className="w-[90%] justify-center items-center my-10" />
       <p className="text-2xl mb-5">이런 룸메이트를 원해요.</p>
       {props.mateIntro.map((elem, index) => (
-        <li key={index} className={"items-center text-sm px-2 py-1 min-w-fit "}>
+        <li
+          key={index}
+          className={"items-center text-[19px] px-2 py-1 min-w-fit "}
+        >
           {elem}
         </li>
       ))}
