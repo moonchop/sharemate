@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { useFlow } from "../stackflow";
 import Logo from "../assets/Logo.png";
+import auth from "../stores/auth";
+import axios from "axios";
 
 const solution = {
   email: "test",
   password: "1234",
 };
 
-const accessToken = "Token입니다.";
-
 const Login = () => {
-  const { replace } = useFlow();
+  const { accessToken, refreshToken, setToken } = auth();
+
+  const { replace, push } = useFlow();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
 
-  const changeHandler = (e) => {
+  const loginSubmit = () => {
+    axios({
+      method: "post",
+      url: "",
+      data: { loginForm },
+    })
+      .then((response) => {
+        console.log(response);
+        setToken(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
     return setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
@@ -54,7 +71,14 @@ const Login = () => {
           />
         </div>
         <div className="w-[81%] flex flex-row justify-between mb-[23%]">
-          <div className="flex text-[#AAAAAA] font-semibold">회원가입</div>
+          <div
+            className="flex text-[#AAAAAA] font-semibold"
+            onClick={() => {
+              push("SignUpActivity", {});
+            }}
+          >
+            회원가입
+          </div>
           <div className="flex text-[#AAAAAA] font-semibold">비밀번호 찾기</div>
         </div>
         <button
