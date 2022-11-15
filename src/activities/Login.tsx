@@ -54,7 +54,7 @@ const Login = () => {
         </div>
         <div className="h-[12%] w-[81%]">
           <input
-            className="border-b-2 w-full mb-[9%] outline-0 placeholder:text-lg placeholder:font-normal "
+            className="border-b-2 w-full pro:mb-[9%] mb-[5%] outline-0 placeholder:text-lg placeholder:font-normal "
             type={"email"}
             placeholder="Email"
             value={loginForm.email}
@@ -62,7 +62,7 @@ const Login = () => {
             onChange={changeHandler}
           />
           <input
-            className="border-b-2 w-full mb-[9%] outline-0 placeholder:text-lg placeholder:font-normal"
+            className="border-b-2 w-full pro:mb-[9%] mb-[5%] outline-0 placeholder:text-lg placeholder:font-normal"
             type={"password"}
             placeholder="Password"
             value={loginForm.password}
@@ -70,7 +70,7 @@ const Login = () => {
             onChange={changeHandler}
           />
         </div>
-        <div className="w-[81%] flex flex-row justify-between mb-[23%]">
+        <div className="w-[81%] flex flex-row justify-between pro:mb-[30%] mb-[23%]">
           <div
             className="flex text-[#AAAAAA] font-semibold"
             onClick={() => {
