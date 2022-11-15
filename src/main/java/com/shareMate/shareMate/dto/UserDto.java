@@ -1,6 +1,8 @@
 package com.shareMate.shareMate.dto;
 
 import com.shareMate.shareMate.entity.UserEntity;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +11,8 @@ import java.util.Date;
 
 @Getter
 @Setter
+@ApiModel(value = "회원가입" , description = "회원가입시 사용할 유저의 domain class")
+
 public class UserDto {
 
     private int user_id;

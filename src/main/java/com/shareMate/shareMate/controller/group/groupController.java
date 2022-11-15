@@ -8,6 +8,9 @@ import com.shareMate.shareMate.entity.PostEntity;
 import com.shareMate.shareMate.service.GroupService;
 import com.shareMate.shareMate.service.PostService;
 
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,7 @@ public class groupController {
     private final GroupService groupService;
 
 
+    @ApiOperation(value = "그룹매칭 전체 리스트 조회",notes = "그룹매칭 메인화면에 나타낼 그룹매칭 게시글 리스트를 반환합니다.")
 
     //그룹 전체 리스트 조회
     @GetMapping("/groups")
@@ -39,7 +43,14 @@ public class groupController {
         }
         return ResponseEntity.ok(responseList);
     }
-    //그룹 디테일 조회
+    @ApiOperation(value = "그룹매칭 디테일 조회",notes = "그룹매칭 게시글을 클릭하여 조회할 때 사용합니다.")
+    @ApiImplicitParam(
+            name = "num"
+            , value = "게시글 id"
+            , required = true
+            , dataType = "int"
+            , paramType = "query"
+            , defaultValue = "None")
     @GetMapping("/group")
     public ResponseEntity<Optional<GroupDetailDto>>getDetail(@RequestParam int num){
 
@@ -47,7 +58,14 @@ public class groupController {
         return ResponseEntity.ok(groupDetailDto);
     }
 
-    //그룹 생성
+    @ApiOperation(value = "그룹매칭 게시글 작성",notes = "작성자가 그룹매칭 게시글을 작성합니다.")
+    @ApiImplicitParam(
+            name = "group"
+            , value = "수정된 게시글 정보"
+            , required = true
+            , dataType = "GroupDetailDto"
+            , paramType = "query"
+            , defaultValue = "None")
     @PostMapping("/group")
     public ResponseEntity addGroup(@RequestBody GroupDetailDto group)
     {
@@ -55,7 +73,7 @@ public class groupController {
         return  ResponseEntity.ok(HttpStatus.OK);
 
     }
-    //그룹 수정
+    @ApiOperation(value = "그룹매칭 게시글 수정",notes = "작성자가 그룹매칭 게시글을 수정합니다.")
     @PutMapping("/group")
     public ResponseEntity editPost(@RequestParam int groupID,@RequestBody GroupDetailDto group ,HttpServletRequest request){
 
@@ -72,6 +90,7 @@ public class groupController {
     }
 
     //그룹 삭제
+    @ApiOperation(value = "그룹매칭 게시글 삭제",notes = "작성자가 그룹매칭 게시글을 삭제합니다.")
     @DeleteMapping("/group")
     public ResponseEntity delGroup(@RequestParam int postId){
 
@@ -81,13 +100,16 @@ public class groupController {
     }
 
     //참가하기 (유저)
-
+    @ApiOperation(value = "그룹매칭 참여하기",notes = "유저가 그룹매칭을 참여할 때 사용합니다.")
+    @GetMapping("/join")
     public ResponseEntity joinGroup(HttpServletRequest request ,@RequestParam int groupId){
         final int userid = (int) request.getAttribute("userid");
         groupService.joinGroup(groupId,userid);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     //참여 취소
+    @GetMapping("/leave")
+    @ApiOperation(value = "그룹매칭 참여 취소",notes = "유저가 그룹매칭을 탈퇴할 때 사용합니다.")
     public ResponseEntity leaveGroup(HttpServletRequest request ,@RequestParam int groupId){
         final int userid = (int) request.getAttribute("userid");
         groupService.leaveGroup(groupId,userid);

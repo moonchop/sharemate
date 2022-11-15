@@ -1,5 +1,6 @@
 package com.shareMate.shareMate.dto;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
+@ApiModel(value = "그룹매칭 리스트", description = "그룹매칭 리스트 전달시 사용하는 domain class입니다.")
 public class GroupListDto {
     private int group_id;
     private int user_id;

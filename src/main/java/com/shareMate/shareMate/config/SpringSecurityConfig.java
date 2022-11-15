@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,6 +18,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
     private final CustomUserDetailsService customUserDetailsService;
     @Override
+    public void configure(WebSecurity web) {
+        web
+                .ignoring()
+                .antMatchers("/css/**", "/js/**", "/img/**")
+                .antMatchers("/h2-console/**", "/swagger-ui/**");
+    }
+    @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
                 .httpBasic().disable()
@@ -26,8 +34,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers( "/user").permitAll()
+                .antMatchers( "/user","swagger-ui/index.html").permitAll()
                 .antMatchers("/login").anonymous()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/v3/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter( customUserDetailsService),

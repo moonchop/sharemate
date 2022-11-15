@@ -1,10 +1,11 @@
 package com.shareMate.shareMate.dto;
 
 import com.shareMate.shareMate.entity.UserEntity;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 
-
+@ApiModel(value = "로그인 ", description = "로그인할 때 필요한 domain class 입니다.")
 public class RequestLoginDto {
     
 
