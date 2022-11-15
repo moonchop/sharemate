@@ -1,6 +1,5 @@
 import React from "react";
 import { useActivity } from "@stackflow/react";
-import { FaBell } from "react-icons/fa";
 import { ImSearch } from "react-icons/im";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useFlow } from "../stackflow";
@@ -24,7 +23,6 @@ const Topnav = () => {
       )}
       <div className="flex h-[100%] items-center justify-center">
         <ImSearch className="mr-3 w-5 h-5" />
-        <FaBell className="w-5 h-5" />
       </div>
     </header>
   );
