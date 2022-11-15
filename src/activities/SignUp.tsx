@@ -4,6 +4,7 @@ import SignUpSecond from "../components/SignUpSecond";
 import SignUpThird from "../components/SignUpThird";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/basic-ui";
+import TopNav from "../components/TopNav";
 
 const MAX_STAGE = 2;
 const Stage_Map = [
@@ -25,10 +26,8 @@ const SignUp: ActivityComponentType = () => {
   };
 
   return (
-    <AppScreen theme="android">
-      <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
-        <div className="font-bold text-xl text-white">Share Mate</div>
-      </header>
+    <AppScreen theme="cupertino">
+      <TopNav />
       {React.cloneElement(Stage_Map[stage], {
         handleGoNext,
         handleGoPrev,
