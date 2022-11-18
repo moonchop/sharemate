@@ -5,6 +5,7 @@ import { useFlow } from "../stackflow";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import useInfinityQuery from "../hooks/useInfinityQuery";
 import { IoIosArrowForward } from "react-icons/io";
+//import { useActivityParams } from "@stackflow/react";
 
 export interface IUser {
   id: number;
@@ -136,6 +137,7 @@ interface OutData {
 
 const Feed = () => {
   const { push } = useFlow();
+  //const token: string = useActivityParams();
   const fetchControl = useInfinityQuery();
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -153,13 +155,12 @@ const Feed = () => {
       {/* {tempdata?.map((elem2: InData) =>
         elem2.data.map((elem: OutData) => ( */}
       {dumyData.map((elem: IUser) => (
-        <div className="h-[17%]">
+        <div className="h-[17%]" key={elem.id}>
           <div
-            key={elem.id}
             ref={handlerRef(elem.id)}
             className="h-[100%] flex justify-between items-center"
             onClick={() => {
-              push("ProfileActivity", elem);
+              push("ProfileActivity", {});
             }}
           >
             <div className="flex flex-row h-[100%] w-[100%] items-center">
