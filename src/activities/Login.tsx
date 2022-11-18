@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useFlow } from "../stackflow";
 import Logo from "../assets/Logo.png";
 import auth from "../stores/auth";
-import axios from "axios";
+import { loginApi } from "../utils/api/auth";
 
 const solution = {
   email: "test",
@@ -18,32 +18,32 @@ const Login = () => {
     password: "",
   });
 
-  const loginSubmit = () => {
-    axios({
-      method: "post",
-      url: "",
-      data: { loginForm },
-    })
+  const loginSubmit = async () =>
+    loginApi(loginForm)
       .then((response) => {
         console.log(response);
         setToken(response.data);
+        return true;
       })
       .catch((error) => {
         console.log(error);
+        return false;
       });
-  };
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
     return setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const submitHandler = () => {
-    loginForm.email === solution.email &&
-    loginForm.password === solution.password
-      ? replace("MainActivity", { accessToken })
-      : (alert("이메일, 비밀번호 불일치"),
-        setLoginForm((prev) => ({ ...prev, password: "" })));
+  const submitHandler = async () => {
+    if (loginForm.email == "" || loginForm.password == "") {
+      alert("다시 작성해");
+      return;
+    }
+    const resultStatus = await loginSubmit();
+    if (resultStatus) replace("MainActivity", { accessToken });
+
+    setLoginForm((prev) => ({ ...prev, password: "" }));
   };
 
   return (
