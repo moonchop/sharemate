@@ -17,6 +17,7 @@ const DetailGroupActivity = MakeActivity("DetailGroup");
 const CreateGroupActivity = MakeActivity("CreateGroup");
 const BoardDetailActivity = MakeActivity("BoardDetail");
 const LoginActivity = MakeActivity("Login");
+const ProfileEditActivity = MakeActivity("ProfileEdit");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -33,6 +34,7 @@ const activities = {
   BoardDetailActivity,
   CreateBoardActivity,
   LoginActivity,
+  ProfileEditActivity,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -49,6 +51,7 @@ export const { Stack, useFlow } = stackflow({
         MyPageActivity: "/mypage",
         SignUpActivity: "/signup",
         ProfileActivity: "/profile",
+        ProfileEditActivity: "/profile/edit",
         DetailGroupActivity: "/detailgroup",
         CreateGroupActivity: "/creategroup",
         BoardDetailActivity: "/board",

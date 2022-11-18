@@ -6,6 +6,7 @@ import BottomNav from "../components/BottomNav";
 import PersonalFeed from "../components/PersonalFeed";
 import GroupFeed from "../components/GroupFeed";
 import MyPage from "../components/MyPage";
+import ProfileEdit from "../components/ProfileEdit";
 import CommunityFeed from "../components/CommunityFeed";
 import DetailProfile from "../components/DetailProfile";
 import DetailGroup from "../components/DetailGroup";
@@ -24,7 +25,8 @@ type Navigate_Type =
   | "CreateGroup"
   | "BoardDetail"
   | "CreateBoard"
-  | "Login";
+  | "Login"
+  | "ProfileEdit";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -37,6 +39,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   BoardDetail: <BoardDetail />,
   CreateBoard: <CreateBoard />,
   Login: <Login />,
+  ProfileEdit: <ProfileEdit />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;

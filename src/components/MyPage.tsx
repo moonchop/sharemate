@@ -1,7 +1,9 @@
 import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { useFlow } from "../stackflow";
 
 const MyPage = () => {
+  const { push } = useFlow();
   return (
     <div className="h-[85%] ">
       <div className="h-[32%] flex flex-col pro:pt-[30px] pt-[20px] border-b-[6px] border-[rgba(170,170,170,0.25)]">
@@ -22,7 +24,10 @@ const MyPage = () => {
                 </div>
               </div>
             </div>
-            <IoIosArrowForward className="w-[25px] h-[25px] opacity-30"></IoIosArrowForward>
+            <IoIosArrowForward
+              className="w-[25px] h-[25px] opacity-30"
+              onClick={() => push("ProfileEditActivity", {})}
+            ></IoIosArrowForward>
           </div>
         </div>
       </div>
