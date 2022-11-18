@@ -58,7 +58,6 @@ public class UserDto {
         this.major = major;
         this.grade = grade;
         this.birth = birth;
-
         this.profile_photo = profile_photo;
         this.create_at = create_at;
     }

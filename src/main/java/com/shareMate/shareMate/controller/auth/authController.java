@@ -33,6 +33,7 @@ public class authController {
     }
 
     @ApiOperation(value = "로그인(JWT 토큰 발급)",notes = "id,pw를 이용하여 로그인을 진행하고, jwt토큰을 발급합니다. ")
+    @ApiParam()
     @PostMapping("/login")
     public ResponseEntity<ResponseSignInDto> UserLogin(@RequestBody RequestLoginDto requestLoginDto){
         ResponseSignInDto responseSignInDto = signService.doLogin(requestLoginDto);

@@ -8,26 +8,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
 
-@SpringBootTest
-class UserServiceTest {
-    @Autowired
-    UserService userService;
-    @Test
-    void doInsert() {
-        UserDto userDto = UserDto.builder()
-                .email("2222@naver.com")
-                .name("테스트임")
-                .pwd("1234")
-                .major("12")
-                .grade("23")
-                .birth(new Date())
-
-                .profile_photo("ssd")
-                .create_at(new Date())
-                .build();
-
-        userService.doInsert(userDto);
-    }
+//@SpringBootTest
+//class UserServiceTest {
+//    @Autowired
+//    UserService userService;
+//
+//    }
 //    @Test
 //    void doUpdate(){
 ////        UserEntity userEntity = new UserEntity();
@@ -46,4 +32,3 @@ class UserServiceTest {
 //    void doDelete() {
 //        userService.doDelete(2);
 //    }
-}
