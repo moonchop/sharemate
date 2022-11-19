@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useFlow } from "../stackflow";
 import Logo from "../assets/Logo.png";
-import auth from "../stores/auth";
-import { loginApi } from "../utils/api/auth";
-
-const solution = {
-  email: "test",
-  password: "1234",
-};
+import { useAuth } from "../stores/auth";
+import request from "../stores/Request";
 
 const Login = () => {
-  const { accessToken, refreshToken, setToken } = auth();
+  const { accessToken, refreshToken, setToken } = useAuth();
 
   const { replace, push } = useFlow();
   const [loginForm, setLoginForm] = useState({
     email: "",
-    password: "",
+    pwd: "",
   });
 
-  const loginSubmit = async () =>
-    loginApi(loginForm)
+  const loginSubmit = () =>
+    request
+      .post("/login", loginForm)
       .then((response) => {
         console.log(response);
         setToken(response.data);
@@ -36,14 +32,14 @@ const Login = () => {
   };
 
   const submitHandler = async () => {
-    if (loginForm.email == "" || loginForm.password == "") {
-      alert("다시 작성해");
+    if (loginForm.email == "" || loginForm.pwd == "") {
+      alert("이메일, 비밀번호를 입력해 주세요");
       return;
     }
     const resultStatus = await loginSubmit();
     if (resultStatus) replace("MainActivity", { accessToken });
 
-    setLoginForm((prev) => ({ ...prev, password: "" }));
+    setLoginForm((prev) => ({ ...prev, pwd: "" }));
   };
 
   return (
@@ -65,8 +61,8 @@ const Login = () => {
             className="border-b-2 w-full pro:mb-[9%] mb-[5%] outline-0 placeholder:text-lg placeholder:font-normal"
             type={"password"}
             placeholder="Password"
-            value={loginForm.password}
-            name="password"
+            value={loginForm.pwd}
+            name="pwd"
             onChange={changeHandler}
           />
         </div>
