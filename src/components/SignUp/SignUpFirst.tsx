@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useSaveFormData } from "../hooks/useSaveFormData";
-import SignUpButton from "./SignUpButton";
+import { useSaveFormData } from "../../hooks/useSaveFormData";
+import SignUpButton from "../SignUpButton";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const {
@@ -79,13 +79,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             {errors.password.message as string}
           </small>
         )}
-        {/* <label htmlFor="passwordConfirm">비밀번호 확인</label>
-      <input
-        id="password"
-        type="password"
-        placeholder="******"
-        {...register("password")}
-      /> */}
+
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-sm text-left text-black" htmlFor="major">
@@ -109,6 +103,31 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             {errors.major.message as string}
           </small>
         )}
+
+        <div className="flex">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-sm text-left text-black" htmlFor="birth">
+            출생년도
+          </label>
+        </div>
+        <input
+          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
+          id="birth"
+          type="number"
+          placeholder="2000"
+          {...register("birth", {
+            required: "필수 입력입니다.",
+          })}
+        />
+        {errors.birth && (
+          <small
+            className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
+            role="alert"
+          >
+            {errors.birth.message as string}
+          </small>
+        )}
+
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-sm text-left text-black" htmlFor="email">

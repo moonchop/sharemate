@@ -1,38 +1,34 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Arrange_Type = "row" | "col";
 
-export const useRadio = (
-  content: string,
-  title: string,
-  contentList: string[],
-  arrange: Arrange_Type
-) => {
+export const useRadio = ({
+  contentList,
+  arrange = "col",
+  defaultState,
+  title,
+}: {
+  contentList: string[];
+  arrange?: Arrange_Type;
+  defaultState?: string | null;
+  title?: string;
+}) => {
   const Ref = useRef<any>([]);
+  const [radioState, setRadioState] = useState(defaultState ?? null);
 
-  const handleClick = (content: string) => {
-    contentList.map((str) => (Ref.current[str].checked = content === str));
-    sessionStorage.setItem(title, content);
-  };
+  const handleClick = (content: string) => setRadioState(content);
 
   useEffect(() => {
-    const data = sessionStorage.getItem(title);
-    if (data === null) return;
-    contentList.map((str) => (Ref.current[str].checked = data === str));
-  });
-
-  const handleSubmit = () =>
-    contentList.reduce(
-      (result, content) => ({
-        ...result,
-        [content]: Ref.current[content].checked,
-      }),
-      {}
+    contentList.map(
+      (str) =>
+        (Ref.current[str].checked = radioState !== null && radioState === str)
     );
+  }, [radioState]);
+
   const RadioComponent = () => {
     return (
       <div className="mb-[100px]">
-        {content != "" && <p className="ml-3 text-xl">{content}</p>}
+        {title && <p className="ml-3 text-xl">{title}</p>}
         <main className="flex p-2 ">
           <div
             className={`rounded-xl bg-gray-100 p-2 ${
@@ -49,11 +45,15 @@ export const useRadio = (
                 }}
               >
                 <input
-                  className="peer hidden"
+                  className="hidden"
                   type="radio"
                   ref={(el) => (Ref.current[content] = el)}
                 />
-                <label className="px-6 block cursor-pointer select-none rounded-xl text-lg p-2 text-center peer-checked:bg-[#ab82e084] peer-checked:font-semibold">
+                <label
+                  className={`px-6 block cursor-pointer select-none rounded-xl text-lg p-2 text-center ${
+                    radioState === content ? "bg-[#ab82e084] font-semibold" : ""
+                  }`}
+                >
                   {content}
                 </label>
               </div>
@@ -66,6 +66,6 @@ export const useRadio = (
 
   return {
     Component: RadioComponent,
-    onSubmit: handleSubmit,
+    state: radioState,
   };
 };

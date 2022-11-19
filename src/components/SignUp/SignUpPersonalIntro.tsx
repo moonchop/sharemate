@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { BiBulb } from "react-icons/bi";
 
-const SignUpThird = ({ handleGoPrev, handleGoNext }: any) => {
+const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
   useEffect(() => {
     const data = sessionStorage.getItem("intro");
     if (data === null) return;
@@ -51,4 +51,4 @@ const SignUpThird = ({ handleGoPrev, handleGoNext }: any) => {
     </div>
   );
 };
-export default SignUpThird;
+export default SignUpPersonalIntro;

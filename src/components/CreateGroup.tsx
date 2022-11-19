@@ -15,9 +15,9 @@ const CreateGroup = () => {
       <p className="mt-2 ml-2 text-xl">입사를 희망하는 건물을 입력해주세요.</p>
       <InputComponent placeholder="광교관" id="building" />
       <p className="mt-20 ml-2 text-xl">희망하는 층수를 입력해주세요.</p>
-      <div className="flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">
+      <div className=" flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">
         <input
-          className="w-[30px] text-center text-lg text-coolGray-900 bg-transparent placeholder-slate-300"
+          className="w-[30px] focus:border-none text-center text-lg text-coolGray-900 bg-transparent placeholder-slate-300"
           id="floor"
           type="number"
           name="floor"
