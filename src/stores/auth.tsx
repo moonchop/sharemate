@@ -11,7 +11,7 @@ interface tokenProps {
   refreshToken: string;
 }
 
-const auth = create<Token>((set) => ({
+export const useAuth = create<Token>((set) => ({
   accessToken: "",
   refreshToken: "",
   setToken: (token: tokenProps) => {
@@ -21,5 +21,3 @@ const auth = create<Token>((set) => ({
     }));
   },
 }));
-
-export default auth;
