@@ -129,6 +129,7 @@ const ProfileEdit = () => {
             value={editInfo.nickname}
             className="text-[#AFADF5] text-base font-semibold w-[244px] border-b-2 outline-0"
             onChange={changeHandler}
+            onFocus={(e) => e.currentTarget.select()}
           />
         </div>
         <div className="flex flex-row pro:mb-[21px] mb-[10px]">
@@ -140,6 +141,7 @@ const ProfileEdit = () => {
             value={editInfo.grade}
             className="text-[#AFADF5] text-base font-semibold w-[244px] border-b-2 outline-0"
             onChange={changeHandler}
+            onFocus={(e) => e.currentTarget.select()}
           />
         </div>
         <div className="flex flex-row pro:mb-[21px] mb-[10px]">
@@ -163,6 +165,7 @@ const ProfileEdit = () => {
             value={editInfo.kakao_link}
             className="text-[#AFADF5] text-base font-semibold w-[244px] border-b-2 outline-0"
             onChange={changeHandler}
+            onFocus={(e) => e.currentTarget.select()}
           />
         </div>
       </div>

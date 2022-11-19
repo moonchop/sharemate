@@ -3,7 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useFlow } from "../stackflow";
 
 const MyPage = () => {
-  const { push } = useFlow();
+  const { push, replace } = useFlow();
   return (
     <div className="h-[85%] ">
       <div className="h-[32%] flex flex-col pro:pt-[30px] pt-[20px] border-b-[6px] border-[rgba(170,170,170,0.25)]">
@@ -40,17 +40,26 @@ const MyPage = () => {
         </div>
         <div className="h-[48%] flex items-center">
           <div className="pl-[28px] w-[90%] text-[#AFADF5] ">비밀번호 변경</div>
-          <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          <IoIosArrowForward
+            className="opacity-30"
+            onClick={() => push("PasswordActivity", {})}
+          ></IoIosArrowForward>
         </div>
       </div>
       <div className="h-[22%] pro:text-lg text-base font-semibold">
         <div className="h-[48%] flex items-center border-b-2">
           <div className="pl-[28px] w-[90%] text-[#AFADF5] ">로그아웃</div>
-          <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          <IoIosArrowForward
+            className="opacity-30"
+            onClick={() => replace("LoginActivity", {})}
+          ></IoIosArrowForward>
         </div>
         <div className="h-[48%] flex items-center ">
           <div className="pl-[28px] w-[90%] text-[#AFADF5] ">회원 탈퇴</div>
-          <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          <IoIosArrowForward
+            className="opacity-30"
+            onClick={() => replace("LoginActivity", {})}
+          ></IoIosArrowForward>
         </div>
       </div>
     </div>
