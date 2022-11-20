@@ -3,6 +3,7 @@ import { useFlow } from "../stackflow";
 import Logo from "../assets/Logo.png";
 import { useAuth } from "../stores/auth";
 import request from "../stores/Request";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 const Login = () => {
   const { accessToken, refreshToken, setToken } = useAuth();
@@ -51,23 +52,43 @@ const Login = () => {
         <div className="flex h-[55%] w-[63%] items-center justify-center">
           <img src={Logo} className="flex mt-[54%] mb-[35%]" />
         </div>
-        <div className="h-[12%] w-[81%]">
-          <input
-            className="border-b-2 w-full pro:mb-[9%] mb-[5%] outline-0 placeholder:text-lg placeholder:font-normal "
-            type={"email"}
-            placeholder="Email"
-            value={loginForm.email}
-            name="email"
-            onChange={changeHandler}
-          />
-          <input
-            className="border-b-2 w-full pro:mb-[9%] mb-[5%] outline-0 placeholder:text-lg placeholder:font-normal"
-            type={"password"}
-            placeholder="Password"
-            value={loginForm.pwd}
-            name="pwd"
-            onChange={changeHandler}
-          />
+        <div className="flex flex-col h-[13%] w-[81%]">
+          <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[5%] items-center">
+            <input
+              className=" w-full h-full outline-0 placeholder:text-lg placeholder:font-normal "
+              type={"email"}
+              placeholder="Email"
+              value={loginForm.email}
+              name="email"
+              onChange={changeHandler}
+            />
+            {loginForm.email ? (
+              <AiFillCloseCircle
+                className="w-[10%] h-[50%] opacity-60"
+                onClick={() => setLoginForm((prev) => ({ ...prev, email: "" }))}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
+          <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[5%] items-center">
+            <input
+              className=" w-full h-full outline-0 placeholder:text-lg placeholder:font-normal"
+              type={"password"}
+              placeholder="Password"
+              value={loginForm.pwd}
+              name="pwd"
+              onChange={changeHandler}
+            />
+            {loginForm.pwd ? (
+              <AiFillCloseCircle
+                className="w-[10%] h-[50%] opacity-60"
+                onClick={() => setLoginForm((prev) => ({ ...prev, pwd: "" }))}
+              />
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className="w-[81%] flex flex-row justify-between pro:mb-[30%] mb-[23%]">
           <div
