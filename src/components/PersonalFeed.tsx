@@ -5,6 +5,7 @@ import { useFlow } from "../stackflow";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import useInfinityQuery from "../hooks/useInfinityQuery";
 import { IoIosArrowForward } from "react-icons/io";
+import { useAuth } from "../stores/auth";
 //import { useActivityParams } from "@stackflow/react";
 
 export interface IUser {
@@ -137,7 +138,7 @@ interface OutData {
 
 const Feed = () => {
   const { push } = useFlow();
-  //const token: string = useActivityParams();
+  const { accessToken, refreshToken, setToken } = useAuth();
   const fetchControl = useInfinityQuery();
 
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {

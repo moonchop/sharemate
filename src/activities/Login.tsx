@@ -17,12 +17,15 @@ const Login = () => {
     request
       .post("/login", loginForm)
       .then((response) => {
-        console.log(response);
+        console.log(response.status);
         setToken(response.data);
         return true;
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 400) alert("비밀번호가 잘못되었습니다.");
+        else if (error.response.status === 500)
+          alert("이메일을 확인해 주세요.");
         return false;
       });
 
@@ -33,11 +36,11 @@ const Login = () => {
 
   const submitHandler = async () => {
     if (loginForm.email == "" || loginForm.pwd == "") {
-      alert("이메일, 비밀번호를 입력해 주세요");
+      alert("로그인 정보를 입력해 주세요");
       return;
     }
     const resultStatus = await loginSubmit();
-    if (resultStatus) replace("MainActivity", { accessToken });
+    if (resultStatus) replace("MainActivity", {});
 
     setLoginForm((prev) => ({ ...prev, pwd: "" }));
   };

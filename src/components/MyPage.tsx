@@ -33,7 +33,10 @@ const MyPage = () => {
       </div>
       <div className="h-[22%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
         <div className="h-[50%] flex items-center border-b-2">
-          <div className="pl-[28px] w-[90%] text-[#AFADF5]">
+          <div
+            className="pl-[28px] w-[90%] text-[#AFADF5]"
+            onClick={() => push("LikeProfileActivity", {})}
+          >
             좋아요 누른 프로필
           </div>
           <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
