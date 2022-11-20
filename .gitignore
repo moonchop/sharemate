@@ -56,3 +56,7 @@ profile-*
 profile*
 *clinic*
 *flamegraph*
+
+
+src/main/resources/application.properties
+/src/main/resources/application.properties

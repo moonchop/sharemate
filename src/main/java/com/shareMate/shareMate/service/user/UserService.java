@@ -38,9 +38,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public UserEntity doSelectOne(int id) {
-        return userRepository.findById(id).get();
-    }
+//   public UserEntity doSelectOne(int id) {
+//        return userRepository.findById(id).get();
+//    }
 
 
     public Map doInsert(UserDto userDto) {
@@ -123,7 +123,7 @@ public class UserService {
 
     public UserDto getUserDetail(int num) {
         Optional<UserEntity> member = userRepository.findById(num);
-        return new UserDto(member.get().getUser_id(), member.get().getEmail(), member.get().getPwd(), member.get().getName(), member.get().getMajor(), member.get().getGrade(), member.get().getBirth(), member.get().getProfile_photo(), member.get().getCreate_at());
+        return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getCreated_at(),member.get().getUpdated_at());
 
     }
 
@@ -165,14 +165,19 @@ public class UserService {
         likeRepository.save(likeEntity);
 
         return ;
-
-
     }
 
     public void doUnLike(int user_id, int target_id){
         Optional<LikeEntity> like =likeRepository.findLikeEntityByUserFromIDAndUserToID(user_id,target_id);
         likeRepository.delete(like.get());
         return;
+    }
+
+    public boolean dupCheck(String email ){
+
+        Optional<UserEntity> user = userRepository.findByEmail(email);
+        if(user.isPresent()) return true;
+        else return false;
     }
 
 

@@ -42,8 +42,8 @@ public class UserController {
         List<UserEntity> resultDtoList = resultList.getContent();
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();
         for( UserEntity u : resultDtoList){
-            UserSimpleDto userDto = new UserSimpleDto(u.getUser_id(),u.getName(),u.getMajor(), u.getGrade(),u.getBirth(), u.getProfile_photo());
-            List<String> hash = hashtagRepository.findAllByUser_id(u.getUser_id());
+            UserSimpleDto userDto = new UserSimpleDto(u.getUserID(),u.getName(),u.getMajor(), u.getAge(),u.getGender(), u.getProfile_photo());
+            List<String> hash = hashtagRepository.findAllByUser_id(u.getUserID());
             userDto.setHashtags(hash);
             responseList.add(userDto);
         }

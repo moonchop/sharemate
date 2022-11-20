@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.mail.internet.MimeMessage;
 import java.util.Map;
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class authController {
@@ -45,5 +48,28 @@ public class authController {
         }
         else return ResponseEntity.status(HttpStatus.OK).body(responseSignInDto);
     }
+    @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.")
+    @PostMapping("/register/email")
+    public ResponseEntity<String > EmailVerification(@RequestBody Map<String,String> email) throws Exception {
+        System.out.println(email.get("email"));
+        Boolean IsDup = userService.dupCheck(email.get("email"));
+        //중복된 이메일
+        if (IsDup) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("중복된 이메일입니다.");
+        }
+        else{
+            System.out.println("중복 아님");
+            String  code = UUID.randomUUID().toString().substring(0, 6); //인증번호 생성
+            System.out.println("code : "+code);
+            signService.sendMail(code,email.get("email"));
+            return ResponseEntity.status(HttpStatus.OK).body(code);
+
+
+
+
+        }
+
+
+    };
 
 }
