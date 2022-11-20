@@ -9,7 +9,7 @@ interface Profile {
   kakao_id: string;
   profile_photo: string;
   kakao_link: string;
-  birth: string;
+  age: string;
 }
 
 const dumydata: Profile = {
@@ -22,8 +22,9 @@ const dumydata: Profile = {
   profile_photo:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   kakao_link: "https://open.kakao.com/o/s2qDCFOe",
-  birth: "1999-06-02",
+  age: "24",
 };
+
 const ProfileEdit = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -35,7 +36,7 @@ const ProfileEdit = () => {
 
   const [editInfo, setEditInfo] = useState({
     grade: "3학년",
-    birth: "1999-06-02",
+    age: "24",
     kakao_link: "https://open.kakao.com/o/s2qDCFOe",
     profile_photo:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
@@ -146,12 +147,12 @@ const ProfileEdit = () => {
         </div>
         <div className="flex flex-row pro:mb-[21px] mb-[10px]">
           <div className="text-[#AFADF5] text-base font-medium w-[98px]">
-            생년월일
+            나이
           </div>
           <input
-            type="date"
-            name="birth"
-            value={editInfo.birth}
+            type="text"
+            name="age"
+            value={editInfo.age}
             className="text-[#AFADF5] text-base font-semibold w-[244px] border-b-2 outline-0"
             onChange={changeHandler}
           />
