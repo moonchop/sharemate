@@ -11,17 +11,26 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.mail.Message;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.persistence.Access;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -30,12 +39,38 @@ public class SignService {
 
     private final TokenHelper accTokenHelper;
     private final TokenHelper refTokenHelper;
+    private final JavaMailSender javaMailSender;
     @AllArgsConstructor
     @Data
     static class LoginSuccessResponse {
         private String token;
     }
-    @ResponseBody
+
+
+
+    public void sendMail(String code, String email) throws Exception{
+        try{
+
+            SimpleMailMessage  message = new SimpleMailMessage();
+            message.setTo(email);
+            message.setSubject("쉐어메이트 회원가입 인증번호입니다.");
+            message.setText("이메일 인증코드: "+code);
+            message.setFrom("jh6car@naver.com");
+            javaMailSender.send(message);
+//            MimeMessage message = javaMailSender.createMimeMessage();
+//            MimeMessageHelper h = new MimeMessageHelper(message,"UTF-8");
+//            h.setTo(email);
+//            h.setSubject("쉐어메이트 회원가입 인증번호입니다.");
+//            h.setText("이메일 인증코드: "+code);
+//            h.setFrom(new InternetAddress("zzzz"));
+//            javaMailSender.send(message);
+        }catch (MailException mailException){
+            mailException.printStackTrace();
+            throw  new IllegalAccessException();
+        }
+    }
+
+
     public ResponseSignInDto doLogin(RequestLoginDto requestLoginDto){
         Map json = new HashMap<String,Object>();
         System.out.println("lgser");
@@ -43,8 +78,8 @@ public class SignService {
         UserEntity user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail()).orElseThrow(()-> {throw new UsernameNotFoundException("유저 없음");});
         if(encoder.matches(requestLoginDto.toEntity().getPwd(),user.getPwd()))
         {
-            String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.getUser_id()));
-            String jwtRefToken =refTokenHelper.createToken( String.valueOf(user.getUser_id()));
+            String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.getUserID()));
+            String jwtRefToken =refTokenHelper.createToken( String.valueOf(user.getUserID()));
             //System.out.println("사인 서비스 토큰 "+ jwtRefToken);
             //System.out.println("사인 서비스 토큰 "+ jwtAccToken);
             return new ResponseSignInDto(jwtAccToken,jwtRefToken);

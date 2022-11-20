@@ -24,7 +24,8 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    @Column(name= "user_id")
+    private int userID;
 //    @Column(nullable = false)
     private String email;
 //    @Column(nullable = false)
@@ -34,15 +35,14 @@ public class UserEntity implements UserDetails {
 //    @Column(nullable = false)
     private String major;
 //    @Column(nullable = false)
-    private String grade;
-//    @Column(nullable = false)
-    private Date birth;
-//    @Column(nullable = false)
-
-//    @Column(nullable = false)
+    private int grade;
+    private int gender;
+    private int age;
     private String profile_photo;
 //    @Column(nullable = false)
-    private Date create_at;
+    private Date created_at;
+
+    private Date updated_at;
     @OneToOne
     @JoinColumn(name="user_id")
     private FavorEntity favor;
