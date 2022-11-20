@@ -1,9 +1,10 @@
 import { useActivityParams } from "@stackflow/react";
-import React from "react";
+import React, { useState } from "react";
 import Hashtag from "./HashTag";
 import { HashTagColor } from "../utils/HashTagColor";
 import Ajou from "../assets/Ajou.gif";
 import KakaoButton from "../assets/KakaoButton.png";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 interface ParamsValue {
   id: number;
@@ -15,6 +16,7 @@ interface ParamsValue {
   mbti: string;
   photo: string;
   self_intro: string;
+  kakao_link: string;
 }
 
 const props: ParamsValue = {
@@ -29,9 +31,12 @@ const props: ParamsValue = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   self_intro:
     "안녕하세요. 저는 무슨무슨 학과 몇학년 땡땡땡입니다. 저는 특히 무엇을 좋아해서 무엇을 같이 할 수 있는 사람이면 좋겠습니다.",
+  kakao_link: "https://open.kakao.com/o/s2qDCFOe",
 };
 
 const DetailProfile = () => {
+  const [like, setLike] = useState<boolean>(false);
+
   return (
     <div className="flex-col h-[92%]">
       <div className="w-full h-[38%]">
@@ -64,8 +69,8 @@ const DetailProfile = () => {
         </div>
       </div>
       <div className="flex flex-col ml-[38px] mr-[38px] h-[62%] justify-center ">
-        <div className="h-[80%] pro:mt-[9%] mt-[5%] item-center">
-          <div className=" text-left w-full">
+        <div className="h-[80%] pro:mt-[9%] mt-[5%] item-center border-b-2 border-[#AAAAAA]">
+          <div className=" text-left w-full ">
             <div className="font-bold pro:text-xl text-lg pro:mb-[30px] mb-[18px] text-[#AFADF5] underline underline-offset-8">
               나의 생활
             </div>
@@ -87,11 +92,27 @@ const DetailProfile = () => {
             </div>
           </div>
         </div>
-        <div className="flex justify-end w-full h-[13%]">
+        <div className="flex justify-between w-full h-[13%]">
+          {!like ? (
+            <AiOutlineHeart
+              color="#AAAAAA"
+              className="h-full w-[10%]"
+              onClick={() => setLike(true)}
+            />
+          ) : (
+            <AiFillHeart
+              color="red"
+              className="h-full w-[10%] "
+              onClick={() => setLike(false)}
+            />
+          )}
+
           <img
             src={KakaoButton}
-            className="items-center w-[130px] pro:h-[55px] h-[49px]"
-            onClick={() => alert("카카오이동")}
+            className="h-full items-center w-[130px] "
+            onClick={() => {
+              window.open(props.kakao_link);
+            }}
           />
         </div>
       </div>
