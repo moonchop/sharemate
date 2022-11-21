@@ -21,9 +21,9 @@ public class GroupEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="group_id")
+
     private int groupID;
-    @Column(name = "user_id")
+
     private int userID;
     private String title;
     private String text;

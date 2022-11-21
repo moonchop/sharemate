@@ -1,6 +1,7 @@
 package com.shareMate.shareMate.controller.auth;
 
 import com.shareMate.shareMate.dto.RequestLoginDto;
+import com.shareMate.shareMate.dto.RequestSignUpDto;
 import com.shareMate.shareMate.dto.UserDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.service.sign.SignService;
@@ -29,11 +30,11 @@ public class authController {
     @ApiOperation(value = "회원가입",notes = "회원가입 버튼 클릭시 회원가입을 진행하는 요청입니다.")
 
     @PostMapping("/register")
-    public Map doUserList(@RequestBody UserDto userDto){
+    public Map doUserList(@RequestBody RequestSignUpDto requestSignUpDto){
 
-        System.out.println("hello"+ userDto);
+        System.out.println("hello"+ requestSignUpDto);
 
-        return userService.doInsert(userDto);
+        return userService.doInsert(requestSignUpDto);
     }
 
     @ApiOperation(value = "로그인(JWT 토큰 발급)",notes = "id,pw를 이용하여 로그인을 진행하고, jwt토큰을 발급합니다. ")

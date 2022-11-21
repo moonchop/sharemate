@@ -11,13 +11,12 @@ import java.util.Date;
 //@Builder
 
 @Entity(name="favor")
+@Table(name="favor")
 @Getter
 @Setter
 public class FavorEntity {
 
     @Id
-
-//    @Column(nullable = false,unique = true)
     private int userID;
     private String sleepTime;
     private String smoking;
@@ -32,8 +31,8 @@ public class FavorEntity {
     private String mbti;
     private String selfIntro;
 
-
-
+    @OneToOne(mappedBy = "favor")
+    private UserEntity user;
 
 
 

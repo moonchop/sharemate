@@ -12,11 +12,11 @@ import java.util.List;
 @Setter
 public class UserSimpleDto
 {
-    private int user_id;
+    private int userID;
     private String name;
     private String major;
     private int age;
-    private int gender;
+    private boolean gender;
 
     private String profile_photo;
     private List<String> Hashtags;
@@ -36,8 +36,8 @@ public class UserSimpleDto
     }
 
     @Builder
-    public UserSimpleDto(int user_id, String name, String major, int age, int gender, String profile_photo) {
-        this.user_id = user_id;
+    public UserSimpleDto(int user_id, String name, String major, int age, boolean gender, String profile_photo) {
+        this.userID = user_id;
         this.name = name;
         this.major = major;
         this.age=age;

@@ -13,6 +13,6 @@ import java.util.Optional;
 @Repository
 public interface FavorRepository extends JpaRepository<FavorEntity,Number> {
     //Optional<UserEntity> findByEmail(String email);
-
-    Optional<FavorEntity> findFavorEntityByUserID(int userid);
+    Optional<FavorEntity> findByUserID(int userid);
+    //Optional<FavorEntity> findFavorEntityByUserID(int userid);
 }

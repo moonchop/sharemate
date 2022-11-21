@@ -29,17 +29,9 @@ public class HashTagEntity {
         this.userID=user_id;
         this.groupID=group_id;
         this.hashTag=hashTag;
-
     }
-
     @ManyToOne
     @JoinColumn(name="userID",insertable = false,updatable = false)
     private UserEntity user;
-
-
-
-
-
-
 
 }
