@@ -58,14 +58,6 @@ export const useMbti = () => {
 
 export const useRegisterForm = () => {
   const { Component: MbtiSelect, state: mbtiState } = useMbti();
-  const { Component: GradeSelect, state: gradeState } = useRadio({
-    contentList: ["1", "2", "3", "4"],
-    title: "학년을 선택해주세요.",
-  });
-  const { Component: ForeignSelect, state: foreignState } = useRadio({
-    contentList: ["내국인", "외국인"],
-    title: "국적을 선택해주세요.",
-  });
 
   const { Component: SleepTimeSelect, state: SleepTimeState } = useRadio({
     contentList: ["5시간 미만", "5시간 이상"],
@@ -97,8 +89,7 @@ export const useRegisterForm = () => {
     console.log(
       "진짜",
       mbtiState,
-      gradeState,
-      foreignState,
+
       SleepTimeState,
       smokingState,
       livingPatternState,
@@ -108,8 +99,7 @@ export const useRegisterForm = () => {
     );
   }, [
     mbtiState,
-    gradeState,
-    foreignState,
+
     SleepTimeState,
     smokingState,
     livingPatternState,
@@ -121,8 +111,7 @@ export const useRegisterForm = () => {
   return {
     state: {
       mbtiState,
-      gradeState,
-      foreignState,
+
       SleepTimeState,
       smokingState,
       livingPatternState,
@@ -138,8 +127,6 @@ export const useRegisterForm = () => {
         </h1>
         <div className="my-10">
           <MbtiSelect />
-          <GradeSelect />
-          <ForeignSelect />
         </div>
         <SleepTimeSelect />
         <SmokingSelect />

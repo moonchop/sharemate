@@ -64,13 +64,13 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           </small>
         )}
 
-        <div className="flex">
+        <div className="flex mt-4">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-base text-left pb-3 text-black" htmlFor="name">
             성별
           </label>
         </div>
-        <label className="m-3">
+        <label className="m-3 ">
           <input
             {...register("gender", { required: true })}
             type="radio"
@@ -87,6 +87,74 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             id="여"
           />
           여
+        </label>
+
+        <div className="flex mt-7">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-base text-left pb-3 text-black" htmlFor="name">
+            학년
+          </label>
+        </div>
+        <label className="m-3 ">
+          <input
+            {...register("grade", { required: true })}
+            type="radio"
+            value={1}
+            id="1"
+          />
+          1
+        </label>
+        <label className="m-3">
+          <input
+            {...register("grade", { required: true })}
+            type="radio"
+            value={2}
+            id="2"
+          />
+          2
+        </label>
+        <label className="m-3">
+          <input
+            {...register("grade", { required: true })}
+            type="radio"
+            value={3}
+            id="3"
+          />
+          3
+        </label>
+        <label className="m-3">
+          <input
+            {...register("grade", { required: true })}
+            type="radio"
+            value={4}
+            id="4"
+          />
+          4
+        </label>
+
+        <div className="flex mt-7">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label className="text-base text-left pb-3 text-black" htmlFor="name">
+            국적
+          </label>
+        </div>
+        <label className="m-3 ">
+          <input
+            {...register("gender", { required: true })}
+            type="radio"
+            value="내국인"
+            id="내국인"
+          />
+          내국인
+        </label>
+        <label className="m-3">
+          <input
+            {...register("gender", { required: true })}
+            type="radio"
+            value="외국인"
+            id="외국인"
+          />
+          외국인
         </label>
 
         <div className="flex pt-6">
