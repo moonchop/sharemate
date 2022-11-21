@@ -57,13 +57,6 @@ public class SignService {
             message.setText("이메일 인증코드: "+code);
             message.setFrom("jh6car@naver.com");
             javaMailSender.send(message);
-//            MimeMessage message = javaMailSender.createMimeMessage();
-//            MimeMessageHelper h = new MimeMessageHelper(message,"UTF-8");
-//            h.setTo(email);
-//            h.setSubject("쉐어메이트 회원가입 인증번호입니다.");
-//            h.setText("이메일 인증코드: "+code);
-//            h.setFrom(new InternetAddress("zzzz"));
-//            javaMailSender.send(message);
         }catch (MailException mailException){
             mailException.printStackTrace();
             throw  new IllegalAccessException();

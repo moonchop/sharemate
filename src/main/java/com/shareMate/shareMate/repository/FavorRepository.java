@@ -14,6 +14,5 @@ import java.util.Optional;
 public interface FavorRepository extends JpaRepository<FavorEntity,Number> {
     //Optional<UserEntity> findByEmail(String email);
 
-    @Query("select u from user u join fetch u.favor where u.userID=:userid")
-    Optional<UserEntity> findUserEntityByUser_id(int userid);
+    Optional<FavorEntity> findFavorEntityByUserID(int userid);
 }

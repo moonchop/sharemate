@@ -37,7 +37,7 @@ public class UserController {
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청")
     @GetMapping("/users")
     public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") int page){
-        Page<UserEntity> resultList = userService.getUserList(page, 5);
+        Page<UserEntity> resultList = userService.getUserList(page, 15);
 
         List<UserEntity> resultDtoList = resultList.getContent();
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();

@@ -142,17 +142,17 @@ public class UserService {
         FavorDto res = new FavorDto();
         res.setCleanness(member.get().getCleanness());
         res.setMbti(member.get().getMbti());
-        res.setUser_id(member.get().getUser_id());
+        res.setUserID(member.get().getUserID());
         res.setDrinking(member.get().getDrinking());
         res.setSnoring(member.get().getSnoring());
 
-        res.setPrefered_age(member.get().getPrefered_age());
+
         res.setSmoking(member.get().getSmoking());
-        res.setSelf_intro(member.get().getSelf_intro());
-        res.setStudy_time(member.get().getStudy_time());
-        res.setSleep_time(member.get().getSleep_time());
-        res.setWakeup_time(member.get().getWakeup_time());
-        res.setPrefered_major(member.get().getPrefered_major());
+        res.setSelfIntro(member.get().getSelfIntro());
+        res.setStudyTime(member.get().getStudyTime());
+        res.setSleepTime(member.get().getSleepTime());
+        res.setWakeupTime(member.get().getWakeupTime());
+
         return res;
     }
 
