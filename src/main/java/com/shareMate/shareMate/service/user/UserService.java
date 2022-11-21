@@ -1,9 +1,6 @@
 package com.shareMate.shareMate.service.user;
 
-import com.shareMate.shareMate.dto.HashtagDto;
-import com.shareMate.shareMate.dto.RequestLoginDto;
-import com.shareMate.shareMate.dto.UserDto;
-import com.shareMate.shareMate.dto.FavorDto;
+import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
@@ -43,21 +40,22 @@ public class UserService {
 //    }
 
 
-    public Map doInsert(UserDto userDto) {
+    public Map doInsert(RequestSignUpDto requestSignUpDto) {
         Map json = new HashMap<String, Object>();
         System.out.println("service");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String securePwd = encoder.encode(userDto.toEntity().getPwd());
+
+        String securePwd = encoder.encode(requestSignUpDto.getPwd());
         System.out.println("암호화 된 비번 " + securePwd);
 
 
-        if (userRepository.findByEmail(userDto.toEntity().getEmail()).isPresent()) {
+        if (userRepository.findByEmail(requestSignUpDto.getEmail()).isPresent()) {
             json.put("status", "fail");
             json.put("text", "동일한 id가 있습니다.");
             return json;
         } else {
-            userDto.toEntity().setPwd(securePwd);
-            UserEntity newUser = userDto.toEntity();
+            requestSignUpDto.setPwd(securePwd);
+            UserEntity newUser = requestSignUpDto.toEntity();
             newUser.setPwd(securePwd);
             System.out.println("새 비번" + newUser.getPwd());
 
@@ -130,7 +128,7 @@ public class UserService {
     public List<String> getHashTagList(int num) {
         System.out.println("Zz");
         //Collection<HashTagEntity> hashtagList = hashtagRepository.findAllByUser_id(num);
-        List<String> hashtagList = hashtagRepository.findAllByUser_id(num);
+        List<String> hashtagList = hashtagRepository.findAllByUserID(num);
         System.out.println(hashtagList);
         return hashtagList;
 

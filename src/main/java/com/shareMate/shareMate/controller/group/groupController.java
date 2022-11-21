@@ -23,7 +23,6 @@ public class groupController {
 
 
     @ApiOperation(value = "그룹매칭 전체 리스트 조회",notes = "그룹매칭 메인화면에 나타낼 그룹매칭 게시글 리스트를 반환합니다.")
-
     //그룹 전체 리스트 조회
     @GetMapping("/groups")
     public ResponseEntity<ArrayList<GroupListDto>> getAll(HttpServletRequest request) {
@@ -50,6 +49,8 @@ public class groupController {
     public ResponseEntity<Optional<GroupDetailDto>>getDetail(@RequestParam int num){
 
         Optional<GroupDetailDto> groupDetailDto = groupService.getDetailGroup(num);
+        groupDetailDto.get().setHashtags(groupService.getHashtags(num));
+        groupDetailDto.get().setWishLists(groupService.getWishlist(num));
         return ResponseEntity.ok(groupDetailDto);
     }
 

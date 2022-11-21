@@ -18,8 +18,9 @@ import java.util.Optional;
 @Repository
 public interface HashtagRepository extends JpaRepository<HashTagEntity,Number> {
 
-    @Query(value="select hashTag from hashtag where user_id=:user_id")
-    List<String> findAllByUser_id(int user_id);
+
+    List<String> findAllByUserID(int user_id);
+    List<HashTagEntity> findAllByGroupID(int group_id);
     //Optional<UserEntity> findByEmail(String email);
     //List<HashTagEntity> findAllById(int userid);
 

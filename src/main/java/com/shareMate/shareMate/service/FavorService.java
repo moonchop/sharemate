@@ -34,7 +34,7 @@ public class FavorService {
         favorRepository.save(favor);
     }
     public void doUpdate (int userid , FavorDto favorDto) {
-        Optional<FavorEntity> f= favorRepository.findFavorEntityByUserID(userid);
+        Optional<FavorEntity> f= favorRepository.findByUserID(userid);
         if (f.isPresent()){
             FavorEntity favor = new FavorEntity();
             favor.setUserID(userid);

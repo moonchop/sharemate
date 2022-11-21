@@ -27,10 +27,7 @@ import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.Access;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -66,13 +63,16 @@ public class SignService {
 
     public ResponseSignInDto doLogin(RequestLoginDto requestLoginDto){
         Map json = new HashMap<String,Object>();
-        System.out.println("lgser");
+
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        UserEntity user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail()).orElseThrow(()-> {throw new UsernameNotFoundException("유저 없음");});
-        if(encoder.matches(requestLoginDto.toEntity().getPwd(),user.getPwd()))
+        System.out.println(requestLoginDto.getEmail());
+        Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.getEmail());
+        if (!user.isPresent()) throw new UsernameNotFoundException("유저 없음");
+        System.out.println("lgser");
+        if(encoder.matches(requestLoginDto.getPwd(),user.get().getPwd()))
         {
-            String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.getUserID()));
-            String jwtRefToken =refTokenHelper.createToken( String.valueOf(user.getUserID()));
+            String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.get().getUserID()));
+            String jwtRefToken =refTokenHelper.createToken( String.valueOf(user.get().getUserID()));
             //System.out.println("사인 서비스 토큰 "+ jwtRefToken);
             //System.out.println("사인 서비스 토큰 "+ jwtAccToken);
             return new ResponseSignInDto(jwtAccToken,jwtRefToken);

@@ -2,7 +2,6 @@ package com.shareMate.shareMate.dto;
 
 import com.shareMate.shareMate.entity.UserEntity;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +13,7 @@ import java.util.Date;
 @ApiModel(value = "회원가입" , description = "회원가입시 사용할 유저의 domain class")
 
 public class UserDto {
-
-    private int user_id;
+    private int userID;
 
     private String email;
 
@@ -25,7 +23,7 @@ public class UserDto {
     private String major;
 
     private int grade;
-    private int gender;
+    private Boolean  gender;
     private int age;
 
     private String profile_photo;
@@ -35,6 +33,7 @@ public class UserDto {
 
     public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
+                .userID(userID)
                 .email(email)
                 .name(name)
                 .major(major)
@@ -49,8 +48,8 @@ public class UserDto {
     }
 
     @Builder
-    public UserDto(int user_id, String email, String name, String major, int grade, int gender,int age, String profile_photo, Date created_at,Date updated_at) {
-        this.user_id = user_id;
+    public UserDto(int userID, String email, String name, String major, int grade, boolean gender, int age, String profile_photo, Date created_at, Date updated_at) {
+        this.userID = userID;
         this.email = email;
 
         this.name = name;

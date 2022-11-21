@@ -2,6 +2,9 @@ package com.shareMate.shareMate.entity;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,41 +14,39 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-//@Data
-//@AllArgsConstructor
+
 @Builder
 @Entity(name="user")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-
+@Table(name = "user")
+@EntityListeners(AuditingEntityListener.class)
 public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "user_id")
-    private int userID;
-//    @Column(nullable = false)
+    @Column(name= "userID",nullable = false)
+    private Integer userID;
+    @Column(name= "email",nullable = false)
     private String email;
-//    @Column(nullable = false)
+    @Column(name= "pwd",nullable = false)
     private String pwd;
-//    @Column(nullable = false)
     private String name;
-//    @Column(nullable = false)
     private String major;
-//    @Column(nullable = false)
-    private int grade;
-    private int gender;
-    private int age;
+    private Integer grade;
+    private Boolean gender;
+    private Integer age;
     private String profile_photo;
-//    @Column(nullable = false)
+    @CreatedDate
     private Date created_at;
-
+    @LastModifiedDate
     private Date updated_at;
     @OneToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "userID")
     private FavorEntity favor;
+
 
 
     public String getPwd(){
