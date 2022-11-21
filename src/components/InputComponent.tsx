@@ -3,9 +3,11 @@ import React from "react";
 const InputComponent = ({
   placeholder,
   id,
+  onChange,
 }: {
   placeholder: string;
   id: string;
+  onChange: any;
 }) => {
   return (
     <div className="flex items-center justify-center rounded-xl bg-gray-100 mx-2 py-4 mt-1">
@@ -15,7 +17,7 @@ const InputComponent = ({
         type="text"
         name={id}
         placeholder={placeholder}
-        onChange={(e) => sessionStorage.setItem(e.target.id, e.target.value)}
+        onChange={onChange}
       />
     </div>
   );

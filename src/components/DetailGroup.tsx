@@ -5,7 +5,6 @@ import HashTag from "./HashTag";
 interface ParamsValue {
   id: number;
   building: string;
-  floor: number;
   hashtag: string[];
   groupIntro: string;
   mateIntro: string[];
@@ -15,7 +14,7 @@ interface ParamsValue {
 
 const DetailGroup = () => {
   // props : elem
-  const activity: ParamsValue = useActivityParams();
+  const activity: ParamsValue = useActivityParams() as any;
   const props = activity;
 
   return (
@@ -24,7 +23,6 @@ const DetailGroup = () => {
       <p className="text-3xl ">룸메이트를 모집합니다.</p>
       <br />
       <br />
-      <p className="text-[19px]">{`희망 층수: ${props.floor}층`}</p>
       <p className="text-[18px]">{props.groupIntro}</p>
       <div className="my-2">
         <HashTag
