@@ -1,32 +1,44 @@
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSaveFormData } from "../../hooks/useSaveFormData";
 import request from "../../stores/Request";
+import { checkEmail, RegisterApi } from "../../utils/api/auth";
+import { SignUpFormInterface } from "./SignUp.type";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
+  const [emailValidNum, setEmailValidNum] = useState<number>(0);
+  const [isValid, setIsValid] = useState(false);
+  const checkEmailRef = useRef<HTMLInputElement>(null);
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { isSubmitting, isDirty, errors },
-  } = useForm();
+  } = useForm<SignUpFormInterface>();
 
-  const { setData } = useSaveFormData("first");
-
-  const SignUpSubmit = (data: any) => {
-    request.post("./register/", data).catch((error) => console.log(error));
-  };
-
-  const checkEmail = async (email: string) => {
-    return await request
-      .post("/register/email", email)
+  const getEmailValidNum = async () => {
+    const email = getValues("email");
+    return await checkEmail(email)
       .then((response) => {
-        console.log(response.status);
+        setEmailValidNum(response.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => alert(error.data));
   };
 
-  const onSubmit = async (data: any) => {
-    await new Promise((r) => setTimeout(r, 1000));
-    setData(data);
+  const handleCheckEmailValid = () => {
+    if (checkEmailRef.current === null) return;
+    if (parseInt(checkEmailRef.current?.value) !== emailValidNum) {
+      alert("인증코드가 잘못되었습니다.");
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+  };
+
+  const onSubmit = async (data: SignUpFormInterface) => {
+    console.log(data);
+    if (!isValid) return;
+    // RegisterApi(data); //회원가입 하고 결과값에 따라서 다음으로 보낼지 결정 ㄱㄱ
     handleGoNext();
   };
 
@@ -76,6 +88,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value="남"
             id="남"
+            className="mr-2"
           />
           남
         </label>
@@ -85,6 +98,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value="여"
             id="여"
+            className="mr-2"
           />
           여
         </label>
@@ -101,6 +115,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={1}
             id="1"
+            className="mr-2"
           />
           1
         </label>
@@ -110,6 +125,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={2}
             id="2"
+            className="mr-2"
           />
           2
         </label>
@@ -119,6 +135,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={3}
             id="3"
+            className="mr-2"
           />
           3
         </label>
@@ -128,33 +145,9 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={4}
             id="4"
+            className="mr-2"
           />
           4
-        </label>
-
-        <div className="flex mt-7">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-base text-left pb-3 text-black" htmlFor="name">
-            국적
-          </label>
-        </div>
-        <label className="m-3 ">
-          <input
-            {...register("gender", { required: true })}
-            type="radio"
-            value="내국인"
-            id="내국인"
-          />
-          내국인
-        </label>
-        <label className="m-3">
-          <input
-            {...register("gender", { required: true })}
-            type="radio"
-            value="외국인"
-            id="외국인"
-          />
-          외국인
         </label>
 
         <div className="flex pt-6">
@@ -256,7 +249,10 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             })}
           />
 
-          <button className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[#ab82e0] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button">
+          <button
+            className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[#ab82e0] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
+            onClick={getEmailValidNum}
+          >
             인증요청
           </button>
           {errors.email && (
@@ -282,8 +278,12 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             id="code"
             type="number"
             placeholder="1234"
+            ref={checkEmailRef}
           />
-          <div className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button">
+          <div
+            className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
+            onClick={handleCheckEmailValid}
+          >
             확인
           </div>
         </div>

@@ -17,14 +17,18 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
     formState: { isSubmitting },
   } = useForm();
 
-  const { setData } = useSaveFormData("third");
+  const { setData, getData: getThirdData } = useSaveFormData("third");
+  const { getData: getSecondData } = useSaveFormData("second");
 
   const onSubmit = async (data: any) => {
     await new Promise((r) => setTimeout(r, 1000));
     setData(data);
     setPersonalityForm(data);
 
-    const radioData = sessionStorage.getItem("second");
+    const result = { ...getThirdData(), ...getSecondData() };
+
+    console.log(result);
+     ///result 데이터 포스트해야함
 
     handleGoNext();
   };

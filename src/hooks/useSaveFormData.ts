@@ -5,6 +5,8 @@ export const useSaveFormData = (formName: string) => {
     sessionStorage.setItem(formName, JSON.stringify(data));
   };
 
+  const getData = () => JSON.parse(sessionStorage.getItem(formName) ?? "{}");
+
   useEffect(() => {
     const data = sessionStorage.getItem(formName);
     if (data === null) return;
@@ -14,5 +16,5 @@ export const useSaveFormData = (formName: string) => {
     });
   });
 
-  return { setData };
+  return { setData, getData };
 };

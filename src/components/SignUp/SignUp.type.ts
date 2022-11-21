@@ -5,4 +5,5 @@ export interface SignUpFormInterface {
   major: string;
   email: string;
   birth: Date;
+  grade: number;
 }
