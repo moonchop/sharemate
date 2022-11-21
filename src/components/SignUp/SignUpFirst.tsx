@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useSaveFormData } from "../../hooks/useSaveFormData";
-import SignUpButton from "../SignUpButton";
+import request from "../../stores/Request";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const {
@@ -10,6 +10,19 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   } = useForm();
 
   const { setData } = useSaveFormData("first");
+
+  const SignUpSubmit = (data: any) => {
+    request.post("./register/", data).catch((error) => console.log(error));
+  };
+
+  const checkEmail = async (email: string) => {
+    return await request
+      .post("/register/email", email)
+      .then((response) => {
+        console.log(response.status);
+      })
+      .catch((error) => console.log(error));
+  };
 
   const onSubmit = async (data: any) => {
     await new Promise((r) => setTimeout(r, 1000));
@@ -53,7 +66,35 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
 
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-sm text-left text-black" htmlFor="password">
+          <label className="text-base text-left pb-3 text-black" htmlFor="name">
+            성별
+          </label>
+        </div>
+        <label className="m-3">
+          <input
+            {...register("gender", { required: true })}
+            type="radio"
+            value="남"
+            id="남"
+          />
+          남
+        </label>
+        <label className="m-3">
+          <input
+            {...register("gender", { required: true })}
+            type="radio"
+            value="여"
+            id="여"
+          />
+          여
+        </label>
+
+        <div className="flex pt-6">
+          <div className="my-[0.8px] mr-1">* </div>
+          <label
+            className="text-base text-left pb-2 text-black"
+            htmlFor="password"
+          >
             비밀번호
           </label>
         </div>
@@ -79,7 +120,6 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             {errors.password.message as string}
           </small>
         )}
-
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-sm text-left text-black" htmlFor="major">
@@ -103,7 +143,6 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             {errors.major.message as string}
           </small>
         )}
-
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-sm text-left text-black" htmlFor="birth">
@@ -113,8 +152,8 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         <input
           className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="birth"
-          type="number"
-          placeholder="2000"
+          type="date"
+          placeholder="2001-01-29"
           {...register("birth", {
             required: "필수 입력입니다.",
           })}
@@ -127,7 +166,6 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             {errors.birth.message as string}
           </small>
         )}
-
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-sm text-left text-black" htmlFor="email">
@@ -176,7 +214,6 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             id="code"
             type="number"
             placeholder="1234"
-            {...register("code")}
           />
           <div className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button">
             확인

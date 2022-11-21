@@ -58,10 +58,6 @@ export const useMbti = () => {
 
 export const useRegisterForm = () => {
   const { Component: MbtiSelect, state: mbtiState } = useMbti();
-  const { Component: GenderSelect, state: genderState } = useRadio({
-    contentList: ["남", "여"],
-    title: "성별을 선택해주세요.",
-  });
   const { Component: GradeSelect, state: gradeState } = useRadio({
     contentList: ["1", "2", "3", "4"],
     title: "학년을 선택해주세요.",
@@ -101,7 +97,6 @@ export const useRegisterForm = () => {
     console.log(
       "진짜",
       mbtiState,
-      genderState,
       gradeState,
       foreignState,
       SleepTimeState,
@@ -113,7 +108,6 @@ export const useRegisterForm = () => {
     );
   }, [
     mbtiState,
-    genderState,
     gradeState,
     foreignState,
     SleepTimeState,
@@ -127,7 +121,6 @@ export const useRegisterForm = () => {
   return {
     state: {
       mbtiState,
-      genderState,
       gradeState,
       foreignState,
       SleepTimeState,
@@ -140,12 +133,10 @@ export const useRegisterForm = () => {
     Component: () => (
       <>
         <h1 className="text-[33px] py-[30px] p-3 text-bold text-left text-black mb-14 ml-2">
-          나의 <br />
-          룸메이트 취향은?
+          당신은 <br />
+          어떤 룸메이트인가요?
         </h1>
         <div className="my-10">
-          <GenderSelect />
-
           <MbtiSelect />
           <GradeSelect />
           <ForeignSelect />

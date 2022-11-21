@@ -10,13 +10,13 @@ import TopNav from "../components/TopNav";
 const MAX_STAGE = 3;
 const Stage_Map = [
   <SignUpFirst handleGoNext={() => {}} />,
-  <SignUpSecond />,
   <SignUpCoverPage />,
+  <SignUpSecond />,
   <SignUpPersonalIntro />,
 ];
 
 const SignUp: ActivityComponentType = () => {
-  const [stage, setStage] = useState(2);
+  const [stage, setStage] = useState(0);
 
   const handleGoPrev = () => {
     console.log(stage);
@@ -29,7 +29,7 @@ const SignUp: ActivityComponentType = () => {
 
   return (
     <AppScreen theme="cupertino">
-      {stage == 2 ? "" : <TopNav />}
+      {stage == 1 ? "" : <TopNav />}
       {React.cloneElement(Stage_Map[stage], {
         handleGoNext,
         handleGoPrev,

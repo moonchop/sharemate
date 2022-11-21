@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
 export const useSaveFormData = (formName: string) => {
-  const setData = (data: Object) => {
+  const setData = (data: any) => {
     sessionStorage.setItem(formName, JSON.stringify(data));
   };
 
