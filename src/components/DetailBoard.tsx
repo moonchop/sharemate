@@ -1,7 +1,7 @@
 import { useActivityParams } from "@stackflow/react";
 
 const BoardDetail = () => {
-  const activity: ParamsValue = useActivityParams();
+  const activity: any = useActivityParams();
   const props = activity;
 
   return (

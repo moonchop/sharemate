@@ -1,4 +1,4 @@
-import { api } from ".";
+import request from "../../stores/Request";
 
 type LoginFormType = {
   email: string;
@@ -6,7 +6,11 @@ type LoginFormType = {
 };
 
 export const loginApi = async (loginForm: LoginFormType) =>
-  await api("POST")("login")(loginForm);
+  await request.post("/login", loginForm);
 
 export const RegisterApi = async (params: any) =>
-  await api("POST")("register")(params);
+  await request.post("/register", params);
+
+export const checkEmail = async (email: string) =>
+  request.post("/register/email", { email });
+
