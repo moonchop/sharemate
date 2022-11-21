@@ -18,24 +18,19 @@ public class FavorEntity {
     @Id
 
 //    @Column(nullable = false,unique = true)
-    private int user_id;
-
-    private int sleep_time;
-    private int smoking;
-    private int wakeup_time;
+    private int userID;
+    private String sleepTime;
+    private String smoking;
+    private String wakeupTime;
       // @Column(nullable = false)
-    private int drinking;
+    private String drinking;
        //@Column(nullable = false)
-    private int study_time;
+    private String studyTime;
        //@Column(nullable = false)
-    private int cleanness;
-       //@Column(nullable = false)
-    private int prefered_age;
-       //@Column(nullable = false)
-    private int prefered_major;
-    private int snoring;
+    private String cleanness;
+    private String snoring;
     private String mbti;
-    private String self_intro;
+    private String selfIntro;
 
 
 

@@ -13,29 +13,25 @@ import lombok.Setter;
 public class FavorDto {
 
     @ApiModelProperty(value = "유저 id", required = true, example = "35")
-    private int user_id;
+    private int userID;
     @ApiModelProperty(value = "취침시간", required = true, example = "0")
-    private int sleep_time;
+    private String sleepTime;
     @ApiModelProperty(value = "흡연 여부", required = true, example = "1")
-    private int smoking;
+    private String smoking;
     @ApiModelProperty(value = "기상시간", required = true, example = "3")
-    private int wakeup_time;
+    private String wakeupTime;
     @ApiModelProperty(value = "음주", required = true, example = "1")
-    private int drinking;
+    private String drinking;
     @ApiModelProperty(value = "공부시간대", required = true, example = "1")
-    private int study_time;
+    private String studyTime;
     @ApiModelProperty(value = "청결도", required = true, example = "1")
-    private int cleanness;
-    @ApiModelProperty(value = "선호 나이대", required = true, example = "1")
-    private int prefered_age;
-    @ApiModelProperty(value = "선호 학과", required = true, example = "0")
-    private int prefered_major;
+    private String cleanness;
     @ApiModelProperty(value = "코골이 여부", required = true, example = "1")
-    private int snoring;
+    private String snoring;
     @ApiModelProperty(value = "mbti", required = true, example = "string")
     private String mbti;
     @ApiModelProperty(value = "자기소개", required = true, example = "string")
-    private String self_intro;
+    private String selfIntro;
     public FavorDto(){};
 
 }

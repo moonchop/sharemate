@@ -21,7 +21,6 @@ public class PostEntity {
     private int postId;
     //    @Column(nullable = false,unique = true)
     @Column(name = "user_id")
-
     private int user_id;
 
     private String title;
