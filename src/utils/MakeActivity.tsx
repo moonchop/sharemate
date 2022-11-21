@@ -35,8 +35,8 @@ type Navigate_Type =
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
   Group: <GroupFeed />,
-  MyPage: <MyPage />,
   Community: <CommunityFeed />,
+  MyPage: <MyPage />,
   Profile: <DetailProfile />,
   DetailGroup: <DetailGroup />,
   CreateGroup: <CreateGroup />,
@@ -56,7 +56,12 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       {NavigateMapper[navigate]}
       {navigate === "Profile" ||
       navigate === "DetailGroup" ||
-      navigate === "Login" ? (
+      navigate === "Login" ||
+      navigate === "CreateGroup" ||
+      navigate === "Password" ||
+      navigate === "LikeProfile" ||
+      navigate === "ProfileEdit" ||
+      navigate === "BoardDetail" ? (
         <></>
       ) : (
         <BottomNav />
