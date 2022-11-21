@@ -9,6 +9,7 @@ import lombok.Setter;
 @ApiModel(value = "해시태그", description = "해시태그에 사용할 domain class 입니다.")
 public class HashtagDto {
     private int user_id;
+    private int group_id;
     private String hashTag;
 
     public HashtagDto(){}

@@ -30,7 +30,9 @@ public class GroupEntity {
     private int maxNum;
     private int curNum;
     private String kakaoLink;
+    private String building;
     private Date created_at;
+
 
     @ManyToOne
     @JoinColumn(name="user_id",insertable = false,updatable = false)
@@ -41,7 +43,7 @@ public class GroupEntity {
 
     }
 
-    public GroupEntity(int groupID, String title, String text, int maxNum, int curNum, String kakaoLink, Date created_at) {
+    public GroupEntity(int groupID, String title, String text, int maxNum, int curNum, String kakaoLink, String building,Date created_at) {
 
     }
 }

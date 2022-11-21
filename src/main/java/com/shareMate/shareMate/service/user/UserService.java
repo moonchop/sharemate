@@ -130,7 +130,7 @@ public class UserService {
     public List<String> getHashTagList(int num) {
         System.out.println("Zz");
         //Collection<HashTagEntity> hashtagList = hashtagRepository.findAllByUser_id(num);
-        List<String> hashtagList = hashtagRepository.findAllByUser_id(num);
+        List<String> hashtagList = hashtagRepository.findAllByUserID(num);
         System.out.println(hashtagList);
         return hashtagList;
 

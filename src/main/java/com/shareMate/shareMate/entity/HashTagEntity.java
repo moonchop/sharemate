@@ -16,21 +16,24 @@ import java.util.Date;
 public class HashTagEntity {
 
     @Id
-    private int user_id;
+    private int hashtagID;
+    private int userID;
+
+    private int groupID;
 
     private String hashTag;
 
 
     @Builder
-    public HashTagEntity(int user_id, String hashTag){
-        this.user_id=user_id;
+    public HashTagEntity(int user_id, int group_id,String hashTag){
+        this.userID=user_id;
+        this.groupID=group_id;
         this.hashTag=hashTag;
-
 
     }
 
     @ManyToOne
-    @JoinColumn(name="user_id",insertable = false,updatable = false)
+    @JoinColumn(name="userID",insertable = false,updatable = false)
     private UserEntity user;
 
 

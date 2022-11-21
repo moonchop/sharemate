@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -32,19 +33,24 @@ public class GroupDetailDto {
 
     @ApiModelProperty(value = "오픈채팅방 링크", required = true, example = "string")
     private String kakaoLink;
+    @ApiModelProperty(value = "기숙사", required = true, example = "string")
+    private String building;
+    private List<HashtagDto> hashtags ;
+    private List<WishListDto> wishLists;
     @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
     private Date created_at;
 
 
 
     @Builder
-    public GroupDetailDto(int groupID,String title, String text, int maxNum, int curNum ,String kakaoLink, Date created_at) {
+    public GroupDetailDto(int groupID,String title, String text, int maxNum, int curNum ,String kakaoLink, String building,Date created_at) {
         this.groupID = groupID;
         this.title=title;
         this.text=text;
         this.maxNum=maxNum;
         this.curNum=curNum;
         this.kakaoLink=kakaoLink;
+        this.building=building;
         this.created_at=created_at;
     }
 
