@@ -16,10 +16,10 @@ import java.util.Date;
 public class HashTagEntity {
 
     @Id
-    private int hashtagID;
-    private int userID;
+    private Integer hashtagID;
+    private Integer userID;
 
-    private int groupID;
+    private Integer groupID;
 
     private String hashTag;
 
@@ -30,8 +30,8 @@ public class HashTagEntity {
         this.groupID=group_id;
         this.hashTag=hashTag;
     }
-    @ManyToOne
-    @JoinColumn(name="userID",insertable = false,updatable = false)
-    private UserEntity user;
+//    @ManyToOne
+//    @JoinColumn(name="userID",insertable = false,updatable = false)
+//    private UserEntity user;
 
 }
