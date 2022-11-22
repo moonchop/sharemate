@@ -1,4 +1,6 @@
+import request from "../stores/Request";
 import React, { useState } from "react";
+import { useFlow } from "../stackflow";
 import {
   AiFillEye,
   AiFillCloseCircle,
@@ -6,6 +8,7 @@ import {
 } from "react-icons/ai";
 
 const PasswordEdit = () => {
+  const { replace } = useFlow();
   const [showPass, setShowPass] = useState({
     origin: false,
     new: false,
@@ -21,6 +24,33 @@ const PasswordEdit = () => {
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
     return setPasswordForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const passwordSubmit = () =>
+    request
+      .put("/", passwordForm.new_pass)
+      .then((response) => {
+        console.log(response.status);
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
+
+  const submitHandler = async () => {
+    const pwdRegEx = /^[A-Za-z0-9]([A-Za-z0-9]){6,12}$/;
+    if (!pwdRegEx.test(passwordForm.new_pass)) {
+      alert("숫자+영문자 조합으로 6자리에서 12자리로 입력해주세요");
+    } else {
+      if (passwordForm.new_pass === passwordForm.verify_pass) {
+        const result = await passwordSubmit();
+        if (result) {
+          alert("비밀번호 변경에 성공했습니다.");
+          replace("MyPageActivity", {});
+        }
+      } else alert("비밀번호가 일치하지 않습니다.");
+    }
   };
 
   return (
@@ -133,7 +163,10 @@ const PasswordEdit = () => {
           />
         )}
       </div>
-      <button className="h-[6%] mt-[10%] ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm rounded-md shadow-button">
+      <button
+        className="h-[6%] mt-[10%] ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm rounded-md shadow-button"
+        onClick={submitHandler}
+      >
         비밀번호 변경
       </button>
     </div>
