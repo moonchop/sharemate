@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class WishListDto {
-    private int groupID;
+    private Integer groupID;
     private String text;
 
 }

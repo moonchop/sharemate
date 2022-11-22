@@ -45,7 +45,7 @@ public class postController {
     //게시글 디테일
     @ApiOperation(value = "커뮤니티 게시글 디테일 조회",notes = "게시글 클릭시 게시글 정보를 반환합니다.")
     @GetMapping("/post")
-    public ResponseEntity<Optional<PostDetailDto>>getDetail(@RequestParam int num){
+    public ResponseEntity<Optional<PostDetailDto>>getDetail(@RequestParam Integer num){
 
         Optional<PostDetailDto> postDetailDto = postService.getDetailPost(num);
         return ResponseEntity.ok(postDetailDto);
@@ -63,7 +63,7 @@ public class postController {
     @ApiOperation("커뮤니티 게시글 수정")
     @PutMapping("/post")
     @ApiParam(value = "파라미터에 대한 설명")
-    public ResponseEntity editPost(@RequestParam int postid,@RequestBody PostDetailDto post ,HttpServletRequest request){
+    public ResponseEntity editPost(@RequestParam Integer postid,@RequestBody PostDetailDto post ,HttpServletRequest request){
 
         System.out.println("+++");
         System.out.println(Integer.parseInt(request.getAttribute("userid").toString()));
@@ -81,7 +81,7 @@ public class postController {
     //게시글 삭제
     @ApiOperation(value = "커뮤니티 게시글 삭제",notes = "커뮤니티에 있는 게시글을 삭제합니다.")
     @DeleteMapping("/post")
-    public ResponseEntity delPost(@RequestParam int postId){
+    public ResponseEntity delPost(@RequestParam Integer postId){
 
         postService.delPost(postId);
         return ResponseEntity.ok(HttpStatus.OK);

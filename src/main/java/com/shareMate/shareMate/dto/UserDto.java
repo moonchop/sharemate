@@ -13,7 +13,7 @@ import java.util.Date;
 @ApiModel(value = "회원가입" , description = "회원가입시 사용할 유저의 domain class")
 
 public class UserDto {
-    private int userID;
+    private Integer userID;
 
     private String email;
 
@@ -22,9 +22,9 @@ public class UserDto {
 
     private String major;
 
-    private int grade;
+    private Integer grade;
     private Boolean  gender;
-    private int age;
+    private Integer age;
 
     private String profile_photo;
 

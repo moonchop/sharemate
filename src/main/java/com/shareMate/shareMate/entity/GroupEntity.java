@@ -22,13 +22,13 @@ public class GroupEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    private int groupID;
+    private Integer groupID;
 
-    private int userID;
+    private Integer userID;
     private String title;
     private String text;
-    private int maxNum;
-    private int curNum;
+    private Integer maxNum;
+    private Integer curNum;
     private String kakaoLink;
     private String building;
     private Date created_at;
@@ -43,7 +43,7 @@ public class GroupEntity {
 
     }
 
-    public GroupEntity(int groupID, String title, String text, int maxNum, int curNum, String kakaoLink, String building,Date created_at) {
+    public GroupEntity(Integer groupID, String title, String text, Integer maxNum, Integer curNum, String kakaoLink, String building,Date created_at) {
 
     }
 }

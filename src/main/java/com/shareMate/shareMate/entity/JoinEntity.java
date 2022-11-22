@@ -17,10 +17,10 @@ public class JoinEntity {
     //    @Column(nullable = false,unique = true)
     @Id
     @Column(name = "group_id")
-    private int groupID;
+    private Integer groupID;
 
     @Column(name="user_id")
-    private int userID;
+    private Integer userID;
 
     public JoinEntity() {
 

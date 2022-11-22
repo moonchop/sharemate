@@ -22,7 +22,6 @@ public class RequestLoginDto {
     public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
                 .email(email)
-//                .pwd(passwordEncoder.endcode(pwd))
                 .pwd(pwd)
                 .build();
         return userEntity;

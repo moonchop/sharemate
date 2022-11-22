@@ -17,7 +17,7 @@ import java.util.Date;
 public class FavorEntity {
 
     @Id
-    private int userID;
+    private Integer userID;
     private String sleepTime;
     private String smoking;
     private String wakeupTime;

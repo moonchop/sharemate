@@ -11,14 +11,14 @@ import java.util.Date;
 @Setter
 @ApiModel(value = "커뮤니티 게시글 리스트", description = "커뮤니티 게시글의 리스트 domain class 입니다.")
 public class PostListDto {
-    private int post_id;
-    private int user_id;
+    private Integer post_id;
+    private Integer user_id;
     private String title;
     private String category;
     private Date created_at;
 
     @Builder
-    public PostListDto(int post_id,int user_id, String title, String category,  Date created_at) {
+    public PostListDto(Integer post_id,Integer user_id, String title, String category,  Date created_at) {
         this.user_id = user_id;
         this.post_id=post_id;
         this.title=title;

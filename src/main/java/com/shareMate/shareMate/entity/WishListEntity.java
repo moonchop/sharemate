@@ -20,14 +20,14 @@ public class WishListEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int wishlistID;
-    private int groupID;
+    private Integer wishlistID;
+    private Integer groupID;
 
     private String text;
 
 
     public WishListEntity(){};
-    public WishListEntity(int groupID, String text) {
+    public WishListEntity(Integer groupID, String text) {
         this.groupID=groupID;
         this.text=text;
     }

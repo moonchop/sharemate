@@ -2,6 +2,7 @@ package com.shareMate.shareMate.service.user;
 
 import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
+import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
 import com.shareMate.shareMate.entity.UserEntity;
@@ -9,6 +10,7 @@ import com.shareMate.shareMate.repository.FavorRepository;
 import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.repository.LikeRepository;
 import com.shareMate.shareMate.repository.UserRepository;
+import com.shareMate.shareMate.service.sign.SignService;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
@@ -29,7 +31,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final FavorRepository favorRepository;
     private final HashtagRepository hashtagRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final SignService signService;
     private final LikeRepository likeRepository;
 
     public List<UserEntity> doSelectAll() {
@@ -44,7 +46,9 @@ public class UserService {
 
     public Map doInsert(RequestSignUpDto requestSignUpDto) {
         Map json = new HashMap<String, Object>();
+        String originalPwd=requestSignUpDto.getPwd();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         String securePwd = encoder.encode(requestSignUpDto.getPwd());
 
 
@@ -56,24 +60,21 @@ public class UserService {
             requestSignUpDto.setPwd(securePwd);
             UserEntity newUser = requestSignUpDto.toEntity();
             newUser.setPwd(securePwd);
-            System.out.println("새 비번" + newUser.getPwd());
-
-
             userRepository.save(newUser);
             json.put("status", "success");
             json.put("text", "회원가입이 완료되었습니다.");
+            ResponseSignInDto req = signService.doLogin(new RequestLoginDto(newUser.getEmail(),originalPwd));
+            json.put("data",(req));
+            System.out.println(json);
             return json;
         }
 //
-////        userRepository.save(UserEntity.builder().email(userEntity.getEmail()).password(userEntity.getPassword()).name(userEntity.getName()).build());
-////        userRepository.save(UserEntity.builder().name(responseUserDto.toEntity().getName()).pwd(responseUserDto.toEntity().getPwd()).email(responseUserDto.toEntity().getEmail()).build());
 //
     }
 
     @ResponseBody
     public Map doLogin(RequestLoginDto requestLoginDto) {
         Map json = new HashMap<String, Object>();
-        System.out.println("lgser");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail());
 

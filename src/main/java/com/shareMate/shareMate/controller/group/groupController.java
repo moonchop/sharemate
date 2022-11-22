@@ -71,7 +71,7 @@ public class groupController {
     }
     @ApiOperation(value = "그룹매칭 게시글 수정",notes = "작성자가 그룹매칭 게시글을 수정합니다.")
     @PutMapping("/group")
-    public ResponseEntity editPost(@RequestParam int groupID,@RequestBody GroupDetailDto group ,HttpServletRequest request){
+    public ResponseEntity editPost(@RequestParam Integer groupID,@RequestBody GroupDetailDto group ,HttpServletRequest request){
 
         System.out.println(Integer.parseInt(request.getAttribute("userid").toString()));
         Optional<GroupDetailDto> origin_group = groupService.getDetailGroup(groupID);

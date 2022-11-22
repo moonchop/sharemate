@@ -16,16 +16,16 @@ import java.util.Date;
 public class HashTagEntity {
 
     @Id
-    private int hashtagID;
-    private int userID;
+    private Integer hashtagID;
+    private Integer userID;
 
-    private int groupID;
+    private Integer groupID;
 
     private String hashTag;
 
 
     @Builder
-    public HashTagEntity(int user_id, int group_id,String hashTag){
+    public HashTagEntity(Integer user_id, Integer group_id,String hashTag){
         this.userID=user_id;
         this.groupID=group_id;
         this.hashTag=hashTag;
