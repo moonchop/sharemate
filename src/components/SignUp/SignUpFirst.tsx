@@ -1,7 +1,5 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSaveFormData } from "../../hooks/useSaveFormData";
-import request from "../../stores/Request";
 import { checkEmail, RegisterApi } from "../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
 
@@ -207,24 +205,24 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-sm text-left text-black" htmlFor="birth">
-            출생년도
+            나이
           </label>
         </div>
         <input
           className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
-          id="birth"
-          type="date"
-          placeholder="2001-01-29"
-          {...register("birth", {
+          id="age"
+          type="number"
+          placeholder="22"
+          {...register("age", {
             required: "필수 입력입니다.",
           })}
         />
-        {errors.birth && (
+        {errors.age && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
-            {errors.birth.message as string}
+            {errors.age.message as string}
           </small>
         )}
         <div className="flex">

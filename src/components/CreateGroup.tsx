@@ -1,4 +1,3 @@
-import { useRadio } from "../hooks/useRadio";
 import InputComponent from "./InputComponent";
 import { useFlow } from "../stackflow";
 import { useState } from "react";
@@ -16,7 +15,11 @@ const CreateGroup = () => {
   const [groupForm, setGroupForm] = useState({});
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
-    setGroupForm((prev) => ({ ...prev, [name]: value }));
+    if (name === "hashtag" || name === "wishList") {
+      console.log("list");
+    } else {
+      setGroupForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const GroupSubmit = () => {
@@ -54,17 +57,17 @@ const CreateGroup = () => {
       </p>
       <InputComponent
         placeholder="조용한편"
-        id="hashtag1"
+        id="hashtag"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="동갑희망"
-        id="hashtag2"
+        id="hashtag"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="비흡연자"
-        id="hashtag3"
+        id="hashtag"
         onChange={changeHandler}
       />
 
@@ -78,27 +81,27 @@ const CreateGroup = () => {
       <p className="mt-20 ml-2 text-xl">어떤 룸메이트를 희망하시나요?</p>
       <InputComponent
         placeholder="22살이었으면 좋겠어요."
-        id="mateIntro1"
+        id="wishList"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="비흡연자가 좋아요."
-        id="mateIntro2"
+        id="wishList"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="성격이 외향적이었으면 좋겠어요."
-        id="mateIntro3"
+        id="wishList"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="깔끔한 편이었으면 좋겠어요."
-        id="mateIntro4"
+        id="wishList"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="음식은 방 밖에서 먹는 게 좋아요."
-        id="mateIntro5"
+        id="wishList"
         onChange={changeHandler}
       />
 

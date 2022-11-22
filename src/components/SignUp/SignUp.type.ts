@@ -4,6 +4,6 @@ export interface SignUpFormInterface {
   gender: string; //number로 변경 가능
   major: string;
   email: string;
-  birth: Date;
+  age: number;
   grade: number;
 }
