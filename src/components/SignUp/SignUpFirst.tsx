@@ -51,14 +51,14 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         <div className="flex">
           <div className="my-[0.8px] mr-1">* </div>
           <label className="text-base text-left text-black" htmlFor="name">
-            이름
+            닉네임
           </label>
         </div>
         <input
           className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="name"
           type="text"
-          placeholder="name"
+          placeholder="nickname"
           {...register("name", {
             required: "닉네임은 필수 입력입니다.",
             pattern: {
