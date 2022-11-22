@@ -46,7 +46,7 @@ public class UserDto {
                 .build();
         return userEntity;
     }
-
+    public UserDto(){};
     @Builder
     public UserDto(int userID, String email, String name, String major, int grade, boolean gender, int age, String profile_photo, Date created_at, Date updated_at) {
         this.userID = userID;
