@@ -37,6 +37,8 @@ public class SignService {
     private final TokenHelper accTokenHelper;
     private final TokenHelper refTokenHelper;
     private final JavaMailSender javaMailSender;
+    private final PasswordEncoder passwordEncoder;
+
     @AllArgsConstructor
     @Data
     static class LoginSuccessResponse {
@@ -62,23 +64,16 @@ public class SignService {
 
 
     public ResponseSignInDto doLogin(RequestLoginDto requestLoginDto){
-        Map json = new HashMap<String,Object>();
-
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(requestLoginDto.getEmail());
         Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.getEmail());
         if (!user.isPresent()) throw new UsernameNotFoundException("유저 없음");
-        System.out.println("lgser");
-        if(encoder.matches(requestLoginDto.getPwd(),user.get().getPwd()))
+        if(passwordEncoder.matches(requestLoginDto.getPwd(),user.get().getPwd()))
         {
             String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.get().getUserID()));
-            String jwtRefToken =refTokenHelper.createToken( String.valueOf(user.get().getUserID()));
-            //System.out.println("사인 서비스 토큰 "+ jwtRefToken);
-            //System.out.println("사인 서비스 토큰 "+ jwtAccToken);
+            String jwtRefToken = refTokenHelper.createToken( String.valueOf(user.get().getUserID()));
             return new ResponseSignInDto(jwtAccToken,jwtRefToken);
         }
         else{
-            return new ResponseSignInDto(null,null);
+            return null;
 
         }
 

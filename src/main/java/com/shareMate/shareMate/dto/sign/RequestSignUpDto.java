@@ -1,4 +1,4 @@
-package com.shareMate.shareMate.dto;
+package com.shareMate.shareMate.dto.sign;
 
 import com.shareMate.shareMate.entity.UserEntity;
 import io.swagger.annotations.ApiModel;

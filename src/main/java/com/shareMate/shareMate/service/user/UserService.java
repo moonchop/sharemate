@@ -1,8 +1,8 @@
 package com.shareMate.shareMate.service.user;
 
 import com.shareMate.shareMate.dto.*;
+import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.entity.FavorEntity;
-import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.FavorRepository;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,7 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final FavorRepository favorRepository;
     private final HashtagRepository hashtagRepository;
-
+    private final PasswordEncoder passwordEncoder;
     private final LikeRepository likeRepository;
 
     public List<UserEntity> doSelectAll() {
@@ -43,11 +44,8 @@ public class UserService {
 
     public Map doInsert(RequestSignUpDto requestSignUpDto) {
         Map json = new HashMap<String, Object>();
-        System.out.println("service");
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
         String securePwd = encoder.encode(requestSignUpDto.getPwd());
-        System.out.println("암호화 된 비번 " + securePwd);
 
 
         if (userRepository.findByEmail(requestSignUpDto.getEmail()).isPresent()) {

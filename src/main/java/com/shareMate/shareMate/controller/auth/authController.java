@@ -1,13 +1,11 @@
 package com.shareMate.shareMate.controller.auth;
 
 import com.shareMate.shareMate.dto.RequestLoginDto;
-import com.shareMate.shareMate.dto.RequestSignUpDto;
-import com.shareMate.shareMate.dto.UserDto;
+import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
+import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.mail.internet.MimeMessage;
 import java.util.Map;
 import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/sign")
 public class authController {
     private final UserService userService;
     private final SignService signService;
@@ -30,10 +29,7 @@ public class authController {
     @ApiOperation(value = "회원가입",notes = "회원가입 버튼 클릭시 회원가입을 진행하는 요청입니다.")
 
     @PostMapping("/register")
-    public Map doUserList(@RequestBody RequestSignUpDto requestSignUpDto){
-
-        System.out.println("hello"+ requestSignUpDto);
-
+    public Map signUp(@RequestBody RequestSignUpDto requestSignUpDto){
         return userService.doInsert(requestSignUpDto);
     }
 
@@ -42,17 +38,15 @@ public class authController {
     @PostMapping("/login")
     public ResponseEntity<ResponseSignInDto> UserLogin(@RequestBody RequestLoginDto requestLoginDto){
         ResponseSignInDto responseSignInDto = signService.doLogin(requestLoginDto);
-        System.out.println("프린트");
         if(responseSignInDto.getAccessToken()==null){
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseSignInDto);
+            throw new UserNotFoundException();
         }
         else return ResponseEntity.status(HttpStatus.OK).body(responseSignInDto);
     }
     @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.")
-    @PostMapping("/register/email")
+    @PostMapping("/email")
     public ResponseEntity<String > EmailVerification(@RequestBody Map<String,String> email) throws Exception {
-        System.out.println(email.get("email"));
         Boolean IsDup = userService.dupCheck(email.get("email"));
         //중복된 이메일
         if (IsDup) {
@@ -64,10 +58,6 @@ public class authController {
             System.out.println("code : "+code);
             signService.sendMail(code,email.get("email"));
             return ResponseEntity.status(HttpStatus.OK).body(code);
-
-
-
-
         }
 
 
