@@ -38,11 +38,6 @@ public class UserService {
         return userRepository.findAll();
     }
 
-//   public UserEntity doSelectOne(int id) {
-//        return userRepository.findById(id).get();
-//    }
-
-
 
     public Map doInsert(RequestSignUpDto requestSignUpDto) {
         Map json = new HashMap<String, Object>();

@@ -20,6 +20,7 @@ import java.util.List;
 
 @RestController
 @Api("유저 정보")
+@RequestMapping("/user")
 public class UserController {
     @Getter
     @Setter
@@ -37,7 +38,7 @@ public class UserController {
         this.hashtagRepository=hashtagRepository;
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청")
-    @GetMapping("/users")
+    @GetMapping("/list")
     public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") Integer page){
         Page<UserEntity> resultList = userService.getUserList(page, 5);
 
@@ -53,9 +54,7 @@ public class UserController {
     }
     @GetMapping("/userAll")
     public ResponseEntity<ArrayList<UserDto>> getUserAll (){
-        System.out.println("userall");
         List<UserEntity> list = userService.doSelectAll();
-        System.out.println(list);
         ArrayList <UserDto> dtos = new ArrayList<>();
         for (UserEntity u : list){
             UserDto userDto = new UserDto();
@@ -74,8 +73,8 @@ public class UserController {
 
     }
     @ApiOperation(value = "유저 디테일 조회",notes ="유저 클릭시 유저의 디테일한 데이터를 반환합니다.(취향/유저정보)")
-    @GetMapping("/user")
-    public ResponseEntity<ResUserDetailDto> getUserDetail(@RequestParam("userNum") Integer num){
+    @GetMapping("/detail")
+    public ResponseEntity<ResUserDetailDto> getUserDetail(@RequestParam("id") Integer num){
         /*favor 가져오는 코드*/
         FavorDto favor = userService.getFavor(num);
         /* User 가져오는 코드*/
@@ -89,23 +88,23 @@ public class UserController {
     }
     @ApiOperation(value = "좋아요 동작",notes = "좋아요 기능을 수행합니다.")
     @GetMapping("/like")
-    public ResponseEntity LikeUser(HttpServletRequest request,@RequestParam("userNum") Integer num){
+    public ResponseEntity LikeUser(HttpServletRequest request,@RequestParam("id") Integer num){
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         userService.doLike(user_id,num);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @ApiOperation(value = "좋아요 취소", notes = "좋아요 기능을 취소합니다.")
     @GetMapping("/unlike")
-    public ResponseEntity UnLikeUser(HttpServletRequest request,@RequestParam("userNum") Integer num) {
-        final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
+    public ResponseEntity UnLikeUser(HttpServletRequest request,@RequestParam("id") Integer num) {
+        final Integer user_id = Integer.parseInt(request.getAttribute("id").toString());
         userService.doUnLike(user_id, num);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
     //개인정보 수정
     @ApiOperation(value = "개인정보 수정",notes = "개인정보를 수정합니다.")
-    @PutMapping("/user")
-    public ResponseEntity editUser (HttpServletRequest request,@RequestParam("userNum") Integer num,UserDto userDto) {
+    @PutMapping("")
+    public ResponseEntity editUser (HttpServletRequest request,@RequestParam("id") Integer num,UserDto userDto) {
        // userService.editUser(num,userDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
