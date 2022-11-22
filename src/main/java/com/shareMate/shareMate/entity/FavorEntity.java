@@ -31,9 +31,6 @@ public class FavorEntity {
     private String mbti;
     private String selfIntro;
 
-    @OneToOne(mappedBy = "favor")
-    private UserEntity user;
-
 
 
 

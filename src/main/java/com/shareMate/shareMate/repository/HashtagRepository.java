@@ -19,7 +19,7 @@ import java.util.Optional;
 public interface HashtagRepository extends JpaRepository<HashTagEntity,Number> {
 
 
-    List<String> findAllByUserID(int user_id);
+    List<HashTagEntity> findAllByUserID(int user_id);
     List<HashTagEntity> findAllByGroupID(int group_id);
     //Optional<UserEntity> findByEmail(String email);
     //List<HashTagEntity> findAllById(int userid);

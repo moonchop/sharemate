@@ -34,9 +34,6 @@ public class GroupEntity {
     private Date created_at;
 
 
-    @ManyToOne
-    @JoinColumn(name="user_id",insertable = false,updatable = false)
-    private UserEntity user;
 
 
     public GroupEntity() {

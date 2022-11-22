@@ -30,8 +30,6 @@ public class HashTagEntity {
         this.groupID=group_id;
         this.hashTag=hashTag;
     }
-    @ManyToOne
-    @JoinColumn(name="userID",insertable = false,updatable = false)
-    private UserEntity user;
+
 
 }

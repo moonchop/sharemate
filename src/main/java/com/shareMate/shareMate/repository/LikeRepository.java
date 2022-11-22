@@ -21,6 +21,7 @@ import java.util.Optional;
 public interface LikeRepository extends JpaRepository<LikeEntity,Number> {
 
 
-   Optional<LikeEntity> findLikeEntityByUserFromIDAndUserToID(int userFromID, int userToID);
+   Optional<LikeEntity> findLikeEntityByUserFromIDAndUserToID(Integer userFromID, Integer userToID);
+   List<LikeEntity> findByUserFromID(Integer userFromID);
 
 }

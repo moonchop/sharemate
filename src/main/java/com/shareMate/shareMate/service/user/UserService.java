@@ -4,6 +4,7 @@ import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.entity.FavorEntity;
+import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.FavorRepository;
@@ -105,25 +106,46 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Page<UserEntity> getUserList(int page, int size) {
+    public Page<UserEntity> getUserList(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<UserEntity> postList = userRepository.findAll(pageable);
 
         return postList;
-
-
     }
+    public List<UserSimpleDto> getUserLikeList(Integer id){
+        List<LikeEntity> likesID = (likeRepository.findByUserFromID(id));
+        List<UserSimpleDto> userSimpleList = new ArrayList<>();
 
+        for (LikeEntity like : likesID) {
+            Optional<UserEntity> user = userRepository.findById(like.getUserToID());
+            List<HashTagEntity> hash = hashtagRepository.findAllByUserID(like.getUserToID());
+            List <String> hashes = new ArrayList<>() ;
+            for (HashTagEntity h : hash){
+                hashes.add(h.getHashTag());
+            }
+            UserSimpleDto userSimpleDto = new UserSimpleDto();
+            userSimpleDto.setUserID(user.get().getUserID());
+            userSimpleDto.setName(user.get().getName());
+            userSimpleDto.setMajor(user.get().getMajor());
+            userSimpleDto.setProfile_photo(user.get().getProfile_photo());
+            userSimpleDto.setAge(user.get().getAge());
+            userSimpleDto.setGender(user.get().getGender());
+            userSimpleDto.setHashtags(hashes);
+            userSimpleList.add(userSimpleDto);
+        }
+
+        return userSimpleList;
+    }
+//    public Use
     public UserDto getUserDetail(int num) {
         Optional<UserEntity> member = userRepository.findById(num);
         return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getCreated_at(),member.get().getUpdated_at());
 
     }
 
-    public List<String> getHashTagList(int num) {
-        System.out.println("Zz");
+    public List<HashTagEntity> getHashTagList(int num) {
         //Collection<HashTagEntity> hashtagList = hashtagRepository.findAllByUser_id(num);
-        List<String> hashtagList = hashtagRepository.findAllByUserID(num);
+        List<HashTagEntity> hashtagList = hashtagRepository.findAllByUserID(num);
         System.out.println(hashtagList);
         return hashtagList;
 
