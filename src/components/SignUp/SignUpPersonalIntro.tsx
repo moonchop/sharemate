@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BiBulb } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { useSaveFormData } from "../../hooks/useSaveFormData";
+import { FavorApi } from "../../utils/api/auth";
 
 const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
   // useEffect(() => {
@@ -28,7 +29,8 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
     const result = { ...getThirdData(), ...getSecondData() };
 
     console.log(result);
-     ///result 데이터 포스트해야함
+    ///result 데이터 포스트해야함
+    FavorApi(result).catch((err) => console.error(err));
 
     handleGoNext();
   };

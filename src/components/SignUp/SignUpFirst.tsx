@@ -4,7 +4,7 @@ import { checkEmail, RegisterApi } from "../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
-  const [emailValidNum, setEmailValidNum] = useState<number>(0);
+  const [emailValidNum, setEmailValidNum] = useState("");
   const [isValid, setIsValid] = useState(false);
   const checkEmailRef = useRef<HTMLInputElement>(null);
   const {
@@ -25,7 +25,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
 
   const handleCheckEmailValid = () => {
     if (checkEmailRef.current === null) return;
-    if (parseInt(checkEmailRef.current?.value) !== emailValidNum) {
+    if (checkEmailRef.current?.value !== emailValidNum) {
       alert("인증코드가 잘못되었습니다.");
       setIsValid(false);
     } else {
@@ -36,7 +36,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const onSubmit = async (data: SignUpFormInterface) => {
     console.log(data);
     if (!isValid) return;
-    // RegisterApi(data); //회원가입 하고 결과값에 따라서 다음으로 보낼지 결정 ㄱㄱ
+    RegisterApi(data).catch((err) => console.error(err));
     handleGoNext();
   };
 
@@ -274,15 +274,15 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           <input
             className="w-[260px] px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
             id="code"
-            type="number"
-            placeholder="1234"
+            type="text"
+            placeholder="6af4ae"
             ref={checkEmailRef}
           />
           <div
             className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
             onClick={handleCheckEmailValid}
           >
-            확인
+            {isValid ? "인증완료" : "확인"}
           </div>
         </div>
         <button

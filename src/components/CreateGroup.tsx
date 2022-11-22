@@ -1,6 +1,7 @@
 import InputComponent from "./InputComponent";
 import { useFlow } from "../stackflow";
 import { useState } from "react";
+import { GroupApi } from "../utils/api/auth";
 /// 그룹 생성 시 정보
 /// =================
 /// 기숙사 건물             building : string       ex] "광교관"
@@ -26,6 +27,7 @@ const CreateGroup = () => {
     console.log("sdfusd");
     console.log(groupForm);
     //groupForm 데이터 포스트해야함
+    GroupApi(groupForm);
     pop();
   };
 

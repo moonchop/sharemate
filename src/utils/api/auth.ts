@@ -14,3 +14,8 @@ export const RegisterApi = async (params: any) =>
 export const checkEmail = async (email: string) =>
   request.post("/register/email", { email });
 
+export const FavorApi = async (params: any) =>
+  await request.post("/favor", params);
+
+export const GroupApi = async (params: any) =>
+  await request.post("/group", params);
