@@ -19,6 +19,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
     return await checkEmail(email)
       .then((response) => {
         setEmailValidNum(response.data);
+        console.log(response.data);
       })
       .catch((error) => alert(error.data));
   };
@@ -30,13 +31,21 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
       setIsValid(false);
     } else {
       setIsValid(true);
+      alert("인증되었습니다.");
     }
   };
 
   const onSubmit = async (data: SignUpFormInterface) => {
     console.log(data);
-    if (!isValid) return;
+    if (!isValid) {
+      console.log(data);
+      return;
+    }
+    data.age = parseInt(data.age);
+    data.grade = parseInt(data.grade);
+    console.log("POST data", data);
     RegisterApi(data).catch((err) => console.error(err));
+    console.log("타입:", typeof data.age, typeof data.grade);
     handleGoNext();
   };
 

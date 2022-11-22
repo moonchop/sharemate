@@ -73,15 +73,15 @@ export const useRegisterForm = () => {
       title: "생활 패턴을 선택해주세요.",
     });
   const { Component: DrinkSelect, state: drinkState } = useRadio({
-    contentList: ["잦은 편", "드문 편"],
-    title: "음주 빈도를 선택해주세요.",
+    contentList: ["1", "2", "3", "4"],
+    title: "일주일 내 음주 횟수를 입력해주세요.",
   });
   const { Component: CleannessSelect, state: cleannessState } = useRadio({
     contentList: ["청결에 예민", "청결에 둔감"],
     title: "청결도를 선택해주세요.",
   });
   const { Component: SnoringSelect, state: snoringState } = useRadio({
-    contentList: ["유", "무"],
+    contentList: ["상", "중", "하", "무"],
     title: "코골이 유무를 선택해주세요.",
   });
 
