@@ -14,20 +14,18 @@ import { GroupApi } from "../utils/api/auth";
 const CreateGroup = () => {
   const { pop } = useFlow();
   const [groupForm, setGroupForm] = useState({});
+  // const [hashtag, setHashtag] = useState([]);
+  // const [wishList, setWishList] = useState([]);
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.currentTarget;
-    if (name === "hashtag" || name === "wishList") {
-      console.log("list");
-    } else {
-      setGroupForm((prev) => ({ ...prev, [name]: value }));
-    }
+    const { name, value } = e.currentTarget;
+    setGroupForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const GroupSubmit = () => {
     console.log("sdfusd");
     console.log(groupForm);
     //groupForm 데이터 포스트해야함
-    GroupApi(groupForm);
+    // request.interceptors.request.use(GroupApi(groupForm)).catch((error) => alert(error.data));
     pop();
   };
 
@@ -59,17 +57,17 @@ const CreateGroup = () => {
       </p>
       <InputComponent
         placeholder="조용한편"
-        id="hashtag"
+        id="hashtag1"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="동갑희망"
-        id="hashtag"
+        id="hashtag2"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="비흡연자"
-        id="hashtag"
+        id="hashtag3"
         onChange={changeHandler}
       />
 
@@ -83,27 +81,27 @@ const CreateGroup = () => {
       <p className="mt-20 ml-2 text-xl">어떤 룸메이트를 희망하시나요?</p>
       <InputComponent
         placeholder="22살이었으면 좋겠어요."
-        id="wishList"
+        id="wishList1"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="비흡연자가 좋아요."
-        id="wishList"
+        id="wishList2"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="성격이 외향적이었으면 좋겠어요."
-        id="wishList"
+        id="wishList3"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="깔끔한 편이었으면 좋겠어요."
-        id="wishList"
+        id="wishList4"
         onChange={changeHandler}
       />
       <InputComponent
         placeholder="음식은 방 밖에서 먹는 게 좋아요."
-        id="wishList"
+        id="wishList5"
         onChange={changeHandler}
       />
 

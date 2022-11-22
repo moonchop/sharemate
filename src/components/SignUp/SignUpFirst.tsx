@@ -43,6 +43,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
     }
     data.age = parseInt(data.age);
     data.grade = parseInt(data.grade);
+    data.gender === "남" ? (data.gender = 1) : (data.gender = 0);
     console.log("POST data", data);
     RegisterApi(data).catch((err) => console.error(err));
     console.log("타입:", typeof data.age, typeof data.grade);
@@ -159,19 +160,16 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
 
         <div className="flex pt-6">
           <div className="my-[0.8px] mr-1">* </div>
-          <label
-            className="text-base text-left pb-2 text-black"
-            htmlFor="password"
-          >
+          <label className="text-base text-left pb-2 text-black" htmlFor="pwd">
             비밀번호
           </label>
         </div>
         <input
           className="w-full px-4 py-2.5 mb-5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
-          id="password"
+          id="pwd"
           type="password"
           placeholder="******"
-          {...register("password", {
+          {...register("pwd", {
             required: "비밀번호는 필수 입력입니다. ",
             pattern: {
               value: /^[A-Za-z0-9]{6,12}$/,
@@ -180,12 +178,12 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             },
           })}
         />
-        {errors.password && (
+        {errors.pwd && (
           <small
             className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
             role="alert"
           >
-            {errors.password.message as string}
+            {errors.pwd.message as string}
           </small>
         )}
         <div className="flex">
