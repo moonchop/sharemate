@@ -123,13 +123,22 @@ public class UserService {
             for (HashTagEntity h : hash){
                 hashes.add(h.getHashTag());
             }
-            UserSimpleDto userSimpleDto = new UserSimpleDto();
-            userSimpleDto.setUserID(user.get().getUserID());
-            userSimpleDto.setName(user.get().getName());
-            userSimpleDto.setMajor(user.get().getMajor());
-            userSimpleDto.setProfile_photo(user.get().getProfile_photo());
-            userSimpleDto.setAge(user.get().getAge());
-            userSimpleDto.setGender(user.get().getGender());
+//            UserSimpleDto userSimpleDto = new UserSimpleDto();
+//            userSimpleDto.setUserID(user.get().getUserID());
+//            userSimpleDto.setName(user.get().getName());
+//            userSimpleDto.setMajor(user.get().getMajor());
+//            userSimpleDto.setProfile_photo(user.get().getProfile_photo());
+//            userSimpleDto.setAge(user.get().getAge());
+//            userSimpleDto.setGender(user.get().getGender());
+//            userSimpleDto.setHashtags(hashes);
+//            userSimpleList.add(userSimpleDto);
+            UserSimpleDto userSimpleDto = new UserSimpleDto(
+                    user.get().getUserID(),
+                    user.get().getName(),
+                    user.get().getMajor(),
+                    user.get().getAge(),
+                    user.get().getGender(),
+                    user.get().getProfile_photo());
             userSimpleDto.setHashtags(hashes);
             userSimpleList.add(userSimpleDto);
         }

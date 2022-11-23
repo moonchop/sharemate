@@ -35,7 +35,7 @@ public class UserSimpleDto
         return userEntity;
     }
 
-    public UserSimpleDto(){}
+
     @Builder
     public UserSimpleDto(int user_id, String name, String major, int age, boolean gender, String profile_photo) {
         this.userID = user_id;
