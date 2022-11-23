@@ -47,6 +47,7 @@ public class UserService {
     }
 
 
+
     public ResponseSignUpDto doInsert(RequestSignUpDto requestSignUpDto) {
         String originalPwd=requestSignUpDto.getPwd();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -76,31 +77,7 @@ public class UserService {
         }
     }
 
-//    사용안함
-//    @ResponseBody
-//    public Map doLogin(RequestLoginDto requestLoginDto) {
-//        Map json = new HashMap<String, Object>();
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail());
-//
-//        if (user == null) {
-//            json.put("status", "fail");
-//            json.put("text", "존재하지 않는 유저입니다.");
-//            return json;
-//
-//        }
-//        if (encoder.matches(requestLoginDto.toEntity().getPwd(), user.get().getPwd())) {
-//            json.put("status", "success");
-//            json.put("text", "로그인 성공");
-//            return json;
-//        } else {
-//            json.put("status", "fail");
-//            json.put("text", "비밀번호가 다릅니다.");
-//            System.out.println(user.get().getPwd().getClass());
-//            System.out.println(requestLoginDto.toEntity().getPwd().getClass());
-//            return json;
-//        }
-//    }
+
 
     public void doUpdate(Integer num , UserDto  userDto) {
 
@@ -117,7 +94,9 @@ public class UserService {
 
     public Page<UserEntity> getUserList(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
+
         Page<UserEntity> postList = userRepository.findAll(pageable);
+        System.out.println(postList);
 
         return postList;
     }
@@ -132,15 +111,6 @@ public class UserService {
             for (HashTagEntity h : hash){
                 hashes.add(h.getHashTag());
             }
-//            UserSimpleDto userSimpleDto = new UserSimpleDto();
-//            userSimpleDto.setUserID(user.get().getUserID());
-//            userSimpleDto.setName(user.get().getName());
-//            userSimpleDto.setMajor(user.get().getMajor());
-//            userSimpleDto.setProfile_photo(user.get().getProfile_photo());
-//            userSimpleDto.setAge(user.get().getAge());
-//            userSimpleDto.setGender(user.get().getGender());
-//            userSimpleDto.setHashtags(hashes);
-//            userSimpleList.add(userSimpleDto);
             UserSimpleDto userSimpleDto = new UserSimpleDto(
                     user.get().getUserID(),
                     user.get().getName(),
@@ -154,15 +124,14 @@ public class UserService {
 
         return userSimpleList;
     }
-//    public Use
     public UserDto getUserDetail(Integer num) {
         Optional<UserEntity> member = userRepository.findById(num);
         return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getCreated_at(),member.get().getUpdated_at());
 
     }
 
-    public List<HashTagEntity> getHashTagList(Integer num) {
-        //Collection<HashTagEntity> hashtagList = hashtagRepository.findAllByUser_id(num);
+    public List<HashTagEntity> getHashTagList(int num) {
+        System.out.println("Zz");
         List<HashTagEntity> hashtagList = hashtagRepository.findAllByUserID(num);
         System.out.println(hashtagList);
         return hashtagList;

@@ -65,9 +65,11 @@ public class groupController {
             , paramType = "query"
             , defaultValue = "None")
     @PostMapping("/group")
-    public ResponseEntity addGroup(@RequestBody GroupDetailDto group)
+    public ResponseEntity addGroup(HttpServletRequest request, @RequestBody ReqGroupDto group)
     {
-        groupService.addGroup(group);
+        final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
+        System.out.println(group);
+        groupService.addGroup(group,user_id);
         return  ResponseEntity.ok(HttpStatus.OK);
 
     }

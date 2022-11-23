@@ -6,6 +6,7 @@ import com.shareMate.shareMate.dto.response.Response;
 import com.shareMate.shareMate.service.FavorService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 @Tag(name="",description = "")
 
+@AllArgsConstructor
 public class favorController {
     private FavorService favorService;
 

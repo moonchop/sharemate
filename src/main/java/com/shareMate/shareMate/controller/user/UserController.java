@@ -4,6 +4,7 @@ import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.entity.HashTagEntity;
+import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.service.CustomUserDetailService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Api("유저 정보")
@@ -51,8 +53,8 @@ public class UserController {
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청",tags="User")
     @GetMapping("/list")
-    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") Integer page){
-        Page<UserEntity> resultList = userService.getUserList(page, 3);
+    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") int page){
+        Page<UserEntity> resultList = userService.getUserList(page, 12);
 
         List<UserEntity> resultDtoList = resultList.getContent();
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();
@@ -60,7 +62,7 @@ public class UserController {
             UserSimpleDto userDto = new UserSimpleDto(u.getUserID(),u.getName(),u.getMajor(), u.getAge(),u.getGender(), u.getProfile_photo());
 
             List<HashTagEntity> hashtag = userService.getHashTagList(u.getUserID());
-            List<String> hashtagDtos = new ArrayList<>();
+            List<String>  hashtagDtos = new ArrayList<>();
             for (HashTagEntity h : hashtag){
                 hashtagDtos.add(h.getHashTag());
             }
@@ -71,7 +73,9 @@ public class UserController {
     }
     @GetMapping("/userAll")
     public ResponseEntity<ArrayList<UserDto>> getUserAll (){
+        System.out.println("userall");
         List<UserEntity> list = userService.doSelectAll();
+        System.out.println(list);
         ArrayList <UserDto> dtos = new ArrayList<>();
         for (UserEntity u : list){
             UserDto userDto = new UserDto();
@@ -96,14 +100,15 @@ public class UserController {
         FavorDto favor = userService.getFavor(num);
         /* User 가져오는 코드*/
         UserDto member = userService.getUserDetail(num);
+        System.out.println(favor.getMbti());
         List<HashTagEntity> hashtag = userService.getHashTagList(num);
-        ResUserDetailDto resUserDetailDto = new ResUserDetailDto();
-        resUserDetailDto.setFavor(favor);
-        resUserDetailDto.setUser(member);
-        List<String> hashtagDtos = new ArrayList<>();
+        List<String>  hashtagDtos = new ArrayList<>();
         for (HashTagEntity h : hashtag){
             hashtagDtos.add(h.getHashTag());
         }
+        ResUserDetailDto resUserDetailDto = new ResUserDetailDto();
+        resUserDetailDto.setFavor(favor);
+        resUserDetailDto.setUser(member);
         resUserDetailDto.setHashtag_list(hashtagDtos);
         return ResponseEntity.ok(resUserDetailDto);
     }

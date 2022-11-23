@@ -43,9 +43,9 @@ public class UserEntity implements UserDetails {
     private Date created_at;
     @LastModifiedDate
     private Date updated_at;
-    @OneToOne
-    @JoinColumn(name = "userID")
-    private FavorEntity favor;
+//    @OneToOne
+//    @JoinColumn(name = "userID")
+//    private FavorEntity favor;
 
 
 
