@@ -40,7 +40,7 @@ public class UserController {
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청")
     @GetMapping("/list")
-    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") int page){
+    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") Integer page){
         Page<UserEntity> resultList = userService.getUserList(page, 3);
 
         List<UserEntity> resultDtoList = resultList.getContent();
@@ -97,15 +97,15 @@ public class UserController {
         return ResponseEntity.ok(resUserDetailDto);
     }
     @ApiOperation(value = "좋아요 동작",notes = "좋아요 기능을 수행합니다.")
-    @GetMapping("/like")
-    public ResponseEntity LikeUser(HttpServletRequest request,@RequestParam("id") Integer num){
+    @PostMapping("/like/{id}")
+    public ResponseEntity LikeUser(HttpServletRequest request,@PathVariable("id") Integer num){
         final Integer user_id =Integer.parseInt(request.getAttribute("userid").toString());
         userService.doLike(user_id,num);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @ApiOperation(value = "좋아요 취소", notes = "좋아요 기능을 취소합니다.")
-    @GetMapping("/unlike")
-    public ResponseEntity UnLikeUser(HttpServletRequest request,@RequestParam("id") Integer num) {
+    @PostMapping("/unlike/{id}")
+    public ResponseEntity UnLikeUser(HttpServletRequest request,@PathVariable("id") Integer num) {
         final Integer user_id = Integer.parseInt(request.getAttribute("id").toString());
         userService.doUnLike(user_id, num);
         return ResponseEntity.ok(HttpStatus.OK);

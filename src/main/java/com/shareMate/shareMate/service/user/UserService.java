@@ -93,7 +93,7 @@ public class UserService {
         }
     }
 
-    public void doUpdate(int num , UserDto  userDto) {
+    public void doUpdate(Integer num , UserDto  userDto) {
 
         UserEntity userEntity = userDto.toEntity();
 
@@ -146,13 +146,13 @@ public class UserService {
         return userSimpleList;
     }
 //    public Use
-    public UserDto getUserDetail(int num) {
+    public UserDto getUserDetail(Integer num) {
         Optional<UserEntity> member = userRepository.findById(num);
         return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getCreated_at(),member.get().getUpdated_at());
 
     }
 
-    public List<HashTagEntity> getHashTagList(int num) {
+    public List<HashTagEntity> getHashTagList(Integer num) {
         //Collection<HashTagEntity> hashtagList = hashtagRepository.findAllByUser_id(num);
         List<HashTagEntity> hashtagList = hashtagRepository.findAllByUserID(num);
         System.out.println(hashtagList);
@@ -161,7 +161,7 @@ public class UserService {
     }
 
 
-    public FavorDto getFavor(int num) {
+    public FavorDto getFavor(Integer num) {
         Optional<FavorEntity> member = favorRepository.findById(num);
         FavorDto res = new FavorDto();
         res.setCleanness(member.get().getCleanness());
@@ -182,7 +182,7 @@ public class UserService {
 
 
 
-    public void doLike(int user_id, int target_id){
+    public void doLike(Integer user_id, Integer target_id){
         LikeEntity likeEntity = new LikeEntity(user_id,target_id);
         System.out.println("dolike/" + likeEntity.getUserFromID()+ " " +likeEntity.getUserToID());
         System.out.println();
@@ -191,7 +191,7 @@ public class UserService {
         return ;
     }
 
-    public void doUnLike(int user_id, int target_id){
+    public void doUnLike(Integer user_id, Integer target_id){
         Optional<LikeEntity> like =likeRepository.findLikeEntityByUserFromIDAndUserToID(user_id,target_id);
         likeRepository.delete(like.get());
         return;
