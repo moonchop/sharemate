@@ -4,6 +4,8 @@ package com.shareMate.shareMate.service.sign;
 import com.shareMate.shareMate.dto.RequestLoginDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.entity.UserEntity;
+import com.shareMate.shareMate.exception.LoginFailureException;
+import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.jwt.TokenHelper;
 import com.shareMate.shareMate.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -65,16 +67,14 @@ public class SignService {
 
     public ResponseSignInDto doLogin(RequestLoginDto requestLoginDto){
         Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.getEmail());
-        if (!user.isPresent()) throw new UsernameNotFoundException("유저 없음");
+        if (!user.isPresent()) throw new UserNotFoundException();
         if(passwordEncoder.matches(requestLoginDto.getPwd(),user.get().getPwd()))
         {
             String jwtAccToken = accTokenHelper.createToken( String.valueOf(user.get().getUserID()));
             String jwtRefToken = refTokenHelper.createToken( String.valueOf(user.get().getUserID()));
             return new ResponseSignInDto(jwtAccToken,jwtRefToken);
         }
-        else{
-            return null;
+        throw new LoginFailureException();
 
-        }
     }
 }

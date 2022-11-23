@@ -61,37 +61,37 @@ public class UserService {
             json.put("text", "회원가입이 완료되었습니다.");
             ResponseSignInDto req = signService.doLogin(new RequestLoginDto(newUser.getEmail(),originalPwd));
             json.put("data",(req));
-            System.out.println(json);
             return json;
         }
 //
 //
     }
 
-    @ResponseBody
-    public Map doLogin(RequestLoginDto requestLoginDto) {
-        Map json = new HashMap<String, Object>();
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail());
-
-        if (user == null) {
-            json.put("status", "fail");
-            json.put("text", "존재하지 않는 유저입니다.");
-            return json;
-
-        }
-        if (encoder.matches(requestLoginDto.toEntity().getPwd(), user.get().getPwd())) {
-            json.put("status", "success");
-            json.put("text", "로그인 성공");
-            return json;
-        } else {
-            json.put("status", "fail");
-            json.put("text", "비밀번호가 다릅니다.");
-            System.out.println(user.get().getPwd().getClass());
-            System.out.println(requestLoginDto.toEntity().getPwd().getClass());
-            return json;
-        }
-    }
+//    사용안함
+//    @ResponseBody
+//    public Map doLogin(RequestLoginDto requestLoginDto) {
+//        Map json = new HashMap<String, Object>();
+//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//        Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail());
+//
+//        if (user == null) {
+//            json.put("status", "fail");
+//            json.put("text", "존재하지 않는 유저입니다.");
+//            return json;
+//
+//        }
+//        if (encoder.matches(requestLoginDto.toEntity().getPwd(), user.get().getPwd())) {
+//            json.put("status", "success");
+//            json.put("text", "로그인 성공");
+//            return json;
+//        } else {
+//            json.put("status", "fail");
+//            json.put("text", "비밀번호가 다릅니다.");
+//            System.out.println(user.get().getPwd().getClass());
+//            System.out.println(requestLoginDto.toEntity().getPwd().getClass());
+//            return json;
+//        }
+//    }
 
     public void doUpdate(Integer num , UserDto  userDto) {
 
@@ -102,7 +102,7 @@ public class UserService {
     }
 
     //  delete
-    public void doDelete(int id) {
+    public void doDelete(Integer id) {
         userRepository.deleteById(id);
     }
 
