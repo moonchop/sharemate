@@ -57,30 +57,30 @@ export const useMbti = () => {
 };
 
 export const useRegisterForm = () => {
-  const { Component: MbtiSelect, state: mbtiState } = useMbti();
+  const { Component: MbtiSelect, state: mbti } = useMbti();
 
-  const { Component: SleepTimeSelect, state: SleepTimeState } = useRadio({
+  const { Component: SleepTimeSelect, state: sleepTime } = useRadio({
     contentList: ["5시간 미만", "5시간 이상"],
     title: "수면 시간을 선택해주세요.",
   });
-  const { Component: SmokingSelect, state: smokingState } = useRadio({
+  const { Component: SmokingSelect, state: smoking } = useRadio({
     contentList: ["흡연", "비흡연"],
     title: "흡연 유무를 선택해주세요.",
   });
-  const { Component: LivingPatternSelect, state: livingPatternState } =
+  const { Component: LivingPatternSelect, state: wakeupTime } =
     useRadio({
       contentList: ["올빼미형", "아침형"],
       title: "생활 패턴을 선택해주세요.",
     });
-  const { Component: DrinkSelect, state: drinkState } = useRadio({
+  const { Component: DrinkSelect, state: drinking } = useRadio({
     contentList: ["1", "2", "3", "4"],
     title: "일주일 내 음주 횟수를 입력해주세요.",
   });
-  const { Component: CleannessSelect, state: cleannessState } = useRadio({
+  const { Component: CleannessSelect, state: cleanness } = useRadio({
     contentList: ["청결에 예민", "청결에 둔감"],
     title: "청결도를 선택해주세요.",
   });
-  const { Component: SnoringSelect, state: snoringState } = useRadio({
+  const { Component: SnoringSelect, state: snoring } = useRadio({
     contentList: ["상", "중", "하", "무"],
     title: "코골이 유무를 선택해주세요.",
   });
@@ -88,36 +88,35 @@ export const useRegisterForm = () => {
   useEffect(() => {
     console.log(
       "진짜",
-      mbtiState,
-
-      SleepTimeState,
-      smokingState,
-      livingPatternState,
-      drinkState,
-      cleannessState,
-      snoringState
+      mbti,
+      sleepTime,
+      smoking,
+      wakeupTime,
+      drinking,
+      cleanness,
+      snoring
     );
   }, [
-    mbtiState,
+    mbti,
 
-    SleepTimeState,
-    smokingState,
-    livingPatternState,
-    drinkState,
-    cleannessState,
-    snoringState,
+    sleepTime,
+    smoking,
+    wakeupTime,
+    drinking,
+    cleanness,
+    snoring,
   ]);
 
   return {
     state: {
-      mbtiState,
+      mbti,
 
-      SleepTimeState,
-      smokingState,
-      livingPatternState,
-      drinkState,
-      cleannessState,
-      snoringState,
+      sleepTime,
+      smoking,
+      wakeupTime,
+      drinking,
+      cleanness,
+      snoring,
     },
     Component: () => (
       <>

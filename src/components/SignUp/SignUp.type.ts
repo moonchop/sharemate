@@ -1,9 +1,10 @@
 export interface SignUpFormInterface {
   name: string;
-  password: string;
-  gender: string; //number로 변경 가능
+  pwd: string;
+  gender: string | number; //number로 변경 가능
   major: string;
   email: string;
   age: number;
   grade: number;
+  profile_photo?: string;
 }

@@ -4,7 +4,7 @@ import { checkEmail, RegisterApi } from "../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
-  const [emailValidNum, setEmailValidNum] = useState("");
+  const [emailValidNum, setEmailValidNum] = useState("false");
   const [isValid, setIsValid] = useState(false);
   const checkEmailRef = useRef<HTMLInputElement>(null);
   const {
@@ -21,7 +21,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         setEmailValidNum(response.data);
         console.log(response.data);
       })
-      .catch((error) => alert(error.data));
+      .catch(() => alert("중복된 이메일입니다."));
   };
 
   const handleCheckEmailValid = () => {
