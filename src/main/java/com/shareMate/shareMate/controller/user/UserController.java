@@ -99,7 +99,7 @@ public class UserController {
     @ApiOperation(value = "좋아요 동작",notes = "좋아요 기능을 수행합니다.")
     @PostMapping("/like/{id}")
     public ResponseEntity LikeUser(HttpServletRequest request,@PathVariable("id") Integer num){
-        final Integer user_id =Integer.parseInt(request.getAttribute("userid").toString());
+        final Integer user_id =Integer.parseInt(request.getAttribute("id").toString());
         userService.doLike(user_id,num);
         return ResponseEntity.ok(HttpStatus.OK);
     }
