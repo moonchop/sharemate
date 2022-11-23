@@ -1,6 +1,6 @@
 import InputComponent from "./InputComponent";
 import { useFlow } from "../stackflow";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GroupApi } from "../utils/api/auth";
 /// 그룹 생성 시 정보
 /// =================
@@ -13,19 +13,35 @@ import { GroupApi } from "../utils/api/auth";
 
 const CreateGroup = () => {
   const { pop } = useFlow();
-  const [groupForm, setGroupForm] = useState({});
-  // const [hashtag, setHashtag] = useState([]);
-  // const [wishList, setWishList] = useState([]);
+  const [groupForm, setGroupForm] = useState({
+    hashtags: [""],
+    wishLists: [""],
+  });
+  const [hashtag, setHashtag] = useState({});
+  const [wishList, setWishList] = useState({});
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
     setGroupForm((prev) => ({ ...prev, [name]: value }));
   };
+  const changeListHandler = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    state: any,
+    setfunction: Function
+  ) => {
+    const { name, value } = e.currentTarget;
+    setfunction((prev: any) => ({ ...prev, [name]: value }));
+    console.log(state);
+  };
 
   const GroupSubmit = () => {
     console.log("sdfusd");
+
+    groupForm.hashtags = Object.values(hashtag);
+    groupForm.wishLists = Object.values(wishList);
+
     console.log(groupForm);
     //groupForm 데이터 포스트해야함
-    // request.interceptors.request.use(GroupApi(groupForm)).catch((error) => alert(error.data));
+    GroupApi(groupForm).catch((error) => alert(error.data));
     pop();
   };
 
@@ -58,23 +74,23 @@ const CreateGroup = () => {
       <InputComponent
         placeholder="조용한편"
         id="hashtag1"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, hashtag, setHashtag)}
       />
       <InputComponent
         placeholder="동갑희망"
         id="hashtag2"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, hashtag, setHashtag)}
       />
       <InputComponent
         placeholder="비흡연자"
         id="hashtag3"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, hashtag, setHashtag)}
       />
 
       <p className="mt-20 ml-2 text-xl">간단한 그룹 소개글을 입력해주세요.</p>
       <InputComponent
         placeholder="동갑내기 친구들과 편하고 즐겁게 지내고 싶어요."
-        id="groupIntro"
+        id="text"
         onChange={changeHandler}
       />
 
@@ -82,27 +98,27 @@ const CreateGroup = () => {
       <InputComponent
         placeholder="22살이었으면 좋겠어요."
         id="wishList1"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, wishList, setWishList)}
       />
       <InputComponent
         placeholder="비흡연자가 좋아요."
         id="wishList2"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, wishList, setWishList)}
       />
       <InputComponent
         placeholder="성격이 외향적이었으면 좋겠어요."
         id="wishList3"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, wishList, setWishList)}
       />
       <InputComponent
         placeholder="깔끔한 편이었으면 좋겠어요."
         id="wishList4"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, wishList, setWishList)}
       />
       <InputComponent
         placeholder="음식은 방 밖에서 먹는 게 좋아요."
         id="wishList5"
-        onChange={changeHandler}
+        onChange={(e: any) => changeListHandler(e, wishList, setWishList)}
       />
 
       <p className="mt-20 ml-2 text-xl">
@@ -111,9 +127,9 @@ const CreateGroup = () => {
       <div className="flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">
         <input
           className="w-[80%] text-center text-lg text-coolGray-900 bg-transparent placeholder-slate-300"
-          id="groupChatLink"
+          id="kakaoLink"
           type="text"
-          name="groupChatLink"
+          name="kakaoLink"
           onChange={changeHandler}
         />
       </div>
