@@ -6,6 +6,7 @@ import com.shareMate.shareMate.dto.ReqFavorDto;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.repository.FavorRepository;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class FavorService {
 
     private FavorRepository favorRepository;

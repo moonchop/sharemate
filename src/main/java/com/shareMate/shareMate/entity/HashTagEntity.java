@@ -12,10 +12,11 @@ import java.util.Date;
 @Table (name="hashtag")
 @Getter
 @Setter
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class HashTagEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer hashtagID;
     private Integer userID;
 
@@ -29,6 +30,16 @@ public class HashTagEntity {
         this.userID=user_id;
         this.groupID=group_id;
         this.hashTag=hashTag;
+    }
+
+    public HashTagEntity() {
+
+    }
+
+    public HashTagEntity(int groupID, String hashTag) {
+        this.groupID=groupID;
+        this.hashTag=hashTag;
+
     }
 //    @ManyToOne
 //    @JoinColumn(name="userID",insertable = false,updatable = false)
