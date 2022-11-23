@@ -1,12 +1,18 @@
 package com.shareMate.shareMate.service.user;
 
 import com.shareMate.shareMate.dto.*;
+import com.shareMate.shareMate.dto.response.BaseResponse;
+import com.shareMate.shareMate.dto.response.MessageUtils;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
+import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
 import com.shareMate.shareMate.entity.UserEntity;
+import com.shareMate.shareMate.exception.SignUpFailureException;
+import com.shareMate.shareMate.exception.UserNotFoundException;
+import com.shareMate.shareMate.jwt.TokenHelper;
 import com.shareMate.shareMate.repository.FavorRepository;
 import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.repository.LikeRepository;
@@ -17,6 +23,7 @@ import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -34,37 +41,39 @@ public class UserService {
     private final HashtagRepository hashtagRepository;
     private final SignService signService;
     private final LikeRepository likeRepository;
-
+    private final TokenHelper accessTokenHelper;
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
     }
 
 
-    public Map doInsert(RequestSignUpDto requestSignUpDto) {
-        Map json = new HashMap<String, Object>();
+    public ResponseSignUpDto doInsert(RequestSignUpDto requestSignUpDto) {
         String originalPwd=requestSignUpDto.getPwd();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String securePwd = encoder.encode(requestSignUpDto.getPwd());
 
-
         if (userRepository.findByEmail(requestSignUpDto.getEmail()).isPresent()) {
-            json.put("status", "fail");
-            json.put("text", "동일한 id가 있습니다.");
-            return json;
+            throw new SignUpFailureException(MessageUtils.INVALID_SIGNUP);
         } else {
             requestSignUpDto.setPwd(securePwd);
             UserEntity newUser = requestSignUpDto.toEntity();
             newUser.setPwd(securePwd);
             userRepository.save(newUser);
-            json.put("status", "success");
-            json.put("text", "회원가입이 완료되었습니다.");
-            ResponseSignInDto req = signService.doLogin(new RequestLoginDto(newUser.getEmail(),originalPwd));
-            json.put("data",(req));
-            return json;
+            String accessToken = accessTokenHelper.createToken(originalPwd);
+            Optional<UserEntity> req = userRepository.findUserEntityByEmail(newUser.getEmail());
+
+            return new ResponseSignUpDto(
+                    req.get().getUserID(),
+                    req.get().getEmail(),
+                    req.get().getName(),
+                    req.get().getMajor(),
+                    req.get().getGrade(),
+                    req.get().getGender(),
+                    req.get().getAge(),
+                    req.get().getProfile_photo(),
+                    accessToken);
         }
-//
-//
     }
 
 //    사용안함

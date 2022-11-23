@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ApiModel(value = "회원가입" , description = "회원가입시 필요한 데이터")
-
+@NoArgsConstructor
 public class RequestSignUpDto {
 
     @ApiModelProperty(value = "이메일")
@@ -25,11 +26,11 @@ public class RequestSignUpDto {
     private String name;
     @ApiModelProperty(value = "전공")
     private String major;
-    @ApiModelProperty(value = "학년")
+    @ApiModelProperty(value = "학년",example = "3")
     private Integer grade;
-    @ApiModelProperty(value = "성별")
+    @ApiModelProperty(value = "성별",example = "true")
     private Boolean gender;
-    @ApiModelProperty(value = "나이")
+    @ApiModelProperty(value = "나이",example = "24")
     private Integer age;
     @ApiModelProperty(value = "프로필 사진")
     private String profile_photo;
@@ -49,15 +50,15 @@ public class RequestSignUpDto {
         return userEntity;
     }
 
-    @Builder
-    public RequestSignUpDto(String email, String pwd, String name, String major, Integer grade, Boolean gender, Integer age, String profile_photo) {
-        this.email = email;
-        this.pwd = pwd;
-        this.name = name;
-        this.major = major;
-        this.grade = grade;
-        this.gender = gender;
-        this.age = age;
-        this.profile_photo = profile_photo;
-    }
+//    @Builder
+//    public RequestSignUpDto(String email, String pwd, String name, String major, Integer grade, Boolean gender, Integer age, String profile_photo) {
+//        this.email = email;
+//        this.pwd = pwd;
+//        this.name = name;
+//        this.major = major;
+//        this.grade = grade;
+//        this.gender = gender;
+//        this.age = age;
+//        this.profile_photo = profile_photo;
+//    }
 }

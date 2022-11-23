@@ -6,6 +6,7 @@ import com.shareMate.shareMate.entity.GroupEntity;
 import com.shareMate.shareMate.service.GroupService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name="Group",description = "그룹매칭 관련 API")
 public class groupController {
 
     private final GroupService groupService;
