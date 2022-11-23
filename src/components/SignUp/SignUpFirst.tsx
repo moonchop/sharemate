@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { checkEmail, RegisterApi } from "../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
+import defaultProfile from "../../assets/defaultProfile.png";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const [emailValidNum, setEmailValidNum] = useState("false");
@@ -41,6 +42,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
       console.log(data);
       return;
     }
+    data.profile_photo = defaultProfile;
     data.age = parseInt(data.age);
     data.grade = parseInt(data.grade);
     data.gender === "남" ? (data.gender = 1) : (data.gender = 0);
