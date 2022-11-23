@@ -1,17 +1,13 @@
 package com.shareMate.shareMate.controller.auth;
 
-import com.shareMate.shareMate.dto.RequestLoginDto;
-import com.shareMate.shareMate.dto.response.BaseResponse;
 import com.shareMate.shareMate.dto.response.DataResponse;
-import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
+import com.shareMate.shareMate.dto.sign.RequestSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
-import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import springfox.documentation.spring.web.json.Json;
 
 import java.util.Map;
 import java.util.UUID;
@@ -35,15 +30,13 @@ public class authController {
 
 
     @ApiOperation(value = "로그인(JWT 토큰 발급)",notes = "id,pw를 이용하여 로그인을 진행하고, jwt토큰을 발급합니다.",tags="Auth")
-    @ApiParam()
     @PostMapping("/login")
-    public ResponseEntity<ResponseSignInDto> UserLogin(@RequestBody RequestLoginDto requestLoginDto){
-        ResponseSignInDto responseSignInDto = signService.doLogin(requestLoginDto);
-        if(responseSignInDto.getAccessToken()==null){
-
+    public DataResponse<ResponseSignInDto> UserLogin(@RequestBody RequestSignInDto requestSignInDto){
+        ResponseSignInDto req = signService.doLogin(requestSignInDto);
+        if(req.getAccessToken()==null){
             throw new UserNotFoundException();
         }
-        else return ResponseEntity.status(HttpStatus.OK).body(responseSignInDto);
+        return new DataResponse(req);
     }
     @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.",tags="Auth")
     @PostMapping("/email")

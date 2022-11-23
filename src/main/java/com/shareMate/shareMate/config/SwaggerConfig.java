@@ -2,6 +2,7 @@ package com.shareMate.shareMate.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.util.Predicates;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -13,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 
 @EnableWebMvc
 @Configuration
@@ -29,7 +31,7 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-//                .paths(PathSelectors.ant("/*/**"))
+                .apis(RequestHandlerSelectors.basePackage("com.shareMate.shareMate.controller"))
                 .build();
     }
     private Set<String> getConsumeContentTypes(){
@@ -37,7 +39,6 @@ public class SwaggerConfig {
         consumes.add("application/json");
         return consumes;
     }
-
     private Set<String> getProduceContentTypes(){
         Set<String> produces = new HashSet<>();
         produces.add("application/json");

@@ -121,9 +121,10 @@ public class UserController {
         userService.doUnLike(user_id, num);
         return ResponseEntity.ok(HttpStatus.OK);
     }
-    @ApiOperation(value="유저 좋아요 리스트",notes="유저가 좋아요 한 다른 유저들을 조회할 수 있습니다.",tags="Auth")
+    @ApiOperation(value="유저 좋아요 리스트",notes="유저가 좋아요 한 다른 유저들을 조회할 수 있습니다.",tags="User")
     @GetMapping("/likelist")
     public List<UserSimpleDto> getLikeList(@RequestParam("id") Integer id){
+
         return userService.getUserLikeList(id);
     }
     //개인정보 수정

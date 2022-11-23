@@ -9,6 +9,7 @@ import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import java.util.*;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name="Post",description = "게시글 작성 관련 API")
+
 public class postController {
     private final UserService userService;
     private final SignService signService;
@@ -28,7 +31,7 @@ public class postController {
 
 
     //게시글 전체 리스트 조회
-    @ApiOperation(value = "커뮤니티 게시글 전체 조회",notes = "커뮤니티 게시글 리스트를 반환합니다.")
+    @ApiOperation(value = "커뮤니티 게시글 전체 조회",notes = "커뮤니티 게시글 리스트를 반환합니다.",tags="Post")
     @GetMapping("/posts")
     public ResponseEntity<ArrayList<PostListDto>> getAll(HttpServletRequest request) {
 
@@ -43,7 +46,7 @@ public class postController {
         return ResponseEntity.ok(responseList);
     }
     //게시글 디테일
-    @ApiOperation(value = "커뮤니티 게시글 디테일 조회",notes = "게시글 클릭시 게시글 정보를 반환합니다.")
+    @ApiOperation(value = "커뮤니티 게시글 디테일 조회",notes = "게시글 클릭시 게시글 정보를 반환합니다.",tags="Post")
     @GetMapping("/post")
     public ResponseEntity<Optional<PostDetailDto>>getDetail(@RequestParam Integer num){
 
@@ -52,7 +55,7 @@ public class postController {
     }
 
     //게시글 작성
-    @ApiOperation(value = "커뮤니티 게시글 작성",notes = "게시글을 작성합니다.")
+    @ApiOperation(value = "커뮤니티 게시글 작성",notes = "게시글을 작성합니다.",tags="Post")
     @PostMapping("/post")
     public ResponseEntity addPost(@RequestBody PostDetailDto post)
     {
@@ -60,7 +63,7 @@ public class postController {
         return  ResponseEntity.ok(HttpStatus.OK);
 
     }
-    @ApiOperation("커뮤니티 게시글 수정")
+    @ApiOperation(value="커뮤니티 게시글 수정",tags="Post")
     @PutMapping("/post")
     @ApiParam(value = "파라미터에 대한 설명")
     public ResponseEntity editPost(@RequestParam Integer postid,@RequestBody PostDetailDto post ,HttpServletRequest request){
@@ -79,7 +82,7 @@ public class postController {
     }
 
     //게시글 삭제
-    @ApiOperation(value = "커뮤니티 게시글 삭제",notes = "커뮤니티에 있는 게시글을 삭제합니다.")
+    @ApiOperation(value = "커뮤니티 게시글 삭제",notes = "커뮤니티에 있는 게시글을 삭제합니다.",tags="Post")
     @DeleteMapping("/post")
     public ResponseEntity delPost(@RequestParam Integer postId){
 

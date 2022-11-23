@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name="",description = "")
 
 public class favorController {
     private FavorService favorService;
