@@ -1,5 +1,6 @@
 package com.shareMate.shareMate.controller.user;
 import com.shareMate.shareMate.dto.*;
+import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.service.CustomUserDetailService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Api("유저 정보")
@@ -38,14 +40,19 @@ public class UserController {
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청")
     @GetMapping("/users")
     public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") int page){
-        Page<UserEntity> resultList = userService.getUserList(page, 5);
+        Page<UserEntity> resultList = userService.getUserList(page, 12);
 
         List<UserEntity> resultDtoList = resultList.getContent();
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();
         for( UserEntity u : resultDtoList){
             UserSimpleDto userDto = new UserSimpleDto(u.getUserID(),u.getName(),u.getMajor(), u.getAge(),u.getGender(), u.getProfile_photo());
-            List<String> hash = hashtagRepository.findAllByUserID(u.getUserID());
-            userDto.setHashtags(hash);
+
+            List<HashTagEntity> hashtag = userService.getHashTagList(u.getUserID());
+            List<String>  hashtagDtos = new ArrayList<>();
+            for (HashTagEntity h : hashtag){
+                hashtagDtos.add(h.getHashTag());
+            }
+            userDto.setHashtags(hashtagDtos);
             responseList.add(userDto);
         }
         return ResponseEntity.ok(responseList);
@@ -80,11 +87,15 @@ public class UserController {
         /* User 가져오는 코드*/
         UserDto member = userService.getUserDetail(num);
         System.out.println(favor.getMbti());
-        List<String> hashtag = userService.getHashTagList(num);
+        List<HashTagEntity> hashtag = userService.getHashTagList(num);
+        List<String>  hashtagDtos = new ArrayList<>();
+        for (HashTagEntity h : hashtag){
+            hashtagDtos.add(h.getHashTag());
+        }
         ResUserDetailDto resUserDetailDto = new ResUserDetailDto();
         resUserDetailDto.setFavor(favor);
         resUserDetailDto.setUser(member);
-        resUserDetailDto.setHashtag_list(hashtag);
+        resUserDetailDto.setHashtag_list(hashtagDtos);
         return ResponseEntity.ok(resUserDetailDto);
     }
     @ApiOperation(value = "좋아요 동작",notes = "좋아요 기능을 수행합니다.")

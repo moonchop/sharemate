@@ -2,6 +2,9 @@ package com.shareMate.shareMate.entity;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -15,35 +18,37 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-
+@EntityListeners(AuditingEntityListener.class)
 public class GroupEntity {
     //    @Column(nullable = false,unique = true)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer groupID;
 
-    private int groupID;
-
-    private int userID;
+    private Integer userID;
     private String title;
     private String text;
-    private int maxNum;
-    private int curNum;
+    @Column(name = "\"max_num\"")
+    private Integer maxNum;
+    @Column(name = "\"cur_num\"")
+    private Integer curNum;
+    @Column(name = "\"kakao_link\"")
     private String kakaoLink;
+
     private String building;
+    @CreatedDate
     private Date created_at;
 
 
-    @ManyToOne
-    @JoinColumn(name="user_id",insertable = false,updatable = false)
-    private UserEntity user;
+//    @ManyToOne
+//    @JoinColumn(name="user_id",insertable = false,updatable = false)
+//    private UserEntity user;
 
 
     public GroupEntity() {
 
     }
 
-    public GroupEntity(int groupID, String title, String text, int maxNum, int curNum, String kakaoLink, String building,Date created_at) {
 
-    }
 }

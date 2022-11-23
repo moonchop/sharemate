@@ -20,8 +20,8 @@ public class WishListEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int wishlistID;
-    private int groupID;
+    private Integer wishlistID;
+    private Integer groupID;
 
     private String text;
 

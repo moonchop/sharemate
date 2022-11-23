@@ -113,7 +113,9 @@ public class UserService {
 
     public Page<UserEntity> getUserList(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
+
         Page<UserEntity> postList = userRepository.findAll(pageable);
+        System.out.println(postList);
 
         return postList;
 
@@ -126,10 +128,9 @@ public class UserService {
 
     }
 
-    public List<String> getHashTagList(int num) {
+    public List<HashTagEntity> getHashTagList(int num) {
         System.out.println("Zz");
-        //Collection<HashTagEntity> hashtagList = hashtagRepository.findAllByUser_id(num);
-        List<String> hashtagList = hashtagRepository.findAllByUserID(num);
+        List<HashTagEntity> hashtagList = hashtagRepository.findAllByUserID(num);
         System.out.println(hashtagList);
         return hashtagList;
 

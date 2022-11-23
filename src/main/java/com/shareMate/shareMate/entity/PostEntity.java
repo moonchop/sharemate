@@ -27,9 +27,9 @@ public class PostEntity {
     private String category;
     private String text;
     private Date created_at;
-    @ManyToOne
-    @JoinColumn(name="user_id",insertable = false,updatable = false)
-    private UserEntity user;
+//    @ManyToOne
+//    @JoinColumn(name="user_id",insertable = false,updatable = false)
+//    private UserEntity user;
 
 
 

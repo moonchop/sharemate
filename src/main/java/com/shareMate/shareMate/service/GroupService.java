@@ -1,10 +1,7 @@
 package com.shareMate.shareMate.service;
 
 
-import com.shareMate.shareMate.dto.GroupDetailDto;
-import com.shareMate.shareMate.dto.HashtagDto;
-import com.shareMate.shareMate.dto.PostDetailDto;
-import com.shareMate.shareMate.dto.WishListDto;
+import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.entity.*;
 import com.shareMate.shareMate.repository.GroupRepository;
 import com.shareMate.shareMate.repository.HashtagRepository;
@@ -16,6 +13,7 @@ import org.springframework.stereotype.Service;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -53,27 +51,45 @@ public class GroupService {
     }
 
     //그룹 생성
-    public void addGroup(GroupDetailDto group) {
-        GroupEntity groupEntity = new GroupEntity(
-                group.getGroupID(),group.getTitle(),group.getText(),group.getMaxNum(),group.getCurNum(),group.getKakaoLink(),group.getBuilding(),group.getCreated_at()
+    public void addGroup(ReqGroupDto group,int user_id) {
+        GroupEntity groupEntity = new GroupEntity();
+        System.out.println(group.getBuilding());
+        groupEntity.setUserID(user_id);
+        groupEntity.setBuilding(group.getBuilding());
+        groupEntity.setCurNum(1);
+        groupEntity.setTitle(group.getTitle());
+        groupEntity.setText(group.getText());
+        groupEntity.setKakaoLink(group.getKakaoLink());
+        groupEntity.setMaxNum(group.getMaxNum());
+        System.out.println(groupEntity);
+        final int groupID= groupRepository.save(groupEntity).getGroupID();
+        System.out.println(groupID);
+        //System.out.println(obj);
 
-        );
+        // group save하고 groupID를 받아오는 작업을 필요로 함 .
+
         // hash태그 전부
-        for (HashtagDto hastag: group.getHashtags()){
-            HashTagEntity hashTagEntity = new HashTagEntity();
-            hashTagEntity.setGroupID(hastag.getGroup_id());
-            hashTagEntity.setHashTag(hastag.getHashTag());
-            hashtagRepository.save(hashTagEntity);
+
+        for (Map<String,Object> hashtag: group.getHashtags()){
+            hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(1))));
+            hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(2))));
+            hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(3))));
         }
         // wishlist 저장
-        for (WishListDto wishlist: group.getWishLists()){
-            WishListEntity wishListEntity = new WishListEntity();
-            wishListEntity.setGroupID(wishlist.getGroupID());
-            wishListEntity.setText(wishListEntity.getText());
-            wishListRepository.save(wishListEntity);
+
+        for (Map<String,Object> wishlist: group.getWishLists()){
+
+            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(1))));
+            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(2))));
+            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(3))));
+            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(4))));
+            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(5))));
+
+
+
         }
         //기타 그룹 정보 저장
-        groupRepository.save(groupEntity);
+
         return;
     }
 
