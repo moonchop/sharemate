@@ -2,11 +2,11 @@ import { HashTagColor } from "../utils/HashTagColor";
 import HashTag from "./HashTag";
 import { HiUserGroup } from "react-icons/hi";
 import { useFlow } from "../stackflow";
+import { IoIosArrowForward } from "react-icons/io";
 
 interface IGroup {
   id: number;
   building: string;
-  floor: number;
   hashtag: string[];
   groupIntro: string;
   mateIntro: string[];
@@ -19,7 +19,6 @@ const GroupFeed = () => {
     {
       id: 1,
       building: "광교관",
-      floor: 4,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -35,7 +34,6 @@ const GroupFeed = () => {
     {
       id: 2,
       building: "광교관",
-      floor: 1,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -51,7 +49,6 @@ const GroupFeed = () => {
     {
       id: 3,
       building: "광교관",
-      floor: 3,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -67,7 +64,6 @@ const GroupFeed = () => {
     {
       id: 4,
       building: "일신관",
-      floor: 11,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -83,7 +79,6 @@ const GroupFeed = () => {
     {
       id: 5,
       building: "광교관",
-      floor: 2,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -99,7 +94,6 @@ const GroupFeed = () => {
     {
       id: 6,
       building: "광교관",
-      floor: 3,
       hashtag: ["청결민감", "소음민감", "아침형생활습관"],
       groupIntro: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
       mateIntro: [
@@ -131,9 +125,6 @@ const GroupFeed = () => {
               <div className="flex flex-col w-full">
                 <div className="flex flex-row">
                   <span className="flex text-[22px] mt-1 font-semibold text-black mx-2">{`[ ${elem.building} ]`}</span>
-                  <span className="pt-4 -ml-0.5 text-sm text-gray-700">
-                    {elem.floor}층
-                  </span>
                 </div>
                 <p className="mx-3 text-[15px] w-[95%] h-auto overflow-scroll whitespace-pre-line">
                   {elem.groupIntro}
@@ -145,21 +136,15 @@ const GroupFeed = () => {
                     color={HashTagColor as ("red" | "blue" | "green")[]}
                   />
                 </span>
-                <span className="text-xs text-right -mr-16 text-gray-500">
+                <span className="text-xs text-right -mr-20 text-gray-500">
                   {`모집 현황 : ${elem.people.length}명 / ${elem.room}명 `}
                 </span>
               </div>
             </div>
-            {/* <div
-              className="flex w-[40px] text-center justify-center items-center px-2 py-0.5 mx-2 rounded-lg text-xs font-medium bg-blue-100 text-blue-800"
-              onClick={() => {
-                push("DetailGroupActivity", elem);
-              }}
-            >
-              attend
-            </div> */}
+
+            <IoIosArrowForward className="flex w-[40px] h-full items-center opacity-30 pt-[10%] pr-[2%]"></IoIosArrowForward>
           </div>
-          <hr className="" />
+          <hr className="mb-2" />
         </div>
       ))}
       <button

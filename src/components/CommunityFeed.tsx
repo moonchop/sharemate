@@ -72,11 +72,12 @@ const CommunityFeed = () => {
           title={elem.title}
           preview={elem.preview}
           text={elem.text}
+          key={elem.id}
         />
       ))}
       <button
         onClick={() => {
-          push("CreateBoardActivity");
+          push("CreateBoardActivity", {});
         }}
         className=" absolute bottom-16 right-2 self-center w-[80px] h-[30px] m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm borde rounded-md shadow-button"
       >
