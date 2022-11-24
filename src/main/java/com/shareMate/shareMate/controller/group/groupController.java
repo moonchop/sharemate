@@ -3,6 +3,7 @@ package com.shareMate.shareMate.controller.group;
 import com.shareMate.shareMate.dto.*;
 
 import com.shareMate.shareMate.entity.GroupEntity;
+import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.service.GroupService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -34,7 +35,19 @@ public class groupController {
         List<GroupEntity> list = groupService.getAllGroup();
         ArrayList<GroupListDto> responseList = new ArrayList<>();
         for (GroupEntity e : list) {
-            GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMaxNum(), e.getCurNum(),e.getCreated_at());
+            List <HashtagDto> groupHash = groupService.getHashtags(e.getGroupID());
+            int index = 1;
+            List<Map<String,Object> > Hash_list = new ArrayList<>();
+
+            for( HashtagDto h : groupHash) {
+                Map<String,Object> hashtag = new HashMap<>();
+                hashtag.put(Integer.toString(index), h.getHashTag());
+                Hash_list.add(hashtag);
+                index+=1;
+            }
+
+            GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMaxNum(), e.getCurNum(),e.getBuilding(),e.getCreated_at());
+            groupListDto.setHashtags(Hash_list);
             responseList.add(groupListDto);
         }
         return ResponseEntity.ok(responseList);
@@ -51,8 +64,6 @@ public class groupController {
     public ResponseEntity<Optional<GroupDetailDto>>getDetail(@RequestParam int num){
 
         Optional<GroupDetailDto> groupDetailDto = groupService.getDetailGroup(num);
-        groupDetailDto.get().setHashtags(groupService.getHashtags(num));
-        groupDetailDto.get().setWishLists(groupService.getWishlist(num));
         return ResponseEntity.ok(groupDetailDto);
     }
 

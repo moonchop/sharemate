@@ -11,10 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -46,6 +43,30 @@ public class GroupService {
                 group.get().getBuilding(),
                 group.get().getCreated_at()
         ));
+        GroupDetailDto.get().setUserID(group.get().getUserID());
+        List <HashTagEntity> hashtags= hashtagRepository.findAllByGroupID(num);
+        List<WishListEntity> wishlists= wishListRepository.findAllByGroupID(num);
+        int index = 1;
+        List <Map<String,Object>> hash_list = new ArrayList<>();
+        List <Map<String,Object>> wish_list = new ArrayList<>();
+        //hashtag 가져오기
+        for (HashTagEntity h : hashtags){
+            Map<String,Object> hashtag= new HashMap<>();
+            hashtag.put(Integer.toString(index),h.getHashTag());
+            hash_list.add(hashtag);
+            index+=1;
+        }
+        //wishlist 가져오기
+        index=1;
+        for(WishListEntity w : wishlists){
+            Map<String,Object> wishlist= new HashMap<>();
+            wishlist.put(Integer.toString(index), w.getText());
+            wish_list.add(wishlist);
+            index+=1;
+        }
+
+        GroupDetailDto.get().setWishLists(wish_list);
+        GroupDetailDto.get().setHashtags(hash_list);
         return GroupDetailDto;
 
     }
@@ -61,34 +82,21 @@ public class GroupService {
         groupEntity.setText(group.getText());
         groupEntity.setKakaoLink(group.getKakaoLink());
         groupEntity.setMaxNum(group.getMaxNum());
-        System.out.println(groupEntity);
+        //Hashtag 저장
         final int groupID= groupRepository.save(groupEntity).getGroupID();
-        System.out.println(groupID);
-        //System.out.println(obj);
-
-        // group save하고 groupID를 받아오는 작업을 필요로 함 .
-
-        // hash태그 전부
-
         for (Map<String,Object> hashtag: group.getHashtags()){
             hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(1))));
             hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(2))));
             hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(3))));
         }
         // wishlist 저장
-
         for (Map<String,Object> wishlist: group.getWishLists()){
-
             wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(1))));
             wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(2))));
             wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(3))));
             wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(4))));
             wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(5))));
-
-
-
         }
-        //기타 그룹 정보 저장
 
         return;
     }
