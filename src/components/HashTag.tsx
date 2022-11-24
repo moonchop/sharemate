@@ -4,11 +4,22 @@ const HASHTAG_OBJ = {
   green: "ring-[rgb(186,152,229)] text-[rgb(186,152,229)]",
 };
 
-const HashTag = ({ text, color }: { text: string[]; color: ("red" | "blue" | "green")[] }) => {
+const HashTag = ({
+  text,
+  color,
+}: {
+  text: string[];
+  color: ("red" | "blue" | "green")[];
+}) => {
   return (
     <div className="flex space-x-3">
       {text.map((elem, index) => (
-        <p key={index} className={`items-center  bg-white rounded-2xl ring-2 text-sm  px-2 py-1 min-w-fit ${HASHTAG_OBJ[color[index]]}`}>
+        <p
+          key={index}
+          className={`items-center bg-white rounded-2xl ring-2 text-sm  px-2 py-1 min-w-fit ${
+            HASHTAG_OBJ[color[index]]
+          }`}
+        >
           #{elem}
         </p>
       ))}
