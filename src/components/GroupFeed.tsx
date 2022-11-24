@@ -13,7 +13,7 @@ interface IGroup {
   people: string[];
   room: number;
 }
-const ICON_OBJ = ["text-indigo-400", "text-purple-400", "text-pink-400"];
+const ICON_OBJ = ["text-indigo-400", "text-purple-400", "text-pink-300"];
 const GroupFeed = () => {
   const groupData: IGroup[] = [
     {
