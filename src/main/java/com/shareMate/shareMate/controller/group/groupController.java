@@ -36,14 +36,9 @@ public class groupController {
         ArrayList<GroupListDto> responseList = new ArrayList<>();
         for (GroupEntity e : list) {
             List <HashtagDto> groupHash = groupService.getHashtags(e.getGroupID());
-            int index = 1;
-            List<Map<String,Object> > Hash_list = new ArrayList<>();
-
+            List<String > Hash_list = new ArrayList<>();
             for( HashtagDto h : groupHash) {
-                Map<String,Object> hashtag = new HashMap<>();
-                hashtag.put(Integer.toString(index), h.getHashTag());
-                Hash_list.add(hashtag);
-                index+=1;
+                Hash_list.add(h.getHashTag());
             }
 
             GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMaxNum(), e.getCurNum(),e.getBuilding(),e.getCreated_at());

@@ -36,8 +36,8 @@ public class GroupDetailDto {
     private String kakaoLink;
     @ApiModelProperty(value = "기숙사", required = true, example = "string")
     private String building;
-    private List<Map<String,Object>> hashtags ;
-    private List<Map<String,Object>> wishLists;
+    private List<String> hashtags ;
+    private List<String> wishLists;
     @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
     private Date created_at;
 

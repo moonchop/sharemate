@@ -18,7 +18,7 @@ public class GroupListDto {
     private String title;
     private Integer maxNum;
     private Integer curNum;
-    private List<Map<String,Object>> hashtags ;
+    private List<String> hashtags ;
     private String building ;
     private Date created_at;
 
