@@ -1,16 +1,18 @@
-package com.shareMate.shareMate.dto;
+package com.shareMate.shareMate.dto.sign;
 
 import com.shareMate.shareMate.entity.UserEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @ApiModel(value = "로그인 ", description = "로그인할 때 필요한 domain class 입니다.")
-public class RequestLoginDto {
+public class RequestSignInDto {
     
 
     @ApiParam(value = "사용자 ID" ,required = true)
@@ -22,15 +24,14 @@ public class RequestLoginDto {
     public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
                 .email(email)
-//                .pwd(passwordEncoder.endcode(pwd))
                 .pwd(pwd)
                 .build();
         return userEntity;
     }
 
-    @Builder
-    public RequestLoginDto(String email, String pwd) {
-        this.email = email;
-        this.pwd = pwd;
-    }
+//    @Builder
+//    public RequestSignInDto(String email, String pwd) {
+//        this.email = email;
+//        this.pwd = pwd;
+//    }
 }

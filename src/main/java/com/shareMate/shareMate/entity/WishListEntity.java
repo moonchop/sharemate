@@ -27,7 +27,7 @@ public class WishListEntity {
 
 
     public WishListEntity(){};
-    public WishListEntity(int groupID, String text) {
+    public WishListEntity(Integer groupID, String text) {
         this.groupID=groupID;
         this.text=text;
     }

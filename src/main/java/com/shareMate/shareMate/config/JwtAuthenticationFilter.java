@@ -28,7 +28,6 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         extractToken(request).map(userDetailsService::loadUserByUsername).ifPresent(this::setAuthentication);
         //CustomUserDetails userId = userDetailsService.loadUserByUsername(String.valueOf(extractToken(request)));
-        System.out.println("zzzzz");
         if(Optional.ofNullable(((HttpServletRequest) request).getHeader("Authorization")).isPresent()){
             System.out.println("토큰 저장한다  필터에서");
             System.out.println(userDetailsService.loadUserByUsername(extractToken(request).get()).getUserId());

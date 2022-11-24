@@ -13,7 +13,7 @@ import lombok.Setter;
 public class FavorDto {
 
     @ApiModelProperty(value = "유저 id", required = true, example = "35")
-    private int userID;
+    private Integer userID;
     @ApiModelProperty(value = "취침시간", required = true, example = "0")
     private String sleepTime;
     @ApiModelProperty(value = "흡연 여부", required = true, example = "1")

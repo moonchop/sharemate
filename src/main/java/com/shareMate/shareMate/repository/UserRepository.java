@@ -13,6 +13,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity,Number> {
     Optional<UserEntity> findByEmail(String email);
+
     Optional<UserEntity> findUserEntityByEmail(String email);
     Page<UserEntity> findAll(Pageable pageable);
 //    @Query("select u from user u join fetch u.favor where u.userID=:userid")

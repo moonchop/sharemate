@@ -18,10 +18,10 @@ public class PostEntity {
     @Id
     @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int postId;
+    private Integer postId;
     //    @Column(nullable = false,unique = true)
     @Column(name = "user_id")
-    private int user_id;
+    private Integer user_id;
 
     private String title;
     private String category;

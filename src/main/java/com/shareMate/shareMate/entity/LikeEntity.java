@@ -19,14 +19,14 @@ public class LikeEntity {
 //    @Column(nullable = false,unique = true)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int num;
+    private Integer num;
 
     @Column(name="user_from_id")
-    private int userFromID;
+    private Integer userFromID;
     @Column(name="user_to_id")
-    private int userToID;
+    private Integer userToID;
     public LikeEntity(){};
-    public LikeEntity(int user_id, int target_id) {
+    public LikeEntity(Integer user_id, Integer target_id) {
         this.userFromID=user_id;
         this.userToID=target_id;
     }

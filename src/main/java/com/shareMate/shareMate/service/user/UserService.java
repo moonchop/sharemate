@@ -1,20 +1,31 @@
 package com.shareMate.shareMate.service.user;
 
 import com.shareMate.shareMate.dto.*;
+import com.shareMate.shareMate.dto.response.BaseResponse;
+import com.shareMate.shareMate.dto.response.MessageUtils;
+import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
+import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
+import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
 import com.shareMate.shareMate.entity.UserEntity;
+import com.shareMate.shareMate.exception.SignUpFailureException;
+import com.shareMate.shareMate.exception.UserNotFoundException;
+import com.shareMate.shareMate.jwt.TokenHelper;
 import com.shareMate.shareMate.repository.FavorRepository;
 import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.repository.LikeRepository;
 import com.shareMate.shareMate.repository.UserRepository;
+import com.shareMate.shareMate.service.sign.SignService;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,77 +39,47 @@ public class UserService {
     private final UserRepository userRepository;
     private final FavorRepository favorRepository;
     private final HashtagRepository hashtagRepository;
-
+    private final SignService signService;
     private final LikeRepository likeRepository;
-
+    private final TokenHelper accessTokenHelper;
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
     }
 
-//   public UserEntity doSelectOne(int id) {
-//        return userRepository.findById(id).get();
-//    }
 
 
-
-    public Map doInsert(RequestSignUpDto requestSignUpDto) {
-        Map json = new HashMap<String, Object>();
-        System.out.println("service");
+    public ResponseSignUpDto doInsert(RequestSignUpDto requestSignUpDto) {
+        String originalPwd=requestSignUpDto.getPwd();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String securePwd = encoder.encode(requestSignUpDto.getPwd());
-        System.out.println("암호화 된 비번 " + securePwd);
-
 
         if (userRepository.findByEmail(requestSignUpDto.getEmail()).isPresent()) {
-            json.put("status", "fail");
-            json.put("text", "동일한 id가 있습니다.");
-            return json;
+            throw new SignUpFailureException(MessageUtils.INVALID_SIGNUP);
         } else {
             requestSignUpDto.setPwd(securePwd);
             UserEntity newUser = requestSignUpDto.toEntity();
             newUser.setPwd(securePwd);
-            System.out.println("새 비번" + newUser.getPwd());
-
-
             userRepository.save(newUser);
-            json.put("status", "success");
-            json.put("text", "회원가입이 완료되었습니다.");
-            return json;
-        }
-//
-////        userRepository.save(UserEntity.builder().email(userEntity.getEmail()).password(userEntity.getPassword()).name(userEntity.getName()).build());
-////        userRepository.save(UserEntity.builder().name(responseUserDto.toEntity().getName()).pwd(responseUserDto.toEntity().getPwd()).email(responseUserDto.toEntity().getEmail()).build());
-//
-    }
+            String accessToken = accessTokenHelper.createToken(originalPwd);
+            Optional<UserEntity> req = userRepository.findUserEntityByEmail(newUser.getEmail());
 
-    @ResponseBody
-    public Map doLogin(RequestLoginDto requestLoginDto) {
-        Map json = new HashMap<String, Object>();
-        System.out.println("lgser");
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        Optional<UserEntity> user = userRepository.findByEmail(requestLoginDto.toEntity().getEmail());
-
-        if (user == null) {
-            json.put("status", "fail");
-            json.put("text", "존재하지 않는 유저입니다.");
-            return json;
-
-        }
-        if (encoder.matches(requestLoginDto.toEntity().getPwd(), user.get().getPwd())) {
-            json.put("status", "success");
-            json.put("text", "로그인 성공");
-            return json;
-        } else {
-            json.put("status", "fail");
-            json.put("text", "비밀번호가 다릅니다.");
-            System.out.println(user.get().getPwd().getClass());
-            System.out.println(requestLoginDto.toEntity().getPwd().getClass());
-            return json;
+            return new ResponseSignUpDto(
+                    req.get().getUserID(),
+                    req.get().getEmail(),
+                    req.get().getName(),
+                    req.get().getMajor(),
+                    req.get().getGrade(),
+                    req.get().getGender(),
+                    req.get().getAge(),
+                    req.get().getProfile_photo(),
+                    accessToken);
         }
     }
 
-    public void doUpdate(int num , UserDto  userDto) {
+
+
+    public void doUpdate(Integer num , UserDto  userDto) {
 
         UserEntity userEntity = userDto.toEntity();
 
@@ -107,22 +88,43 @@ public class UserService {
     }
 
     //  delete
-    public void doDelete(int id) {
+    public void doDelete(Integer id) {
         userRepository.deleteById(id);
     }
 
-    public Page<UserEntity> getUserList(int page, int size) {
+    public Page<UserEntity> getUserList(Integer page, Integer size) {
         Pageable pageable = PageRequest.of(page, size);
 
         Page<UserEntity> postList = userRepository.findAll(pageable);
         System.out.println(postList);
 
         return postList;
-
-
     }
+    public List<UserSimpleDto> getUserLikeList(Integer id){
+        List<LikeEntity> likesID = (likeRepository.findByUserFromID(id));
+        List<UserSimpleDto> userSimpleList = new ArrayList<>();
 
-    public UserDto getUserDetail(int num) {
+        for (LikeEntity like : likesID) {
+            Optional<UserEntity> user = userRepository.findById(like.getUserToID());
+            List<HashTagEntity> hash = hashtagRepository.findAllByUserID(like.getUserToID());
+            List <String> hashes = new ArrayList<>() ;
+            for (HashTagEntity h : hash){
+                hashes.add(h.getHashTag());
+            }
+            UserSimpleDto userSimpleDto = new UserSimpleDto(
+                    user.get().getUserID(),
+                    user.get().getName(),
+                    user.get().getMajor(),
+                    user.get().getAge(),
+                    user.get().getGender(),
+                    user.get().getProfile_photo());
+            userSimpleDto.setHashtags(hashes);
+            userSimpleList.add(userSimpleDto);
+        }
+
+        return userSimpleList;
+    }
+    public UserDto getUserDetail(Integer num) {
         Optional<UserEntity> member = userRepository.findById(num);
         return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getCreated_at(),member.get().getUpdated_at());
 
@@ -137,7 +139,7 @@ public class UserService {
     }
 
 
-    public FavorDto getFavor(int num) {
+    public FavorDto getFavor(Integer num) {
         Optional<FavorEntity> member = favorRepository.findById(num);
         FavorDto res = new FavorDto();
         res.setCleanness(member.get().getCleanness());
@@ -158,7 +160,7 @@ public class UserService {
 
 
 
-    public void doLike(int user_id, int target_id){
+    public void doLike(Integer user_id, Integer target_id){
         LikeEntity likeEntity = new LikeEntity(user_id,target_id);
         System.out.println("dolike/" + likeEntity.getUserFromID()+ " " +likeEntity.getUserToID());
         System.out.println();
@@ -167,7 +169,7 @@ public class UserService {
         return ;
     }
 
-    public void doUnLike(int user_id, int target_id){
+    public void doUnLike(Integer user_id, Integer target_id){
         Optional<LikeEntity> like =likeRepository.findLikeEntityByUserFromIDAndUserToID(user_id,target_id);
         likeRepository.delete(like.get());
         return;

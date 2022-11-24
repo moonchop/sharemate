@@ -17,7 +17,7 @@ import java.util.Date;
 public class FavorEntity {
 
     @Id
-    private int userID;
+    private Integer userID;
     private String sleepTime;
     private String smoking;
     private String wakeupTime;
@@ -30,9 +30,6 @@ public class FavorEntity {
     private String snoring;
     private String mbti;
     private String selfIntro;
-
-//    @OneToOne(mappedBy = "favor")
-//    private UserEntity user;
 
 
 

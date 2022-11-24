@@ -26,7 +26,7 @@ public class HashTagEntity {
 
 
     @Builder
-    public HashTagEntity(int user_id, int group_id,String hashTag){
+    public HashTagEntity(Integer user_id, Integer group_id,String hashTag){
         this.userID=user_id;
         this.groupID=group_id;
         this.hashTag=hashTag;
@@ -36,7 +36,7 @@ public class HashTagEntity {
 
     }
 
-    public HashTagEntity(int groupID, String hashTag) {
+    public HashTagEntity(Integer groupID, String hashTag) {
         this.groupID=groupID;
         this.hashTag=hashTag;
 
