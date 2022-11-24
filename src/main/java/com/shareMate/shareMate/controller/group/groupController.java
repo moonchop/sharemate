@@ -82,7 +82,7 @@ public class groupController {
     @ApiOperation(value = "그룹매칭 게시글 수정",notes = "작성자가 그룹매칭 게시글을 수정합니다.",tags="Group")
     @PutMapping("/group")
     public ResponseEntity editPost(@RequestParam Integer groupID,@RequestBody GroupDetailDto group ,HttpServletRequest request){
-
+        final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         System.out.println(Integer.parseInt(request.getAttribute("userid").toString()));
         Optional<GroupDetailDto> origin_group = groupService.getDetailGroup(groupID);
         //System.out.println("zz "+ origin_post.get().getUser_id() + "/"+origin_post.get().getPost_id());
@@ -109,15 +109,16 @@ public class groupController {
     @ApiOperation(value = "그룹매칭 참여하기",notes = "유저가 그룹매칭을 참여할 때 사용합니다.",tags="Group")
     @GetMapping("/join")
     public ResponseEntity joinGroup(HttpServletRequest request ,@RequestParam int groupId){
-        final int userid = (int) request.getAttribute("userid");
-        groupService.joinGroup(groupId,userid);
+        final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
+        System.out.println("!!!"+user_id);
+        groupService.joinGroup(groupId,user_id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     //참여 취소
     @GetMapping("/leave")
     @ApiOperation(value = "그룹매칭 참여 취소",notes = "유저가 그룹매칭을 탈퇴할 때 사용합니다.",tags="Group")
     public ResponseEntity leaveGroup(HttpServletRequest request ,@RequestParam int groupId){
-        final int userid = (int) request.getAttribute("userid");
+        final int userid = Integer.parseInt((String) request.getAttribute("userid"));
         groupService.leaveGroup(groupId,userid);
         return ResponseEntity.ok(HttpStatus.OK);
     }
