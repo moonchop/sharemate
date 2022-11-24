@@ -160,7 +160,7 @@ const GroupFeed = () => {
       ))}
       <button
         onClick={() => {
-          push("CreateGroupActivity");
+          push("CreateGroupActivity", {});
         }}
         className=" absolute bottom-16 right-2 self-center w-[80px] h-[30px] m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm  rounded-md shadow-button"
       >
