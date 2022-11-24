@@ -149,11 +149,17 @@ public class GroupService {
     public void joinGroup(int group_id, int user_id){
         JoinEntity joinEntity= new JoinEntity(group_id,user_id);
         joinRepository.save(joinEntity);
+        Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
+        group.get().setCurNum(group.get().getCurNum()+1);
+        groupRepository.save(group.get());
         return ;
     }
     public void leaveGroup(int group_id, int user_id){
         JoinEntity joinEntity= new JoinEntity(group_id,user_id);
         joinRepository.delete(joinEntity);
+        Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
+        group.get().setCurNum(group.get().getCurNum()-1);
+        groupRepository.save(group.get());
         return ;
     }
 
