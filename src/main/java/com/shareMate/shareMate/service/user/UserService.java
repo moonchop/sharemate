@@ -42,6 +42,7 @@ public class UserService {
     private final SignService signService;
     private final LikeRepository likeRepository;
     private final TokenHelper accessTokenHelper;
+    private final BCryptPasswordEncoder encoder;
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
     }
@@ -180,6 +181,24 @@ public class UserService {
         Optional<UserEntity> user = userRepository.findByEmail(email);
         if(user.isPresent()) return true;
         else return false;
+    }
+
+
+    public boolean pwdCheck(int userID, String pwd) {
+        /* DB pwd와 요청 pwd가 일치하는지 반환*/
+        UserEntity userEntity = userRepository.findById(userID).orElseThrow( ()-> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        String realPwd = userEntity.getPwd();
+        boolean checked = encoder.matches(pwd,realPwd);
+
+        return checked;
+    }
+
+    public void updatePwd (int userID,String pwd){
+        UserEntity userEntity = userRepository.findById(userID).orElseThrow( ()-> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        userEntity.setPwd(encoder.encode(pwd));
+        userRepository.save(userEntity);
+        return ;
+
     }
 
 
