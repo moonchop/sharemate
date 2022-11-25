@@ -1,10 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { useActivityParams } from "@stackflow/react";
-import React, { useState } from "react";
-import Hashtag from "./HashTag";
-import { HashTagColor } from "../utils/HashTagColor";
 import Ajou from "../assets/Ajou.gif";
-import KakaoButton from "../assets/KakaoButton.png";
+import Kakao from "../assets/kakao.png";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import request from "../stores/Request";
 
 interface ParamsValue {
   id: number;
@@ -14,28 +13,67 @@ interface ParamsValue {
   major: string;
   hashtag: string[];
   mbti: string;
-  photo: string;
+  profile_photo: string;
   self_intro: string;
   kakao_link: string;
 }
 
-const props: ParamsValue = {
-  id: 3,
-  name: "장은학",
-  age: 24,
-  grade: "3",
-  major: "소프트웨어학과",
-  hashtag: ["3학년", "운동", "비염"],
-  mbti: "ISTJ",
-  photo:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  self_intro:
-    "안녕하세요. 저는 무슨무슨 학과 몇학년 땡땡땡입니다. 저는 특히 무엇을 좋아해서 무엇을 같이 할 수 있는 사람이면 좋겠습니다.",
-  kakao_link: "https://open.kakao.com/o/s2qDCFOe",
-};
-
 const DetailProfile = () => {
+  const kakao_link = "https://open.kakao.com/o/s2qDCFOe";
+  const Params: { id: string } = useActivityParams();
   const [like, setLike] = useState<boolean>(false);
+  const [user, setUser] = useState({
+    userID: 0,
+    name: "",
+    major: "",
+    grade: 0,
+    age: 0,
+    profile_photo: "",
+    gender: 0,
+    created_at: 0,
+    updated_at: 0,
+    email: "",
+  });
+
+  const [favor, setFavor] = useState({
+    mbti: "",
+    sleepTime: "",
+    smoking: "",
+    wakeupTime: "",
+    drinking: "",
+    sutdyTime: "",
+    cleanness: "",
+    snoring: "",
+    selfIntro: "",
+  });
+
+  useEffect(() => {
+    request
+      .get("user/detail", { params: { id: Params.id } })
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.data);
+        console.log(response.data.user);
+        setUser(response.data.user);
+        setFavor(response.data.favor);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const likeHandler = () => {
+    console.log(user);
+    request
+      .post(`user/like/${user.userID}`)
+      .then((response) => {
+        console.log(response.status);
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="flex-col h-[92%]">
@@ -45,7 +83,7 @@ const DetailProfile = () => {
           <div className="absolute h-[87%] w-full z-2 bg-[rgba(86,64,221,0.2)] justify-center items-center" />
           <div className="flex items-center justify-center h-[57%]">
             <img
-              src={props.photo}
+              src={user.profile_photo}
               className="flex z-20 rounded-full shadow-xl w-[85px] pro:w-[109px] pro:h-[109px] h-[85px] "
             />
           </div>
@@ -55,21 +93,21 @@ const DetailProfile = () => {
                 <div className="items-center w-[28%] h-[42px] pro:h-[55px] " />
               </div>
               <div className="font-bold pro:text-2xl text-xl text-center mb-[3%]">
-                {props.name}
+                {user.name}
               </div>
               <div className="pro:text-xl text-lg pro:mb-[5%] mb-[5px] font-medium text-[rgb(133,129,129)] text-center">
-                {props.major} &nbsp;{props.grade}학년 &nbsp;{props.age}살
+                {user.major} &nbsp;{user.grade}학년 &nbsp;{user.age}살
               </div>
               <div className=" mb-[24px] pro:text-xl text-lg font-medium text-center">
                 <strong className="text-[#AFADF5] font-semibold">MBTI</strong>
-                &nbsp; {props.mbti}
+                &nbsp; {favor.mbti}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col ml-[38px] mr-[38px] h-[62%] justify-center ">
-        <div className="h-[80%] pro:mt-[9%] mt-[5%] item-center border-b-2 border-[#AAAAAA]">
+      <div className="flex flex-col  h-[62%] justify-center ">
+        <div className="h-[80%] pro:mt-[9%] mt-[5%] ml-[38px] mr-[38px] item-center ">
           <div className=" text-left w-full ">
             <div className="font-bold pro:text-xl text-lg pro:mb-[30px] mb-[18px] text-[#AFADF5] underline underline-offset-8">
               나의 생활
@@ -88,30 +126,36 @@ const DetailProfile = () => {
               자기 소개
             </div>
             <div className="pro:text-xl pro:leading-9 text-lg font-medium w-full	">
-              {props.self_intro}
+              {favor.selfIntro}
             </div>
           </div>
         </div>
-        <div className="flex justify-between w-full h-[13%]">
+        <div className="flex justify-between px-[38px] h-[13%] items-center">
           {!like ? (
             <AiOutlineHeart
               color="#AAAAAA"
               className="h-full w-[10%]"
-              onClick={() => setLike(true)}
+              onClick={() => {
+                setLike(true);
+                likeHandler();
+              }}
             />
           ) : (
             <AiFillHeart
               color="red"
               className="h-full w-[10%] "
-              onClick={() => setLike(false)}
+              onClick={() => {
+                setLike(false);
+                likeHandler();
+              }}
             />
           )}
 
           <img
-            src={KakaoButton}
-            className="h-full items-center w-[130px] "
+            src={Kakao}
+            className="flex pro:h-[70%] h-[70%]"
             onClick={() => {
-              window.open(props.kakao_link);
+              window.open(kakao_link);
             }}
           />
         </div>
