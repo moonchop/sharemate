@@ -25,9 +25,6 @@ const Topnav: React.FC<topProps> = ({ status }) => {
       ) : (
         <div className="font-bold text-xl text-white">Share Mate</div>
       )}
-      <div className="flex h-[100%] items-center justify-center">
-        {!status ? <ImSearch className="mr-3 w-5 h-5" /> : <></>}
-      </div>
     </header>
   );
 };
