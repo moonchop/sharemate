@@ -6,7 +6,7 @@ import request from "../stores/Request";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Login = () => {
-  const { accessToken, refreshToken, setToken } = useAuth();
+  const { setToken } = useAuth();
 
   const { replace, push } = useFlow();
   const [loginForm, setLoginForm] = useState({
@@ -16,10 +16,15 @@ const Login = () => {
 
   const loginSubmit = () =>
     request
-      .post("/login", loginForm)
+      .post("/sign/login", loginForm)
       .then((response) => {
-        console.log(response.status);
-        setToken(response.data);
+        console.log(
+          "status : ",
+          response.status,
+          "reslut : ",
+          response.data.result
+        );
+        setToken(response.data.data);
         return true;
       })
       .catch((error) => {
