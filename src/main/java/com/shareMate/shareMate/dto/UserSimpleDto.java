@@ -21,7 +21,9 @@ public class UserSimpleDto
     private String profile_photo;
     private List<String> Hashtags;
 
+    public UserSimpleDto() {
 
+    }
 
 
     public UserEntity toEntity(){

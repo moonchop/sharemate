@@ -18,5 +18,5 @@ import java.util.Optional;
 public interface JoinRepository extends JpaRepository<JoinEntity,Number> {
 
 
-
+    List<JoinEntity> findJoinEntitiesByGroupID(int groupID);
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.shareMate.shareMate.DB_test" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-24T06:53:37" hostname="gimjihun-ui-MacBookAir.local" time="0.01">
+<testsuite name="com.shareMate.shareMate.DB_test" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-25T08:15:04" hostname="gimjihun-ui-MacBookAir.local" time="0.006">
   <properties/>
-  <testcase name="test()" classname="com.shareMate.shareMate.DB_test" time="0.01"/>
+  <testcase name="test()" classname="com.shareMate.shareMate.DB_test" time="0.006"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

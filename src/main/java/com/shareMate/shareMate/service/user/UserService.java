@@ -46,6 +46,32 @@ public class UserService {
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
     }
+    public UserSimpleDto doSelectOne (int num){
+        Optional<UserEntity> userEntity= userRepository.findById(num);
+        List<HashTagEntity> hash_list = hashtagRepository.findAllByUserID(num);
+        UserSimpleDto userSimpleDto = new UserSimpleDto();
+        if(userEntity.isPresent()){
+            List<String> hashtags= new ArrayList<>();
+            for (HashTagEntity h : hash_list){
+                hashtags.add(h.getHashTag());
+            }
+
+            userSimpleDto.setUserID(userEntity.get().getUserID());
+            userSimpleDto.setName(userEntity.get().getName());
+            userSimpleDto.setAge(userEntity.get().getAge());
+            userSimpleDto.setGender(userEntity.get().getGender());
+            userSimpleDto.setName(userEntity.get().getName());
+            userSimpleDto.setHashtags(hashtags);
+
+
+
+        }
+
+
+        return userSimpleDto;
+
+
+    }
 
 
 
@@ -80,7 +106,7 @@ public class UserService {
 
 
 
-    public void doUpdate(Integer num , UserDto  userDto) {
+    public void doUpdate(int  num , UserDto  userDto) {
 
         UserEntity userEntity = userDto.toEntity();
 

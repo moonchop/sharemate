@@ -138,7 +138,7 @@ public class UserController {
     @ApiOperation(value = "개인정보 수정",notes = "개인정보를 수정합니다.",tags="User")
     @PutMapping("")
     public ResponseEntity editUser (HttpServletRequest request,@RequestParam("id") Integer num,UserDto userDto) {
-       // userService.editUser(num,userDto);
+        userService.doUpdate(num,userDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @ApiOperation(value ="비밀번호 수정" , notes = "비밀번호를 변경합니다." , tags ="User")

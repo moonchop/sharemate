@@ -4,11 +4,15 @@ import com.shareMate.shareMate.dto.*;
 
 import com.shareMate.shareMate.entity.GroupEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
+import com.shareMate.shareMate.entity.JoinEntity;
+import com.shareMate.shareMate.repository.JoinRepository;
 import com.shareMate.shareMate.service.GroupService;
+import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +27,8 @@ import java.util.*;
 public class groupController {
 
     private final GroupService groupService;
+    private final JoinRepository joinRepository;
+    private final UserService userService;
 
 
     @ApiOperation(value = "그룹매칭 전체 리스트 조회",notes = "그룹매칭 메인화면에 나타낼 그룹매칭 게시글 리스트를 반환합니다.",tags="Group")
@@ -56,10 +62,22 @@ public class groupController {
             , paramType = "query"
             , defaultValue = "None")
     @GetMapping("/group")
-    public ResponseEntity<Optional<GroupDetailDto>>getDetail(@RequestParam int num){
+    public ResponseEntity<ResGroupDetailDto>getDetail(@RequestParam Integer num){
 
         Optional<GroupDetailDto> groupDetailDto = groupService.getDetailGroup(num);
-        return ResponseEntity.ok(groupDetailDto);
+        List<JoinEntity> join_list = joinRepository.findJoinEntitiesByGroupID(num);
+        List <UserSimpleDto> user_List= new ArrayList<>();
+        for( JoinEntity j : join_list){
+            UserSimpleDto userSimpleDto = userService.doSelectOne(j.getUserID());
+
+            user_List.add(userSimpleDto);
+
+        }
+        ResGroupDetailDto resGroupDetailDto = new ResGroupDetailDto();
+        resGroupDetailDto.setGroupDetailDto(groupDetailDto.get());
+        resGroupDetailDto.setUser(user_List);
+
+        return ResponseEntity.status(HttpStatus.OK).body(resGroupDetailDto);
     }
 
     @ApiOperation(value = "그룹매칭 게시글 작성",notes = "작성자가 그룹매칭 게시글을 작성합니다.",tags="Group")
