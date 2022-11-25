@@ -16,13 +16,20 @@ import javax.persistence.*;
 public class JoinEntity {
     //    @Column(nullable = false,unique = true)
     @Id
-    @Column(name = "group_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer joinedID;
+
     private Integer groupID;
 
-    @Column(name="user_id")
+
     private Integer userID;
 
     public JoinEntity() {
 
+    }
+
+    public JoinEntity(int groupID, int user_id) {
+        this.groupID=groupID;
+        this.userID=user_id;
     }
 }

@@ -1,6 +1,7 @@
 package com.shareMate.shareMate.controller.user;
 import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.response.DataResponse;
+import com.shareMate.shareMate.dto.response.Response;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.entity.HashTagEntity;
@@ -101,6 +102,7 @@ public class UserController {
         /* User 가져오는 코드*/
         UserDto member = userService.getUserDetail(num);
         System.out.println(favor.getMbti());
+        /* Hashtag 가져오는 코드 */
         List<HashTagEntity> hashtag = userService.getHashTagList(num);
         List<String>  hashtagDtos = new ArrayList<>();
         for (HashTagEntity h : hashtag){
@@ -136,8 +138,44 @@ public class UserController {
     @ApiOperation(value = "개인정보 수정",notes = "개인정보를 수정합니다.",tags="User")
     @PutMapping("")
     public ResponseEntity editUser (HttpServletRequest request,@RequestParam("id") Integer num,UserDto userDto) {
-       // userService.editUser(num,userDto);
+        userService.doUpdate(num,userDto);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+    @ApiOperation(value ="비밀번호 수정" , notes = "비밀번호를 변경합니다." , tags ="User")
+    @PutMapping("/pwd")
+    public ResponseEntity editPwd (HttpServletRequest request, @RequestBody ReqPwdDto reqPwdDto ){
+        final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
+        /* 비밀번호 확인 코드 */
+        if(!userService.pwdCheck(user_id,reqPwdDto.getCurrPwd())){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("비밀번호가 일치하지 않습니다.");
+        }
+        /* 새로운 암호 저장*/
+        else{
+            userService.updatePwd(user_id, reqPwdDto.getNewPwd());
+            return ResponseEntity.ok(HttpStatus.OK);
+        }
+    }
+
+    @ApiOperation(value ="본인 정보 가져오기" , notes = "본인 개인정보를 조회합니다.." , tags ="User")
+    @GetMapping("/mypage")
+    public ResponseEntity<ResUserDetailDto> editPwd (HttpServletRequest request ){
+        final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
+        /*favor 가져오는 코드*/
+        FavorDto favor = userService.getFavor(user_id);
+        /* User 가져오는 코드*/
+        UserDto member = userService.getUserDetail(user_id);
+        System.out.println(favor.getMbti());
+        List<HashTagEntity> hashtag = userService.getHashTagList(user_id);
+        List<String>  hashtagDtos = new ArrayList<>();
+        for (HashTagEntity h : hashtag){
+            hashtagDtos.add(h.getHashTag());
+        }
+        ResUserDetailDto resUserDetailDto = new ResUserDetailDto();
+        resUserDetailDto.setFavor(favor);
+        resUserDetailDto.setUser(member);
+        resUserDetailDto.setHashtag_list(hashtagDtos);
+        return ResponseEntity.ok(resUserDetailDto);
+
     }
 
 

@@ -42,8 +42,35 @@ public class UserService {
     private final SignService signService;
     private final LikeRepository likeRepository;
     private final TokenHelper accessTokenHelper;
+    private final BCryptPasswordEncoder encoder;
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
+    }
+    public UserSimpleDto doSelectOne (int num){
+        Optional<UserEntity> userEntity= userRepository.findById(num);
+        List<HashTagEntity> hash_list = hashtagRepository.findAllByUserID(num);
+        UserSimpleDto userSimpleDto = new UserSimpleDto();
+        if(userEntity.isPresent()){
+            List<String> hashtags= new ArrayList<>();
+            for (HashTagEntity h : hash_list){
+                hashtags.add(h.getHashTag());
+            }
+
+            userSimpleDto.setUserID(userEntity.get().getUserID());
+            userSimpleDto.setName(userEntity.get().getName());
+            userSimpleDto.setAge(userEntity.get().getAge());
+            userSimpleDto.setGender(userEntity.get().getGender());
+            userSimpleDto.setName(userEntity.get().getName());
+            userSimpleDto.setHashtags(hashtags);
+
+
+
+        }
+
+
+        return userSimpleDto;
+
+
     }
 
 
@@ -79,7 +106,7 @@ public class UserService {
 
 
 
-    public void doUpdate(Integer num , UserDto  userDto) {
+    public void doUpdate(int  num , UserDto  userDto) {
 
         UserEntity userEntity = userDto.toEntity();
 
@@ -180,6 +207,24 @@ public class UserService {
         Optional<UserEntity> user = userRepository.findByEmail(email);
         if(user.isPresent()) return true;
         else return false;
+    }
+
+
+    public boolean pwdCheck(int userID, String pwd) {
+        /* DB pwd와 요청 pwd가 일치하는지 반환*/
+        UserEntity userEntity = userRepository.findById(userID).orElseThrow( ()-> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        String realPwd = userEntity.getPwd();
+        boolean checked = encoder.matches(pwd,realPwd);
+
+        return checked;
+    }
+
+    public void updatePwd (int userID,String pwd){
+        UserEntity userEntity = userRepository.findById(userID).orElseThrow( ()-> new IllegalArgumentException("해당 회원이 존재하지 않습니다."));
+        userEntity.setPwd(encoder.encode(pwd));
+        userRepository.save(userEntity);
+        return ;
+
     }
 
 

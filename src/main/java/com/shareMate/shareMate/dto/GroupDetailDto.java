@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 @Getter
@@ -35,8 +36,8 @@ public class GroupDetailDto {
     private String kakaoLink;
     @ApiModelProperty(value = "기숙사", required = true, example = "string")
     private String building;
-    private List<HashtagDto> hashtags ;
-    private List<WishListDto> wishLists;
+    private List<String> hashtags ;
+    private List<String> wishLists;
     @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
     private Date created_at;
 

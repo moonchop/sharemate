@@ -9,15 +9,14 @@ import com.shareMate.shareMate.repository.JoinRepository;
 import com.shareMate.shareMate.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class GroupService {
 
 
@@ -46,6 +45,22 @@ public class GroupService {
                 group.get().getBuilding(),
                 group.get().getCreated_at()
         ));
+        GroupDetailDto.get().setUserID(group.get().getUserID());
+        List <HashTagEntity> hashtags= hashtagRepository.findAllByGroupID(num);
+        List<WishListEntity> wishlists= wishListRepository.findAllByGroupID(num);
+
+        List <String> hash_list = new ArrayList<>();
+        List <String> wish_list = new ArrayList<>();
+        //hashtag 가져오기
+        for (HashTagEntity h : hashtags){
+            hash_list.add(h.getHashTag());
+        }
+        //wishlist 가져오기
+        for(WishListEntity w : wishlists){
+            wish_list.add(w.getText());
+        }
+        GroupDetailDto.get().setWishLists(wish_list);
+        GroupDetailDto.get().setHashtags(hash_list);
         return GroupDetailDto;
 
     }
@@ -61,34 +76,17 @@ public class GroupService {
         groupEntity.setText(group.getText());
         groupEntity.setKakaoLink(group.getKakaoLink());
         groupEntity.setMaxNum(group.getMaxNum());
-        System.out.println(groupEntity);
+        //Hashtag 저장
         final int groupID= groupRepository.save(groupEntity).getGroupID();
-        System.out.println(groupID);
-        //System.out.println(obj);
 
-        // group save하고 groupID를 받아오는 작업을 필요로 함 .
-
-        // hash태그 전부
-
-        for (Map<String,Object> hashtag: group.getHashtags()){
-            hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(1))));
-            hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(2))));
-            hashtagRepository.save( new HashTagEntity ( groupID, (String) hashtag.get(Integer.toString(3))));
+        for (String hashtag: group.getHashtags()){
+            hashtagRepository.save( new HashTagEntity ( groupID, hashtag));
         }
         // wishlist 저장
-
-        for (Map<String,Object> wishlist: group.getWishLists()){
-
-            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(1))));
-            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(2))));
-            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(3))));
-            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(4))));
-            wishListRepository.save(new WishListEntity( groupID,(String) wishlist.get(Integer.toString(5))));
-
-
-
+        for (String wishlist: group.getWishLists()){
+            wishListRepository.save(new WishListEntity( groupID,wishlist));
         }
-        //기타 그룹 정보 저장
+        joinRepository.save(new JoinEntity(groupID,user_id));
 
         return;
     }
@@ -141,11 +139,20 @@ public class GroupService {
     public void joinGroup(int group_id, int user_id){
         JoinEntity joinEntity= new JoinEntity(group_id,user_id);
         joinRepository.save(joinEntity);
+        Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
+        group.get().setCurNum(group.get().getCurNum()+1);
+        groupRepository.save(group.get());
         return ;
     }
     public void leaveGroup(int group_id, int user_id){
-        JoinEntity joinEntity= new JoinEntity(group_id,user_id);
-        joinRepository.delete(joinEntity);
+        System.out.println(group_id+" "+user_id);
+        System.out.println(joinRepository.findByGroupIDAndUserID(group_id,user_id).get().getJoinedID());
+
+        joinRepository.deleteByGroupIDAndUserID(group_id,user_id);
+        System.out.println("delete success");
+        Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
+        group.get().setCurNum(group.get().getCurNum()-1);
+        groupRepository.save(group.get());
         return ;
     }
 

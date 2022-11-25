@@ -12,7 +12,7 @@ import lombok.Setter;
 @ApiModel(value = "취향 정보", description = "유저의 취향 정보를 나타내는 domain class 입니다.")
 public class FavorDto {
 
-    @ApiModelProperty(value = "유저 id", required = true, example = "35")
+    @ApiModelProperty(value = "유저 id", required = true)
     private Integer userID;
     @ApiModelProperty(value = "취침시간", required = true, example = "0")
     private String sleepTime;

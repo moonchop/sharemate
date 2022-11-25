@@ -18,5 +18,10 @@ import java.util.Optional;
 public interface JoinRepository extends JpaRepository<JoinEntity,Number> {
 
 
+    void deleteByGroupIDAndUserID(int groupID,int userID);
 
+    Optional<JoinEntity> findByGroupIDAndUserID(Integer groupID, Integer userID);
+    List<JoinEntity> findJoinEntitiesByGroupID(int groupID);
+
+    List<JoinEntity> findAllByGroupID(int groupID);
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -16,15 +18,18 @@ public class GroupListDto {
     private String title;
     private Integer maxNum;
     private Integer curNum;
+    private List<String> hashtags ;
+    private String building ;
     private Date created_at;
 
     @Builder
-    public GroupListDto(Integer group_id,Integer user_id, String title, Integer maxNUm, Integer curNum, Date created_at) {
+    public GroupListDto(Integer group_id,Integer user_id, String title, Integer maxNUm, Integer curNum, String building,Date created_at) {
         this.group_id=group_id;
         this.user_id = user_id;
         this.title=title;
         this.maxNum=maxNUm;
         this.curNum=curNum;
+        this.building=building;
         this.created_at=created_at;
     }
 }
