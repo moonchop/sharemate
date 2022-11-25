@@ -35,7 +35,7 @@ const BottomNav = () => {
   //activity.name === "Profile" || activity.name === "DetailGroup" ? return <></> :
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 h-[6%] bg-white flex justify-around border-t-2 border-gray-500">
+    <nav className="fixed inset-x-0 bottom-0 h-[7%] bg-white flex justify-around border-t-2 items-center">
       {NAVIGATE_OBJ.map(({ action, content, Icon }, idx) => (
         <Link
           activityName={action}
@@ -44,13 +44,13 @@ const BottomNav = () => {
           animate={false}
           key={`bottom-${idx}`}
           className={classNames(
-            `text-xs h-full text-center`,
+            `flex flex-col items-center justify-center text-xs h-full text-center`,
             activity.name === action ? "opacity-100" : "opacity-30"
           )}
         >
           {React.cloneElement(Icon, {
             className: classNames(
-              `justify-center items-center w-full h-3/6 mt-1`,
+              `justify-center items-center w-full h-2/5 mt-1`,
               activity.name === action ? "opacity-100" : "opacity-30"
             ),
           })}
