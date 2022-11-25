@@ -19,3 +19,5 @@ export const FavorApi = async (params: any) =>
 
 export const GroupApi = async (params: any) =>
   await request.post("/group", params);
+
+export const GroupParticipate = async (path: string) => await request.get(path);
