@@ -63,7 +63,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           </label>
         </div>
         <input
-          className="w-full px-4 mb-1 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
+          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="name"
           type="text"
           placeholder="nickname"
@@ -99,7 +99,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
               id="남"
               name="radio"
               // checked
-              className="mr-2 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+              className="mr-2 h-5 w-5 accent-fuchsia-500 border-gray-400"
             />
             <span>남</span>
             <input
@@ -108,7 +108,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
               value="여"
               id="여"
               name="radio"
-              className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+              className="accent-fuchsia-500 mr-2 ml-5 h-5 w-5  border-gray-400"
             />
             <span>여</span>
           </label>
@@ -126,7 +126,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={1}
             id="1"
-            className="mr-2 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+            className="mr-2 h-5 w-5 accent-purple-500 border-gray-400"
           />
           1
           <input
@@ -134,7 +134,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={2}
             id="2"
-            className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+            className="mr-2 ml-5 h-5 w-5 accent-purple-500 border-gray-400"
           />
           2
           <input
@@ -142,7 +142,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={3}
             id="3"
-            className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+            className="mr-2 ml-5 h-5 w-5 4)] accent-purple-500 border-gray-400"
           />
           3
           <input
@@ -150,7 +150,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             type="radio"
             value={4}
             id="4"
-            className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+            className="mr-2 ml-5 h-5 w-5 accent-purple-500 border-gray-400"
           />
           4
         </label>
@@ -296,7 +296,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           disabled={isSubmitting}
           className="flex justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] ring-1 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
         >
-          다음
+          시작하기
         </button>
       </form>
     </div>

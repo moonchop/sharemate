@@ -60,13 +60,14 @@ const Login = () => {
         <div className="flex flex-col h-[13%] w-[81%]">
           <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[5%] items-center">
             <input
-              className=" w-full h-full outline-0 placeholder:text-lg placeholder:font-normal "
+              className=" w-full h-full outline-0 border-none placeholder:text-lg placeholder:font-normal "
               type={"email"}
               placeholder="Email"
               value={loginForm.email}
               name="email"
               onChange={changeHandler}
             />
+
             {loginForm.email ? (
               <AiFillCloseCircle
                 className="w-[10%] h-[50%] opacity-60"
