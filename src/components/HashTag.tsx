@@ -8,12 +8,12 @@ const HashTag = ({
   text,
   color,
 }: {
-  text: string[];
+  text?: string[];
   color: ("red" | "blue" | "green")[];
 }) => {
   return (
     <div className="flex space-x-3">
-      {text.map((elem, index) => (
+      {text?.map((elem, index) => (
         <p
           key={index}
           className={`items-center bg-white rounded-2xl ring-2 text-sm  px-2 py-1 min-w-fit ${
