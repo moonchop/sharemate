@@ -4,7 +4,11 @@ import { ImSearch } from "react-icons/im";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useFlow } from "../stackflow";
 
-const Topnav = () => {
+type topProps = {
+  status?: boolean;
+};
+
+const Topnav: React.FC<topProps> = ({ status }) => {
   const { pop } = useFlow();
   const stack_Status = useActivity();
   const onClick = () => {
@@ -22,7 +26,7 @@ const Topnav = () => {
         <div className="font-bold text-xl text-white">Share Mate</div>
       )}
       <div className="flex h-[100%] items-center justify-center">
-        <ImSearch className="mr-3 w-5 h-5" />
+        {!status ? <ImSearch className="mr-3 w-5 h-5" /> : <></>}
       </div>
     </header>
   );
