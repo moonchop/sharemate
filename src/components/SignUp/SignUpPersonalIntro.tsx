@@ -44,9 +44,9 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
           </p>
           <input
             className=" w-full h-[150px] px-4 mb-8 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
-            id="intro"
+            id="selfIntro"
             type="text"
-            {...register("intro", {
+            {...register("selfIntro", {
               required: true,
             })}
           />

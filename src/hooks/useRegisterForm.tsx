@@ -67,11 +67,10 @@ export const useRegisterForm = () => {
     contentList: ["흡연", "비흡연"],
     title: "흡연 유무를 선택해주세요.",
   });
-  const { Component: LivingPatternSelect, state: wakeupTime } =
-    useRadio({
-      contentList: ["올빼미형", "아침형"],
-      title: "생활 패턴을 선택해주세요.",
-    });
+  const { Component: LivingPatternSelect, state: studyTime } = useRadio({
+    contentList: ["올빼미형", "아침형"],
+    title: "생활 패턴을 선택해주세요.",
+  });
   const { Component: DrinkSelect, state: drinking } = useRadio({
     contentList: ["1", "2", "3", "4"],
     title: "일주일 내 음주 횟수를 입력해주세요.",
@@ -84,6 +83,10 @@ export const useRegisterForm = () => {
     contentList: ["상", "중", "하", "무"],
     title: "코골이 유무를 선택해주세요.",
   });
+  const { Component: WakeUpTime, state: wakeupTime } = useRadio({
+    contentList: ["6-8", "8-10", "10-12"],
+    title: "기상 시간을 선택해주세요.",
+  });
 
   useEffect(() => {
     console.log(
@@ -91,20 +94,21 @@ export const useRegisterForm = () => {
       mbti,
       sleepTime,
       smoking,
-      wakeupTime,
+      studyTime,
       drinking,
       cleanness,
-      snoring
+      snoring,
+      wakeupTime
     );
   }, [
     mbti,
-
     sleepTime,
     smoking,
-    wakeupTime,
+    studyTime,
     drinking,
     cleanness,
     snoring,
+    wakeupTime,
   ]);
 
   return {
@@ -113,10 +117,11 @@ export const useRegisterForm = () => {
 
       sleepTime,
       smoking,
-      wakeupTime,
+      studyTime,
       drinking,
       cleanness,
       snoring,
+      wakeupTime,
     },
     Component: () => (
       <>
@@ -127,6 +132,7 @@ export const useRegisterForm = () => {
         <div className="my-10">
           <MbtiSelect />
         </div>
+        <WakeUpTime />
         <SleepTimeSelect />
         <SmokingSelect />
         <LivingPatternSelect />
