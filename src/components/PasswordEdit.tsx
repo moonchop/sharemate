@@ -16,9 +16,9 @@ const PasswordEdit = () => {
   });
 
   const [passwordForm, setPasswordForm] = useState({
-    origin_pass: "",
-    new_pass: "",
-    verify_pass: "",
+    currPwd: "",
+    newPwd: "",
+    verifyPwd: "",
   });
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,9 +28,13 @@ const PasswordEdit = () => {
 
   const passwordSubmit = () =>
     request
-      .put("/", passwordForm.new_pass)
+      .put("user/pwd", {
+        currPwd: passwordForm.currPwd,
+        newPwd: passwordForm.newPwd,
+      })
       .then((response) => {
         console.log(response.status);
+        console.log(response.data);
         return true;
       })
       .catch((error) => {
@@ -40,10 +44,10 @@ const PasswordEdit = () => {
 
   const submitHandler = async () => {
     const pwdRegEx = /^[A-Za-z0-9]([A-Za-z0-9]){6,12}$/;
-    if (!pwdRegEx.test(passwordForm.new_pass)) {
+    if (!pwdRegEx.test(passwordForm.newPwd)) {
       alert("숫자+영문자 조합으로 6자리에서 12자리로 입력해주세요");
     } else {
-      if (passwordForm.new_pass === passwordForm.verify_pass) {
+      if (passwordForm.newPwd === passwordForm.verifyPwd) {
         const result = await passwordSubmit();
         if (result) {
           alert("비밀번호 변경에 성공했습니다.");
@@ -60,18 +64,18 @@ const PasswordEdit = () => {
       </div>
       <div className="flex h-[6%] mb-[3%] border-2 rounded-md items-center">
         <input
-          name="origin_pass"
+          name="currPwd"
           type={showPass.origin ? "text" : "password"}
-          value={passwordForm.origin_pass}
+          value={passwordForm.currPwd}
           placeholder="기존 비밀번호"
           className=" w-full outline-0  pl-[5px] placeholder:text-lg placeholder:font-normal"
           onChange={changeHandler}
         />
-        {passwordForm.origin_pass ? (
+        {passwordForm.currPwd ? (
           <AiFillCloseCircle
             className="w-[8%] h-[50%] opacity-60"
             onClick={() =>
-              setPasswordForm((prev) => ({ ...prev, origin_pass: "" }))
+              setPasswordForm((prev) => ({ ...prev, currPwd: "" }))
             }
           />
         ) : (
@@ -95,19 +99,17 @@ const PasswordEdit = () => {
       </div>
       <div className="flex h-[6%] mb-[3%] border-2 rounded-md items-center">
         <input
-          name="new_pass"
+          name="newPwd"
           type={showPass.new ? "text" : "password"}
-          value={passwordForm.new_pass}
+          value={passwordForm.newPwd}
           placeholder="새 비밀번호"
           className=" w-full outline-0  pl-[5px] placeholder:text-lg placeholder:font-normal"
           onChange={changeHandler}
         />
-        {passwordForm.new_pass ? (
+        {passwordForm.newPwd ? (
           <AiFillCloseCircle
             className="w-[8%] h-[50%] opacity-60"
-            onClick={() =>
-              setPasswordForm((prev) => ({ ...prev, new_pass: "" }))
-            }
+            onClick={() => setPasswordForm((prev) => ({ ...prev, newPwd: "" }))}
           />
         ) : (
           <></>
@@ -130,18 +132,18 @@ const PasswordEdit = () => {
       </div>
       <div className="flex h-[6%] mb-[3%] border-2 rounded-md items-center">
         <input
-          name="verify_pass"
+          name="verifyPwd"
           type={showPass.verify ? "text" : "password"}
-          value={passwordForm.verify_pass}
+          value={passwordForm.verifyPwd}
           placeholder="새 비밀번호 확인"
           className=" w-full outline-0  pl-[5px] placeholder:text-lg placeholder:font-normal"
           onChange={changeHandler}
         />
-        {passwordForm.verify_pass ? (
+        {passwordForm.verifyPwd ? (
           <AiFillCloseCircle
             className="w-[8%] h-[50%] opacity-60"
             onClick={() =>
-              setPasswordForm((prev) => ({ ...prev, verify_pass: "" }))
+              setPasswordForm((prev) => ({ ...prev, verifyPwd: "" }))
             }
           />
         ) : (
