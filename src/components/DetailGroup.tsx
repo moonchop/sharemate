@@ -62,7 +62,7 @@ const DetailGroup = () => {
 
   return (
     <div className="items-center">
-      <img src={Ajou} className="absolute z-5 h-[20%] opacity-50" />
+      <img src={Ajou} className="absolute z-5 h-[20%] opacity-50 w-full" />
       {/* 하얀색 카드 Form */}
       <div className="absolute h-[70%] bg-white rounded-3xl top-[20%] w-[90%] right-1/2 left-1/2 -translate-x-1/2 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] ">
         <div className=" p-5 z-10 ">

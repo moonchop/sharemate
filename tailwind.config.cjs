@@ -7,5 +7,9 @@ module.exports = {
       pro: "389px",
     },
   },
-  plugins: [require("tailwind-scrollbar-hide")],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/custom-forms"),
+    require("@tailwindcss/forms"),
+  ],
 };

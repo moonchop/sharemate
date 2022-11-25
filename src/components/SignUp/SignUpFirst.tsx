@@ -53,19 +53,17 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   };
 
   return (
-    <div className="py-[25px] p-3 overflow-y-scroll">
-      <h1 className="text-[33px] text-bold text-left text-black mb-10 py-5">
-        회원가입
-      </h1>
+    <div className="px-5 py-8 overflow-y-scroll">
+      <h1 className="text-3xl font-semibold text-black mb-7">회원가입</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-base text-left text-black" htmlFor="name">
+          <div className="mr-1 text-red-500">* </div>
+          <label className="text-base text-left text-black mb-2" htmlFor="name">
             닉네임
           </label>
         </div>
         <input
-          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
+          className="w-full px-4 mb-1 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="name"
           type="text"
           placeholder="nickname"
@@ -79,95 +77,92 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         />
         {errors.name && (
           <small
-            className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
+            className="text-slate-300 w-full flex -mt-5  ml-2"
             role="alert"
           >
             {errors.name.message as string}
           </small>
         )}
 
-        <div className="flex mt-4">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-base text-left pb-3 text-black" htmlFor="name">
+        <div className="flex flex-row mt-6 mb-2">
+          <div className="mr-1 text-red-500">*</div>
+          <label className=" text-base text-left text-black" htmlFor="name">
             성별
           </label>
         </div>
-        <label className="m-3 ">
-          <input
-            {...register("gender", { required: true })}
-            type="radio"
-            value="남"
-            id="남"
-            className="mr-2"
-          />
-          남
-        </label>
-        <label className="m-3">
-          <input
-            {...register("gender", { required: true })}
-            type="radio"
-            value="여"
-            id="여"
-            className="mr-2"
-          />
-          여
-        </label>
-
-        <div className="flex mt-7">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-base text-left pb-3 text-black" htmlFor="name">
+        <div className="flex flex-row items-center">
+          <label className=" flex items-center">
+            <input
+              {...register("gender", { required: true })}
+              type="radio"
+              value="남"
+              id="남"
+              name="radio"
+              // checked
+              className="mr-2 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+            />
+            <span>남</span>
+            <input
+              {...register("gender", { required: true })}
+              type="radio"
+              value="여"
+              id="여"
+              name="radio"
+              className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
+            />
+            <span>여</span>
+          </label>
+        </div>
+        {/* </div> */}
+        <div className="flex mt-6">
+          <div className="mr-1 text-red-500">* </div>
+          <label className="text-base text-left mb-2 text-black" htmlFor="name">
             학년
           </label>
         </div>
-        <label className="m-3 ">
+        <label className="flex flex-row items-center">
           <input
             {...register("grade", { required: true })}
             type="radio"
             value={1}
             id="1"
-            className="mr-2"
+            className="mr-2 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
           />
           1
-        </label>
-        <label className="m-3">
           <input
             {...register("grade", { required: true })}
             type="radio"
             value={2}
             id="2"
-            className="mr-2"
+            className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
           />
           2
-        </label>
-        <label className="m-3">
           <input
             {...register("grade", { required: true })}
             type="radio"
             value={3}
             id="3"
-            className="mr-2"
+            className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
           />
           3
-        </label>
-        <label className="m-3">
           <input
             {...register("grade", { required: true })}
             type="radio"
             value={4}
             id="4"
-            className="mr-2"
+            className="mr-2 ml-5 h-5 w-5 checked:bg-[rgb(171,130,224)] checked:ring-[rgb(171,130,224)] text-[rgb(171,130,224)] border-gray-400"
           />
           4
         </label>
 
-        <div className="flex pt-6">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-base text-left pb-2 text-black" htmlFor="pwd">
+        <div className="flex mt-6">
+          <div className="mr-1 text-red-500">* </div>
+          <label className="text-base text-left mb-2 text-black" htmlFor="pwd">
             비밀번호
           </label>
         </div>
         <input
-          className="w-full px-4 py-2.5 mb-5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
+          className="flex w-full px-4 py-2.5 mb-5 text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="pwd"
           type="password"
           placeholder="******"
@@ -182,15 +177,18 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         />
         {errors.pwd && (
           <small
-            className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
+            className="text-slate-300 w-full flex -mt-5  ml-2"
             role="alert"
           >
             {errors.pwd.message as string}
           </small>
         )}
-        <div className="flex">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-sm text-left text-black" htmlFor="major">
+        <div className="flex mt-4">
+          <div className="mr-1 text-red-500">* </div>
+          <label
+            className="text-base text-left text-black mb-2"
+            htmlFor="major"
+          >
             학과
           </label>
         </div>
@@ -204,16 +202,16 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           })}
         />
         {errors.major && (
-          <small
-            className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
-            role="alert"
-          >
+          <small className="text-slate-300 w-full flex -mt-5 ml-2" role="alert">
             {errors.major.message as string}
           </small>
         )}
-        <div className="flex">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-sm text-left text-black" htmlFor="birth">
+        <div className="flex mt-4">
+          <div className="mr-1 text-red-500">* </div>
+          <label
+            className="text-base text-left text-black mb-2"
+            htmlFor="birth"
+          >
             나이
           </label>
         </div>
@@ -227,16 +225,16 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           })}
         />
         {errors.age && (
-          <small
-            className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
-            role="alert"
-          >
+          <small className="text-slate-300 w-full flex -mt-5 ml-2" role="alert">
             {errors.age.message as string}
           </small>
         )}
-        <div className="flex">
-          <div className="my-[0.8px] mr-1">* </div>
-          <label className="text-sm text-left text-black" htmlFor="email">
+        <div className="flex mt-4">
+          <div className="mr-1 text-red-500">* </div>
+          <label
+            className="text-base text-left text-black mb-2"
+            htmlFor="email"
+          >
             이메일
           </label>
         </div>
@@ -257,14 +255,14 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           />
 
           <button
-            className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[#ab82e0] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
+            className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-1 ring-[#ab82e0] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
             onClick={getEmailValidNum}
           >
             인증요청
           </button>
           {errors.email && (
             <small
-              className="text-slate-300 w-full flex -mt-5 mb-3 ml-2"
+              className="text-slate-300 w-full flex -mt-5 ml-2"
               role="alert"
             >
               {errors.email.message as string}
@@ -272,9 +270,9 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           )}
         </div>
         <div className="w-full">
-          <div className="flex">
+          <div className="flex mt-4">
             <label
-              className="text-sm text-left ml-1 mb-1 text-black"
+              className="text-base text-left ml-1 mb-2 text-black"
               htmlFor="code"
             >
               인증번호
@@ -284,11 +282,11 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             className="w-[260px] px-4 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
             id="code"
             type="text"
-            placeholder="6af4ae"
+            placeholder="example"
             ref={checkEmailRef}
           />
           <div
-            className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-2 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
+            className="flex text-xs justify-center w-[60px] text-center py-3 m-1 float-right ring-1 ring-[rgb(171,130,224)] text-[rgb(171,130,224)] font-extrabold borde rounded-md shadow-button"
             onClick={handleCheckEmailValid}
           >
             {isValid ? "인증완료" : "확인"}
@@ -296,7 +294,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         </div>
         <button
           disabled={isSubmitting}
-          className="flex justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] ring-2 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
+          className="flex justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] ring-1 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
         >
           다음
         </button>
