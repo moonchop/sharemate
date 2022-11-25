@@ -17,7 +17,4 @@ export const checkEmail = async (email: string) =>
 export const FavorApi = async (params: any) =>
   await request.post("/favor", params);
 
-export const GroupApi = async (params: any) =>
-  await request.post("/group", params);
-
 export const GroupParticipate = async (path: string) => await request.get(path);
