@@ -1,29 +1,53 @@
 import { useActivityParams } from "@stackflow/react";
 import { HashTagColor } from "../utils/HashTagColor";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HashTag from "./HashTag";
 import Ajou from "../assets/Ajou.gif";
 import { IoIosCheckmark } from "react-icons/io";
 import { GroupParticipate } from "../utils/api/auth";
-interface ParamsValue {
-  groupID: number;
-  building: string;
-  hashtags: string[];
-  text: string;
-  wishLists: string[];
-  maxNum: number;
-  curNum: number;
-  userID: number;
-  kakaoLink: string;
-}
+import { IGroup } from "./GroupFeed";
+import request from "../stores/Request";
+
+// interface ParamsValue {
+//   groupID: number;
+//   building: string;
+//   hashtags: string[];
+//   text: string;
+//   wishLists: string[];
+//   maxNum: number;
+//   curNum: number;
+//   userID: number;
+//   kakaoLink: string;
+// }
 
 const DetailGroup = () => {
   // props : elem
-  const activity: ParamsValue = useActivityParams() as any;
-  const props = activity;
-  const [participation, setParticipation] = useState(false);
+  const Params: { num: any } = useActivityParams();
 
-  const getUserID = () => {};
+  const [participation, setParticipation] = useState(false);
+  const [group, setGroup] = useState<IGroup>({
+    groupID: 0,
+    building: "",
+    hashtags: [],
+    text: "",
+    wishLists: [],
+    maxNum: 0,
+    curNum: 0,
+    userID: 0,
+    kakaoLink: "",
+  });
+  // const getUserID = () => {};
+  useEffect(() => {
+    request
+      .get("group", { params: { num: Params.num } })
+      .then((response) => {
+        console.log(Params);
+        console.log(response.status);
+        console.log(response.data);
+        setGroup(response.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const hancleParticiation = async (state: boolean) => {
     setParticipation((prev) => !prev);
@@ -43,13 +67,13 @@ const DetailGroup = () => {
       <div className="absolute h-[70%] bg-white rounded-3xl top-[20%] w-[90%] right-1/2 left-1/2 -translate-x-1/2 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] ">
         <div className=" p-5 z-10 ">
           {/* 카드 내용 */}
-          <p className="text-2xl font-bold">{props.building}</p>
-          <p className="text-md mt-2">{props.text}</p>
+          <p className="text-2xl font-bold">{group.building}</p>
+          <p className="text-md mt-2">{group.text}</p>
           {/* 해시태그(화면 width 꽉차게 스크롤로 구현) */}
           <div className="pl-3 overflow-auto scrollbar-hide -mx-5 mt-2 ">
             <div className="p-2">
               <HashTag
-                text={props.hashtags}
+                text={group.hashtags}
                 color={HashTagColor as ("red" | "blue" | "green")[]}
               />
             </div>
@@ -59,7 +83,7 @@ const DetailGroup = () => {
             이런 룸메이트를 원해요.
           </p>
           <div>
-            {props.wishLists.map((elem, index) => (
+            {group.wishLists.map((elem, index) => (
               <div key={index} className="flex items-center mb-2 -ml-1.5">
                 <IoIosCheckmark className="w-7 h-7 text-green-700 opacity-50" />
                 <p className={"text-md"}>{elem}</p>

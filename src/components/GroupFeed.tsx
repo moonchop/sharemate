@@ -4,7 +4,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { useFlow } from "../stackflow";
 import { IoIosArrowForward } from "react-icons/io";
 import { BiBuildingHouse } from "react-icons/bi";
-interface IGroup {
+export interface IGroup {
   groupID: number;
   building: string;
   hashtags: string[];
@@ -135,7 +135,7 @@ const GroupFeed = () => {
           key={elem.groupID + elem.building}
           className=""
           onClick={() => {
-            push("DetailGroupActivity", elem);
+            push("DetailGroupActivity", { num: elem.groupID });
           }}
         >
           <div className="flex justify-between h-full">
