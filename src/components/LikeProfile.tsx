@@ -1,42 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFlow } from "../stackflow";
-import { IUser } from "./PersonalFeed";
+import { useUser } from "../stores/user";
+import request from "../stores/Request";
 import { HashTagColor } from "../utils/HashTagColor";
-import HashTag from "./HashTag";
 import { IoIosArrowForward } from "react-icons/io";
+import HashTag from "./HashTag";
 
-const dumyData: IUser[] = [
-  {
-    id: 1,
-    name: "이수인",
-    age: "23",
-    major: "행정학과",
-    hashtag: ["팀장", "대장", "카리스마"],
-    photo:
-      "https://user-images.githubusercontent.com/86648265/193459223-b395926e-98d0-4a2a-8787-9ec47fd5d7c6.png",
-  },
-  {
-    id: 2,
-    name: "이현조",
-    age: "22",
-    major: "경영학과",
-    hashtag: ["브레이커", "최강", "디자이너"],
-    photo:
-      "https://user-images.githubusercontent.com/86648265/193459183-cc7fea86-851d-492a-b537-70975de31643.png",
-  },
-  {
-    id: 3,
-    name: "장은학",
-    age: "24",
-    major: "소프트웨어학과",
-    hashtag: ["3학년", "운동", "비염"],
-    photo:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  },
-];
+interface IUser {
+  userID: number;
+  name: string;
+  major: string;
+  age: number;
+  gender: boolean;
+  profile_photo: string;
+  hashtags: string[];
+}
 
 const LikeProfile = () => {
   const { push } = useFlow();
+  const { userID } = useUser();
+  const [feedData, setFeedData] = useState([]);
+
+  useEffect(() => {
+    request
+      .get("/user/likelist", { params: { id: userID } })
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.data);
+        setFeedData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
     <>
@@ -44,18 +40,18 @@ const LikeProfile = () => {
         <div className="pro:text-3xl text-2xl font-bold pro:mb-[25px] mb-[20px] ">
           좋아요 누른 프로필
         </div>
-        {dumyData.map((elem: IUser) => (
-          <div className="h-[17%]" key={elem.id}>
+        {feedData.map((elem: IUser) => (
+          <div className="h-[17%]" key={elem.userID}>
             <div
               className="h-[100%] flex justify-between items-center"
               onClick={() => {
-                push("ProfileActivity", {});
+                push("ProfileActivity", { id: elem.userID });
               }}
             >
               <div className="flex flex-row h-[100%] w-[100%] items-center">
                 <div className="flex w-[20%] items-center">
                   <img
-                    src={elem.photo}
+                    src={elem.profile_photo}
                     className="mr-2 w-[58px] h-[58px] rounded-xl object-fill"
                   />
                 </div>
@@ -66,13 +62,12 @@ const LikeProfile = () => {
                     </p>
                     <p className="">24</p>
                     <p className="w-[50%] overflow-hidden text-ellipsis whitespace-nowrap mx-2">
-                      {/* 9글자가 최대 */}
                       {elem.major}
                     </p>
                   </div>
                   <div className="flex space-x-3 overflow-x-auto py-1 px-[2px] w-full scrollbar-hide">
                     <HashTag
-                      text={elem.hashtag}
+                      text={elem.hashtags}
                       color={HashTagColor as ("red" | "blue" | "green")[]}
                     />
                   </div>
