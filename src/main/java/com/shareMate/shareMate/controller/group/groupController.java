@@ -65,11 +65,13 @@ public class groupController {
     public ResponseEntity<ResGroupDetailDto>getDetail(@RequestParam Integer num){
 
         Optional<GroupDetailDto> groupDetailDto = groupService.getDetailGroup(num);
-        List<JoinEntity> join_list = joinRepository.findJoinEntitiesByGroupID(num);
+        List<JoinEntity> join_list = joinRepository.findAllByGroupID(num);
+       // System.out.println(join_list.);
         List <UserSimpleDto> user_List= new ArrayList<>();
         for( JoinEntity j : join_list){
+            System.out.println("@@@@");
+            System.out.println(j.getUserID());
             UserSimpleDto userSimpleDto = userService.doSelectOne(j.getUserID());
-
             user_List.add(userSimpleDto);
 
         }
@@ -128,18 +130,18 @@ public class groupController {
     //참가하기 (유저)
     @ApiOperation(value = "그룹매칭 참여하기",notes = "유저가 그룹매칭을 참여할 때 사용합니다.",tags="Group")
     @GetMapping("/join")
-    public ResponseEntity joinGroup(HttpServletRequest request ,@RequestParam int groupId){
+    public ResponseEntity joinGroup(HttpServletRequest request ,@RequestParam int groupID){
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         System.out.println("!!!"+user_id);
-        groupService.joinGroup(groupId,user_id);
+        groupService.joinGroup(groupID,user_id);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     //참여 취소
     @GetMapping("/leave")
     @ApiOperation(value = "그룹매칭 참여 취소",notes = "유저가 그룹매칭을 탈퇴할 때 사용합니다.",tags="Group")
-    public ResponseEntity leaveGroup(HttpServletRequest request ,@RequestParam int groupId){
+    public ResponseEntity leaveGroup(HttpServletRequest request ,@RequestParam int groupID){
         final int userid = Integer.parseInt((String) request.getAttribute("userid"));
-        groupService.leaveGroup(groupId,userid);
+        groupService.leaveGroup(groupID,userid);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

@@ -9,12 +9,14 @@ import com.shareMate.shareMate.repository.JoinRepository;
 import com.shareMate.shareMate.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.swing.*;
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class GroupService {
 
 
@@ -143,8 +145,11 @@ public class GroupService {
         return ;
     }
     public void leaveGroup(int group_id, int user_id){
-        JoinEntity joinEntity= new JoinEntity(group_id,user_id);
-        joinRepository.delete(joinEntity);
+        System.out.println(group_id+" "+user_id);
+        System.out.println(joinRepository.findByGroupIDAndUserID(group_id,user_id).get().getJoinedID());
+
+        joinRepository.deleteByGroupIDAndUserID(group_id,user_id);
+        System.out.println("delete success");
         Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
         group.get().setCurNum(group.get().getCurNum()-1);
         groupRepository.save(group.get());
