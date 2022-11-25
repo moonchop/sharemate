@@ -16,6 +16,7 @@ import CreateBoard from "../components/CreateBoard";
 import Login from "../activities/Login";
 import Password from "../components/PasswordEdit";
 import LikeProfile from "../components/LikeProfile";
+import ModifyFavor from "../components/ModifyFavor";
 
 type Navigate_Type =
   | "Main"
@@ -30,6 +31,7 @@ type Navigate_Type =
   | "Login"
   | "ProfileEdit"
   | "Password"
+  | "ModifyFavor"
   | "LikeProfile";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
@@ -44,6 +46,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   CreateBoard: <CreateBoard />,
   Login: <Login />,
   ProfileEdit: <ProfileEdit />,
+  ModifyFavor: <ModifyFavor />,
   Password: <Password />,
   LikeProfile: <LikeProfile />,
 };
@@ -60,6 +63,7 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       navigate === "CreateGroup" ||
       navigate === "Password" ||
       navigate === "LikeProfile" ||
+      navigate === "ModifyFavor" ||
       navigate === "ProfileEdit" ||
       navigate === "BoardDetail" ? (
         <></>

@@ -20,6 +20,7 @@ const LoginActivity = MakeActivity("Login");
 const ProfileEditActivity = MakeActivity("ProfileEdit");
 const PasswordActivity = MakeActivity("Password");
 const LikeProfileActivity = MakeActivity("LikeProfile");
+const ModifyFavorActivity = MakeActivity("ModifyFavor");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -39,6 +40,7 @@ const activities = {
   ProfileEditActivity,
   PasswordActivity,
   LikeProfileActivity,
+  ModifyFavorActivity,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -58,6 +60,7 @@ export const { Stack, useFlow } = stackflow({
         ProfileEditActivity: "/mypage/edit",
         PasswordActivity: "/mypage/password",
         LikeProfileActivity: "/mypage/like",
+        ModifyFavorActivity: "/mypage/modifyfavor",
         DetailGroupActivity: "/detailgroup",
         CreateGroupActivity: "/creategroup",
         BoardDetailActivity: "/board",
