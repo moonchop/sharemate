@@ -1,11 +1,18 @@
 import { useMbti, useRegisterForm } from "../../hooks/useRegisterForm";
+import { useSaveFormData } from "../../hooks/useSaveFormData";
 
 const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
   const { Component: RegisterForm, state } = useRegisterForm();
+  const { getData: SecondData } = useSaveFormData("second");
 
   const handleSubmit = (handleGo: Function) => {
     sessionStorage.setItem("second", JSON.stringify(state));
-    handleGo();
+
+    if (!Object.values(SecondData()).every((x) => x !== null && x !== "")) {
+      alert("작성되지 않은 칸이 존재합니다.");
+    } else {
+      handleGo();
+    }
   };
 
   return (

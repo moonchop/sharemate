@@ -5,13 +5,6 @@ import { useSaveFormData } from "../../hooks/useSaveFormData";
 import { FavorApi } from "../../utils/api/auth";
 
 const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
-  // useEffect(() => {
-  //   const data = sessionStorage.getItem("intro");
-  //   if (data === null) return;
-  //   (document.getElementById("intro") as any).value = data;
-  // });
-  const [personalityForm, setPersonalityForm] = useState({});
-
   const {
     register,
     handleSubmit,
@@ -24,15 +17,17 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
   const onSubmit = async (data: any) => {
     await new Promise((r) => setTimeout(r, 1000));
     setData(data);
-    setPersonalityForm(data);
 
     const result = { ...getThirdData(), ...getSecondData() };
 
     console.log(result);
-    ///result 데이터 포스트해야함
-    FavorApi(result).catch((err) => console.error(err));
 
-    handleGoNext();
+    if (Object.values(data).every((x) => x !== null && x !== "")) {
+      FavorApi(result).catch((err) => console.error(err));
+      handleGoNext();
+    } else {
+      alert("작성되지 않은 칸이 존재합니다.");
+    }
   };
 
   return (
@@ -46,9 +41,7 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
             className=" w-full h-[150px] px-4 mb-8 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
             id="selfIntro"
             type="text"
-            {...register("selfIntro", {
-              required: true,
-            })}
+            {...register("selfIntro")}
           />
           <div className="flex items-center ">
             <p className="my-4 mt-10 ml-2 text-md">
@@ -64,9 +57,7 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
             id="chatLink"
             type="text"
             placeholder="다른 사람들과 채팅을 하기 위해서 링크가 필요합니다."
-            {...register("chatLink", {
-              required: true,
-            })}
+            {...register("chatLink")}
           />
         </div>
         <button
