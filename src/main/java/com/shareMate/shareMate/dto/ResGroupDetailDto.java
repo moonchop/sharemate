@@ -11,8 +11,8 @@ import java.util.List;
 @Setter
 @ApiModel(value = "그룹 디테일 ", description = "그룹매칭 정보를 담은 domain class 입니다.")
 public class ResGroupDetailDto {
-    private GroupDetailDto groupDetailDto;
-    private List<UserSimpleDto> user;
+    private GroupDetailDto GroupDetailInfo;
+    private List<UserSimpleDto> joinedUserList;
 
 
     public ResGroupDetailDto(){}

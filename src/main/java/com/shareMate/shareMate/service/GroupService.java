@@ -76,6 +76,7 @@ public class GroupService {
         groupEntity.setMaxNum(group.getMaxNum());
         //Hashtag 저장
         final int groupID= groupRepository.save(groupEntity).getGroupID();
+
         for (String hashtag: group.getHashtags()){
             hashtagRepository.save( new HashTagEntity ( groupID, hashtag));
         }
@@ -83,6 +84,7 @@ public class GroupService {
         for (String wishlist: group.getWishLists()){
             wishListRepository.save(new WishListEntity( groupID,wishlist));
         }
+        joinRepository.save(new JoinEntity(groupID,user_id));
 
         return;
     }

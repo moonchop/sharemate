@@ -74,8 +74,8 @@ public class groupController {
 
         }
         ResGroupDetailDto resGroupDetailDto = new ResGroupDetailDto();
-        resGroupDetailDto.setGroupDetailDto(groupDetailDto.get());
-        resGroupDetailDto.setUser(user_List);
+        resGroupDetailDto.setGroupDetailInfo(groupDetailDto.get());
+        resGroupDetailDto.setJoinedUserList(user_List);
 
         return ResponseEntity.status(HttpStatus.OK).body(resGroupDetailDto);
     }
@@ -94,6 +94,8 @@ public class groupController {
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         System.out.println(group);
         groupService.addGroup(group,user_id);
+
+
         return  ResponseEntity.ok(HttpStatus.OK);
 
     }
