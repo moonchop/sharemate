@@ -43,8 +43,8 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
       return;
     }
     data.profile_photo = defaultProfile;
-    data.age = parseInt(data.age);
-    data.grade = parseInt(data.grade);
+    data.age = Number(data.age);
+    data.grade = Number(data.grade);
     data.gender === "남" ? (data.gender = 1) : (data.gender = 0);
     console.log("POST data", data);
     RegisterApi(data).catch((err) => console.error(err));
@@ -63,7 +63,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           </label>
         </div>
         <input
-          className="w-full px-4 mb-5 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
+          className="w-full px-4 py-2.5 mb-5 text-base text-coolGray-900 font-normal outline-none focus:border-[#ab82e0] border border-coolGray-200 rounded-lg shadow-input"
           id="name"
           type="text"
           placeholder="nickname"
@@ -84,7 +84,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           </small>
         )}
 
-        <div className="flex flex-row mt-6 mb-2">
+        <div className="flex flex-row mb-2 mt-2">
           <div className="mr-1 text-red-500">*</div>
           <label className=" text-base text-left text-black" htmlFor="name">
             성별

@@ -9,14 +9,14 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
   };
 
   return (
-    <div className="h-[100%] overflow-y-scroll">
+    <div className="h-[100%] overflow-y-scroll px-3 py-8">
       <RegisterForm />
-      <button
+      {/* <button
         onClick={() => handleSubmit(handleGoPrev)}
         className="w-[100px] h-[44px] m-2 float-left ring-2 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
       >
         이전
-      </button>
+      </button> */}
       <button
         onClick={() => handleSubmit(handleGoNext)}
         className="w-[100px] h-[44px] m-2 float-right ring-2 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"

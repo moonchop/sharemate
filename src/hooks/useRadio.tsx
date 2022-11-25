@@ -15,7 +15,6 @@ export const useRadio = ({
 }) => {
   const Ref = useRef<any>([]);
   const [radioState, setRadioState] = useState(defaultState ?? null);
-
   const handleClick = (content: string) => setRadioState(content);
 
   useEffect(() => {
@@ -27,8 +26,8 @@ export const useRadio = ({
 
   const RadioComponent = () => {
     return (
-      <div className="mb-[100px]">
-        {title && <p className="ml-3 text-xl">{title}</p>}
+      <div className="mb-20">
+        {title && <p className="ml-3 text-md">{title}</p>}
         <main className="flex p-2 ">
           <div
             className={`rounded-xl bg-gray-100 p-2 ${

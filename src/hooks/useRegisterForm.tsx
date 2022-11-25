@@ -44,7 +44,7 @@ export const useMbti = () => {
     state: mbti.EI + mbti.NS + mbti.TF + mbti.JP,
     Component: () => (
       <>
-        <p className="mt-2 ml-2 text-xl">MBTI를 선택해주세요.</p>
+        <p className="mt-2 ml-2 text-md">MBTI를 선택해주세요.</p>
         <div className="flex items-center justify-center">
           <EandISelect />
           <NandSSelect />
@@ -84,13 +84,12 @@ export const useRegisterForm = () => {
     title: "코골이 유무를 선택해주세요.",
   });
   const { Component: WakeUpTime, state: wakeupTime } = useRadio({
-    contentList: ["6-8", "8-10", "10-12"],
+    contentList: ["6-8시", "8-10시", "10-12시"],
     title: "기상 시간을 선택해주세요.",
   });
 
   useEffect(() => {
     console.log(
-      "진짜",
       mbti,
       sleepTime,
       smoking,
@@ -125,13 +124,11 @@ export const useRegisterForm = () => {
     },
     Component: () => (
       <>
-        <h1 className="text-[33px] py-[30px] p-3 text-bold text-left text-black mb-14 ml-2">
+        <p className="text-3xl  text-semibold text-left text-black mb-14 ">
           당신은 <br />
           어떤 룸메이트인가요?
-        </h1>
-        <div className="my-10">
-          <MbtiSelect />
-        </div>
+        </p>
+        <MbtiSelect />
         <WakeUpTime />
         <SleepTimeSelect />
         <SmokingSelect />
