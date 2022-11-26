@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useFlow } from "../../stackflow";
-import Logo from "../assets/Logo.png";
+import Logo from "../../assets/Logo.png";
 import { useAuth } from "../../stores/auth";
 import request from "../../stores/Request";
 import { AiFillCloseCircle } from "react-icons/ai";

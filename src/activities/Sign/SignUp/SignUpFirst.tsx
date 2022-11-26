@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { checkEmail, RegisterApi } from "../../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
-import defaultProfile from "../../assets/defaultProfile.png";
+import defaultProfile from "../../../assets/defaultProfile.png";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const [emailValidNum, setEmailValidNum] = useState("false");

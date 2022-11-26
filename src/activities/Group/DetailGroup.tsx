@@ -2,7 +2,7 @@ import { useActivityParams } from "@stackflow/react";
 import { HashTagColor } from "../../utils/HashTagColor";
 import React, { useEffect, useState } from "react";
 import HashTag from "../../components/HashTag";
-import Ajou from "../assets/Ajou.gif";
+import Ajou from "../../assets/Ajou.gif";
 import { IoIosCheckmark } from "react-icons/io";
 import {
   GetGroupApi,
