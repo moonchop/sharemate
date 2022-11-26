@@ -43,8 +43,8 @@ public class SignService {
 
             SimpleMailMessage  message = new SimpleMailMessage();
             message.setTo(email);
-            message.setSubject("쉐어메이트 회원가입 인증번호입니다.");
-            message.setText("이메일 인증코드: "+code);
+            message.setSubject("[sharemate] 인증번호입니다.");
+            message.setText("이메일 인증코드 입니다. : "+code);
             message.setFrom("jh6car@naver.com");
             javaMailSender.send(message);
         }catch (MailException mailException){

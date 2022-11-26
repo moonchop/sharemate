@@ -19,7 +19,7 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class GroupEntity {
+public class    GroupEntity {
     //    @Column(nullable = false,unique = true)
 
     @Id

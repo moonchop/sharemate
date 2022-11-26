@@ -3,6 +3,7 @@ package com.shareMate.shareMate.service.user;
 import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.response.BaseResponse;
 import com.shareMate.shareMate.dto.response.MessageUtils;
+
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
@@ -61,6 +62,7 @@ public class UserService {
             userSimpleDto.setAge(userEntity.get().getAge());
             userSimpleDto.setGender(userEntity.get().getGender());
             userSimpleDto.setName(userEntity.get().getName());
+            userSimpleDto.setMajor(userEntity.get().getMajor());
             userSimpleDto.setHashtags(hashtags);
 
 
@@ -99,19 +101,25 @@ public class UserService {
                     req.get().getGrade(),
                     req.get().getGender(),
                     req.get().getAge(),
+
                     req.get().getProfile_photo(),
+                    req.get().getKakao_link(),
                     accessToken);
         }
     }
 
 
 
-    public void doUpdate(int  num , UserDto  userDto) {
+    public void doUpdate(int  num , ReqUpdateUserDto reqUpdateUserDto) {
+        Optional<UserEntity> user =userRepository.findById(num);
+        user.get().setKakao_link(reqUpdateUserDto.getKakao_link());
+        user.get().setProfile_photo(reqUpdateUserDto.getProfile_photo());
+        user.get().setAge(reqUpdateUserDto.getAge());
+        user.get().setGrade(reqUpdateUserDto.getGrade());
+        user.get().setName(reqUpdateUserDto.getName());
+        user.get().setMajor(reqUpdateUserDto.getMajor());
 
-        UserEntity userEntity = userDto.toEntity();
-
-
-        userRepository.save(userEntity);
+        userRepository.save(user.get());
     }
 
     //  delete
@@ -153,7 +161,7 @@ public class UserService {
     }
     public UserDto getUserDetail(Integer num) {
         Optional<UserEntity> member = userRepository.findById(num);
-        return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getCreated_at(),member.get().getUpdated_at());
+        return new UserDto(member.get().getUserID(), member.get().getEmail(),member.get().getName(),member.get().getMajor(),member.get().getGrade(), member.get().getGender(), member.get().getAge(),member.get().getProfile_photo(),member.get().getKakao_link(),member.get().getCreated_at(),member.get().getUpdated_at());
 
     }
 
@@ -225,6 +233,12 @@ public class UserService {
         userRepository.save(userEntity);
         return ;
 
+    }
+
+    public UserEntity doSelectOneByEmail(String email){
+
+       Optional<UserEntity> user = userRepository.findByEmail(email);
+       return user.get();
     }
 
 

@@ -22,7 +22,7 @@ import java.util.Map;
 @Data
 public class ReqGroupDto {
 
-    @ApiModelProperty(value = "제목", required = true, example = "string")
+    @ApiModelProperty(value = "제목", required = false, example = "string")
     private String title;
     @ApiModelProperty(value = "내용", required = true, example = "string")
     private String text;
@@ -36,13 +36,13 @@ public class ReqGroupDto {
     @NotNull
     private List<String> hashtags ;
     private List<String> wishLists;
-    @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
-    private Date created_at;
+//    @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
+//    private Date created_at;
 
 
 
     @Builder
-    public ReqGroupDto(String title, String text, int maxNum,String kakaoLink, String building,Date created_at) {
+    public ReqGroupDto(String title, String text, int maxNum,String kakaoLink, String building) {
 
         this.title=title;
         this.text=text;
@@ -50,7 +50,7 @@ public class ReqGroupDto {
 
         this.kakaoLink=kakaoLink;
         this.building=building;
-        this.created_at=created_at;
+
     }
 
     public ReqGroupDto() {

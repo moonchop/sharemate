@@ -39,6 +39,7 @@ public class UserEntity implements UserDetails {
     private Boolean gender;
     private Integer age;
     private String profile_photo;
+    private String kakao_link;
     @CreatedDate
     private Date created_at;
     @LastModifiedDate
