@@ -21,7 +21,7 @@ const PasswordEdit = () => {
   const emailSubmit = () => {
     const email = authemail.email;
     request
-      .post("sign/email", { email })
+      .post("sign/email/new-pwd", { email })
       .then((response) => {
         console.log(response.status);
         console.log(response.data);
@@ -41,8 +41,10 @@ const PasswordEdit = () => {
   };
 
   const submitHandler = () => {
+    console.log(authemail.email);
     if (successState) {
-      replace("FindPassword_PasswordActivity", {});
+      console.log("진입");
+      replace("FindPassword_PasswordActivity", { email: authemail.email });
     } else {
       alert("이메일 인증을 진행해주세요");
     }
@@ -59,8 +61,9 @@ const PasswordEdit = () => {
           <input
             name="email"
             type={"email"}
+            readOnly={successState ? true : false}
             value={authemail.email}
-            placeholder="example@email.com"
+            placeholder="ex). example@email.com"
             className=" w-full outline-0  pl-[5px] text-base"
             onChange={changeHandler}
           />
