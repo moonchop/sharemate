@@ -53,10 +53,6 @@ const Login = () => {
     setLoginForm((prev) => ({ ...prev, pwd: "" }));
   };
 
-  const autoHandler = () => {
-    auto === 0 ? setAuto(1) : setAuto(0);
-  };
-
   return (
     <div className="h-full w-full">
       <div className="flex flex-col items-center h-full w-full">
@@ -102,33 +98,21 @@ const Login = () => {
           </div>
         </div>
         <div className="w-[81%] justify-between items-center flex flex-row pro:mb-[30%] mb-[23%]">
-          <div className="flex text-[#AAAAAA] text-sm">
-            <input
-              className="flex mr-1 accent-purple-500"
-              type={"checkbox"}
-              value={auto}
-              name="auto"
-              onChange={autoHandler}
-            />
-            자동 로그인
+          <div
+            className="flex text-[#AAAAAA] text-sm mr-2 text  underline underline-offset-4"
+            onClick={() => {
+              push("SignUpActivity", {});
+            }}
+          >
+            회원가입
           </div>
-          <div className="flex flex-row">
-            <div
-              className="flex text-[#AAAAAA] text-sm mr-2 text  underline underline-offset-4"
-              onClick={() => {
-                push("SignUpActivity", {});
-              }}
-            >
-              회원가입
-            </div>
-            <div
-              className="flex text-[#AAAAAA] text-sm  underline underline-offset-4"
-              onClick={() => {
-                push("FindPwdActivity", {});
-              }}
-            >
-              비밀번호 찾기
-            </div>
+          <div
+            className="flex text-[#AAAAAA] text-sm  underline underline-offset-4"
+            onClick={() => {
+              push("FindPwd_emailActivity", {});
+            }}
+          >
+            비밀번호 찾기
           </div>
         </div>
         <button
