@@ -76,7 +76,7 @@ const GroupFeed = () => {
         onClick={() => {
           push("CreateGroupActivity", {});
         }}
-        className=" absolute bottom-16 right-2 self-center w-[45px] h-[45px] rounded-full m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white ring-opacity-70 "
+        className=" absolute bottom-16 right-2 self-center w-[45px] h-[45px] rounded-full m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white ring-opacity-70 bg-opacity-70 "
       >
         <div className="flex items-center justify-center">
           <BsPencil className="w-7 h-7 opacity-70" />

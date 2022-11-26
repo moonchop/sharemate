@@ -7,4 +7,5 @@ export interface SignUpFormInterface {
   age: number;
   grade: number;
   profile_photo?: string;
+  kakao_link: string;
 }

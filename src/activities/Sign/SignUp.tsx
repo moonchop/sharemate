@@ -14,9 +14,8 @@ const Stage_Map = [
   <SignUpSecond />,
   <SignUpPersonalIntro />,
 ];
-
 const SignUp: ActivityComponentType = () => {
-  const [stage, setStage] = useState(0);
+  const [stage, setStage] = useState(2);
 
   const handleGoPrev = () => {
     console.log(stage);

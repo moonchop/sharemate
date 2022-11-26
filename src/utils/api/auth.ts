@@ -6,13 +6,13 @@ type LoginFormType = {
 };
 
 export const loginApi = async (loginForm: LoginFormType) =>
-  await request.post("/login", loginForm);
+  await request.post("/sign/login", loginForm);
 
 export const RegisterApi = async (params: any) =>
-  await request.post("/register", params);
+  await request.post("/user", params);
 
 export const checkEmail = async (email: string) =>
-  request.post("/register/email", { email });
+  await request.post("/sign/email", { email });
 
 export const FavorApi = async (params: any) =>
   await request.post("/favor", params);

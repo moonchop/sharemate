@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import { checkEmail, RegisterApi } from "../../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
 import defaultProfile from "../../../assets/defaultProfile.png";
+import { useAuth } from "../../../stores/auth";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const [emailValidNum, setEmailValidNum] = useState("false");
   const [isValid, setIsValid] = useState(false);
   const checkEmailRef = useRef<HTMLInputElement>(null);
+  const { setToken } = useAuth();
   const {
     register,
     handleSubmit,
@@ -16,13 +18,16 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   } = useForm<SignUpFormInterface>();
 
   const getEmailValidNum = async () => {
-    const email = getValues("email");
-    return await checkEmail(email)
-      .then((response) => {
-        setEmailValidNum(response.data);
-        console.log(response.data);
-      })
-      .catch(() => alert("중복된 이메일입니다."));
+    console.log(getValues("email"));
+    try {
+      const response = await checkEmail(getValues("email"));
+
+      setEmailValidNum(response.data);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+      alert("요청에 실패했습니다.");
+    }
   };
 
   const handleCheckEmailValid = () => {
@@ -37,18 +42,25 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   };
 
   const onSubmit = async (data: SignUpFormInterface) => {
-    console.log(data);
     if (!isValid) {
       console.log(data);
       return;
     }
+
     data.profile_photo = defaultProfile;
     data.age = Number(data.age);
     data.grade = Number(data.grade);
-    data.gender === "남" ? (data.gender = 1) : (data.gender = 0);
+    data.gender = "남" ? 1 : 0;
     console.log("POST data", data);
-    RegisterApi(data).catch((err) => console.error(err));
+    RegisterApi(data).then((elem: any) => {
+      console.log(elem);
+      setToken({
+        ...{ accessToken: elem.data.data.accessToken },
+        ...{ refreshToken: elem.data.data.accessToken },
+      });
+    });
     console.log("타입:", typeof data.age, typeof data.grade);
+
     handleGoNext();
   };
 
@@ -95,19 +107,16 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             <input
               {...register("gender", { required: true })}
               type="radio"
-              value="남"
+              value={"남"}
               id="남"
-              name="radio"
-              // checked
               className="mr-2 h-5 w-5 accent-fuchsia-500 border-gray-400"
             />
             <span>남</span>
             <input
               {...register("gender", { required: true })}
               type="radio"
-              value="여"
+              value={"여"}
               id="여"
-              name="radio"
               className="accent-fuchsia-500 mr-2 ml-5 h-5 w-5  border-gray-400"
             />
             <span>여</span>
@@ -170,8 +179,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             required: "비밀번호는 필수 입력입니다. ",
             pattern: {
               value: /^[A-Za-z0-9]{6,12}$/,
-              message:
-                "비밀번호 형식에 맞지 않습니다. (한글,영문,숫자 6~12 자리)",
+              message: "비밀번호 형식에 맞지 않습니다. (영문,숫자 6~12 자리)",
             },
           })}
         />
@@ -223,6 +231,24 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           {...register("age", {
             required: "필수 입력입니다.",
           })}
+        />
+        {errors.age && (
+          <small className="text-slate-300 w-full flex -mt-5 ml-2" role="alert">
+            {errors.age.message as string}
+          </small>
+        )}
+        <div className="flex  mt-4">
+          <div className="mr-1 text-red-500">* </div>
+          <p className="text-base text-left  text-black">
+            카카오톡 1:1 오픈채팅 링크를 입력해주세요.
+          </p>
+        </div>
+        <input
+          className="mt-2 placeholder:text-sm w-full px-4 mb-5 py-2.5 text-base text-coolGray-600 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
+          id="chatLink"
+          type="text"
+          placeholder="다른 사람들과 채팅을 하기 위해서 링크가 필요합니다."
+          {...register("kakao_link")}
         />
         {errors.age && (
           <small className="text-slate-300 w-full flex -mt-5 ml-2" role="alert">
@@ -292,12 +318,16 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
             {isValid ? "인증완료" : "확인"}
           </div>
         </div>
-        <button
-          disabled={isSubmitting}
-          className="flex justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] ring-1 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
-        >
-          시작하기
-        </button>
+        {isValid ? (
+          <button
+            disabled={isSubmitting}
+            className="flex justify-center w-[100px] h-[44px] pt-3 float-right my-10 -mr-[65px] ring-1 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
+          >
+            시작하기
+          </button>
+        ) : (
+          ""
+        )}
       </form>
     </div>
   );

@@ -18,7 +18,6 @@ const CreateGroup = () => {
   const [groupForm, setGroupForm] = useState({
     hashtags: [],
     wishLists: [],
-    created_at: new Date(),
   });
   const [hashtag, setHashtag] = useState({});
   const [wishList, setWishList] = useState({});
