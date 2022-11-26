@@ -26,6 +26,28 @@ const MyPage = () => {
   const logoutHandler = () => {
     if (confirm("로그아웃 하시겠습니까?")) {
       setToken({ accessToken: "", refreshToken: "" });
+      setUser({
+        userID: 0,
+        email: "",
+        gender: false,
+        name: "",
+        major: "",
+        grade: 0,
+        age: 0,
+        kakao_link: "",
+        profile_photo: "",
+        hashtag_list: [],
+      });
+      setFavor({
+        mbti: "",
+        sleepTime: "",
+        smoking: "",
+        wakeupTime: "",
+        drinking: "",
+        sutdyTime: "",
+        cleanness: "",
+        snoring: "",
+      });
       replace("LoginActivity", {});
     } else {
       alert("로그아웃이 취소되었습니다.");
@@ -34,6 +56,10 @@ const MyPage = () => {
 
   const confirmHandler = () => {
     if (confirm("회원탈퇴를 하시겠습니까?")) {
+      request
+        .post("/user/del")
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
       replace("LoginActivity", {});
     } else {
       alert("회원탈퇴가 취소되었습니다.");
@@ -47,15 +73,15 @@ const MyPage = () => {
           <div className="pro:text-3xl text-2xl font-semibold pro:mb-[25px] mb-[20px] ml-[24px]">
             마이페이지
           </div>
-          <div className="flex items-center">
-            <div className="flex flex-row items-center w-[83%] ml-[24px]">
+          <div className="flex items-center ">
+            <div className="flex flex-row items-center w-full ml-[24px]">
               <img
                 className="flex rounded-3xl pro:w-[80px] pro:h-[80px] w-[60px] h-[60px] mr-[15px]"
                 src={profile_photo}
               />
-              <div className="flex flex-row w-[80%]">
+              <div className="flex flex-row w-full items-center">
                 <div
-                  className="flex flex-col "
+                  className="flex flex-col w-[84%]"
                   onClick={() => push("ProfileEditActivity", {})}
                 >
                   <div className="font-semibold pro:text-xl text-lg">
