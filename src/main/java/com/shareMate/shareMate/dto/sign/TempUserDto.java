@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Getter
 @Setter
 public class TempUserDto {
@@ -41,7 +39,7 @@ public class TempUserDto {
     }
 
     @Builder
-    public TempUserDto(Integer userID, String email, String name, String major, Integer grade, Boolean gender, Integer age, String profile_photo) {
+    public TempUserDto(Integer userID, String email, String name, String major, Integer grade, Boolean gender, Integer age, String profile_photo, String profilePhoto) {
         this.userID = userID;
         this.email = email;
         this.name = name;

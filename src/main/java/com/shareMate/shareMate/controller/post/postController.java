@@ -3,7 +3,9 @@ package com.shareMate.shareMate.controller.post;
 import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.entity.PostEntity;
+import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.jwt.TokenHelper;
+import com.shareMate.shareMate.repository.UserRepository;
 import com.shareMate.shareMate.service.PostService;
 import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
@@ -28,6 +30,7 @@ public class postController {
     private final SignService signService;
     private final PostService postService;
     private final TokenHelper tokenHelper;
+    private final UserRepository userRepository;
 
 
     //게시글 전체 리스트 조회
@@ -40,7 +43,8 @@ public class postController {
         List<PostEntity> list = postService.getAllPost();
         ArrayList<PostListDto> responseList = new ArrayList<>();
         for (PostEntity e : list) {
-            PostListDto postListDto = new PostListDto(e.getPostId(), e.getUser_id(), e.getTitle(), e.getCategory(), e.getCreated_at());
+            Optional<UserEntity> u =userRepository.findById(e.getUser_id());
+            PostListDto postListDto = new PostListDto(e.getPostId(), e.getUser_id(),u.get().getName(), e.getTitle(),e.getText(), e.getCategory(), e.getCreated_at());
             responseList.add(postListDto);
         }
         return ResponseEntity.ok(responseList);

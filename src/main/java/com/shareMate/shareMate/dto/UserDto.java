@@ -25,9 +25,12 @@ public class UserDto {
     private Integer age;
 
     private String profile_photo;
+    private String kakao_link;
 
     private Date created_at;
     private Date updated_at;
+
+
 
     public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
@@ -46,7 +49,7 @@ public class UserDto {
     }
     public UserDto(){};
     @Builder
-    public UserDto(int userID, String email, String name, String major, int grade, boolean gender, int age, String profile_photo, Date created_at, Date updated_at) {
+    public UserDto(int userID, String email, String name, String major, int grade, boolean gender, int age, String profile_photo, String kakao_link,Date created_at, Date updated_at) {
         this.userID = userID;
         this.email = email;
 
@@ -57,6 +60,7 @@ public class UserDto {
         this.age=age;
 
         this.profile_photo = profile_photo;
+        this.kakao_link=kakao_link;
         this.created_at = created_at;
         this.updated_at= updated_at;
     }

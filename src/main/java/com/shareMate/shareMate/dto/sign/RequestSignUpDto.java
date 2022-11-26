@@ -26,12 +26,16 @@ public class RequestSignUpDto {
     private String name;
     @ApiModelProperty(value = "전공")
     private String major;
-    @ApiModelProperty(value = "학년",example = "3")
+    @ApiModelProperty(value = "학년")
     private Integer grade;
-    @ApiModelProperty(value = "성별",example = "true")
+    @ApiModelProperty(value = "성별")
     private Boolean gender;
-    @ApiModelProperty(value = "나이",example = "24")
+    @ApiModelProperty(value = "나이")
     private Integer age;
+
+    @ApiModelProperty(value= "카카오 오픈채팅 링크")
+    private String kakao_link;
+
     @ApiModelProperty(value = "프로필 사진")
     private String profile_photo;
 
@@ -45,6 +49,7 @@ public class RequestSignUpDto {
                 .grade(grade)
                 .gender(gender)
                 .age(age)
+                .kakao_link(kakao_link)
                 .profile_photo(profile_photo)
                 .build();
         return userEntity;

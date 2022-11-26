@@ -1,15 +1,19 @@
 package com.shareMate.shareMate.controller.auth;
 
+import com.shareMate.shareMate.dto.ReqSetPwdDto;
 import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.sign.RequestSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
+import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,6 +31,7 @@ import java.util.UUID;
 public class authController {
     private final UserService userService;
     private final SignService signService;
+
 
 
     @ApiOperation(value = "로그인(JWT 토큰 발급)",notes = "id,pw를 이용하여 로그인을 진행하고, jwt토큰을 발급합니다.",tags="Auth")
@@ -55,6 +60,16 @@ public class authController {
         }
 
 
+    };
+    @ApiOperation(value = "비밀번호 찾기",notes = "비밀번호 재설정 인증번호를 위한 api 입니다.",tags="Auth")
+    @PostMapping("/setPwd")
+    public ResponseEntity<String > EmailVerification(@RequestBody ReqSetPwdDto reqSetPwdDto) throws Exception {
+
+        UserEntity user =userService.doSelectOneByEmail(reqSetPwdDto.getEmail());
+        System.out.println(user.getUserID());
+        userService.updatePwd(user.getUserID(), reqSetPwdDto.getPwd());
+
+        return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");
     };
 
 }

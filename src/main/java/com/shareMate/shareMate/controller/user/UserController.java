@@ -2,6 +2,7 @@ package com.shareMate.shareMate.controller.user;
 import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.response.Response;
+
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.entity.HashTagEntity;
@@ -9,6 +10,7 @@ import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.service.CustomUserDetailService;
+import com.shareMate.shareMate.service.sign.SignService;
 import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -22,9 +24,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @Api("유저 정보")
@@ -39,12 +39,14 @@ public class UserController {
 
     }
     private final UserService userService;
+    private final SignService signService;
     private final CustomUserDetailService userDetailsService;
     private final HashtagRepository hashtagRepository;
-    public UserController(UserService userService,CustomUserDetailService userDetailsService,HashtagRepository hashtagRepository) {
+    public UserController(UserService userService,CustomUserDetailService userDetailsService,HashtagRepository hashtagRepository,SignService signService) {
         this.userService = userService;
         this.userDetailsService=userDetailsService;
         this.hashtagRepository=hashtagRepository;
+        this.signService=signService;
     }
     @ApiOperation(value = "회원가입",notes = "회원가입을 진행하고, jwt 토큰을 반환합니다.",tags="User")
     @PostMapping("")
@@ -137,8 +139,8 @@ public class UserController {
     //개인정보 수정
     @ApiOperation(value = "개인정보 수정",notes = "개인정보를 수정합니다.",tags="User")
     @PutMapping("")
-    public ResponseEntity editUser (HttpServletRequest request,@RequestParam("id") Integer num,UserDto userDto) {
-        userService.doUpdate(num,userDto);
+    public ResponseEntity editUser (HttpServletRequest request, @RequestParam("id") Integer num, ReqUpdateUserDto reqUpdateUserDto) {
+        userService.doUpdate(num,reqUpdateUserDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }
     @ApiOperation(value ="비밀번호 수정" , notes = "비밀번호를 변경합니다." , tags ="User")
@@ -177,6 +179,16 @@ public class UserController {
         return ResponseEntity.ok(resUserDetailDto);
 
     }
+
+    @PostMapping("/del")
+    @ApiOperation(value ="회원탈퇴" , notes = "회원 탈퇴를 진행합니다." , tags ="User")
+    public ResponseEntity deleteUser (HttpServletRequest request){
+        final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
+        userService.doDelete(user_id);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+
 
 
 
