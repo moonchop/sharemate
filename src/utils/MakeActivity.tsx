@@ -19,6 +19,8 @@ import LikeProfile from "../activities/MyPage/LikeProfile";
 import ModifyFavor from "../activities/MyPage/ModifyFavor";
 import FindPassword_Email from "../activities/Sign/FindPassword/AuthEmail";
 import FindPassword_Password from "../activities/Sign/FindPassword/NewPassword";
+import ServiceTerm from "../activities/MyPage/ServiceTerm";
+import UserTerm from "../activities/MyPage/UserTerm";
 
 type Navigate_Type =
   | "Main"
@@ -36,7 +38,9 @@ type Navigate_Type =
   | "ModifyFavor"
   | "LikeProfile"
   | "FindPassword_Email"
-  | "FindPassword_Password";
+  | "FindPassword_Password"
+  | "ServiceTerm"
+  | "UserTerm";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -55,6 +59,8 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   LikeProfile: <LikeProfile />,
   FindPassword_Email: <FindPassword_Email />,
   FindPassword_Password: <FindPassword_Password />,
+  ServiceTerm: <ServiceTerm />,
+  UserTerm: <UserTerm />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
@@ -87,7 +93,9 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       navigate === "ProfileEdit" ||
       navigate === "BoardDetail" ||
       navigate === "FindPassword_Email" ||
-      navigate === "FindPassword_Password" ? (
+      navigate === "FindPassword_Password" ||
+      navigate === "ServiceTerm" ||
+      navigate === "UserTerm" ? (
         <></>
       ) : (
         <BottomNav />
