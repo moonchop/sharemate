@@ -16,7 +16,7 @@ const Topnav: React.FC<topProps> = ({ status }) => {
   };
 
   return (
-    <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
+    <header className="flex justify-between margin-0 p-4 pr-3 h-[7%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
       {!stack_Status.isRoot ? (
         <IoMdArrowRoundBack
           className="w-5 h-5"
