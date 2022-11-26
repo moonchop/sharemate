@@ -130,7 +130,6 @@ const DetailGroup = () => {
           <div>
             {group?.groupDetailInfo.wishLists.map((elem, index) => (
               <div key={index} className="flex items-center mb-2 -ml-1.5">
-                <IoIosCheckmark className="w-7 h-7 text-green-700 opacity-50" />
                 <p className={"text-md"}>{elem}</p>
               </div>
             ))}
