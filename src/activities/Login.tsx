@@ -14,6 +14,8 @@ const Login = () => {
     pwd: "",
   });
 
+  const [auto, setAuto] = useState<number>(0);
+
   const loginSubmit = () =>
     request
       .post("/sign/login", loginForm)
@@ -51,23 +53,26 @@ const Login = () => {
     setLoginForm((prev) => ({ ...prev, pwd: "" }));
   };
 
+  const autoHandler = () => {
+    auto === 0 ? setAuto(1) : setAuto(0);
+  };
+
   return (
     <div className="h-full w-full">
       <div className="flex flex-col items-center h-full w-full">
         <div className="flex h-[55%] w-[63%] items-center justify-center">
           <img src={Logo} className="flex mt-[54%] mb-[35%]" />
         </div>
-        <div className="flex flex-col h-[13%] w-[81%]">
-          <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[5%] items-center">
+        <div className="flex flex-col pro:h-[13%] h-[15%] w-[81%]">
+          <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[8%] items-center">
             <input
-              className=" w-full h-full outline-0 border-none placeholder:text-lg placeholder:font-normal "
+              className=" w-full h-full pb-1 outline-0 placeholder:text-base placeholder:font-normal border-none"
               type={"email"}
               placeholder="Email"
               value={loginForm.email}
               name="email"
               onChange={changeHandler}
             />
-
             {loginForm.email ? (
               <AiFillCloseCircle
                 className="w-[10%] h-[50%] opacity-60"
@@ -77,9 +82,9 @@ const Login = () => {
               <></>
             )}
           </div>
-          <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[5%] items-center">
+          <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[8%] items-center">
             <input
-              className=" w-full h-full outline-0 placeholder:text-lg placeholder:font-normal"
+              className=" w-full h-full pb-1 outline-0 placeholder:text-base placeholder:font-normal border-none"
               type={"password"}
               placeholder="Password"
               value={loginForm.pwd}
@@ -96,16 +101,35 @@ const Login = () => {
             )}
           </div>
         </div>
-        <div className="w-[81%] flex flex-row justify-between pro:mb-[30%] mb-[23%]">
-          <div
-            className="flex text-[#AAAAAA] font-semibold"
-            onClick={() => {
-              push("SignUpActivity", {});
-            }}
-          >
-            회원가입
+        <div className="w-[81%] justify-between items-center flex flex-row pro:mb-[30%] mb-[23%]">
+          <div className="flex text-[#AAAAAA] text-sm">
+            <input
+              className="flex mr-1 accent-purple-500"
+              type={"checkbox"}
+              value={auto}
+              name="auto"
+              onChange={autoHandler}
+            />
+            자동 로그인
           </div>
-          <div className="flex text-[#AAAAAA] font-semibold">비밀번호 찾기</div>
+          <div className="flex flex-row">
+            <div
+              className="flex text-[#AAAAAA] text-sm mr-2 text  underline underline-offset-4"
+              onClick={() => {
+                push("SignUpActivity", {});
+              }}
+            >
+              회원가입
+            </div>
+            <div
+              className="flex text-[#AAAAAA] text-sm  underline underline-offset-4"
+              onClick={() => {
+                push("FindPwdActivity", {});
+              }}
+            >
+              비밀번호 찾기
+            </div>
+          </div>
         </div>
         <button
           className="w-[81%] h-[7%] rounded-md border border-transparent bg-[#B1A4FD] text-xl font-semibold text-white shadow-[0px_3px_5px_3px_rgba(0,0,0,0.25)] "
