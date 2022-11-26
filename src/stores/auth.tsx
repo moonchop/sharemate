@@ -1,5 +1,5 @@
 import create from "zustand";
-
+import { persist } from "zustand/middleware";
 interface Token {
   accessToken: string;
   refreshToken: string;
@@ -11,13 +11,21 @@ interface tokenProps {
   refreshToken: string;
 }
 
-export const useAuth = create<Token>((set) => ({
-  accessToken: "",
-  refreshToken: "",
-  setToken: (token: tokenProps) => {
-    set((state) => ({
-      accessToken: token.accessToken,
-      refreshToken: token.refreshToken,
-    }));
-  },
-}));
+export const useAuth = create(
+  persist<Token>(
+    (set) => ({
+      accessToken: "",
+      refreshToken: "",
+      setToken: (token: tokenProps) => {
+        set((state) => ({
+          accessToken: token.accessToken,
+          refreshToken: token.refreshToken,
+        }));
+      },
+    }),
+    {
+      name: "auth-storage",
+      getStorage: () => localStorage,
+    }
+  )
+);
