@@ -90,7 +90,7 @@ public class UserService {
             UserEntity newUser = requestSignUpDto.toEntity();
             newUser.setPwd(securePwd);
             userRepository.save(newUser);
-            String accessToken = accessTokenHelper.createToken(originalPwd);
+            String accessToken = accessTokenHelper.createToken(String.valueOf(newUser.getUserID()));
             Optional<UserEntity> req = userRepository.findUserEntityByEmail(newUser.getEmail());
 
             return new ResponseSignUpDto(
@@ -101,7 +101,6 @@ public class UserService {
                     req.get().getGrade(),
                     req.get().getGender(),
                     req.get().getAge(),
-
                     req.get().getProfile_photo(),
                     req.get().getKakao_link(),
                     accessToken);

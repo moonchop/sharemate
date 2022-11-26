@@ -53,13 +53,28 @@ public class authController {
         }
         else{
             System.out.println("중복 아님");
-            String  code = UUID.randomUUID().toString().substring(0, 6); //인증번호 생성
+             String code = UUID.randomUUID().toString().substring(0, 6); //인증번호 생성
             System.out.println("code : "+code);
             signService.sendMail(code,email.get("email"));
             return ResponseEntity.status(HttpStatus.OK).body(code);
         }
+    };
+    @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.",tags="Auth")
+    @PostMapping("/email/new-pwd")
+    public ResponseEntity<String> EmailNewPwdVerification(@RequestBody Map<String,String> email) throws Exception {
+        Boolean IsDup = userService.dupCheck(email.get("email"));
+        //중복된 이메일
+        if (IsDup) {
+            String code = UUID.randomUUID().toString().substring(0, 6); //인증번호 생성
+            System.out.println("code : "+code);
+            signService.sendMail(code,email.get("email"));
+            return ResponseEntity.status(HttpStatus.OK).body(code);
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("중복된 이메일입니다.");
 
 
+        }
     };
     @ApiOperation(value = "비밀번호 찾기",notes = "비밀번호 재설정 인증번호를 위한 api 입니다.",tags="Auth")
     @PostMapping("/setPwd")

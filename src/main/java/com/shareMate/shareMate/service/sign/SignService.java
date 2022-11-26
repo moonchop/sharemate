@@ -45,7 +45,7 @@ public class SignService {
             message.setTo(email);
             message.setSubject("[sharemate] 인증번호입니다.");
             message.setText("이메일 인증코드 입니다. : "+code);
-            message.setFrom("jh6car@naver.com");
+            message.setFrom("minssu913@naver.com");
             javaMailSender.send(message);
         }catch (MailException mailException){
             mailException.printStackTrace();
