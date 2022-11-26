@@ -1,6 +1,6 @@
-import request from "../stores/Request";
+import request from "../../stores/Request";
 import React, { useState } from "react";
-import { useFlow } from "../stackflow";
+import { useFlow } from "../../stackflow";
 import {
   AiFillEye,
   AiFillCloseCircle,
@@ -59,16 +59,16 @@ const PasswordEdit = () => {
 
   return (
     <div className="h-[85%] flex flex-col pro:pt-[30px] pt-[20px] mx-[20px] ">
-      <div className="pro:text-3xl text-2xl font-bold pro:mb-[25px] mb-[20px] ">
+      <div className="pro:text-2xl text-xl font-bold pro:mb-[25px] mb-[20px] ">
         비밀번호 수정
       </div>
-      <div className="flex h-[6%] mb-[3%] border-2 rounded-md items-center">
+      <div className="flex h-[7%] mb-[3%] border-2 rounded-md items-center">
         <input
           name="currPwd"
           type={showPass.origin ? "text" : "password"}
           value={passwordForm.currPwd}
           placeholder="기존 비밀번호"
-          className=" w-full outline-0  pl-[5px] placeholder:text-lg placeholder:font-normal"
+          className=" w-full outline-0  pl-[5px] text-base"
           onChange={changeHandler}
         />
         {passwordForm.currPwd ? (
@@ -97,13 +97,13 @@ const PasswordEdit = () => {
           />
         )}
       </div>
-      <div className="flex h-[6%] mb-[3%] border-2 rounded-md items-center">
+      <div className="flex h-[7%] mb-[3%] border-2 rounded-md items-center">
         <input
           name="newPwd"
           type={showPass.new ? "text" : "password"}
           value={passwordForm.newPwd}
           placeholder="새 비밀번호"
-          className=" w-full outline-0  pl-[5px] placeholder:text-lg placeholder:font-normal"
+          className=" w-full outline-0  pl-[5px] text-base"
           onChange={changeHandler}
         />
         {passwordForm.newPwd ? (
@@ -130,13 +130,13 @@ const PasswordEdit = () => {
           />
         )}
       </div>
-      <div className="flex h-[6%] mb-[3%] border-2 rounded-md items-center">
+      <div className="flex h-[7%] mb-[3%] border-2 rounded-md items-center">
         <input
           name="verifyPwd"
           type={showPass.verify ? "text" : "password"}
           value={passwordForm.verifyPwd}
           placeholder="새 비밀번호 확인"
-          className=" w-full outline-0  pl-[5px] placeholder:text-lg placeholder:font-normal"
+          className=" w-full outline-0  pl-[5px] text-base"
           onChange={changeHandler}
         />
         {passwordForm.verifyPwd ? (
@@ -166,7 +166,7 @@ const PasswordEdit = () => {
         )}
       </div>
       <button
-        className="h-[6%] mt-[10%] ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm rounded-md shadow-button"
+        className="h-[6%] mt-[7%] ring-1 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm rounded-md shadow-button"
         onClick={submitHandler}
       >
         비밀번호 변경

@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { IoIosArrowForward } from "react-icons/io";
-import { useFlow } from "../stackflow";
-import { useUser, useFavor } from "../stores/user";
-import { useAuth } from "../stores/auth";
-import request from "../stores/Request";
+import { useFlow } from "../../stackflow";
+import { useUser, useFavor } from "../../stores/user";
+import { useAuth } from "../../stores/auth";
+import request from "../../stores/Request";
 
 const MyPage = () => {
   const { push, replace } = useFlow();
@@ -42,9 +42,9 @@ const MyPage = () => {
 
   return (
     <div className="h-[85%] ">
-      <div className="h-[32%] flex flex-col pro:pt-[30px] pt-[20px] border-b-[6px] border-[rgba(170,170,170,0.25)]">
+      <div className="h-[32%] flex flex-col pro:pt-8 pt-5 border-b-[6px] border-[rgba(170,170,170,0.25)]">
         <div className="h-[100%] pb-[13%] ">
-          <div className="pro:text-3xl text-2xl font-bold pro:mb-[25px] mb-[20px] ml-[24px]">
+          <div className="pro:text-3xl text-2xl font-semibold pro:mb-[25px] mb-[20px] ml-[24px]">
             마이페이지
           </div>
           <div className="flex items-center">
@@ -54,7 +54,7 @@ const MyPage = () => {
                 src={profile_photo}
               />
               <div className="flex flex-col">
-                <div className="font-bold pro:text-xl text-lg">{name}</div>
+                <div className="font-semibold pro:text-xl text-lg">{name}</div>
                 <div className="text-[#858181] pro:text-sm text-xs">
                   {email}
                 </div>
@@ -67,8 +67,8 @@ const MyPage = () => {
           </div>
         </div>
       </div>
-      <div className="h-[22%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
-        <div className="h-[50%] flex items-center border-b-2">
+      <div className="h-[33%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
+        <div className="h-[33%] flex items-center border-b-2">
           <div
             className="pl-[28px] w-[90%] text-[#AFADF5]"
             onClick={() => push("LikeProfileActivity", {})}
@@ -77,7 +77,16 @@ const MyPage = () => {
           </div>
           <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
         </div>
-        <div className="h-[48%] flex items-center">
+        <div className="h-[33%] flex items-center border-b-2">
+          <div
+            className="pl-[28px] w-[90%] text-[#AFADF5]"
+            onClick={() => push("ModifyFavorActivity", {})}
+          >
+            취향 정보 수정
+          </div>
+          <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+        </div>
+        <div className="h-[32%] flex items-center">
           <div className="pl-[28px] w-[90%] text-[#AFADF5] ">비밀번호 변경</div>
           <IoIosArrowForward
             className="opacity-30"

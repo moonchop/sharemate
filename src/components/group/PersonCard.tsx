@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosArrowForward } from "react-icons/io";
 import { useFlow } from "../../stackflow";
 import { HashTagColor } from "../../utils/HashTagColor";
-import { IGroupJoined } from "../DetailGroup";
+import { IGroupJoined } from "../../activities/Group/DetailGroup";
 import HashTag from "../HashTag";
 
 export default function PersonCard({

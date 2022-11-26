@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { BiBulb } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import { useSaveFormData } from "../../hooks/useSaveFormData";
-import { FavorApi } from "../../utils/api/auth";
+import { useSaveFormData } from "../../../hooks/useSaveFormData";
+import { FavorApi } from "../../../utils/api/auth";
 
 const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
   const {

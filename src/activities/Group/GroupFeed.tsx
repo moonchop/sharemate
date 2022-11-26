@@ -1,11 +1,11 @@
-import { HashTagColor } from "../utils/HashTagColor";
-import HashTag from "./HashTag";
+import { HashTagColor } from "../../utils/HashTagColor";
+import HashTag from "../../components/HashTag";
 import { HiUserGroup } from "react-icons/hi";
-import { useFlow } from "../stackflow";
+import { useFlow } from "../../stackflow";
 import { IoIosArrowForward } from "react-icons/io";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useEffect, useState } from "react";
-import { GetAllGroupsApi } from "../utils/api/group";
+import { GetAllGroupsApi } from "../../utils/api/group";
 export interface IGroup {
   group_id: number;
   created_at?: number;

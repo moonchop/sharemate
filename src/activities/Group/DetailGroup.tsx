@@ -1,13 +1,17 @@
 import { useActivityParams } from "@stackflow/react";
-import { HashTagColor } from "../utils/HashTagColor";
+import { HashTagColor } from "../../utils/HashTagColor";
 import React, { useEffect, useState } from "react";
-import HashTag from "./HashTag";
+import HashTag from "../../components/HashTag";
 import Ajou from "../assets/Ajou.gif";
 import { IoIosCheckmark } from "react-icons/io";
-import { GetGroupApi, JoinGroupApi, LeaveGroupApi } from "../utils/api/group";
-import PersonCard from "./group/PersonCard";
+import {
+  GetGroupApi,
+  JoinGroupApi,
+  LeaveGroupApi,
+} from "../../utils/api/group";
+import PersonCard from "../../components/group/PersonCard";
 import jwt_decode from "jwt-decode";
-import { useAuth } from "../stores/auth";
+import { useAuth } from "../../stores/auth";
 // interface ParamsValue {
 //   groupID: number;
 //   building: string;

@@ -3,7 +3,7 @@ import { useActivityParams } from "@stackflow/react";
 import Ajou from "../assets/Ajou.gif";
 import Kakao from "../assets/kakao.png";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import request from "../stores/Request";
+import request from "../../stores/Request";
 
 interface ParamsValue {
   id: number;

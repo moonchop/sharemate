@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
-import { HashTagColor } from "../utils/HashTagColor";
-import HashTag from "./HashTag";
-import { useFlow } from "../stackflow";
-import useIntersectionObserver from "../hooks/useIntersectionObserver";
-import useInfinityQuery from "../hooks/useInfinityQuery";
+import React, { useEffect, useState } from "react";
+import { useFlow } from "../../stackflow";
+import { useUser } from "../../stores/user";
+import request from "../../stores/Request";
+import { HashTagColor } from "../../utils/HashTagColor";
 import { IoIosArrowForward } from "react-icons/io";
+import HashTag from "../../components/HashTag";
 
 interface IUser {
   userID: number;
@@ -16,48 +16,33 @@ interface IUser {
   hashtags: string[];
 }
 
-const Feed = () => {
+const LikeProfile = () => {
   const { push } = useFlow();
-  let previous_Y = 0;
-  let previous_Ratio = 0;
+  const { userID } = useUser();
+  const [feedData, setFeedData] = useState([]);
 
-  const fetchControl = useInfinityQuery();
-  const feedData = fetchControl.result?.pages;
-  //console.log("FEED DATA : ", feedData);
-
-  const onIntersect: IntersectionObserverCallback = ([
-    { isIntersecting, boundingClientRect, intersectionRatio },
-  ]) => {
-    const current_Y = boundingClientRect.y;
-    const current_Ratio = intersectionRatio;
-
-    if (
-      isIntersecting &&
-      current_Ratio > previous_Ratio &&
-      current_Y > previous_Y
-    ) {
-      console.log("감지성공");
-      fetchControl.nextFetch();
-      previous_Y = current_Y;
-      previous_Ratio = current_Ratio;
-    }
-  };
-
-  const { setTarget } = useIntersectionObserver({ onIntersect });
-
-  const handlerTarget = (index: number) => {
-    if (index % 7 == 0 && index != 0) {
-      return setTarget;
-    }
-  };
+  useEffect(() => {
+    request
+      .get("/user/likelist", { params: { id: userID } })
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.data);
+        setFeedData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
-    <div className="h-[85%] overflow-y-scroll scrollbar-hide px-5 pt-3">
-      {feedData?.map((elem2: []) =>
-        elem2.map((elem: IUser, index: number) => (
+    <>
+      <div className="h-[85%] flex flex-col pro:pt-[30px] pt-[20px] mx-[20px] ">
+        <div className="pro:text-3xl text-2xl font-bold pro:mb-[25px] mb-[20px] ">
+          좋아요 누른 프로필
+        </div>
+        {feedData.map((elem: IUser) => (
           <div className="h-[17%]" key={elem.userID}>
             <div
-              ref={handlerTarget(index)}
               className="h-[100%] flex justify-between items-center"
               onClick={() => {
                 push("ProfileActivity", { id: elem.userID });
@@ -75,9 +60,8 @@ const Feed = () => {
                     <p className="max-w-[78px] mr-1 overflow-hidden text-ellipsis whitespace-nowrap">
                       {elem.name}
                     </p>
-                    <p className="">{elem.age}</p>
+                    <p className="">24</p>
                     <p className="w-[50%] overflow-hidden text-ellipsis whitespace-nowrap mx-2">
-                      {/* 9글자가 최대 */}
                       {elem.major}
                     </p>
                   </div>
@@ -93,10 +77,10 @@ const Feed = () => {
             </div>
             <hr />
           </div>
-        ))
-      )}
-    </div>
+        ))}
+      </div>
+    </>
   );
 };
 
-export default Feed;
+export default LikeProfile;

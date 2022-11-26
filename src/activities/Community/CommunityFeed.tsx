@@ -1,5 +1,5 @@
-import { useFlow } from "../stackflow";
-import BoardListItem from "./BoardListItem";
+import { useFlow } from "../../stackflow";
+import BoardListItem from "../../components/BoardListItem";
 
 export interface IBoard {
   id: number;

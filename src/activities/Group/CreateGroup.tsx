@@ -1,7 +1,7 @@
-import InputComponent from "./InputComponent";
-import { useFlow } from "../stackflow";
+import InputComponent from "../../components/InputComponent";
+import { useFlow } from "../../stackflow";
 import React, { useState } from "react";
-import { PostGroupApi } from "../utils/api/group";
+import { PostGroupApi } from "../../utils/api/group";
 /// 그룹 생성 시 정보
 /// =================
 /// 기숙사 건물             building : string       ex] "광교관"

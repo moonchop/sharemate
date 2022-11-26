@@ -1,12 +1,13 @@
 import create from "zustand";
 
 interface User {
+  userID: number;
   email: string;
-  gender: string;
-  nickname: string;
+  gender: boolean;
+  name: string;
   major: string;
-  grade: string;
-  age: string;
+  grade: number;
+  age: number;
   kakao_link: string;
   profile_photo: string;
   setUser: (user: userProps) => void;
@@ -14,12 +15,13 @@ interface User {
 }
 
 interface userProps {
+  userID: number;
   email: string;
-  gender: string;
-  nickname: string;
+  gender: boolean;
+  name: string;
   major: string;
-  grade: string;
-  age: string;
+  grade: number;
+  age: number;
   kakao_link: string;
   profile_photo: string;
 }
@@ -27,26 +29,28 @@ interface userProps {
 interface userEditProps {
   nickname: string;
   major: string;
-  grade: string;
-  age: string;
+  grade: number;
+  age: number;
   kakao_link: string;
   profile_photo: string;
 }
 
 export const useUser = create<User>((set) => ({
+  userID: 0,
   email: "",
-  gender: "",
-  nickname: "",
+  gender: false,
+  name: "",
   major: "",
-  grade: "",
-  age: "",
+  grade: 0,
+  age: 0,
   kakao_link: "",
   profile_photo: "",
   setUser: (user: userProps) => {
     set((state) => ({
+      userID: user.userID,
       email: user.email,
       gender: user.gender,
-      nickname: user.nickname,
+      name: user.name,
       major: user.major,
       grade: user.grade,
       age: user.age,
@@ -56,7 +60,7 @@ export const useUser = create<User>((set) => ({
   },
   setEditUser: (user: userEditProps) => {
     set((state) => ({
-      nickname: user.nickname,
+      name: user.name,
       major: user.major,
       grade: user.grade,
       age: user.age,

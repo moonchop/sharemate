@@ -1,5 +1,5 @@
-import { useMbti, useRegisterForm } from "../../hooks/useRegisterForm";
-import { useSaveFormData } from "../../hooks/useSaveFormData";
+import { useMbti, useRegisterForm } from "../../../hooks/useRegisterForm";
+import { useSaveFormData } from "../../../hooks/useSaveFormData";
 
 const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
   const { Component: RegisterForm, state } = useRegisterForm();

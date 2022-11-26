@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useFlow } from "../stackflow";
+import { useFlow } from "../../stackflow";
 import Logo from "../assets/Logo.png";
-import { useAuth } from "../stores/auth";
-import request from "../stores/Request";
+import { useAuth } from "../../stores/auth";
+import request from "../../stores/Request";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const Login = () => {
@@ -109,7 +109,7 @@ const Login = () => {
           <div
             className="flex text-[#AAAAAA] text-sm  underline underline-offset-4"
             onClick={() => {
-              push("FindPwd_emailActivity", {});
+              push("FindPassword_EmailActivity", {});
             }}
           >
             비밀번호 찾기

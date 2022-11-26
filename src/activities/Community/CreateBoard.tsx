@@ -1,6 +1,6 @@
 import { AppScreen } from "@stackflow/basic-ui";
 import { ActivityComponentType } from "@stackflow/react";
-import { useFlow } from "../stackflow";
+import { useFlow } from "../../stackflow";
 import { IoMdArrowRoundBack } from "react-icons/io";
 
 const CreateBoard: ActivityComponentType = () => {

@@ -1,5 +1,5 @@
 import { useFlow } from "../stackflow";
-import { IBoard } from "./CommunityFeed";
+import { IBoard } from "../activities/Community/CommunityFeed";
 
 const BoardListItem = ({ id, title, username, preview, text }: IBoard) => {
   const { push } = useFlow();

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import SignUpFirst from "../components/SignUp/SignUpFirst";
-import SignUpSecond from "../components/SignUp/SignUpSecond";
-import SignUpPersonalIntro from "../components/SignUp/SignUpPersonalIntro";
+import SignUpFirst from "./SignUp/SignUpFirst";
+import SignUpSecond from "./SignUp/SignUpSecond";
+import SignUpPersonalIntro from "./SignUp/SignUpPersonalIntro";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/basic-ui";
-import SignUpCoverPage from "../components/SignUp/SignUpCoverPage";
-import TopNav from "../components/TopNav";
+import SignUpCoverPage from "./SignUp/SignUpCoverPage";
+import TopNav from "../../components/TopNav";
 
 const MAX_STAGE = 3;
 const Stage_Map = [
@@ -16,7 +16,7 @@ const Stage_Map = [
 ];
 
 const SignUp: ActivityComponentType = () => {
-  const [stage, setStage] = useState(2);
+  const [stage, setStage] = useState(0);
 
   const handleGoPrev = () => {
     console.log(stage);

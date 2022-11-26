@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { checkEmail, RegisterApi } from "../../utils/api/auth";
+import { checkEmail, RegisterApi } from "../../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
 import defaultProfile from "../../assets/defaultProfile.png";
 
