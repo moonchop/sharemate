@@ -18,7 +18,7 @@ interface User {
 interface userProps {
   userID: number;
   email: string;
-  gender: boolean;
+  gender: boolean; // 여자 0, 남자 1
   name: string;
   major: string;
   grade: number;
@@ -76,11 +76,11 @@ export const useUser = create<User>((set) => ({
 
 interface Favor {
   mbti: string;
-  sleep_time: string;
+  sleepTime: string;
   smoking: string;
-  wakeup_time: string;
+  wakeupTime: string;
   drinking: string;
-  sutdy_time: string;
+  studyTime: string;
   cleanness: string;
   snoring: string;
   setFavor: (favor: favorProps) => void;
@@ -88,32 +88,32 @@ interface Favor {
 
 interface favorProps {
   mbti: string;
-  sleep_time: string;
+  sleepTime: string;
   smoking: string;
-  wakeup_time: string;
+  wakeupTime: string;
   drinking: string;
-  sutdy_time: string;
+  studyTime: string;
   cleanness: string;
   snoring: string;
 }
 
 export const useFavor = create<Favor>((set) => ({
   mbti: "",
-  sleep_time: "",
+  sleepTime: "",
   smoking: "",
-  wakeup_time: "",
+  wakeupTime: "",
   drinking: "",
-  sutdy_time: "",
+  studyTime: "",
   cleanness: "",
   snoring: "",
   setFavor: (favor: favorProps) => {
     set((state) => ({
       mbti: favor.mbti,
-      sleep_time: favor.sleep_time,
+      sleepTime: favor.sleepTime,
       smoking: favor.smoking,
-      wakeup_time: favor.wakeup_time,
+      wakeupTime: favor.wakeupTime,
       drinking: favor.drinking,
-      sutdy_time: favor.sutdy_time,
+      studyTime: favor.studyTime,
       cleanness: favor.cleanness,
       snoring: favor.snoring,
     }));

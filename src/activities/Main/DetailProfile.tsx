@@ -5,19 +5,6 @@ import Kakao from "../../assets/kakao.png";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import request from "../../stores/Request";
 
-interface ParamsValue {
-  id: number;
-  name: string;
-  age: number;
-  grade: string;
-  major: string;
-  hashtag: string[];
-  mbti: string;
-  profile_photo: string;
-  self_intro: string;
-  kakao_link: string;
-}
-
 const DetailProfile = () => {
   const kakao_link = "https://open.kakao.com/o/s2qDCFOe";
   const Params: { id: string } = useActivityParams();
@@ -28,6 +15,7 @@ const DetailProfile = () => {
     major: "",
     grade: 0,
     age: 0,
+    kakao_link: "",
     profile_photo: "",
     gender: 0,
     created_at: 0,
@@ -41,7 +29,7 @@ const DetailProfile = () => {
     smoking: "",
     wakeupTime: "",
     drinking: "",
-    sutdyTime: "",
+    studyTime: "",
     cleanness: "",
     snoring: "",
     selfIntro: "",
@@ -113,14 +101,15 @@ const DetailProfile = () => {
               나의 생활
             </div>
             <div className="flex pro:text-xl text-lg flex-row pro:mb-[30px] mb-[22px] w-full justify-between ">
-              <div className="flex "> 아침형 </div>
-              <div className="flex "> 비흡연 </div>
-              <div className="flex "> 음주 잦음 </div>
+              <div className="flex ">{favor.wakeupTime}</div>
+              <div className="flex ">{favor.sleepTime}</div>
+              <div className="flex ">{favor.smoking}</div>
             </div>
             <div className="flex pro:text-xl text-lg flex-row pro:mb-[12%] mb-[5%] w-full justify-between">
-              <div className="flex">청결 예민</div>
-              <div className="flex">코골이</div>
-              <div className="flex">수면 5시간 ↓ </div>
+              <div className="flex">{favor.studyTime}</div>
+              <div className="flex">{favor.drinking}</div>
+              <div className="flex">{favor.cleanness}</div>
+              <div className="flex">{favor.snoring}</div>
             </div>
             <div className="font-bold pro:text-xl text-lg pro:mb-[27px] mb-[15px] text-[#AFADF5] underline underline-offset-8">
               자기 소개
@@ -155,7 +144,7 @@ const DetailProfile = () => {
             src={Kakao}
             className="flex pro:h-[70%] h-[70%]"
             onClick={() => {
-              window.open(kakao_link);
+              window.open(user.kakao_link);
             }}
           />
         </div>

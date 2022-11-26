@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useFlow } from "../../stackflow";
-
 import { useAuth } from "../../stores/auth";
 import request from "../../stores/Request";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Logo from "../../assets/Logo.png";
+
 const Login = () => {
   const { setToken } = useAuth();
 
@@ -31,9 +31,8 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
-        if (error.response.status === 400) alert("비밀번호가 잘못되었습니다.");
-        else if (error.response.status === 500)
-          alert("이메일을 확인해 주세요.");
+        if (error.response.status !== 200)
+          alert("이메일, 비밀번호를 확인해 주세요.");
         return false;
       });
 

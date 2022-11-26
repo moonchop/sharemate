@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/basic-ui";
 import TopNav from "../components/TopNav";
@@ -70,7 +70,28 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
+
 const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
+  const isHideBottomNav = useMemo(() => {
+    return [
+      "Profile",
+      "DetailGroup",
+      "Login",
+      "CreateGroup",
+      "Password",
+      "LikeProfile",
+      "ModifyFavor",
+      "ProfileEdit",
+      "BoardDetail",
+      "FindPassword_Email",
+      "FindPassword_Password",
+      "ServiceTerm",
+      "UserPolicyTerm",
+      "UserTerm",
+      "Term",
+    ].includes(navigate);
+  }, [navigate]);
+
   return (
     <AppScreen theme="cupertino">
       {navigate === "MyPage" ||
@@ -89,25 +110,7 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
         <TopNav />
       )}
       {NavigateMapper[navigate]}
-      {navigate === "Profile" ||
-      navigate === "DetailGroup" ||
-      navigate === "Login" ||
-      navigate === "CreateGroup" ||
-      navigate === "Password" ||
-      navigate === "LikeProfile" ||
-      navigate === "ModifyFavor" ||
-      navigate === "ProfileEdit" ||
-      navigate === "BoardDetail" ||
-      navigate === "FindPassword_Email" ||
-      navigate === "FindPassword_Password" ||
-      navigate === "ServiceTerm" ||
-      navigate === "UserPolicyTerm" ||
-      navigate === "UserTerm" ||
-      navigate === "Term" ? (
-        <></>
-      ) : (
-        <BottomNav />
-      )}
+      {isHideBottomNav ? <></> : <BottomNav />}
     </AppScreen>
   );
 };
