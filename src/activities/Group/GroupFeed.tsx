@@ -5,7 +5,10 @@ import { useFlow } from "../../stackflow";
 import { IoIosArrowForward } from "react-icons/io";
 import { BiBuildingHouse } from "react-icons/bi";
 import { useEffect, useState } from "react";
+
+import { BsPencil } from "react-icons/bs";
 import { GetAllGroupsApi } from "../../utils/api/group";
+
 export interface IGroup {
   group_id: number;
   created_at?: number;
@@ -18,114 +21,6 @@ export interface IGroup {
 }
 const ICON_OBJ = ["text-indigo-400", "text-purple-400", "text-pink-300"];
 const GroupFeed = () => {
-  // const groupData: IGroup[] = [
-  //   {
-  //     groupID: 1,
-  //     building: "광교관",
-  //     hashtags: [
-  //       "아침형생활습관아침형생활습관",
-  //       "아침형생활습관",
-  //       "아침형생활습관",
-  //     ],
-  //     text: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요야야아아아아아.",
-  //     wishLists: [
-  //       "22살이었으면 좋겠어요.",
-  //       "비흡연자였으면 좋겠어요.",
-  //       "코를 안 골았으면 좋겠어요",
-  //       "친하게 지내고 싶어요.",
-  //       "방을 깨끗이 쓰면 좋겠어요.",
-  //     ],
-  //     maxNum: 4,
-  //     userID: 1,
-  //     kakaoLink: "sdfsdf",
-  //     curNum: 2,
-  //   },
-  //   {
-  //     groupID: 2,
-  //     building: "광교관",
-  //     hashtags: ["청결민감", "소음민감", "아침형생활습관"],
-  //     text: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
-  //     wishLists: [
-  //       "22살이었으면 좋겠어요.",
-  //       "비흡연자였으면 좋겠어요.",
-  //       "코를 안 골았으면 좋겠어요",
-  //       "친하게 지내고 싶어요.",
-  //       "방을 깨끗이 쓰면 좋겠어요.",
-  //     ],
-  //     maxNum: 4,
-  //     userID: 1,
-  //     kakaoLink: "sdfsdf",
-  //     curNum: 2,
-  //   },
-  //   {
-  //     groupID: 3,
-  //     building: "광교관",
-  //     hashtags: ["청결민감", "소음민감", "아침형생활습관"],
-  //     text: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
-  //     wishLists: [
-  //       "22살이었으면 좋겠어요.",
-  //       "비흡연자였으면 좋겠어요.",
-  //       "코를 안 골았으면 좋겠어요",
-  //       "친하게 지내고 싶어요.",
-  //       "방을 깨끗이 쓰면 좋겠어요.",
-  //     ],
-  //     maxNum: 4,
-  //     userID: 1,
-  //     kakaoLink: "sdfsdf",
-  //     curNum: 2,
-  //   },
-  //   {
-  //     groupID: 4,
-  //     building: "일신관",
-  //     hashtags: ["청결민감", "소음민감", "아침형생활습관"],
-  //     text: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
-  //     wishLists: [
-  //       "22살이었으면 좋겠어요.",
-  //       "비흡연자였으면 좋겠어요.",
-  //       "코를 안 골았으면 좋겠어요",
-  //       "친하게 지내고 싶어요.",
-  //       "방을 깨끗이 쓰면 좋겠어요.",
-  //     ],
-  //     maxNum: 4,
-  //     userID: 1,
-  //     kakaoLink: "sdfsdf",
-  //     curNum: 2,
-  //   },
-  //   {
-  //     groupID: 5,
-  //     building: "광교관",
-  //     hashtags: ["청결민감", "소음민감", "아침형생활습관"],
-  //     text: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
-  //     wishLists: [
-  //       "22살이었으면 좋겠어요.",
-  //       "비흡연자였으면 좋겠어요.",
-  //       "코를 안 골았으면 좋겠어요",
-  //       "친하게 지내고 싶어요.",
-  //       "방을 깨끗이 쓰면 좋겠어요.",
-  //     ],
-  //     maxNum: 4,
-  //     userID: 1,
-  //     kakaoLink: "sdfsdf",
-  //     curNum: 2,
-  //   },
-  //   {
-  //     groupID: 6,
-  //     building: "광교관",
-  //     hashtags: ["청결민감", "소음민감", "아침형생활습관"],
-  //     text: "동갑내기 친구들과 편하고 즐겁게 지내고 싶어요.",
-  //     wishLists: [
-  //       "22살이었으면 좋겠어요.",
-  //       "비흡연자였으면 좋겠어요.",
-  //       "코를 안 골았으면 좋겠어요",
-  //       "친하게 지내고 싶어요.",
-  //       "방을 깨끗이 쓰면 좋겠어요.",
-  //     ],
-  //     maxNum: 4,
-  //     userID: 1,
-  //     kakaoLink: "sdfsdf",
-  //     curNum: 2,
-  //   },
-  // ];
   const [groupData, setGroupData] = useState<any>(null);
   const { push } = useFlow();
 
@@ -181,9 +76,11 @@ const GroupFeed = () => {
         onClick={() => {
           push("CreateGroupActivity", {});
         }}
-        className=" absolute bottom-16 right-2 self-center w-[80px] h-[30px] m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm  rounded-md shadow-button"
+        className=" absolute bottom-16 right-2 self-center w-[45px] h-[45px] rounded-full m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white ring-opacity-70 "
       >
-        그룹 생성
+        <div className="flex items-center justify-center">
+          <BsPencil className="w-7 h-7 opacity-70" />
+        </div>
       </button>
     </div>
   );

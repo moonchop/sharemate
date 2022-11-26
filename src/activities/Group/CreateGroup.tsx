@@ -2,6 +2,8 @@ import InputComponent from "../../components/InputComponent";
 import { useFlow } from "../../stackflow";
 import React, { useState } from "react";
 import { PostGroupApi } from "../../utils/api/group";
+import CheckText from "../../components/group/CheckText";
+
 /// 그룹 생성 시 정보
 /// =================
 /// 기숙사 건물             building : string       ex] "광교관"
@@ -47,11 +49,13 @@ const CreateGroup = () => {
   };
 
   return (
-    <div className="h-[95%] overflow-y-scroll w-full">
-      <div className="text-xl">그룹 생성</div>
+    <div className="h-[100%] overflow-y-scroll w-full px-6 pt-8">
+      <div className="text-2xl font-semibold mb-10">그룹 생성</div>
       <div className="space-y-10">
         <div>
-          <p className="text-lg">입사를 희망하는 건물을 입력해주세요.</p>
+          <CheckText>
+            <p className="text-lg">입사를 희망하는 건물을 입력해주세요.</p>
+          </CheckText>
           <InputComponent
             placeholder="광교관"
             id="building"
@@ -59,22 +63,20 @@ const CreateGroup = () => {
           />
         </div>
         <div>
-          <p className="text-lg">몇인실을 희망하시나요?</p>
-          <div className="flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">
-            <input
-              className="w-[30px] text-center text-lg text-coolGray-900 bg-transparent placeholder-slate-300"
-              id="maxNum"
-              type="number"
-              name="maxNum"
-              placeholder="4"
-              onChange={changeHandler}
-            />
-            <p>인실</p>
-          </div>
+          <CheckText>
+            <p className="text-lg">몇인실을 희망하시나요?</p>
+          </CheckText>
+          <InputComponent
+            placeholder="N 인실"
+            id="maxNum"
+            onChange={changeHandler}
+          />
         </div>
 
         <div>
-          <p className="text-lg">그룹을 표현할 해시태그를 입력해주세요.</p>
+          <CheckText>
+            <p className="text-lg">그룹을 표현할 해시태그를 입력해주세요.</p>
+          </CheckText>
           <InputComponent
             placeholder="조용한편"
             id="hashtag1"
@@ -92,7 +94,9 @@ const CreateGroup = () => {
           />
         </div>
         <div>
-          <p className="text-lg">간단한 그룹 소개글을 입력해주세요.</p>
+          <CheckText>
+            <p className="text-lg">간단한 그룹 소개글을 입력해주세요.</p>
+          </CheckText>
           <InputComponent
             placeholder="동갑내기 친구들과 편하고 즐겁게 지내고 싶어요."
             id="text"
@@ -100,7 +104,9 @@ const CreateGroup = () => {
           />
         </div>
         <div>
-          <p className="text-lg">어떤 룸메이트를 희망하시나요?</p>
+          <CheckText>
+            <p className="text-lg">어떤 룸메이트를 희망하시나요?</p>
+          </CheckText>
           <InputComponent
             placeholder="22살이었으면 좋겠어요."
             id="wish1"
@@ -128,26 +134,26 @@ const CreateGroup = () => {
           />
         </div>
         <div>
-          <p className=" text-xl">그룹 오픈 채팅방 링크를 입력해주세요.</p>
-          <div className="flex items-center justify-center mb-[100px] rounded-xl bg-gray-100 mx-2 py-4 mt-1">
-            <input
-              className="w-[80%] text-center text-lg text-coolGray-900 bg-transparent placeholder-slate-300"
-              id="kakaoLink"
-              type="text"
-              name="kakaoLink"
-              onChange={changeHandler}
-            />
-          </div>
+          <CheckText>
+            <p className=" text-lg">그룹 오픈 채팅방 링크를 입력해주세요.</p>
+          </CheckText>
+          <InputComponent
+            placeholder="https://open.kakao.com/o/s2qDCFOe"
+            id="kakaoLink"
+            onChange={changeHandler}
+          />
         </div>
       </div>
-      <button
-        onClick={GroupSubmit}
-        className={
-          "flex justify-center item-center text-center w-[90%] h-[44px] ring-2 ring-[#ab82e0] text-[#ab82e0] text-lg rounded-md shadow-button"
-        }
-      >
-        그룹 생성하기
-      </button>
+      <div className="flex justify-center mt-10 mb-5">
+        <button
+          onClick={GroupSubmit}
+          className={
+            "w-full h-12 text-center ring-2 ring-[#ab82e0] text-[#ab82e0] text-lg rounded-md shadow-button"
+          }
+        >
+          그룹 생성하기
+        </button>
+      </div>
     </div>
   );
 };
