@@ -3,20 +3,22 @@ import { ActivityComponentType } from "@stackflow/react";
 import { AppScreen } from "@stackflow/basic-ui";
 import TopNav from "../components/TopNav";
 import BottomNav from "../components/BottomNav";
-import PersonalFeed from "../components/PersonalFeed";
-import GroupFeed from "../components/GroupFeed";
-import MyPage from "../components/MyPage";
-import ProfileEdit from "../components/ProfileEdit";
-import CommunityFeed from "../components/CommunityFeed";
-import DetailProfile from "../components/DetailProfile";
-import DetailGroup from "../components/DetailGroup";
-import CreateGroup from "../components/CreateGroup";
-import BoardDetail from "../components/DetailBoard";
-import CreateBoard from "../components/CreateBoard";
-import Login from "../activities/Login";
-import Password from "../components/PasswordEdit";
-import LikeProfile from "../components/LikeProfile";
-import ModifyFavor from "../components/ModifyFavor";
+import PersonalFeed from "../activities/Main/PersonalFeed";
+import GroupFeed from "../activities/Group/GroupFeed";
+import MyPage from "../activities/MyPage/MyPage";
+import ProfileEdit from "../activities/MyPage/ProfileEdit";
+import CommunityFeed from "../activities/Community/CommunityFeed";
+import DetailProfile from "../activities/Main/DetailProfile";
+import DetailGroup from "../activities/Group/DetailGroup";
+import CreateGroup from "../activities/Group/CreateGroup";
+import BoardDetail from "../activities/Community/DetailBoard";
+import CreateBoard from "../activities/Community/CreateBoard";
+import Login from "../activities/Sign/Login";
+import Password from "../activities/MyPage/PasswordEdit";
+import LikeProfile from "../activities/MyPage/LikeProfile";
+import ModifyFavor from "../activities/MyPage/ModifyFavor";
+import FindPassword_Email from "../activities/Sign/FindPassword/AuthEmail";
+import FindPassword_Password from "../activities/Sign/FindPassword/NewPassword";
 
 type Navigate_Type =
   | "Main"
@@ -32,7 +34,9 @@ type Navigate_Type =
   | "ProfileEdit"
   | "Password"
   | "ModifyFavor"
-  | "LikeProfile";
+  | "LikeProfile"
+  | "FindPassword_Email"
+  | "FindPassword_Password";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -49,6 +53,8 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   ModifyFavor: <ModifyFavor />,
   Password: <Password />,
   LikeProfile: <LikeProfile />,
+  FindPassword_Email: <FindPassword_Email />,
+  FindPassword_Password: <FindPassword_Password />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
@@ -79,7 +85,9 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       navigate === "LikeProfile" ||
       navigate === "ModifyFavor" ||
       navigate === "ProfileEdit" ||
-      navigate === "BoardDetail" ? (
+      navigate === "BoardDetail" ||
+      navigate === "FindPassword_Email" ||
+      navigate === "FindPassword_Password" ? (
         <></>
       ) : (
         <BottomNav />
