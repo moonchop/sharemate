@@ -53,22 +53,26 @@ const MyPage = () => {
                 className="flex rounded-3xl pro:w-[80px] pro:h-[80px] w-[60px] h-[60px] mr-[15px]"
                 src={profile_photo}
               />
-              <div className="flex flex-col">
-                <div className="font-semibold pro:text-xl text-lg">{name}</div>
-                <div className="text-[#858181] pro:text-sm text-xs">
-                  {email}
+              <div className="flex flex-row w-[80%]">
+                <div
+                  className="flex flex-col "
+                  onClick={() => push("ProfileEditActivity", {})}
+                >
+                  <div className="font-semibold pro:text-xl text-lg">
+                    {name}
+                  </div>
+                  <div className="text-[#858181] pro:text-sm text-xs">
+                    {email}
+                  </div>
                 </div>
+                <IoIosArrowForward className="flex w-[25px] h-[25px] opacity-30"></IoIosArrowForward>
               </div>
             </div>
-            <IoIosArrowForward
-              className="w-[25px] h-[25px] opacity-30"
-              onClick={() => push("ProfileEditActivity", {})}
-            ></IoIosArrowForward>
           </div>
         </div>
       </div>
-      <div className="h-[33%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
-        <div className="h-[33%] flex items-center border-b-2">
+      <div className="h-[45%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
+        <div className="h-[25%] flex items-center border-b-2">
           <div
             className="pl-[28px] w-[90%] text-[#AFADF5]"
             onClick={() => push("LikeProfileActivity", {})}
@@ -77,7 +81,7 @@ const MyPage = () => {
           </div>
           <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
         </div>
-        <div className="h-[33%] flex items-center border-b-2">
+        <div className="h-[25%] flex items-center border-b-2">
           <div
             className="pl-[28px] w-[90%] text-[#AFADF5]"
             onClick={() => push("ModifyFavorActivity", {})}
@@ -86,11 +90,20 @@ const MyPage = () => {
           </div>
           <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
         </div>
-        <div className="h-[32%] flex items-center">
+        <div className="h-[25%] flex items-center border-b-2">
           <div className="pl-[28px] w-[90%] text-[#AFADF5] ">비밀번호 변경</div>
           <IoIosArrowForward
             className="opacity-30"
             onClick={() => push("PasswordActivity", { userID })}
+          ></IoIosArrowForward>
+        </div>
+        <div className="h-[25%] flex items-center">
+          <div className="pl-[28px] w-[90%] text-[#AFADF5] ">
+            약관 및 동의 관리
+          </div>
+          <IoIosArrowForward
+            className="opacity-30"
+            onClick={() => push("TermActivity", {})}
           ></IoIosArrowForward>
         </div>
       </div>

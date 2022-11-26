@@ -23,7 +23,9 @@ const ModifyFavorActivity = MakeActivity("ModifyFavor");
 const FindPassword_EmailActivity = MakeActivity("FindPassword_Email");
 const FindPassword_PasswordActivity = MakeActivity("FindPassword_Password");
 const ServiceTermActivity = MakeActivity("ServiceTerm");
+const UserPolicyTermActivity = MakeActivity("UserPolicyTerm");
 const UserTermActivity = MakeActivity("UserTerm");
+const TermActivity = MakeActivity("Term");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -47,7 +49,9 @@ const activities = {
   FindPassword_EmailActivity,
   FindPassword_PasswordActivity,
   ServiceTermActivity,
+  UserPolicyTermActivity,
   UserTermActivity,
+  TermActivity,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -74,8 +78,10 @@ export const { Stack, useFlow } = stackflow({
         CreateBoardActivity: "/createboard",
         FindPassword_EmailActivity: "/findpwd/email",
         FindPassword_PasswordActivity: "/findpwd/pwd",
-        ServiceTermActivity: "/mypage/userterm",
-        UserTermActivity: "/mypage/serviceterm",
+        ServiceTermActivity: "/mypage/serviceterm",
+        UserPolicyTermActivity: "/mypage/userpolicyterm",
+        UserTermActivity: "/mypage/userterm",
+        TermActivity: "/mypge/term",
       },
       fallbackActivity: () => "LoginActivity", // 오류 발생시 Home으로 이동 (404페이지 처리 할때 사용)
     }),

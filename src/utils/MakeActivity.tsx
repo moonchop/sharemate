@@ -20,7 +20,9 @@ import ModifyFavor from "../activities/MyPage/ModifyFavor";
 import FindPassword_Email from "../activities/Sign/FindPassword/AuthEmail";
 import FindPassword_Password from "../activities/Sign/FindPassword/NewPassword";
 import ServiceTerm from "../activities/MyPage/ServiceTerm";
+import UserPolicyTerm from "../activities/MyPage/UserPolicyTerm";
 import UserTerm from "../activities/MyPage/UserTerm";
+import Term from "../activities/MyPage/Term";
 
 type Navigate_Type =
   | "Main"
@@ -40,7 +42,9 @@ type Navigate_Type =
   | "FindPassword_Email"
   | "FindPassword_Password"
   | "ServiceTerm"
-  | "UserTerm";
+  | "UserPolicyTerm"
+  | "UserTerm"
+  | "Term";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -60,7 +64,9 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   FindPassword_Email: <FindPassword_Email />,
   FindPassword_Password: <FindPassword_Password />,
   ServiceTerm: <ServiceTerm />,
+  UserPolicyTerm: <UserPolicyTerm />,
   UserTerm: <UserTerm />,
+  Term: <Term />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
@@ -95,7 +101,9 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       navigate === "FindPassword_Email" ||
       navigate === "FindPassword_Password" ||
       navigate === "ServiceTerm" ||
-      navigate === "UserTerm" ? (
+      navigate === "UserPolicyTerm" ||
+      navigate === "UserTerm" ||
+      navigate === "Term" ? (
         <></>
       ) : (
         <BottomNav />
