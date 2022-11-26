@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import HashTag from "./HashTag";
 import Ajou from "../assets/Ajou.gif";
 import { IoIosCheckmark } from "react-icons/io";
-import { GetGroupApi, JoinGroupApi } from "../utils/api/group";
+import { GetGroupApi, JoinGroupApi, LeaveGroupApi } from "../utils/api/group";
 import PersonCard from "./group/PersonCard";
-
+import jwt_decode from "jwt-decode";
+import { useAuth } from "../stores/auth";
 // interface ParamsValue {
 //   groupID: number;
 //   building: string;
@@ -50,8 +51,11 @@ interface IGroups {
 const DetailGroup = () => {
   const Params: { num: string } = useActivityParams();
 
-  const [participation, setParticipation] = useState(false);
+  const [participation, setParticipation] = useState<boolean | undefined>(
+    false
+  );
   const [group, setGroup] = useState<IGroups | null>(null);
+  const { accessToken } = useAuth();
   useEffect(() => {
     GetGroupApi(Params.num)
       .then((response) => {
@@ -60,18 +64,41 @@ const DetailGroup = () => {
       })
       .catch((error) => console.log(error));
   }, []);
+  useEffect(() => {
+    duplicated(group?.joinedUserList.map((elem: IGroupJoined) => elem.userID));
+  }, [group, setParticipation]);
 
-  const handleParticiation = async (group_id?: number) => {
-    // setParticipation((prev) => !prev);
-    if (!group_id) return;
+  const onJoin = async (group_id: number) => {
+    console.log("group_id", group_id);
     try {
       const res = await JoinGroupApi(group_id);
-    } catch (e) {
-      console.log(e);
+      setParticipation(true);
+    } catch {
+      alert("그룹 참여 실패했습니다.");
     }
-    console.log("leave");
   };
 
+  const onLeave = async (group_id: number) => {
+    try {
+      const res = await LeaveGroupApi(group_id);
+      if (confirm("그룹을 떠나시겠습니까?")) setParticipation(false);
+    } catch {
+      alert("그룹 떠나기에 실패했습니다.");
+    }
+  };
+
+  const duplicated = (ids?: number[]) => {
+    const decoded = jwt_decode<Record<"sub", string>>(accessToken);
+    const state = ids?.some((id) => id === Number(decoded.sub));
+    console.log(decoded.sub, ids, state);
+    setParticipation(state);
+    //true : 값 찾음, false : 값 못찾음
+    return state;
+  };
+
+  useEffect(() => {
+    console.log("participation", participation);
+  }, [participation]);
   return (
     <div className="items-center">
       <img src={Ajou} className="absolute z-5 h-[20%] opacity-50 w-full" />
@@ -115,25 +142,26 @@ const DetailGroup = () => {
           </div>
         </div>
       </div>
-      {participation ? (
-        <button
-          onClick={() => {
-            handleParticiation(group?.groupDetailInfo.groupID);
-          }}
-          className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-white bg-[#a984da] font-semibold text-base rounded-md shadow-button"
-        >
-          참 여 중
-        </button>
-      ) : (
-        <button
-          onClick={() => {
-            handleParticiation(group?.groupDetailInfo.groupID);
-          }}
-          className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-[#a984da] bg-white bg-opacity-60 font-semibold text-base rounded-md shadow-button"
-        >
-          그룹 참여
-        </button>
-      )}
+      {group &&
+        (participation ? (
+          <button
+            onClick={() => {
+              onLeave(group?.groupDetailInfo.groupID);
+            }}
+            className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-white bg-[#a984da] font-semibold text-base rounded-md shadow-button"
+          >
+            참 여 중
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              onJoin(group?.groupDetailInfo.groupID);
+            }}
+            className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-[#a984da] bg-white bg-opacity-60 font-semibold text-base rounded-md shadow-button"
+          >
+            그룹 참여
+          </button>
+        ))}
     </div>
   );
 };

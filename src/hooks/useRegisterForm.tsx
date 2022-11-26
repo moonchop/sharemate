@@ -124,7 +124,7 @@ export const useRegisterForm = () => {
     },
     Component: () => (
       <>
-        <p className="text-3xl  text-semibold text-left text-black mb-14 ">
+        <p className="text-2xl  text-semibold text-left text-black mb-14 ">
           당신은 <br />
           어떤 룸메이트인가요?
         </p>

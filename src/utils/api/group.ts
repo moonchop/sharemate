@@ -11,6 +11,6 @@ export const DeleteGroupApi = async (params: any) =>
   await request.delete("/group", params);
 
 export const JoinGroupApi = (params: any) =>
-  request.get("/join", { params: { groupId: params } });
-export const LeaveGroupApi = async (params: any) =>
-  await request.get("/leae", { params: { groupId: params } });
+  request.get("/join", { params: { groupID: params } });
+export const LeaveGroupApi = (params: any) =>
+  request.get("/leave", { params: { groupID: params } });

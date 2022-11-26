@@ -51,6 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:2.1.0"],\
             ["autoprefixer", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:10.4.12"],\
             ["axios", "npm:1.1.3"],\
+            ["jwt-decode", "npm:3.1.2"],\
             ["postcss", "npm:8.4.17"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:18.2.0"],\
@@ -2572,6 +2573,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["jwt-decode", [\
+        ["npm:3.1.2", {\
+          "packageLocation": "./.yarn/cache/jwt-decode-npm-3.1.2-bf3ab26591-20a4b072d4.zip/node_modules/jwt-decode/",\
+          "packageDependencies": [\
+            ["jwt-decode", "npm:3.1.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["lilconfig", [\
         ["npm:2.0.6", {\
           "packageLocation": "./.yarn/cache/lilconfig-npm-2.0.6-6231346eaf-40a3cd72f1.zip/node_modules/lilconfig/",\
@@ -3532,6 +3542,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:2.1.0"],\
             ["autoprefixer", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:10.4.12"],\
             ["axios", "npm:1.1.3"],\
+            ["jwt-decode", "npm:3.1.2"],\
             ["postcss", "npm:8.4.17"],\
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:18.2.0"],\

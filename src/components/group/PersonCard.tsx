@@ -13,8 +13,7 @@ export default function PersonCard({
   name,
   profile_photo,
   userID,
-  onClick,
-}: IGroupJoined & { onClick: React.MouseEventHandler<HTMLDivElement> }) {
+}: IGroupJoined) {
   const { push } = useFlow();
   return (
     <div
