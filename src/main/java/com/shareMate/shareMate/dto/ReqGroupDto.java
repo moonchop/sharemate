@@ -36,8 +36,8 @@ public class ReqGroupDto {
     @NotNull
     private List<String> hashtags ;
     private List<String> wishLists;
-    @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
-    private Date created_at;
+//    @ApiModelProperty(value = "작성 날짜", required = true, example = "date")
+//    private Date created_at;
 
 
 

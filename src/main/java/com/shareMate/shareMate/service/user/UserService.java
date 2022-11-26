@@ -61,6 +61,7 @@ public class UserService {
             userSimpleDto.setAge(userEntity.get().getAge());
             userSimpleDto.setGender(userEntity.get().getGender());
             userSimpleDto.setName(userEntity.get().getName());
+            userSimpleDto.setMajor(userEntity.get().getMajor());
             userSimpleDto.setHashtags(hashtags);
 
 
