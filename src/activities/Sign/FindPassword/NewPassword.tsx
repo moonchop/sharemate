@@ -1,4 +1,5 @@
 import request from "../../../stores/Request";
+import { useActivityParams } from "@stackflow/react";
 import React, { useState } from "react";
 import { useFlow } from "../../../stackflow";
 import {
@@ -7,8 +8,9 @@ import {
   AiFillEyeInvisible,
 } from "react-icons/ai";
 
-const PasswordEdit = () => {
+const NewPassword = () => {
   const { replace } = useFlow();
+  const Params: { email: string } = useActivityParams();
   const [showPass, setShowPass] = useState({
     new: false,
     verify: false,
@@ -26,8 +28,9 @@ const PasswordEdit = () => {
 
   const passwordSubmit = () =>
     request
-      .put("user/forgetpwd", {
-        newPwd: passwordForm.newPwd,
+      .post("sign/setPwd", {
+        email: Params.email,
+        pwd: passwordForm.newPwd,
       })
       .then((response) => {
         console.log(response.status);
@@ -35,6 +38,7 @@ const PasswordEdit = () => {
         return true;
       })
       .catch((error) => {
+        console.log({ email: Params.email, pwd: passwordForm.newPwd });
         console.log(error);
         return false;
       });
@@ -48,7 +52,7 @@ const PasswordEdit = () => {
         const result = await passwordSubmit();
         if (result) {
           alert("비밀번호 변경에 성공했습니다.");
-          replace("MyPageActivity", {});
+          replace("LoginActivity", {});
         }
       } else alert("비밀번호가 일치하지 않습니다.");
     }
@@ -137,4 +141,4 @@ const PasswordEdit = () => {
   );
 };
 
-export default PasswordEdit;
+export default NewPassword;
