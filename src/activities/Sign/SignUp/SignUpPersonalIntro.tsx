@@ -3,6 +3,7 @@ import { BiBulb } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { useSaveFormData } from "../../../hooks/useSaveFormData";
 import { FavorApi } from "../../../utils/api/auth";
+import { useFlow } from "../../../stackflow";
 
 const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
   const {
@@ -13,7 +14,7 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
 
   const { setData, getData: getThirdData } = useSaveFormData("third");
   const { getData: getSecondData } = useSaveFormData("second");
-
+  const { push, replace } = useFlow();
   const onSubmit = async (data: any) => {
     await new Promise((r) => setTimeout(r, 1000));
     setData(data);
@@ -26,7 +27,7 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
       try {
         const res = await FavorApi(result);
         console.log(res);
-        handleGoNext();
+        replace("MainActivity", {});
       } catch (e) {
         console.log(e);
       }

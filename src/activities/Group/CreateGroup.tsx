@@ -14,7 +14,7 @@ import CheckText from "../../components/group/CheckText";
 /// 그룹 오픈 채팅방 링크     groupChatLink : string
 
 const CreateGroup = () => {
-  const { pop } = useFlow();
+  const { pop, replace } = useFlow();
   const [groupForm, setGroupForm] = useState({
     hashtags: [],
     wishLists: [],
@@ -23,7 +23,9 @@ const CreateGroup = () => {
   const [wishList, setWishList] = useState({});
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    setGroupForm((prev) => ({ ...prev, [name]: value }));
+    if (name === "maxNum")
+      setGroupForm((prev) => ({ ...prev, [name]: Number(value) }));
+    else setGroupForm((prev) => ({ ...prev, [name]: value }));
   };
   const changeListHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -42,6 +44,8 @@ const CreateGroup = () => {
       const res = await PostGroupApi(groupForm);
       alert("그룹 생성에 성공했습니다.");
       pop();
+      pop();
+      // replace("GroupActivity", {});
     } catch {
       alert("모든 내용을 입력해주세요");
     }
@@ -90,6 +94,16 @@ const CreateGroup = () => {
             placeholder="비흡연자"
             id="hashtag3"
             onChange={(e: any) => changeListHandler(e, hashtag, setHashtag)}
+          />
+        </div>
+        <div>
+          <CheckText>
+            <p className="text-lg">그룹 소개글의 제목을 입력해주세요.</p>
+          </CheckText>
+          <InputComponent
+            placeholder="활발한 사람들의 모임입니다."
+            id="title"
+            onChange={changeHandler}
           />
         </div>
         <div>

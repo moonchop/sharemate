@@ -23,6 +23,7 @@ import ServiceTerm from "../activities/MyPage/ServiceTerm";
 import UserPolicyTerm from "../activities/MyPage/UserPolicyTerm";
 import UserTerm from "../activities/MyPage/UserTerm";
 import Term from "../activities/MyPage/Term";
+import SignUpCoverPage from "../activities/Sign/SignUp/SignUpCoverPage";
 
 type Navigate_Type =
   | "Main"
@@ -44,7 +45,8 @@ type Navigate_Type =
   | "ServiceTerm"
   | "UserPolicyTerm"
   | "UserTerm"
-  | "Term";
+  | "Term"
+  | "SignUpCover";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -67,6 +69,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   UserPolicyTerm: <UserPolicyTerm />,
   UserTerm: <UserTerm />,
   Term: <Term />,
+  SignUpCover: <SignUpCoverPage />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
@@ -89,6 +92,7 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       "UserPolicyTerm",
       "UserTerm",
       "Term",
+      "SignUpCover",
     ].includes(navigate);
   }, [navigate]);
 
@@ -104,7 +108,7 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       navigate === "Password" ||
       navigate === "LikeProfile" ? (
         <TopNav status={true} />
-      ) : navigate === "Login" ? (
+      ) : navigate === "Login" || navigate === "SignUpCover" ? (
         <></>
       ) : (
         <TopNav />

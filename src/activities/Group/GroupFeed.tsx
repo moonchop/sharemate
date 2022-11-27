@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import { BsPencil } from "react-icons/bs";
 import { GetAllGroupsApi } from "../../utils/api/group";
+import { useActivityParams } from "@stackflow/react";
 
 export interface IGroup {
   group_id: number;
@@ -22,11 +23,11 @@ export interface IGroup {
 const ICON_OBJ = ["text-indigo-400", "text-purple-400", "text-pink-300"];
 const GroupFeed = () => {
   const [groupData, setGroupData] = useState<any>(null);
-  const { push } = useFlow();
+  const { push, replace } = useFlow();
 
   useEffect(() => {
     GetAllGroupsApi().then((v) => setGroupData(v.data));
-  }, []);
+  }, [[]]);
 
   return (
     <div className="h-[86%] overflow-y-scroll px-1 mt-2 scrollbar-hgroupIDe">

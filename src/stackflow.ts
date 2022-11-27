@@ -26,6 +26,7 @@ const ServiceTermActivity = MakeActivity("ServiceTerm");
 const UserPolicyTermActivity = MakeActivity("UserPolicyTerm");
 const UserTermActivity = MakeActivity("UserTerm");
 const TermActivity = MakeActivity("Term");
+const SignUpCoverActivity = MakeActivity("SignUpCover");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -52,6 +53,7 @@ const activities = {
   UserPolicyTermActivity,
   UserTermActivity,
   TermActivity,
+  SignUpCoverActivity,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -61,6 +63,7 @@ export const { Stack, useFlow } = stackflow({
     basicRendererPlugin(),
     historySyncPlugin({
       routes: {
+        SignUpCoverActivity: "/signupcover",
         LoginActivity: "/",
         MainActivity: "/home",
         GroupActivity: "/group",

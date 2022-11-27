@@ -12,6 +12,7 @@ import {
 import PersonCard from "../../components/group/PersonCard";
 import jwt_decode from "jwt-decode";
 import { useAuth } from "../../stores/auth";
+import CheckText from "../../components/group/CheckText";
 // interface ParamsValue {
 //   groupID: number;
 //   building: string;
@@ -58,6 +59,8 @@ const DetailGroup = () => {
   const [participation, setParticipation] = useState<boolean | undefined>(
     false
   );
+  const [own, setOwn] = useState<boolean | undefined>(false);
+
   const [group, setGroup] = useState<IGroups | null>(null);
   const { accessToken } = useAuth();
   useEffect(() => {
@@ -96,6 +99,8 @@ const DetailGroup = () => {
     const state = ids?.some((id) => id === Number(decoded.sub));
     console.log(decoded.sub, ids, state);
     setParticipation(state);
+
+    if (ids && ids[0] === Number(decoded.sub)) setOwn(true);
     //true : 값 찾음, false : 값 못찾음
     return state;
   };
@@ -110,9 +115,14 @@ const DetailGroup = () => {
       <div className="absolute h-[70%] bg-white rounded-3xl top-[20%] w-[90%] right-1/2 left-1/2 -translate-x-1/2 shadow-[0px_2px_2px_rgba(0,0,0,0.25)] overflow-auto">
         <div className=" p-5 z-10 ">
           {/* 카드 내용 */}
-          <p className="text-2xl font-bold">
-            {group?.groupDetailInfo.building}
-          </p>
+          <div className="flex justify-between">
+            <p className="text-2xl font-bold">
+              {group?.groupDetailInfo.building}
+            </p>
+            <button onClick={() => {}} className="text-xs text-red-300">
+              신고하기
+            </button>
+          </div>
           <p className="text-md mt-2">{group?.groupDetailInfo.text}</p>
           {/* 해시태그(화면 width 꽉차게 스크롤로 구현) */}
           <div className="pl-3 overflow-auto scrollbar-hide -mx-5 mt-2 ">
@@ -129,8 +139,10 @@ const DetailGroup = () => {
           </p>
           <div>
             {group?.groupDetailInfo.wishLists.map((elem, index) => (
-              <div key={index} className="flex items-center mb-2 -ml-1.5">
-                <p className={"text-md"}>{elem}</p>
+              <div key={index} className="flex items-center mb-2 ">
+                <CheckText>
+                  <p className={"text-md"}>{elem}</p>
+                </CheckText>
               </div>
             ))}
           </div>
@@ -147,14 +159,26 @@ const DetailGroup = () => {
       </div>
       {group &&
         (participation ? (
-          <button
-            onClick={() => {
-              onLeave(group?.groupDetailInfo.groupID);
-            }}
-            className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-white bg-[#a984da] font-semibold text-base rounded-md shadow-button"
-          >
-            참 여 중
-          </button>
+          own ? (
+            <button
+              // onClick={() => {
+              //   onLeave(group?.groupDetailInfo.groupID);
+              // }}
+              disabled
+              className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] text-opacity-50 text-white bg-gray-500 bg-opacity-40 font-semibold text-base rounded-md shadow-button"
+            >
+              참 여 중
+            </button>
+          ) : (
+            <button
+              onClick={() => {
+                onLeave(group?.groupDetailInfo.groupID);
+              }}
+              className="absolute bottom-[2%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-white bg-[#a984da] font-semibold text-base rounded-md shadow-button"
+            >
+              참 여 중
+            </button>
+          )
         ) : (
           <button
             onClick={() => {
