@@ -21,17 +21,17 @@ const DetailProfile = () => {
   const kakao_link = "https://open.kakao.com/o/s2qDCFOe";
   const Params: { id: string } = useActivityParams();
   const { accessToken } = useAuth();
-  const [likeId, setLikeId] = useState<LikeProps[]>();
-  const [like, setLike] = useState<boolean>(false);
+  const [likeId, setLikeId] = useState<number[] | null>(null);
+  const [like, setLike] = useState<boolean | undefined>(false);
   const [user, setUser] = useState({
     userID: 0,
     name: "",
     major: "",
     grade: 0,
     age: 0,
-    kakao_link: "",
-    profile_photo: "",
     gender: 0,
+    profile_photo: "",
+    kakao_link: "",
     created_at: 0,
     updated_at: 0,
     email: "",
@@ -52,7 +52,6 @@ const DetailProfile = () => {
   useEffect(() => {
     const decoded = jwt_decode<Record<"sub", string>>(accessToken);
     console.log(decoded);
-
     request
       .get("user/detail", { params: { id: Params.id } })
       .then((response) => {
@@ -69,21 +68,17 @@ const DetailProfile = () => {
     request
       .get("user/likelist", { params: { id: decoded.sub } })
       .then((response) => {
-        console.log(response.data);
-        response.data.map((elem: any) => {
-          setLikeId(elem);
-        });
+        setLikeId(response.data.map((elem: LikeProps) => elem.userID));
       })
       .catch((error) => {
         console.log(error);
       });
-
-    if (likeId?.some((id) => id.userID === Number(Params.id))) {
-      console.log(likeId);
-      console.log("성공");
-      setLike(true);
-    }
   }, []);
+
+  useEffect(() => {
+    const state = likeId?.some((e: number) => e === Number(Params.id));
+    setLike(state);
+  }, [likeId]);
 
   const likeHandler = () => {
     console.log(user);
