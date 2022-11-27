@@ -2,6 +2,9 @@ package com.shareMate.shareMate.entity;
 
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -11,21 +14,24 @@ import java.util.Date;
 //@Builder
 
 @Entity(name="post")
+@Data
 @Getter
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class PostEntity {
 
     @Id
-    @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer postId;
+    @Column(name = "postId")
+    private Integer postID;
     //    @Column(nullable = false,unique = true)
-    @Column(name = "user_id")
-    private Integer user_id;
+
+    private Integer userID;
 
     private String title;
     private String category;
     private String text;
+    @CreatedDate
     private Date created_at;
 //    @ManyToOne
 //    @JoinColumn(name="user_id",insertable = false,updatable = false)
