@@ -34,7 +34,7 @@ public class ReqFavorDto {
     @ApiModelProperty(value = "자기소개", required = true, example = "string")
     private String selfIntro;
     @ApiModelProperty(value = "해쉬태그", required = true, example = "list")
-    private List<String > hastags;
+    private List<String > hashtags;
 
     public ReqFavorDto(){};
 
