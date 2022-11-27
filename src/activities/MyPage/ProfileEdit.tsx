@@ -58,8 +58,6 @@ const ProfileEdit = () => {
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const [editInfo, setEditInfo] = useState(dumydata);
-
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.currentTarget;
     return setEditData((prev) => ({ ...prev, [name]: value }));
@@ -95,13 +93,15 @@ const ProfileEdit = () => {
   const submitHandler = async () => {
     const nicknameRegEx = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
 
-    if (!nicknameRegEx.test(editInfo.nickname)) {
+    if (!nicknameRegEx.test(editData.name)) {
       alert("닉네임 형식에 맞춰주세요");
     } else {
       const result = await editSubmit();
       if (result) {
         alert("회원정보 수정이 완료되었습니다.");
         replace("MyPageActivity", {});
+      } else {
+        alert("회원정보 수정에 실패하였습니다.");
       }
     }
   };
@@ -130,8 +130,8 @@ const ProfileEdit = () => {
           </div>
         </div>
       </div>
-      <div className="h-[15%] pl-[24px] pr-[24px] border-b-4">
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
+      <div className="pro:h-[16%] h-[19%] pl-[24px] pr-[24px] border-dotted border-b-4 border-gray-300 border-opacity-0">
+        <div className="flex flex-row pro:mb-[26px] mb-[20px]">
           <div className="text-[#AFADF5] text-base font-medium w-[29%]">
             이메일
           </div>
@@ -139,7 +139,7 @@ const ProfileEdit = () => {
             {editData.email}
           </div>
         </div>
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
+        <div className="flex flex-row pro:mb-[26px] mb-[20px]">
           <div className="text-[#AFADF5] text-base font-medium w-[29%]">
             성별
           </div>

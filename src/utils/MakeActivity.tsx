@@ -16,7 +16,7 @@ import CreateBoard from "../activities/Community/CreateBoard";
 import Login from "../activities/Sign/Login";
 import Password from "../activities/MyPage/PasswordEdit";
 import LikeProfile from "../activities/MyPage/LikeProfile";
-import ModifyFavor from "../activities/MyPage/ModifyFavor";
+import ModifyFavor from "../activities/MyPage/FavorEdit";
 import FindPassword_Email from "../activities/Sign/FindPassword/AuthEmail";
 import FindPassword_Password from "../activities/Sign/FindPassword/NewPassword";
 import ServiceTerm from "../activities/MyPage/ServiceTerm";
