@@ -14,69 +14,21 @@ export interface IBoard {
   created_at: string;
 }
 
-// const boardData: IBoard[] = [
-//   {
-//     id: 1,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-//   {
-//     id: 2,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-//   {
-//     id: 3,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-//   {
-//     id: 4,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-//   {
-//     id: 5,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-//   {
-//     id: 6,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-//   {
-//     id: 7,
-//     username: "정희수",
-//     title: "제목입니다.",
-//     preview: "미리보기 글입니다.",
-//     text: "내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.내용입니다.",
-//   },
-// ];
-
 const CommunityFeed = () => {
   const { push } = useFlow();
   const [data, setData] = useState<IBoard[] | null>(null);
   useEffect(() => {
-    PostAllApi().then((response: any) => setData(response));
+    PostAllApi().then((response: any) => {
+      console.log(response.data);
+      setData(response.data);
+    });
   }, []);
   return (
-    <div className="h-[86%] overflow-y-scroll p-3">
-      {data?.map((elem: IBoard) => (
-        <BoardListItem {...elem} />
-      ))}
+    <div className="p-5 overflow-y-scroll">
+      {data &&
+        data?.map((elem: IBoard) => (
+          <BoardListItem {...elem} key={elem.post_id} />
+        ))}
       <button
         onClick={() => {
           push("CreateBoardActivity", {});

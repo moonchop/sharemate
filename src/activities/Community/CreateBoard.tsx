@@ -11,7 +11,11 @@ const CreateBoard: ActivityComponentType = () => {
     title: "",
     text: "",
   });
+  const back = () => {
+    pop();
+  };
   const onClick = () => {
+    if (inputs.text === "" || inputs.title === "") return;
     PostCreateApi(inputs);
     pop();
   };
@@ -24,30 +28,29 @@ const CreateBoard: ActivityComponentType = () => {
   };
   const { title, text } = inputs;
   return (
-    <AppScreen theme="android">
+    <AppScreen theme="cupertino">
       <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
         <IoMdArrowRoundBack
           className="w-5 h-5"
-          onClick={onClick}
+          onClick={back}
         ></IoMdArrowRoundBack>
         <div className="font-semibold text-xl text-white" onClick={onClick}>
           등록
         </div>
       </header>
-
       <input
         onChange={onChange}
         name="title"
         value={title}
-        className="mt-5 my-2 w-full px-5 text-xl"
+        className="py-2 my-2 w-full px-5 text-xl outline-none"
         placeholder="제목"
       />
       <hr />
-      <input
+      <textarea
         onChange={onChange}
         name="text"
         value={text}
-        className="mt-5 my-2 w-full h-60% px-5 text-lg"
+        className="w-full h-[60%] p-5 text-lg  outline-none"
         placeholder="내용을 입력하세요."
       />
     </AppScreen>
