@@ -13,28 +13,28 @@ import java.util.Date;
 //@AllArgsConstructor
 //@Builder
 
-@Table(name="group")
-@Entity(name="group")
+@Table(name="groups")
+@Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class    GroupEntity {
+public class GroupEntity {
     //    @Column(nullable = false,unique = true)
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer groupID;
 
+//    @Column(name = "\"userid\"")
     private Integer userID;
     private String title;
     private String text;
-    @Column(name = "\"max_num\"")
-    private Integer maxNum;
-    @Column(name = "\"cur_num\"")
-    private Integer curNum;
-    @Column(name = "\"kakao_link\"")
-    private String kakaoLink;
+//    @Column(name = "\"max_num\"")
+    private Integer max_num;
+//    @Column(name = "\"cur_num\"")
+    private Integer cur_num;
+//    @Column(name = "\"kakao_link\"")
+    private String kakao_link;
 
     private String building;
     @CreatedDate
@@ -46,9 +46,9 @@ public class    GroupEntity {
 //    private UserEntity user;
 
 
-    public GroupEntity() {
-
-    }
+//    public GroupEntity() {
+//
+//    }
 
 
 }

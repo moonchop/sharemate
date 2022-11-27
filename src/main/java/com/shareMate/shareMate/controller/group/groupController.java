@@ -47,7 +47,7 @@ public class groupController {
                 Hash_list.add(h.getHashTag());
             }
 
-            GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMaxNum(), e.getCurNum(),e.getBuilding(),e.getCreated_at());
+            GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMax_num(), e.getCur_num(),e.getBuilding(),e.getCreated_at());
             groupListDto.setHashtags(Hash_list);
             responseList.add(groupListDto);
         }
@@ -66,7 +66,7 @@ public class groupController {
 
         Optional<GroupDetailDto> groupDetailDto = groupService.getDetailGroup(num);
         List<JoinEntity> join_list = joinRepository.findAllByGroupID(num);
-       // System.out.println(join_list.);
+        // System.out.println(join_list.);
         List <UserSimpleDto> user_List= new ArrayList<>();
         for( JoinEntity j : join_list){
             System.out.println("@@@@");
@@ -94,7 +94,6 @@ public class groupController {
     public ResponseEntity addGroup(HttpServletRequest request, @RequestBody ReqGroupDto group)
     {
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
-        System.out.println(group);
         groupService.addGroup(group,user_id);
 
 

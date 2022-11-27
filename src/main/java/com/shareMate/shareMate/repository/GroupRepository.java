@@ -16,6 +16,5 @@ import java.util.Optional;
 public interface GroupRepository extends JpaRepository<GroupEntity,Number> {
     //Optional<UserEntity> findByEmail(String email);
 
-
     Optional<GroupEntity> findGroupEntityByGroupID(int groupID);
 }
