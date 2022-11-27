@@ -4,6 +4,7 @@ import com.shareMate.shareMate.dto.FavorDto;
 import com.shareMate.shareMate.dto.ReqFavorDto;
 import com.shareMate.shareMate.dto.response.Response;
 import com.shareMate.shareMate.service.FavorService;
+import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletRequest;
 public class favorController {
     @Autowired
     private FavorService favorService;
+    @Autowired
+    private UserService userService;
 
 
     @PostMapping("/favor")
@@ -31,8 +34,8 @@ public class favorController {
     private ResponseEntity addFavor(HttpServletRequest request, @RequestBody ReqFavorDto favorDto){
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         System.out.println("@ "+user_id+"   @    "+favorDto.getSmoking());
-
         favorService.doInsert(user_id, favorDto);
+        userService.doInsertHashTags(user_id,favorDto.getHastags());
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
     @PutMapping("/favor")
