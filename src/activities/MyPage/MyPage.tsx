@@ -44,9 +44,10 @@ const MyPage = () => {
         smoking: "",
         wakeupTime: "",
         drinking: "",
-        sutdyTime: "",
+        studyTime: "",
         cleanness: "",
         snoring: "",
+        selfIntro: "",
       });
       replace("LoginActivity", {});
     } else {
@@ -79,11 +80,11 @@ const MyPage = () => {
                 className="flex rounded-3xl pro:w-[80px] pro:h-[80px] w-[60px] h-[60px] mr-[15px]"
                 src={profile_photo}
               />
-              <div className="flex flex-row w-full items-center">
-                <div
-                  className="flex flex-col w-[84%]"
-                  onClick={() => push("ProfileEditActivity", {})}
-                >
+              <div
+                className="flex flex-row w-full items-center"
+                onClick={() => push("ProfileEditActivity", {})}
+              >
+                <div className="flex flex-col w-[84%]">
                   <div className="font-semibold pro:text-xl text-lg">
                     {name}
                   </div>
@@ -98,55 +99,62 @@ const MyPage = () => {
         </div>
       </div>
       <div className="h-[45%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
-        <div className="h-[25%] flex items-center border-b-2">
-          <div
-            className="pl-[28px] w-[90%] text-[#AFADF5]"
-            onClick={() => push("LikeProfileActivity", {})}
-          >
+        <div
+          className="h-[25%] flex items-center border-b-2"
+          onClick={() => push("LikeProfileActivity", {})}
+        >
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">
             좋아요 누른 프로필
           </div>
-          <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
-        </div>
-        <div className="h-[25%] flex items-center border-b-2">
-          <div
-            className="pl-[28px] w-[90%] text-[#AFADF5]"
-            onClick={() => push("ModifyFavorActivity", {})}
-          >
-            취향 정보 수정
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
           </div>
-          <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
         </div>
-        <div className="h-[25%] flex items-center border-b-2">
-          <div className="pl-[28px] w-[90%] text-[#AFADF5] ">비밀번호 변경</div>
-          <IoIosArrowForward
-            className="opacity-30"
-            onClick={() => push("PasswordActivity", { userID })}
-          ></IoIosArrowForward>
+        <div
+          className="h-[25%] w-full flex items-center border-b-2"
+          onClick={() => push("ModifyFavorActivity", {})}
+        >
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">취향 정보 수정</div>
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          </div>
         </div>
-        <div className="h-[25%] flex items-center">
-          <div className="pl-[28px] w-[90%] text-[#AFADF5] ">
+        <div
+          className="h-[25%] flex items-center border-b-2"
+          onClick={() => push("PasswordActivity", { userID })}
+        >
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">비밀번호 변경</div>
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          </div>
+        </div>
+        <div
+          className="h-[25%] flex items-center"
+          onClick={() => push("TermActivity", {})}
+        >
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">
             약관 및 동의 관리
           </div>
-          <IoIosArrowForward
-            className="opacity-30"
-            onClick={() => push("TermActivity", {})}
-          ></IoIosArrowForward>
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          </div>
         </div>
       </div>
       <div className="h-[22%] pro:text-lg text-base font-semibold">
-        <div className="h-[48%] flex items-center border-b-2">
-          <div className="pl-[28px] w-[90%] text-[#AFADF5] ">로그아웃</div>
-          <IoIosArrowForward
-            className="opacity-30"
-            onClick={logoutHandler}
-          ></IoIosArrowForward>
+        <div
+          className="h-[48%] flex items-center border-b-2"
+          onClick={logoutHandler}
+        >
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">로그아웃</div>
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          </div>
         </div>
-        <div className="h-[48%] flex items-center ">
-          <div className="pl-[28px] w-[90%] text-[#AFADF5] ">회원 탈퇴</div>
-          <IoIosArrowForward
-            className="opacity-30"
-            onClick={confirmHandler}
-          ></IoIosArrowForward>
+        <div className="h-[48%] flex items-center" onClick={confirmHandler}>
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">회원 탈퇴</div>
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          </div>
         </div>
       </div>
     </div>
