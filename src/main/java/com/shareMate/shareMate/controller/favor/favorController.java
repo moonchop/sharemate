@@ -35,7 +35,7 @@ public class favorController {
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         System.out.println("@ "+user_id+"   @    "+favorDto.getSmoking());
         favorService.doInsert(user_id, favorDto);
-        userService.doInsertHashTags(user_id,favorDto.getHastags());
+        userService.doInsertHashTags(user_id,favorDto.getHashtags());
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
     @PutMapping("/favor")
