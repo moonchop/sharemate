@@ -4,10 +4,24 @@ import Ajou from "../../assets/Ajou.gif";
 import Kakao from "../../assets/kakao.png";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import request from "../../stores/Request";
+import jwt_decode from "jwt-decode";
+import { useAuth } from "../../stores/auth";
+
+interface LikeProps {
+  age: number;
+  gender: boolean;
+  hashtags: string[];
+  major: string;
+  name: string;
+  profile_photo: string;
+  userID: number;
+}
 
 const DetailProfile = () => {
   const kakao_link = "https://open.kakao.com/o/s2qDCFOe";
   const Params: { id: string } = useActivityParams();
+  const { accessToken } = useAuth();
+  const [likeId, setLikeId] = useState<LikeProps[]>();
   const [like, setLike] = useState<boolean>(false);
   const [user, setUser] = useState({
     userID: 0,
@@ -36,6 +50,9 @@ const DetailProfile = () => {
   });
 
   useEffect(() => {
+    const decoded = jwt_decode<Record<"sub", string>>(accessToken);
+    console.log(decoded);
+
     request
       .get("user/detail", { params: { id: Params.id } })
       .then((response) => {
@@ -48,6 +65,24 @@ const DetailProfile = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    request
+      .get("user/likelist", { params: { id: decoded.sub } })
+      .then((response) => {
+        console.log(response.data);
+        response.data.map((elem: any) => {
+          setLikeId(elem);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    if (likeId?.some((id) => id.userID === Number(Params.id))) {
+      console.log(likeId);
+      console.log("성공");
+      setLike(true);
+    }
   }, []);
 
   const likeHandler = () => {
