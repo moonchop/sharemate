@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -18,19 +20,22 @@ public class ReqFavorDto {
     @ApiModelProperty(value = "흡연 여부", required = true, example = "1")
     private String smoking;
     @ApiModelProperty(value = "기상시간", required = true, example = "3")
-    private String wakeupTime;
+        private String wakeupTime;
     @ApiModelProperty(value = "음주", required = true, example = "1")
     private String drinking;
     @ApiModelProperty(value = "공부시간대", required = true, example = "1")
     private String studyTime;
     @ApiModelProperty(value = "청결도", required = true, example = "1")
-    private String cleanness;
+        private String cleanness;
     @ApiModelProperty(value = "코골이 여부", required = true, example = "1")
     private String snoring;
     @ApiModelProperty(value = "mbti", required = true, example = "string")
     private String mbti;
     @ApiModelProperty(value = "자기소개", required = true, example = "string")
     private String selfIntro;
+    @ApiModelProperty(value = "해쉬태그", required = true, example = "list")
+    private List<String > hastags;
+
     public ReqFavorDto(){};
 
 }

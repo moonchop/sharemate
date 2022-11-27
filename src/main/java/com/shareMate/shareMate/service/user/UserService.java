@@ -172,6 +172,19 @@ public class UserService {
 
     }
 
+    public void doInsertHashTags (int userID, List<String> hashtags){
+
+        for (String s : hashtags){
+            HashTagEntity hashTagEntity = new HashTagEntity();
+            hashTagEntity.setHashTag(s);
+            hashTagEntity.setUserID(userID);
+            hashtagRepository.save(hashTagEntity);
+
+        }
+        return ;
+
+    }
+
 
     public FavorDto getFavor(Integer num) {
         Optional<FavorEntity> member = favorRepository.findById(num);
