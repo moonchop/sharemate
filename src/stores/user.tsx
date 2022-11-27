@@ -87,7 +87,7 @@ interface Favor {
   setFavor: (favor: favorProps) => void;
 }
 
-interface favorProps {
+export interface favorProps {
   mbti: string;
   sleepTime: string;
   smoking: string;
