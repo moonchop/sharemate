@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @AllArgsConstructor
 public class favorController {
+    @Autowired
     private FavorService favorService;
 
 
@@ -28,6 +30,8 @@ public class favorController {
 
     private ResponseEntity addFavor(HttpServletRequest request, @RequestBody ReqFavorDto favorDto){
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
+        System.out.println("@ "+user_id+"   @    "+favorDto.getSmoking());
+
         favorService.doInsert(user_id, favorDto);
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }

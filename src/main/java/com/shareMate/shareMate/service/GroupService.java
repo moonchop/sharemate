@@ -39,9 +39,9 @@ public class GroupService {
                 group.get().getGroupID(),
                 group.get().getTitle(),
                 group.get().getText(),
-                group.get().getMaxNum(),
-                group.get().getCurNum(),
-                group.get().getKakaoLink(),
+                group.get().getMax_num(),
+                group.get().getCur_num(),
+                group.get().getKakao_link(),
                 group.get().getBuilding(),
                 group.get().getCreated_at()
         ));
@@ -67,27 +67,33 @@ public class GroupService {
 
     //그룹 생성
     public void addGroup(ReqGroupDto group,int user_id) {
+
+
         GroupEntity groupEntity = new GroupEntity();
-        System.out.println(group.getBuilding());
         groupEntity.setUserID(user_id);
         groupEntity.setBuilding(group.getBuilding());
-        groupEntity.setCurNum(1);
+        groupEntity.setCur_num(1);
         groupEntity.setTitle(group.getTitle());
         groupEntity.setText(group.getText());
-        groupEntity.setKakaoLink(group.getKakaoLink());
-        groupEntity.setMaxNum(group.getMaxNum());
+        groupEntity.setKakao_link(group.getKakaoLink());
+        groupEntity.setMax_num(group.getMaxNum());
+
+        System.out.println("@"+1+"  "+(groupEntity.getUserID())+ " "+groupEntity.getTitle()+"  "+groupEntity.getText());
         //Hashtag 저장
         final int groupID= groupRepository.save(groupEntity).getGroupID();
-
+//        final int groupID =
+        System.out.println("@"+2);
         for (String hashtag: group.getHashtags()){
             hashtagRepository.save( new HashTagEntity ( groupID, hashtag));
         }
         // wishlist 저장
+        System.out.println("@"+3);
         for (String wishlist: group.getWishLists()){
             wishListRepository.save(new WishListEntity( groupID,wishlist));
         }
+        System.out.println("@"+4);
         joinRepository.save(new JoinEntity(groupID,user_id));
-
+        System.out.println("@"+5);
         return;
     }
 
@@ -140,7 +146,7 @@ public class GroupService {
         JoinEntity joinEntity= new JoinEntity(group_id,user_id);
         joinRepository.save(joinEntity);
         Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
-        group.get().setCurNum(group.get().getCurNum()+1);
+        group.get().setCur_num(group.get().getCur_num()+1);
         groupRepository.save(group.get());
         return ;
     }
@@ -151,14 +157,13 @@ public class GroupService {
         joinRepository.deleteByGroupIDAndUserID(group_id,user_id);
         System.out.println("delete success");
         Optional<GroupEntity> group = groupRepository.findGroupEntityByGroupID(group_id);
-        group.get().setCurNum(group.get().getCurNum()-1);
+        group.get().setCur_num(group.get().getCur_num()-1);
         groupRepository.save(group.get());
         return ;
     }
 
 
 }
-
 
 
 

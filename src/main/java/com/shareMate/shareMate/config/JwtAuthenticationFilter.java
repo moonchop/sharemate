@@ -24,12 +24,10 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = String.valueOf(extractToken(request));
-        System.out.println("token : " + token);
 
         extractToken(request).map(userDetailsService::loadUserByUsername).ifPresent(this::setAuthentication);
         //CustomUserDetails userId = userDetailsService.loadUserByUsername(String.valueOf(extractToken(request)));
         if(Optional.ofNullable(((HttpServletRequest) request).getHeader("Authorization")).isPresent()){
-            System.out.println("토큰 저장한다  필터에서");
             System.out.println(userDetailsService.loadUserByUsername(extractToken(request).get()).getUserId());
             request.setAttribute("userid",userDetailsService.loadUserByUsername(extractToken(request).get()).getUserId());
 

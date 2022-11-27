@@ -16,7 +16,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public CustomUserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
-        System.out.println("loadUserbyUsername");
         return new CustomUserDetails(accessTokenHelper.extractSubject(token));
 
     }
