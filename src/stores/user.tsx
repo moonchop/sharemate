@@ -83,6 +83,7 @@ interface Favor {
   studyTime: string;
   cleanness: string;
   snoring: string;
+  selfIntro: string;
   setFavor: (favor: favorProps) => void;
 }
 
@@ -95,6 +96,7 @@ interface favorProps {
   studyTime: string;
   cleanness: string;
   snoring: string;
+  selfIntro: string;
 }
 
 export const useFavor = create<Favor>((set) => ({
@@ -106,6 +108,7 @@ export const useFavor = create<Favor>((set) => ({
   studyTime: "",
   cleanness: "",
   snoring: "",
+  selfIntro: "",
   setFavor: (favor: favorProps) => {
     set((state) => ({
       mbti: favor.mbti,
@@ -116,6 +119,7 @@ export const useFavor = create<Favor>((set) => ({
       studyTime: favor.studyTime,
       cleanness: favor.cleanness,
       snoring: favor.snoring,
+      selfIntro: favor.selfIntro,
     }));
   },
 }));
