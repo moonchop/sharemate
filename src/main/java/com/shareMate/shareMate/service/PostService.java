@@ -2,6 +2,7 @@ package com.shareMate.shareMate.service;
 
 
 import com.shareMate.shareMate.dto.PostDetailDto;
+import com.shareMate.shareMate.dto.ReqPostDto;
 import com.shareMate.shareMate.entity.PostEntity;
 import com.shareMate.shareMate.repository.PostRepository;
 
@@ -26,10 +27,10 @@ public class PostService {
     }
 
     public Optional<PostDetailDto> getDetailPost(int num){
-        Optional<PostEntity> post = postRepository.findPostEntityByPostId(num);
+        Optional<PostEntity> post = postRepository.findPostEntityByPostID(num);
         Optional<PostDetailDto> postDetailDto = Optional.of(new PostDetailDto(
-                post.get().getPostId(),
-                post.get().getUser_id(),
+                post.get().getPostID(),
+                post.get().getUserID(),
                 post.get().getTitle(),
                 post.get().getCategory(),
                 post.get().getText(),
@@ -39,10 +40,10 @@ public class PostService {
 
     }
 
-    public void addPost(PostDetailDto post) {
+    public void addPost(int  userID, ReqPostDto post) {
         PostEntity postEntity = new PostEntity();
-        postEntity.setPostId(post.getPost_id());
-        postEntity.setUser_id(post.getUser_id());
+
+        postEntity.setUserID(userID);
         postEntity.setText(post.getText());
         postEntity.setTitle(post.getTitle());
         postEntity.setCategory(post.getCategory());
@@ -53,7 +54,7 @@ public class PostService {
 
 
     public Optional<PostEntity> editPost (int postid,PostDetailDto post){
-        Optional<PostEntity> origin = postRepository.findPostEntityByPostId(postid);
+        Optional<PostEntity> origin = postRepository.findPostEntityByPostID(postid);
         origin.ifPresent(t->{
             if(post.getText()!=null) t.setText(post.getText());
             if(post.getCategory()!=null) t.setCategory(post.getCategory());

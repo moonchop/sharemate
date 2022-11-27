@@ -26,10 +26,9 @@ import java.util.*;
 @Tag(name="Post",description = "게시글 작성 관련 API")
 
 public class postController {
-    private final UserService userService;
-    private final SignService signService;
+
     private final PostService postService;
-    private final TokenHelper tokenHelper;
+
     private final UserRepository userRepository;
 
 
@@ -43,8 +42,8 @@ public class postController {
         List<PostEntity> list = postService.getAllPost();
         ArrayList<PostListDto> responseList = new ArrayList<>();
         for (PostEntity e : list) {
-            Optional<UserEntity> u =userRepository.findById(e.getUser_id());
-            PostListDto postListDto = new PostListDto(e.getPostId(), e.getUser_id(),u.get().getName(), e.getTitle(),e.getText(), e.getCategory(), e.getCreated_at());
+            Optional<UserEntity> u =userRepository.findById(e.getUserID());
+            PostListDto postListDto = new PostListDto(e.getPostID(), e.getUserID(),u.get().getName(), e.getTitle(),e.getText(), e.getCategory(), e.getCreated_at());
             responseList.add(postListDto);
         }
         return ResponseEntity.ok(responseList);
@@ -61,9 +60,10 @@ public class postController {
     //게시글 작성
     @ApiOperation(value = "커뮤니티 게시글 작성",notes = "게시글을 작성합니다.",tags="Post")
     @PostMapping("/post")
-    public ResponseEntity addPost(@RequestBody PostDetailDto post)
+    public ResponseEntity addPost(HttpServletRequest request,@RequestBody ReqPostDto post)
     {
-        postService.addPost(post);
+        final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
+        postService.addPost(user_id,post);
         return  ResponseEntity.ok(HttpStatus.OK);
 
     }
@@ -88,9 +88,9 @@ public class postController {
     //게시글 삭제
     @ApiOperation(value = "커뮤니티 게시글 삭제",notes = "커뮤니티에 있는 게시글을 삭제합니다.",tags="Post")
     @DeleteMapping("/post")
-    public ResponseEntity delPost(@RequestParam Integer postId){
+    public ResponseEntity delPost(@RequestParam Integer postID){
 
-        postService.delPost(postId);
+        postService.delPost(postID);
         return ResponseEntity.ok(HttpStatus.OK);
 
     }
