@@ -141,7 +141,8 @@ public class UserController {
     //개인정보 수정
     @ApiOperation(value = "개인정보 수정",notes = "개인정보를 수정합니다.",tags="User")
     @PutMapping("")
-    public ResponseEntity editUser (HttpServletRequest request, @RequestParam("id") Integer num, ReqUpdateUserDto reqUpdateUserDto) {
+    public ResponseEntity editUser (HttpServletRequest request, ReqUpdateUserDto reqUpdateUserDto) {
+        final Integer num = Integer.parseInt(request.getAttribute("userid").toString());
         userService.doUpdate(num,reqUpdateUserDto);
         return ResponseEntity.ok(HttpStatus.OK);
     }

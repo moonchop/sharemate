@@ -8,6 +8,9 @@ import com.shareMate.shareMate.repository.HashtagRepository;
 import com.shareMate.shareMate.repository.JoinRepository;
 import com.shareMate.shareMate.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,8 +30,9 @@ public class GroupService {
 
 
     //그룹 전체 리스트 조회
-    public List<GroupEntity> getAllGroup() {
-        List<GroupEntity> list = groupRepository.findAll();
+    public Page<GroupEntity> getAllGroup(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<GroupEntity> list = groupRepository.findAll(pageable);
         return list;
     }
 

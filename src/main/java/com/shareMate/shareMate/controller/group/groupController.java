@@ -5,6 +5,7 @@ import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.entity.GroupEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.JoinEntity;
+import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.repository.JoinRepository;
 import com.shareMate.shareMate.service.GroupService;
 import com.shareMate.shareMate.service.user.UserService;
@@ -13,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,11 +37,11 @@ public class groupController {
     @ApiOperation(value = "그룹매칭 전체 리스트 조회",notes = "그룹매칭 메인화면에 나타낼 그룹매칭 게시글 리스트를 반환합니다.",tags="Group")
     //그룹 전체 리스트 조회
     @GetMapping("/groups")
-    public ResponseEntity<ArrayList<GroupListDto>> getAll(HttpServletRequest request) {
+    public ResponseEntity<ArrayList<GroupListDto>> getAll(HttpServletRequest request, @RequestParam int page) {
 
-
+        //Page<UserEntity> resultList = userService.getUserList(page, 12);
         System.out.println("filter로부터 전달받은 userid: "+request.getAttribute("userid"));
-        List<GroupEntity> list = groupService.getAllGroup();
+        Page<GroupEntity> list = groupService.getAllGroup(page,4);
         ArrayList<GroupListDto> responseList = new ArrayList<>();
         for (GroupEntity e : list) {
             List <HashtagDto> groupHash = groupService.getHashtags(e.getGroupID());
@@ -120,10 +123,8 @@ public class groupController {
     @ApiOperation(value = "그룹매칭 게시글 삭제",notes = "작성자가 그룹매칭 게시글을 삭제합니다.",tags="Group")
     @DeleteMapping("/group")
     public ResponseEntity delGroup(@RequestParam int postId){
-
         groupService.delGroup(postId);
         return ResponseEntity.ok(HttpStatus.OK);
-
     }
 
     //참가하기 (유저)

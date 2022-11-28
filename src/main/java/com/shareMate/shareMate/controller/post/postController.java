@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,11 +36,11 @@ public class postController {
     //게시글 전체 리스트 조회
     @ApiOperation(value = "커뮤니티 게시글 전체 조회",notes = "커뮤니티 게시글 리스트를 반환합니다.",tags="Post")
     @GetMapping("/posts")
-    public ResponseEntity<ArrayList<PostListDto>> getAll(HttpServletRequest request) {
+    public ResponseEntity<ArrayList<PostListDto>> getAll(HttpServletRequest request , @RequestParam int page) {
 
 
         System.out.println("filter로부터 전달받은 userid: "+request.getAttribute("userid"));
-        List<PostEntity> list = postService.getAllPost();
+        Page<PostEntity> list = postService.getAllPost(page,4);
         ArrayList<PostListDto> responseList = new ArrayList<>();
         for (PostEntity e : list) {
             Optional<UserEntity> u =userRepository.findById(e.getUserID());

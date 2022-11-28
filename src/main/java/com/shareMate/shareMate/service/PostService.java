@@ -8,6 +8,9 @@ import com.shareMate.shareMate.repository.PostRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +23,9 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public List<PostEntity> getAllPost() {
-        List<PostEntity> list = postRepository.findAll();
+    public Page<PostEntity> getAllPost(Integer page, Integer size ) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<PostEntity> list = postRepository.findAll(pageable);
 
         return list;
     }
