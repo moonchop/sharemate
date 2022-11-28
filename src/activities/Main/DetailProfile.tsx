@@ -173,14 +173,7 @@ const DetailProfile = () => {
               }}
             />
           )}
-          <span className="w-[50%]">
-            <span
-              className="text-lg"
-              onClick={() => push("ReportActivity", { userToID: user.userID })}
-            >
-              신고하기
-            </span>
-          </span>
+          <span className="w-[50%]"></span>
           <img
             src={Kakao}
             className="flex pro:h-[70%] h-[70%]"
@@ -189,6 +182,12 @@ const DetailProfile = () => {
             }}
           />
         </div>
+        <span
+          className="text-xs text-red-300 ml-[33px]"
+          onClick={() => push("ReportActivity", { userToID: user.userID })}
+        >
+          신고하기
+        </span>
       </div>
     </div>
   );

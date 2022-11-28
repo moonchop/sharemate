@@ -13,6 +13,7 @@ import PersonCard from "../../components/group/PersonCard";
 import jwt_decode from "jwt-decode";
 import { useAuth } from "../../stores/auth";
 import CheckText from "../../components/group/CheckText";
+import { useFlow } from "../../stackflow";
 // interface ParamsValue {
 //   groupID: number;
 //   building: string;
@@ -55,6 +56,7 @@ interface IGroups {
 
 const DetailGroup = () => {
   const Params: { num: string } = useActivityParams();
+  const { push } = useFlow();
 
   const [participation, setParticipation] = useState<boolean | undefined>(
     false
@@ -119,7 +121,10 @@ const DetailGroup = () => {
             <p className="text-2xl font-bold">
               {group?.groupDetailInfo.building}
             </p>
-            <button onClick={() => {}} className="text-xs text-red-300">
+            <button
+              onClick={() => push("ReportActivity", { postID: Params.num })}
+              className="text-xs text-red-300"
+            >
               신고하기
             </button>
           </div>

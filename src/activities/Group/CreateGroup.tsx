@@ -44,7 +44,6 @@ const CreateGroup = () => {
       const res = await PostGroupApi(groupForm);
       alert("그룹 생성에 성공했습니다.");
       pop();
-      pop();
       // replace("GroupActivity", {});
     } catch {
       alert("모든 내용을 입력해주세요");

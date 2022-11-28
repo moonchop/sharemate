@@ -50,7 +50,7 @@ const BoardListItem = ({
         <p className="text-right text-sm text-gray-400">{`작성자 : ${username}`}</p>
       </div>
       <p className="truncate mb-2">{text}</p>
-      <p className="text-right text-sm text-gray-400">{`${postDate}`}</p>
+      <p className="text-right text-sm text-gray-400 mb-1">{`${postDate}`}</p>
 
       <hr />
     </div>
