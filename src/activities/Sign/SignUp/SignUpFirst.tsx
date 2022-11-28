@@ -51,7 +51,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
     data.profile_photo = defaultProfile;
     data.age = Number(data.age);
     data.grade = Number(data.grade);
-    data.gender = "남" ? 1 : 0;
+    data.gender = data.gender == "남" ? 1 : 0;
     console.log("POST data", data);
     RegisterApi(data).then((elem: any) => {
       console.log(elem);
@@ -60,7 +60,6 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
         ...{ refreshToken: elem.data.data.accessToken },
       });
     });
-    console.log("타입:", typeof data.age, typeof data.grade);
 
     handleGoNext();
   };

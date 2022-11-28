@@ -43,10 +43,10 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
           <p className="my-4 mt-10 ml-2 text-md">
             자기소개 글을 입력해주세요.(50자 이내)
           </p>
-          <input
+          <textarea
             className=" w-full h-[150px] px-4 mb-8 py-2.5 text-base text-coolGray-900 font-normal outline-none focus:border-[#F65B8082] border border-coolGray-200 rounded-lg shadow-input"
             id="selfIntro"
-            type="text"
+            // type="text"
             {...register("selfIntro")}
           />
         </div>
