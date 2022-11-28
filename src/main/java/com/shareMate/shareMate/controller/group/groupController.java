@@ -7,6 +7,7 @@ import com.shareMate.shareMate.entity.GroupEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.JoinEntity;
 import com.shareMate.shareMate.entity.UserEntity;
+import com.shareMate.shareMate.repository.GroupRepository;
 import com.shareMate.shareMate.repository.JoinRepository;
 import com.shareMate.shareMate.service.GroupService;
 import com.shareMate.shareMate.service.user.UserService;
@@ -14,6 +15,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.Group;
 import org.apache.catalina.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,12 +36,12 @@ public class groupController {
     private final JoinRepository joinRepository;
     private final UserService userService;
     private final UserController userController;
-
+    private final GroupRepository groupRepository;
 
     @ApiOperation(value = "그룹매칭 전체 리스트 조회",notes = "그룹매칭 메인화면에 나타낼 그룹매칭 게시글 리스트를 반환합니다.",tags="Group")
     //그룹 전체 리스트 조회
     @GetMapping("/groups")
-    public ResponseEntity<ArrayList<GroupListDto>> getAll(HttpServletRequest request, @RequestParam int page) {
+    public ResponseEntity<ArrayList<GroupListDto>> getAll(HttpServletRequest request, @RequestParam int page,@RequestParam int offset) {
 
         //Page<UserEntity> resultList = userService.getUserList(page, 12);
         System.out.println("filter로부터 전달받은 userid: "+request.getAttribute("userid"));
@@ -49,19 +51,21 @@ public class groupController {
         System.out.println("성별"+resUserDetailDto.getBody().getUser().getGender());
 
         Boolean Mygender = resUserDetailDto.getBody().getUser().getGender();
-        Page<GroupEntity> list = groupService.getAllGroup(page,4);
+        Page<GroupEntity> list = groupService.getAllGroup(page,offset);
+
         ArrayList<GroupListDto> responseList = new ArrayList<>();
         for (GroupEntity e : list) {
-            Boolean yourGender=userController.getUserDetail(e.getUserID()).getBody().getUser().getGender();
-            System.out.println("zzz z "+yourGender );
-            if(Mygender==yourGender){
+            System.out.println("==groupid===="+e.getGroupID()+"=====");
+            ResponseEntity<ResUserDetailDto> you=userController.getUserDetail(e.getUserID());
+            System.out.println("==userid=== "+you.getBody().getUser().getUserID() +" ======");
+            if(Mygender==you.getBody().getUser().getGender()){
                 List <HashtagDto> groupHash = groupService.getHashtags(e.getGroupID());
                 List<String > Hash_list = new ArrayList<>();
                 for( HashtagDto h : groupHash) {
                     Hash_list.add(h.getHashTag());
                 }
                 GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMax_num(), e.getCur_num(),e.getBuilding(),e.getCreated_at());
-                groupListDto.setGender(yourGender);
+                groupListDto.setGender(you.getBody().getUser().getGender());
                 groupListDto.setHashtags(Hash_list);
                 responseList.add(groupListDto);
             }

@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 
 @Getter
 @Setter
@@ -32,6 +34,7 @@ public class FavorDto {
     private String mbti;
     @ApiModelProperty(value = "자기소개", required = true, example = "string")
     private String selfIntro;
+    List<String> hashtags;
     public FavorDto(){};
 
 }

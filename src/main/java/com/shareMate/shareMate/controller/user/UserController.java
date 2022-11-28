@@ -58,14 +58,14 @@ public class UserController {
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청",tags="User")
     @GetMapping("/list")
-    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(HttpServletRequest request , @RequestParam("page") int page){
+    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(HttpServletRequest request , @RequestParam("page") int page,@RequestParam("offset") int offset){
         final Integer num = Integer.parseInt(request.getAttribute("userid").toString());
         ResponseEntity<ResUserDetailDto> resUserDetailDto = this.getMyInfo(request);
         System.out.println("성별"+resUserDetailDto.getBody().getUser().getGender());
         Boolean gender = resUserDetailDto.getBody().getUser().getGender();
 
 
-        Page<UserEntity> resultList = userService.getUserList(page, 12,gender);
+        Page<UserEntity> resultList = userService.getUserList(page, offset,gender);
 
         List<UserEntity> resultDtoList = resultList.getContent();
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();
