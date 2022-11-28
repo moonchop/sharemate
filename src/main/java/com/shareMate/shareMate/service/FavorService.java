@@ -4,14 +4,17 @@ package com.shareMate.shareMate.service;
 import com.shareMate.shareMate.dto.FavorDto;
 import com.shareMate.shareMate.dto.ReqFavorDto;
 import com.shareMate.shareMate.entity.FavorEntity;
+import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.repository.FavorRepository;
+import com.shareMate.shareMate.repository.HashtagRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +22,7 @@ import java.util.Optional;
 public class FavorService {
 
     private FavorRepository favorRepository;
-
+    private HashtagRepository hashtagRepository;
     public void doInsert(int userid, ReqFavorDto reqFavorDto) {
         FavorEntity favor = new FavorEntity();
         favor.setUserID(userid);
@@ -49,6 +52,16 @@ public class FavorService {
             favor.setWakeupTime(favorDto.getWakeupTime());
             favor.setSleepTime(favorDto.getSleepTime());
             favorRepository.save(favor);
+
+
+            List<HashTagEntity > hashtags= hashtagRepository.findAllByUserID(userid);
+            int idx=0;
+            for (HashTagEntity h :hashtags){
+                h.setHashTag(favorDto.getHashtags().get(idx));
+                idx+=1;
+                hashtagRepository.save(h);
+
+            }
             return ;
         }
         else throw new ResponseStatusException(HttpStatus.NOT_FOUND, "USER NOT FOUND");

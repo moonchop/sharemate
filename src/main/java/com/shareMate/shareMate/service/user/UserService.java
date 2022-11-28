@@ -111,6 +111,7 @@ public class UserService {
 
     public void doUpdate(int  num , ReqUpdateUserDto reqUpdateUserDto) {
         Optional<UserEntity> user =userRepository.findById(num);
+        System.out.println(reqUpdateUserDto.getKakao_link());
         user.get().setKakao_link(reqUpdateUserDto.getKakao_link());
         user.get().setProfile_photo(reqUpdateUserDto.getProfile_photo());
         user.get().setAge(reqUpdateUserDto.getAge());
@@ -129,9 +130,12 @@ public class UserService {
     public Page<UserEntity> getUserList(Integer page, Integer size,Boolean gender) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<UserEntity> postList = userRepository.findUserEntitiesByGender(pageable,gender);
+        Page<UserEntity> postList = userRepository.findAllByGender(pageable,gender);
         //Page<UserEntity> postList = userRepository.findAll(pageable);
-        System.out.println(postList);
+        System.out.println("====");
+       for(UserEntity e : postList){
+           System.out.println(e.getEmail());
+       }
 
         return postList;
     }
