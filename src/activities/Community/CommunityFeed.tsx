@@ -15,10 +15,10 @@ export interface IBoard {
 }
 
 const CommunityFeed = () => {
-  history.pushState(null, "", location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
+  // history.pushState(null, "", location.href);
+  // window.onpopstate = function () {
+  //   history.go(1);
+  // };
   const { push } = useFlow();
   const [data, setData] = useState<IBoard[] | null>(null);
   useEffect(() => {

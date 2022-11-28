@@ -24,6 +24,7 @@ import UserPolicyTerm from "../activities/MyPage/UserPolicyTerm";
 import UserTerm from "../activities/MyPage/UserTerm";
 import Term from "../activities/MyPage/Term";
 import SignUpCoverPage from "../activities/Sign/SignUp/SignUpCoverPage";
+import Report from "../activities/Report/Report";
 
 type Navigate_Type =
   | "Main"
@@ -46,7 +47,8 @@ type Navigate_Type =
   | "UserPolicyTerm"
   | "UserTerm"
   | "Term"
-  | "SignUpCover";
+  | "SignUpCover"
+  | "Report";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -70,6 +72,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   UserTerm: <UserTerm />,
   Term: <Term />,
   SignUpCover: <SignUpCoverPage />,
+  Report: <Report />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;
@@ -93,6 +96,7 @@ const MakeActivity: MakeActivityType = (navigate: Navigate_Type) => () => {
       "UserTerm",
       "Term",
       "SignUpCover",
+      "Report",
     ].includes(navigate);
   }, [navigate]);
 

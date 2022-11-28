@@ -22,10 +22,10 @@ export interface IGroup {
 }
 const ICON_OBJ = ["text-indigo-400", "text-purple-400", "text-pink-300"];
 const GroupFeed = () => {
-  history.pushState(null, "", location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
+  // history.pushState(null, "", location.href);
+  // window.onpopstate = function () {
+  //   history.go(1);
+  // };
   const [groupData, setGroupData] = useState<any>(null);
   const { push, replace } = useFlow();
 
