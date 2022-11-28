@@ -6,7 +6,7 @@ import { createLink } from "@stackflow/link";
 import MakeActivity from "./utils/MakeActivity";
 import SignUpActivity from "./activities/Sign/SignUp";
 import CreateBoardActivity from "./activities/Community/CreateBoard";
-
+import ReportActivity from "./activities/Report/Report";
 const MainActivity = MakeActivity("Main");
 const GroupActivity = MakeActivity("Group");
 const CommunityActivity = MakeActivity("Community");
@@ -27,7 +27,6 @@ const UserPolicyTermActivity = MakeActivity("UserPolicyTerm");
 const UserTermActivity = MakeActivity("UserTerm");
 const TermActivity = MakeActivity("Term");
 const SignUpCoverActivity = MakeActivity("SignUpCover");
-const ReportActivity = MakeActivity("Report");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
