@@ -1,5 +1,6 @@
 package com.shareMate.shareMate.controller.group;
 
+import com.shareMate.shareMate.controller.user.UserController;
 import com.shareMate.shareMate.dto.*;
 
 import com.shareMate.shareMate.entity.GroupEntity;
@@ -32,6 +33,7 @@ public class groupController {
     private final GroupService groupService;
     private final JoinRepository joinRepository;
     private final UserService userService;
+    private final UserController userController;
 
 
     @ApiOperation(value = "그룹매칭 전체 리스트 조회",notes = "그룹매칭 메인화면에 나타낼 그룹매칭 게시글 리스트를 반환합니다.",tags="Group")
@@ -41,18 +43,28 @@ public class groupController {
 
         //Page<UserEntity> resultList = userService.getUserList(page, 12);
         System.out.println("filter로부터 전달받은 userid: "+request.getAttribute("userid"));
+
+
+        ResponseEntity<ResUserDetailDto> resUserDetailDto = userController.getMyInfo(request);
+        System.out.println("성별"+resUserDetailDto.getBody().getUser().getGender());
+
+        Boolean Mygender = resUserDetailDto.getBody().getUser().getGender();
         Page<GroupEntity> list = groupService.getAllGroup(page,4);
         ArrayList<GroupListDto> responseList = new ArrayList<>();
         for (GroupEntity e : list) {
-            List <HashtagDto> groupHash = groupService.getHashtags(e.getGroupID());
-            List<String > Hash_list = new ArrayList<>();
-            for( HashtagDto h : groupHash) {
-                Hash_list.add(h.getHashTag());
+            Boolean yourGender=userController.getUserDetail(e.getUserID()).getBody().getUser().getGender();
+            System.out.println("zzz z "+yourGender );
+            if(Mygender==yourGender){
+                List <HashtagDto> groupHash = groupService.getHashtags(e.getGroupID());
+                List<String > Hash_list = new ArrayList<>();
+                for( HashtagDto h : groupHash) {
+                    Hash_list.add(h.getHashTag());
+                }
+                GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMax_num(), e.getCur_num(),e.getBuilding(),e.getCreated_at());
+                groupListDto.setGender(yourGender);
+                groupListDto.setHashtags(Hash_list);
+                responseList.add(groupListDto);
             }
-
-            GroupListDto groupListDto = new GroupListDto(e.getGroupID(), e.getUserID(), e.getTitle(), e.getMax_num(), e.getCur_num(),e.getBuilding(),e.getCreated_at());
-            groupListDto.setHashtags(Hash_list);
-            responseList.add(groupListDto);
         }
         return ResponseEntity.ok(responseList);
     }

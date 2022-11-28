@@ -15,6 +15,7 @@ import java.util.Map;
 public class GroupListDto {
     private Integer group_id;
     private Integer user_id;
+    private Boolean gender;
     private String title;
     private Integer maxNum;
     private Integer curNum;
