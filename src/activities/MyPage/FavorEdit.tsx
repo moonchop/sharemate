@@ -9,11 +9,12 @@ const ModifyFavor = () => {
   const { pop } = useFlow();
   const { Component: ModifyForm, state } = useModifyForm();
   const [intro, setIntro] = useState("");
-  const [hash, setHash] = useState({});
+  const [hash, setHash] = useState({ hashtags: ["", ""] });
+  const { hashtags } = useUser();
 
   const changeHashtag = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
-    setHash((prev: any) => ({ ...prev, [name]: value }));
+    setHash((prev: any) => ({ ...prev, [hashtags[Number(name)]]: value }));
   };
 
   const submitHandler = () => {
@@ -66,6 +67,7 @@ const ModifyFavor = () => {
     state.Cleanness = cleanness;
     state.Snoring = snoring;
     setIntro(selfIntro);
+    setHash({ hashtags: hashtags });
   }, []);
 
   return (
@@ -77,13 +79,20 @@ const ModifyFavor = () => {
           placeholder="성격좋음"
           onChange={changeHashtag}
           id="0"
+          //value={hash.hashtags[0]}
         />
         <InputComponent
           placeholder="잘 안 들어옴"
           onChange={changeHashtag}
           id="1"
+          //value={hash.hashtags[1]}
         />
-        <InputComponent placeholder="조용함" id="2" onChange={changeHashtag} />
+        <InputComponent
+          placeholder="조용함"
+          id="2"
+          onChange={changeHashtag}
+          //value={hash.hashtags[2]}
+        />
         <p className="my-4 mt-10 ml-2 text-md">
           자기소개 글을 입력해주세요.(50자 이내)
         </p>

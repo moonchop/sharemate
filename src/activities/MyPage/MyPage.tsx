@@ -24,7 +24,7 @@ const MyPage = () => {
         console.log(response.status);
         console.log(response.data);
         setUser(response.data.user);
-        setHash(response.data.hashtag_list);
+        setHash({ hashtags: response.data.hashtag_list });
         setFavor(response.data.favor);
       })
       .catch((error) => console.log(error));

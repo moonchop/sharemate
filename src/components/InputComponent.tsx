@@ -4,6 +4,7 @@ const InputComponent = ({
   placeholder,
   id,
   onChange,
+  value,
 }: {
   placeholder: string;
   id: string;

@@ -84,15 +84,27 @@ const DetailProfile = () => {
 
   const likeHandler = () => {
     console.log(user);
-    request
-      .post(`user/like/${user.userID}`)
-      .then((response) => {
-        console.log(response.status);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (!like) {
+      request
+        .post(`user/like/${user.userID}`)
+        .then((response) => {
+          console.log(response.status);
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      request
+        .post(`user/unlike/${user.userID}`)
+        .then((response) => {
+          console.log(response.status);
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   return (

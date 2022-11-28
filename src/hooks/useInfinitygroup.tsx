@@ -17,7 +17,6 @@ const useInfinitygroup = (url: string) => {
     useInfiniteQuery(
       ["group"],
       ({ pageParam = 0 }) => {
-        setPages(pageParam + 1);
         return queryHandler(pageParam, url);
       },
       {
