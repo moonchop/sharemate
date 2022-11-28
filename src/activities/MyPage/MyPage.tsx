@@ -7,7 +7,6 @@ import request from "../../stores/Request";
 import ArrowText from "../../components/ArrowText";
 
 const MyPage = () => {
-  
   window.onpageshow = function (event) {
     if (event.persisted) {
       document.location.reload();
@@ -15,7 +14,7 @@ const MyPage = () => {
   };
   const { push, replace } = useFlow();
   const { setToken } = useAuth();
-  const { name, email, profile_photo, userID, setUser } = useUser();
+  const { name, email, profile_photo, userID, setUser, setHash } = useUser();
   const { setFavor } = useFavor();
 
   useEffect(() => {
@@ -25,6 +24,7 @@ const MyPage = () => {
         console.log(response.status);
         console.log(response.data);
         setUser(response.data.user);
+        setHash(response.data.hashtag_list);
         setFavor(response.data.favor);
       })
       .catch((error) => console.log(error));
@@ -43,7 +43,6 @@ const MyPage = () => {
         age: 0,
         kakao_link: "",
         profile_photo: "",
-        hashtag_list: [],
       });
       setFavor({
         mbti: "",
@@ -56,6 +55,7 @@ const MyPage = () => {
         snoring: "",
         selfIntro: "",
       });
+      setHash("");
       replace("LoginActivity", {});
     } else {
       alert("로그아웃이 취소되었습니다.");
@@ -113,7 +113,7 @@ const MyPage = () => {
         />
         <ArrowText
           text={"내가 쓴 커뮤니티글"}
-          onClick={() => push("LikeProfileActivity", {})}
+          onClick={() => push("MyBoardActivity", {})}
           isThin
         />
         <ArrowText

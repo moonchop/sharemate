@@ -27,6 +27,7 @@ const UserPolicyTermActivity = MakeActivity("UserPolicyTerm");
 const UserTermActivity = MakeActivity("UserTerm");
 const TermActivity = MakeActivity("Term");
 const SignUpCoverActivity = MakeActivity("SignUpCover");
+const MyBoardActivity = MakeActivity("MyBoard");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();
@@ -55,6 +56,7 @@ const activities = {
   TermActivity,
   SignUpCoverActivity,
   ReportActivity,
+  MyBoardActivity,
 };
 
 export const { Stack, useFlow } = stackflow({
@@ -87,6 +89,7 @@ export const { Stack, useFlow } = stackflow({
         UserTermActivity: "/mypage/userterm",
         TermActivity: "/mypge/term",
         ReportActivity: "/report",
+        MyBoardActivity: "/mypage/board",
       },
       fallbackActivity: () => "LoginActivity", // 오류 발생시 Home으로 이동 (404페이지 처리 할때 사용)
     }),

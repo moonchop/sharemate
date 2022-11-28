@@ -25,6 +25,7 @@ import UserTerm from "../activities/MyPage/UserTerm";
 import Term from "../activities/MyPage/Term";
 import SignUpCoverPage from "../activities/Sign/SignUp/SignUpCoverPage";
 import Report from "../activities/Report/Report";
+import MyBoard from "../activities/MyPage/MyBoard";
 
 type Navigate_Type =
   | "Main"
@@ -48,7 +49,8 @@ type Navigate_Type =
   | "UserTerm"
   | "Term"
   | "SignUpCover"
-  | "Report";
+  | "Report"
+  | "MyBoard";
 
 const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Main: <PersonalFeed />,
@@ -73,6 +75,7 @@ const NavigateMapper: Record<Navigate_Type, React.ReactNode> = {
   Term: <Term />,
   SignUpCover: <SignUpCoverPage />,
   Report: <Report />,
+  MyBoard: <MyBoard />,
 };
 
 type MakeActivityType = (navigate: Navigate_Type) => ActivityComponentType;

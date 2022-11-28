@@ -17,7 +17,7 @@ export default function ArrowText({
       <div className="h-16" onClick={onClick}>
         <div className="flex justify-between items-center py-4">
           <div className="text-[#AFADF5] text-sm ml-5">{text}</div>
-          <div>
+          <div className="w-[10%]">
             <IoIosArrowForward
               size={25}
               className="opacity-30"
