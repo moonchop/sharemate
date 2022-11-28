@@ -16,6 +16,7 @@ public interface PostRepository extends JpaRepository<PostEntity,Number> {
 
     //@Query(value="select post.post_id,post.user_id,post.title,post.category,post.created_at from post where post.post_id=:post_id")
     Optional<PostEntity> findPostEntityByPostID(int post_id);
+    Optional<List<PostEntity>> findAllByUserID(int user_id);
 
     List<PostEntity> findAll();
 

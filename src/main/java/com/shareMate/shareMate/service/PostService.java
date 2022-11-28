@@ -71,6 +71,12 @@ public class PostService {
         postRepository.deleteById(num);
         return ;
     }
+
+    public Optional<List<PostEntity>> getMyPost(Integer id) {
+        Optional<List<PostEntity>> list = postRepository.findAllByUserID(id);
+
+        return list;
+    }
 }
 
 

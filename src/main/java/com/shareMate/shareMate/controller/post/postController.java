@@ -1,14 +1,10 @@
 package com.shareMate.shareMate.controller.post;
 
 import com.shareMate.shareMate.dto.*;
-import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.entity.PostEntity;
 import com.shareMate.shareMate.entity.UserEntity;
-import com.shareMate.shareMate.jwt.TokenHelper;
 import com.shareMate.shareMate.repository.UserRepository;
 import com.shareMate.shareMate.service.PostService;
-import com.shareMate.shareMate.service.sign.SignService;
-import com.shareMate.shareMate.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -19,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Array;
 import java.util.*;
 
 @RestController
@@ -93,8 +88,20 @@ public class postController {
 
         postService.delPost(postID);
         return ResponseEntity.ok(HttpStatus.OK);
-
     }
 
+    @ApiOperation(value = "자신이 작성한 커뮤니티 글",notes = "유저가 작성한 글을 조회합니다.",tags="User")
+    @GetMapping("/my-post")
+    public ResponseEntity<ArrayList<PostListDto>> getMyPost(HttpServletRequest request){
+        Integer userid = Integer.parseInt(request.getAttribute("userid").toString());
+        Optional<List<PostEntity>> list= postService.getMyPost(userid);
+        ArrayList<PostListDto> myPostList = new ArrayList<>();
+        for (PostEntity e : list.get()) {
+            Optional<UserEntity> u =userRepository.findById(e.getUserID());
+            PostListDto postListDto = new PostListDto(e.getPostID(), e.getUserID(),u.get().getName(), e.getTitle(),e.getText(), e.getCategory(), e.getCreated_at());
+            myPostList.add(postListDto);
+        }
+        return ResponseEntity.ok(myPostList);
+    }
 
 }

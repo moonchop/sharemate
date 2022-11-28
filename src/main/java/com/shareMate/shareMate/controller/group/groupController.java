@@ -98,8 +98,6 @@ public class groupController {
     {
         final int user_id =Integer.parseInt(request.getAttribute("userid").toString());
         groupService.addGroup(group,user_id);
-
-
         return  ResponseEntity.ok(HttpStatus.OK);
 
     }
