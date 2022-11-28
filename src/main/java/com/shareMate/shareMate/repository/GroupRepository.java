@@ -4,6 +4,7 @@ import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.GroupEntity;
 import com.shareMate.shareMate.entity.UserEntity;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -17,4 +18,5 @@ public interface GroupRepository extends JpaRepository<GroupEntity,Number> {
     //Optional<UserEntity> findByEmail(String email);
 
     Optional<GroupEntity> findGroupEntityByGroupID(int groupID);
+
 }

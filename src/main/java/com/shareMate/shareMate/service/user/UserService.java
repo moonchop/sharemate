@@ -126,10 +126,11 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public Page<UserEntity> getUserList(Integer page, Integer size) {
+    public Page<UserEntity> getUserList(Integer page, Integer size,Boolean gender) {
         Pageable pageable = PageRequest.of(page, size);
 
-        Page<UserEntity> postList = userRepository.findAll(pageable);
+        Page<UserEntity> postList = userRepository.findUserEntitiesByGender(pageable,gender);
+        //Page<UserEntity> postList = userRepository.findAll(pageable);
         System.out.println(postList);
 
         return postList;

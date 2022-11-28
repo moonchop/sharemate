@@ -58,8 +58,14 @@ public class UserController {
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청",tags="User")
     @GetMapping("/list")
-    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(@RequestParam("page") int page){
-        Page<UserEntity> resultList = userService.getUserList(page, 12);
+    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(HttpServletRequest request , @RequestParam("page") int page){
+        final Integer num = Integer.parseInt(request.getAttribute("userid").toString());
+        ResponseEntity<ResUserDetailDto> resUserDetailDto = this.getMyInfo(request);
+        System.out.println("성별"+resUserDetailDto.getBody().getUser().getGender());
+        Boolean gender = resUserDetailDto.getBody().getUser().getGender();
+
+
+        Page<UserEntity> resultList = userService.getUserList(page, 12,gender);
 
         List<UserEntity> resultDtoList = resultList.getContent();
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();
@@ -163,7 +169,7 @@ public class UserController {
 
     @ApiOperation(value ="본인 정보 가져오기" , notes = "본인 개인정보를 조회합니다.." , tags ="User")
     @GetMapping("/mypage")
-    public ResponseEntity<ResUserDetailDto> editPwd (HttpServletRequest request ){
+    public ResponseEntity<ResUserDetailDto> getMyInfo (HttpServletRequest request ){
         final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
         /*favor 가져오는 코드*/
         FavorDto favor = userService.getFavor(user_id);
