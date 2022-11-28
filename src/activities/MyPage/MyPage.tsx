@@ -6,6 +6,12 @@ import { useAuth } from "../../stores/auth";
 import request from "../../stores/Request";
 
 const MyPage = () => {
+  
+  window.onpageshow = function (event) {
+    if (event.persisted) {
+      document.location.reload();
+    }
+  };
   const { push, replace } = useFlow();
   const { setToken } = useAuth();
   const { name, email, profile_photo, userID, setUser } = useUser();

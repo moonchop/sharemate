@@ -5,10 +5,6 @@ import { useMbti, useRegisterForm } from "../../../hooks/useRegisterForm";
 import { useSaveFormData } from "../../../hooks/useSaveFormData";
 
 const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
-  history.pushState(null, "", location.href);
-  window.onpopstate = function () {
-    history.go(1);
-  };
   const { Component: RegisterForm, state } = useRegisterForm();
   const { getData: SecondData } = useSaveFormData("second");
   const [hashtag, setHashtag] = useState({});

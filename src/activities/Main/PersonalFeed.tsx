@@ -17,6 +17,10 @@ interface IUser {
 }
 
 const Feed = () => {
+  history.pushState(null, "", location.href);
+  window.onpopstate = function () {
+    history.go(1);
+  };
   const { push } = useFlow();
   let previous_Y = 0;
   let previous_Ratio = 0;
