@@ -6,30 +6,12 @@ import { useFlow } from "../../stackflow";
 
 interface Profile {
   name: string;
-  nickname: string;
-  email: string;
   major: string;
-  grade: string;
-  kakao_id: string;
+  grade: number;
   profile_photo: string;
   kakao_link: string;
-  age: string;
-  gender: string;
+  age: number;
 }
-
-const dumydata: Profile = {
-  name: "장은학",
-  nickname: "devnak",
-  email: "showri0108@ajou.ac.kr",
-  major: "소프트웨어학과",
-  grade: "3학년",
-  kakao_id: "test",
-  profile_photo:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-  kakao_link: "https://open.kakao.com/o/s2qDCFOe",
-  age: "24",
-  gender: "남성",
-};
 
 const ProfileEdit = () => {
   const { replace } = useFlow();
@@ -45,9 +27,7 @@ const ProfileEdit = () => {
     setEditUser,
   } = useUser();
 
-  const [editData, setEditData] = useState({
-    email: email,
-    gender: gender,
+  const [editData, setEditData] = useState<Profile>({
     name: name,
     major: major,
     grade: grade,
@@ -80,7 +60,7 @@ const ProfileEdit = () => {
 
   const editSubmit = () =>
     request
-      .put("/user", { editData })
+      .patch("/user", editData)
       .then((response) => {
         console.log(response.status);
         return true;
@@ -91,18 +71,17 @@ const ProfileEdit = () => {
       });
 
   const submitHandler = async () => {
-    const nicknameRegEx = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
+    //const nicknameRegEx = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
 
-    if (!nicknameRegEx.test(editData.name)) {
-      alert("닉네임 형식에 맞춰주세요");
+    //if (!nicknameRegEx.test(editData.name)) {
+    //alert("닉네임 형식에 맞춰주세요");
+    //} else {
+    const result = await editSubmit();
+    if (result) {
+      alert("회원정보 수정이 완료되었습니다.");
+      replace("MyPageActivity", {});
     } else {
-      const result = await editSubmit();
-      if (result) {
-        alert("회원정보 수정이 완료되었습니다.");
-        replace("MyPageActivity", {});
-      } else {
-        alert("회원정보 수정에 실패하였습니다.");
-      }
+      alert("회원정보 수정에 실패하였습니다.");
     }
   };
 
@@ -136,7 +115,7 @@ const ProfileEdit = () => {
             이메일
           </div>
           <div className="text-[#AFADF5] text-base font-semibold w-[71%] border-b-2">
-            {editData.email}
+            {email}
           </div>
         </div>
         <div className="flex flex-row pro:mb-[26px] mb-[20px]">
@@ -144,7 +123,7 @@ const ProfileEdit = () => {
             성별
           </div>
           <div className="text-[#AFADF5] text-base font-semibold w-[71%] border-b-2">
-            {editData.gender ? "남성" : "여성"}
+            {gender ? "남성" : "여성"}
           </div>
         </div>
       </div>
