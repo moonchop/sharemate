@@ -10,7 +10,7 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
   const [hashtag, setHashtag] = useState({});
 
   const handleSubmit = (handleGo: Function) => {
-    state.hastags = Object.values(hashtag);
+    state.hashtags = Object.values(hashtag);
     sessionStorage.setItem("second", JSON.stringify(state));
 
     if (!Object.values(SecondData()).every((x) => x !== null && x !== "")) {

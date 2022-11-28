@@ -166,7 +166,7 @@ export const useRegisterForm = () => {
       cleanness,
       snoring,
       wakeupTime,
-      hastags: [],
+      hashtags: [],
     },
     Component: () => (
       <>
