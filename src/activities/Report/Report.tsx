@@ -1,34 +1,48 @@
 import InputComponent from "../../components/InputComponent";
 import { AppScreen } from "@stackflow/basic-ui";
-import { ActivityComponentType } from "@stackflow/react";
+import { ActivityComponentType, useActivityParams } from "@stackflow/react";
 import { useFlow } from "../../stackflow";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import AppBar from "@stackflow/basic-ui/dist/AppBar";
 import ReportRadioButton from "../../components/ReportRadioButton";
 import { useState } from "react";
+import request from "../../stores/Request";
 
 const Report: ActivityComponentType = () => {
   const { pop } = useFlow();
+  const [reason, setReason] = useState<string>("");
   const back = () => {
     pop();
   };
   const [validInput, setValidInput] = useState(false);
+  const Params: { userToID?: string | null; postID?: string | null } =
+    useActivityParams();
 
-  function getChecked() {
-    const genderNodeList = document.getElementsByName("report");
-    genderNodeList.forEach((node) => {
-      if (node.checked) {
-        const value = node.value;
-        if (value == "7") {
-          setValidInput(true);
-          console.log(value);
-        } else {
-          setValidInput(false);
-          console.log(value);
-        }
-      }
-    });
+  function getChecked(e: any) {
+    setReason(e.target.value);
+    if (e.target.value == "직접 입력") {
+      setValidInput(true);
+    } else {
+      setValidInput(false);
+    }
   }
+
+  const submitHandler = () => {
+    if (!Params.userToID) Params.userToID = null;
+    if (!Params.postID) Params.postID = null;
+    request
+      .post("/sign/report", {
+        userToID: Params.userToID,
+        reason: reason,
+        postID: Params.postID,
+      })
+      .then((response) => {
+        alert("신고가 접수되었습니다.");
+        pop();
+        pop();
+      })
+      .catch((error) => alert("다시 시도해주세요"));
+  };
 
   return (
     <AppScreen theme="cupertino">
@@ -77,7 +91,7 @@ const Report: ActivityComponentType = () => {
           <div className=" my-4">
             <input
               type="radio"
-              value="7"
+              value="직접 입력"
               name="report"
               id="7"
               className="mr-5 ml-8  my-2 h-5 w-5  accent-fuchsia-500 border-gray-400"
@@ -85,18 +99,18 @@ const Report: ActivityComponentType = () => {
             />
             <span className="">직접 입력</span>
             {validInput ? (
-              <input
+              <textarea
                 className="shadow h-28 appearance-none border ml-[10%] mt-[3%] rounded w-[80%] py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="직접 입력"
-                type="text"
+                onChange={(e: any) => {
+                  setReason(e.target.value);
+                }}
               />
             ) : null}
           </div>
         </label>
         <button
-          onClick={() => {
-            console.log("신고");
-          }}
+          onClick={submitHandler}
           className="absolute bottom-[3%] left-[5%] w-[90%] h-[40px] ring-2 ring-[#a984da] text-[#a984da] bg-white bg-opacity-60 font-semibold text-base rounded-md shadow-button"
         >
           신고하기{" "}

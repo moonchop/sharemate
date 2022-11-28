@@ -6,6 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import request from "../../stores/Request";
 import jwt_decode from "jwt-decode";
 import { useAuth } from "../../stores/auth";
+import { useFlow } from "../../stackflow";
 
 interface LikeProps {
   age: number;
@@ -19,6 +20,7 @@ interface LikeProps {
 
 const DetailProfile = () => {
   const kakao_link = "https://open.kakao.com/o/s2qDCFOe";
+  const { push } = useFlow();
   const Params: { id: string } = useActivityParams();
   const { accessToken } = useAuth();
   const [likeId, setLikeId] = useState<number[] | null>(null);
@@ -94,7 +96,7 @@ const DetailProfile = () => {
   };
 
   return (
-    <div className="flex-col h-[92%]">
+    <div className="flex-col h-[92%] overflow-y-scroll scrollbar-hide">
       <div className="w-full h-[38%]">
         <div className="h-full relative">
           <img src={Ajou} className="absolute h-[87%] z-1 opacity-25" />
@@ -130,16 +132,18 @@ const DetailProfile = () => {
             <div className="font-bold pro:text-xl text-lg pro:mb-[30px] mb-[18px] text-[#AFADF5] underline underline-offset-8">
               나의 생활
             </div>
-            <div className="flex pro:text-xl text-lg flex-row pro:mb-[30px] mb-[22px] w-full justify-between ">
-              <div className="flex ">{favor.wakeupTime}</div>
-              <div className="flex ">{favor.sleepTime}</div>
-              <div className="flex ">{favor.smoking}</div>
+            <div className="flex pro:text-lg text-base flex-row pro:mb-[7%] mb-[5%] w-full justify-between ">
+              <div className="flex">기상 시간 : {favor.wakeupTime}</div>
+              <div className="flex">수면 시간 : {favor.sleepTime}</div>
             </div>
-            <div className="flex pro:text-xl text-lg flex-row pro:mb-[12%] mb-[5%] w-full justify-between">
-              <div className="flex">{favor.studyTime}</div>
-              <div className="flex">{favor.drinking}</div>
+            <div className="flex pro:text-lg text-base flex-row pro:mb-[7%] mb-[5%] w-full justify-between">
+              <div className="flex">생활 패턴 : {favor.studyTime}</div>
+              <div className="flex">코골이 유무 : {favor.snoring}</div>
+            </div>
+            <div className="flex pro:text-lg text-base flex-row pro:mb-[7%] mb-[5%] w-full justify-between">
+              <div className="flex">주 음주 : {favor.drinking}회</div>
               <div className="flex">{favor.cleanness}</div>
-              <div className="flex">{favor.snoring}</div>
+              <div className="flex ">{favor.smoking}</div>
             </div>
             <div className="font-bold pro:text-xl text-lg pro:mb-[27px] mb-[15px] text-[#AFADF5] underline underline-offset-8">
               자기 소개
@@ -169,7 +173,14 @@ const DetailProfile = () => {
               }}
             />
           )}
-
+          <span className="w-[50%]">
+            <span
+              className="text-lg"
+              onClick={() => push("ReportActivity", { userToID: user.userID })}
+            >
+              신고하기
+            </span>
+          </span>
           <img
             src={Kakao}
             className="flex pro:h-[70%] h-[70%]"
