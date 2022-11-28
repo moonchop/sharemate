@@ -55,7 +55,7 @@ const MyPage = () => {
         snoring: "",
         selfIntro: "",
       });
-      setHash("");
+      setHash({ hashtags: [] });
       replace("LoginActivity", {});
     } else {
       alert("로그아웃이 취소되었습니다.");
