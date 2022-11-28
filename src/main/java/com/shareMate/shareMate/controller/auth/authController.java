@@ -1,5 +1,6 @@
 package com.shareMate.shareMate.controller.auth;
 
+import com.shareMate.shareMate.dto.ReportDto;
 import com.shareMate.shareMate.dto.ReqSetPwdDto;
 import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.sign.RequestSignInDto;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.UUID;
 
@@ -84,6 +86,15 @@ public class authController {
         System.out.println(user.getUserID());
         userService.updatePwd(user.getUserID(), reqSetPwdDto.getPwd());
 
+        return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");
+    };
+
+    @ApiOperation(value = "신고하기",notes = "신고하기 기능입니다.",tags="Auth")
+    @PostMapping("/report")
+    public ResponseEntity<String> Report(HttpServletRequest request,@RequestBody ReportDto reportDto) {
+
+        final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
+        signService.Report(user_id,reportDto);
         return ResponseEntity.status(HttpStatus.OK).body("SUCCESS");
     };
 
