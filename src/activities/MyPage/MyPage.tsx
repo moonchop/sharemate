@@ -4,6 +4,7 @@ import { useFlow } from "../../stackflow";
 import { useUser, useFavor } from "../../stores/user";
 import { useAuth } from "../../stores/auth";
 import request from "../../stores/Request";
+import ArrowText from "../../components/ArrowText";
 
 const MyPage = () => {
   
@@ -74,8 +75,8 @@ const MyPage = () => {
   };
 
   return (
-    <div className="h-[85%] ">
-      <div className="h-[32%] flex flex-col pro:pt-8 pt-5 border-b-[6px] border-[rgba(170,170,170,0.25)]">
+    <div className="h-[85%] overflow-auto scrollbar-hide">
+      <div className="h-[32%] flex flex-col pro:pt-8 pt-5 border-b-[6px] border-[rgba(170,170,170,0.25)] mb-1">
         <div className="h-[100%] pb-[13%] ">
           <div className="pro:text-3xl text-2xl font-semibold pro:mb-[25px] mb-[20px] ml-[24px]">
             마이페이지
@@ -104,9 +105,37 @@ const MyPage = () => {
           </div>
         </div>
       </div>
-      <div className="h-[45%] border-b-[6px] border-[rgba(170,170,170,0.25)] pro:text-lg text-base font-semibold">
-        <div
-          className="h-[25%] flex items-center border-b-2"
+      <div>
+        <ArrowText
+          text={"좋아요 누른 프로필"}
+          onClick={() => push("LikeProfileActivity", {})}
+          isThin
+        />
+        <ArrowText
+          text={"내가 쓴 커뮤니티글"}
+          onClick={() => push("LikeProfileActivity", {})}
+          isThin
+        />
+        <ArrowText
+          text={"취향 정보 수정"}
+          onClick={() => push("ModifyFavorActivity", {})}
+          isThin
+        />
+        <ArrowText
+          text={"비밀번호 변경"}
+          onClick={() => push("PasswordActivity", { userID })}
+          isThin
+        />
+        <ArrowText
+          text={"약관 및 동의 관리"}
+          onClick={() => push("TermActivity", {})}
+          isThick
+        />
+        <ArrowText text={"로그아웃"} onClick={logoutHandler} isThin />
+        <ArrowText text={"회원탈퇴"} onClick={confirmHandler} />
+      </div>
+      {/* <div
+          className="h-16 flex items-center border-b-2"
           onClick={() => push("LikeProfileActivity", {})}
         >
           <div className="pl-[28px] w-[85%] text-[#AFADF5]">
@@ -117,7 +146,18 @@ const MyPage = () => {
           </div>
         </div>
         <div
-          className="h-[25%] w-full flex items-center border-b-2"
+          className="h-16 flex items-center border-b-2"
+          onClick={() => push("LikeProfileActivity", {})}
+        >
+          <div className="pl-[28px] w-[85%] text-[#AFADF5]">
+            내가 쓴 커뮤니티글
+          </div>
+          <div className="w-[15%] flex h-full justify-center items-center">
+            <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
+          </div>
+        </div>
+        <div
+          className="h-16 w-full flex items-center border-b-2"
           onClick={() => push("ModifyFavorActivity", {})}
         >
           <div className="pl-[28px] w-[85%] text-[#AFADF5]">취향 정보 수정</div>
@@ -126,7 +166,7 @@ const MyPage = () => {
           </div>
         </div>
         <div
-          className="h-[25%] flex items-center border-b-2"
+          className="h-16 flex items-center border-b-2"
           onClick={() => push("PasswordActivity", { userID })}
         >
           <div className="pl-[28px] w-[85%] text-[#AFADF5]">비밀번호 변경</div>
@@ -135,7 +175,7 @@ const MyPage = () => {
           </div>
         </div>
         <div
-          className="h-[25%] flex items-center"
+          className="h-16 flex items-center"
           onClick={() => push("TermActivity", {})}
         >
           <div className="pl-[28px] w-[85%] text-[#AFADF5]">
@@ -146,9 +186,9 @@ const MyPage = () => {
           </div>
         </div>
       </div>
-      <div className="h-[22%] pro:text-lg text-base font-semibold">
+      <div className="h-16 pro:text-lg text-base font-semibold">
         <div
-          className="h-[48%] flex items-center border-b-2"
+          className="h-16 flex items-center border-b-2"
           onClick={logoutHandler}
         >
           <div className="pl-[28px] w-[85%] text-[#AFADF5]">로그아웃</div>
@@ -161,8 +201,7 @@ const MyPage = () => {
           <div className="w-[15%] flex h-full justify-center items-center">
             <IoIosArrowForward className="opacity-30"></IoIosArrowForward>
           </div>
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };
