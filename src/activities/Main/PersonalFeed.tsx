@@ -17,15 +17,11 @@ interface IUser {
 }
 
 const Feed = () => {
-  // history.pushState(null, "", location.href);
-  // window.onpopstate = function () {
-  //   history.go(1);
-  // };
   const { push } = useFlow();
   let previous_Y = 0;
   let previous_Ratio = 0;
 
-  const fetchControl = useInfinityQuery();
+  const fetchControl = useInfinityQuery("user/list");
   const feedData = fetchControl.result?.pages;
   //console.log("FEED DATA : ", feedData);
 
@@ -34,13 +30,13 @@ const Feed = () => {
   ]) => {
     const current_Y = boundingClientRect.y;
     const current_Ratio = intersectionRatio;
-
     if (
       isIntersecting &&
       current_Ratio > previous_Ratio &&
       current_Y > previous_Y
     ) {
-      console.log("감지성공");
+      //console.log("감지성공");
+      //console.log(current_Ratio, current_Y);
       fetchControl.nextFetch();
       previous_Y = current_Y;
       previous_Ratio = current_Ratio;

@@ -3,6 +3,8 @@ import BoardListItem from "../../components/BoardListItem";
 import { BsPencil } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import { PostAllApi } from "../../utils/api/community";
+import useInfinityQuery from "../../hooks/useInfinitypost";
+import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 
 export interface IBoard {
   user_id: number;
@@ -21,18 +23,49 @@ const CommunityFeed = () => {
   // };
   const { push } = useFlow();
   const [data, setData] = useState<IBoard[] | null>(null);
-  useEffect(() => {
-    PostAllApi().then((response: any) => {
-      console.log(response.data);
-      setData(response.data);
-    });
-  }, []);
+
+  const fetchControl = useInfinityQuery("/posts");
+  const feedData = fetchControl.result?.pages;
+
+  let previous_Y = 0;
+  let previous_Ratio = 0;
+
+  const onIntersect: IntersectionObserverCallback = ([
+    { isIntersecting, boundingClientRect, intersectionRatio },
+  ]) => {
+    const current_Y = boundingClientRect.y;
+    const current_Ratio = intersectionRatio;
+    if (
+      isIntersecting &&
+      current_Ratio > previous_Ratio &&
+      current_Y > previous_Y
+    ) {
+      //console.log("감지성공");
+      //console.log(current_Ratio, current_Y);
+      fetchControl.nextFetch();
+      previous_Y = current_Y;
+      previous_Ratio = current_Ratio;
+    }
+  };
+
+  const { setTarget } = useIntersectionObserver({ onIntersect });
+
+  const handlerTarget = (index: number) => {
+    if (index % 3 == 0 && index != 0) {
+      return setTarget;
+    }
+  };
+
   return (
-    <div className="p-5 overflow-y-scroll">
-      {data &&
-        data?.map((elem: IBoard) => (
-          <BoardListItem {...elem} key={elem.post_id} />
-        ))}
+    <div className="h-[85%] p-5 overflow-y-scroll scrollbar-hide">
+      {feedData?.map((elem2: []) =>
+        elem2?.map((elem: IBoard, index: number) => (
+          <div ref={handlerTarget(index)}>
+            <BoardListItem {...elem} key={elem.post_id} />
+          </div>
+        ))
+      )}
+
       <button
         onClick={() => {
           push("CreateBoardActivity", {});

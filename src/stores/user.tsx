@@ -10,9 +10,10 @@ interface User {
   age: number;
   kakao_link: string;
   profile_photo: string;
-  hashtag_list: string[];
+  hashtags: string[];
   setUser: (user: userProps) => void;
   setEditUser: (user: userEditProps) => void;
+  setHash: (user: userHashProps) => void;
 }
 
 interface userProps {
@@ -25,7 +26,6 @@ interface userProps {
   age: number;
   kakao_link: string;
   profile_photo: string;
-  hashtag_list: string[];
 }
 
 interface userEditProps {
@@ -35,6 +35,10 @@ interface userEditProps {
   age: number;
   kakao_link: string;
   profile_photo: string;
+}
+
+interface userHashProps {
+  hashtags: string[];
 }
 
 export const useUser = create<User>((set) => ({
@@ -47,7 +51,7 @@ export const useUser = create<User>((set) => ({
   age: 0,
   kakao_link: "",
   profile_photo: "",
-  hashtag_list: [],
+  hashtags: [],
   setUser: (user: userProps) => {
     set((state) => ({
       userID: user.userID,
@@ -59,7 +63,6 @@ export const useUser = create<User>((set) => ({
       age: user.age,
       kakao_link: user.kakao_link,
       profile_photo: user.profile_photo,
-      hashtag_list: user.hashtag_list,
     }));
   },
   setEditUser: (user: userEditProps) => {
@@ -70,6 +73,11 @@ export const useUser = create<User>((set) => ({
       age: user.age,
       kakao_link: user.kakao_link,
       profile_photo: user.profile_photo,
+    }));
+  },
+  setHash: (user: userHashProps) => {
+    set((state) => ({
+      hashtags: user.hashtags,
     }));
   },
 }));

@@ -4,17 +4,20 @@ import request from "../stores/Request";
 
 const queryHandler = async (page: string, url: string) => {
   const response = await request.get(url, {
-    params: { page: page, offset: 12 },
+    params: { page: page, offset: 8 },
   });
+  //console.log(response.data, page);
   return response.data;
 };
 
-const useInfinityQuery = (url: string) => {
+const useInfinitygroup = (url: string) => {
   const queryClient = useQueryClient();
+  const [pages, setPages] = useState<number>(0);
   const { data, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } =
     useInfiniteQuery(
-      ["page"],
+      ["group"],
       ({ pageParam = 0 }) => {
+        setPages(pageParam + 1);
         return queryHandler(pageParam, url);
       },
       {
@@ -30,4 +33,4 @@ const useInfinityQuery = (url: string) => {
   };
 };
 
-export default useInfinityQuery;
+export default useInfinitygroup;

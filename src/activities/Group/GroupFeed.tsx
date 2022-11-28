@@ -7,8 +7,8 @@ import { BiBuildingHouse } from "react-icons/bi";
 import { useEffect, useState } from "react";
 
 import { BsPencil } from "react-icons/bs";
-import { GetAllGroupsApi } from "../../utils/api/group";
-import { useActivityParams } from "@stackflow/react";
+import useInfinitygroup from "../../hooks/useInfinitygroup";
+import useIntersectionObserver from "../../hooks/userIntersectionObserverGroup";
 
 export interface IGroup {
   group_id: number;
@@ -26,19 +26,49 @@ const GroupFeed = () => {
   // window.onpopstate = function () {
   //   history.go(1);
   // };
-  const [groupData, setGroupData] = useState<any>(null);
+
+  //const [groupData, setGroupData] = useState<any>(null);
   const { push, replace } = useFlow();
 
-  useEffect(() => {
-    GetAllGroupsApi().then((v) => setGroupData(v.data));
-  }, [[]]);
+  const fetchControl = useInfinitygroup("/groups");
+  const feedData = fetchControl.result?.pages;
+  //console.log(fetchControl.result);
+
+  let previous_Y = 0;
+  let previous_Ratio = 0;
+
+  const onIntersect: IntersectionObserverCallback = ([
+    { isIntersecting, boundingClientRect, intersectionRatio },
+  ]) => {
+    const current_Y = boundingClientRect.y;
+    const current_Ratio = intersectionRatio;
+    if (
+      isIntersecting &&
+      current_Ratio > previous_Ratio &&
+      current_Y > previous_Y
+    ) {
+      //console.log("감지");
+      fetchControl.nextFetch();
+      previous_Y = current_Y;
+      previous_Ratio = current_Ratio;
+    }
+  };
+
+  const { setTarget } = useIntersectionObserver({ onIntersect });
+
+  const handlerTarget = (index: number) => {
+    if (index % 6 == 0 && index != 0) {
+      return setTarget;
+    }
+  };
 
   return (
-    <div className="h-[86%] overflow-y-scroll px-1 mt-2 scrollbar-hgroupIDe">
-      {groupData &&
-        groupData.map((elem: IGroup, index: number) => (
+    <div className="h-[86%] overflow-y-scroll px-1 mt-2 scrollbar-hide">
+      {feedData?.map((elem2: []) =>
+        elem2.map((elem: IGroup, index: number) => (
           <div
-            key={elem.group_id + elem.building}
+            key={index}
+            ref={handlerTarget(index)}
             className=""
             onClick={() => {
               push("DetailGroupActivity", { num: elem.group_id });
@@ -76,7 +106,8 @@ const GroupFeed = () => {
             </div>
             <hr className="mt-1" />
           </div>
-        ))}
+        ))
+      )}
       <button
         onClick={() => {
           push("CreateGroupActivity", {});

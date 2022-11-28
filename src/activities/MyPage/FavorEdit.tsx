@@ -3,11 +3,18 @@ import useModifyForm from "../../hooks/useModifyForm";
 import { useFlow } from "../../stackflow";
 import request from "../../stores/Request";
 import { useFavor, useUser } from "../../stores/user";
+import InputComponent from "../../components/InputComponent";
 
 const ModifyFavor = () => {
   const { pop } = useFlow();
   const { Component: ModifyForm, state } = useModifyForm();
   const [intro, setIntro] = useState("");
+  const [hash, setHash] = useState({});
+
+  const changeHashtag = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setHash((prev: any) => ({ ...prev, [name]: value }));
+  };
 
   const submitHandler = () => {
     const result = {
@@ -20,10 +27,11 @@ const ModifyFavor = () => {
       cleanness: state.Cleanness,
       snoring: state.Snoring,
       selfIntro: intro,
+      hashtags: Object.values(hash),
     };
     console.log(result);
     request
-      .put("/favor", { result })
+      .put("/favor", result)
       .then((response) => {
         console.log(response.status);
         console.log(response.data);
@@ -31,6 +39,7 @@ const ModifyFavor = () => {
         pop();
       })
       .catch((error) => {
+        alert("다시 시도해 주세요");
         console.log(error);
       });
   };
@@ -63,6 +72,18 @@ const ModifyFavor = () => {
     <div className="px-3 py-8 h-[93%] overflow-y-scroll scrollbar-hide">
       <ModifyForm />
       <div className="m-2 mb-14">
+        <p className="text-base">자신을 표현하는 해시태그를 입력해주세요.</p>
+        <InputComponent
+          placeholder="성격좋음"
+          onChange={changeHashtag}
+          id="0"
+        />
+        <InputComponent
+          placeholder="잘 안 들어옴"
+          onChange={changeHashtag}
+          id="1"
+        />
+        <InputComponent placeholder="조용함" id="2" onChange={changeHashtag} />
         <p className="my-4 mt-10 ml-2 text-md">
           자기소개 글을 입력해주세요.(50자 이내)
         </p>
@@ -75,9 +96,6 @@ const ModifyFavor = () => {
             setIntro(e.target.value);
           }}
         />
-        <button className="w-[100px] h-[44px] m-2 float-left ring-2 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button">
-          이전
-        </button>
         <button
           onClick={submitHandler}
           className="w-[100px] h-[44px] m-2 float-right ring-2 ring-[#ab82e0] text-[#ab82e0] font-extrabold text-sm borde rounded-md shadow-button"
