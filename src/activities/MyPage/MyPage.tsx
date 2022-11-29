@@ -55,6 +55,7 @@ const MyPage = () => {
         snoring: "",
         selfIntro: "",
       });
+      sessionStorage.clear();
       setHash({ hashtags: [] });
       replace("LoginActivity", {});
     } else {
@@ -69,6 +70,7 @@ const MyPage = () => {
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
       replace("LoginActivity", {});
+      sessionStorage.clear();
     } else {
       alert("회원탈퇴가 취소되었습니다.");
     }

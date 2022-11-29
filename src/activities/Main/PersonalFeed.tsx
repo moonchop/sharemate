@@ -5,6 +5,7 @@ import { useFlow } from "../../stackflow";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
 import useInfinityQuery from "../../hooks/useInfinityQuery";
 import { IoIosArrowForward } from "react-icons/io";
+import { useAuth } from "../../stores/auth";
 
 interface IUser {
   userID: number;
@@ -23,7 +24,14 @@ const Feed = () => {
 
   const fetchControl = useInfinityQuery("user/list");
   const feedData = fetchControl.result?.pages;
+  const { accessToken } = useAuth();
   //console.log("FEED DATA : ", feedData);
+  useEffect(() => {
+    console.log(accessToken);
+    if (accessToken) {
+      history.pushState(null, "", location.href);
+    }
+  }, []);
 
   const onIntersect: IntersectionObserverCallback = ([
     { isIntersecting, boundingClientRect, intersectionRatio },
