@@ -28,20 +28,25 @@ const Report = () => {
   }
 
   const submitHandler = () => {
+    console.log(reason);
     if (!Params.userToID) Params.userToID = null;
     if (!Params.postID) Params.postID = null;
-    request
-      .post("/sign/report", {
-        userToID: Params.userToID,
-        reason: reason,
-        postID: Params.postID,
-      })
-      .then((response) => {
-        alert("신고가 접수되었습니다.");
-        pop();
-        pop();
-      })
-      .catch((error) => alert("다시 시도해주세요"));
+    reason.length === 0
+      ? alert("신고 사유를 선택해주세요")
+      : reason == "직접 입력"
+      ? alert("신고 사유를 작성해주세요")
+      : request
+          .post("/sign/report", {
+            userToID: Params.userToID,
+            reason: reason,
+            postID: Params.postID,
+          })
+          .then((response) => {
+            alert("신고가 접수되었습니다.");
+            pop();
+            pop();
+          })
+          .catch((error) => alert("다시 시도해주세요"));
   };
 
   return (
