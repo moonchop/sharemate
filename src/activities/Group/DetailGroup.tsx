@@ -68,7 +68,6 @@ const DetailGroup = () => {
   useEffect(() => {
     GetGroupApi(Params.num)
       .then((response) => {
-        console.log("@@", response.data);
         setGroup(response.data);
       })
       .catch((error) => console.log(error));
@@ -78,7 +77,6 @@ const DetailGroup = () => {
   }, [group, setParticipation]);
 
   const onJoin = async (group_id: number) => {
-    console.log("group_id", group_id);
     try {
       const res = await JoinGroupApi(group_id);
       setParticipation(true);
@@ -99,7 +97,6 @@ const DetailGroup = () => {
   const duplicated = (ids?: number[]) => {
     const decoded = jwt_decode<Record<"sub", string>>(accessToken);
     const state = ids?.some((id) => id === Number(decoded.sub));
-    console.log(decoded.sub, ids, state);
     setParticipation(state);
 
     if (ids && ids[0] === Number(decoded.sub)) setOwn(true);
@@ -107,9 +104,6 @@ const DetailGroup = () => {
     return state;
   };
 
-  useEffect(() => {
-    console.log("participation", participation);
-  }, [participation]);
   return (
     <div className="items-center">
       <img src={Ajou} className="absolute z-5 h-[20%] opacity-50 w-full" />

@@ -22,7 +22,6 @@ const Login = () => {
     request
       .post("/sign/login", loginForm)
       .then((response) => {
-        console.log("status : ", response.status, "reslut : ", response.data);
         setUser(response.data.user);
         setToken(response.data.token);
         return true;

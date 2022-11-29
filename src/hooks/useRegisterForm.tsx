@@ -62,7 +62,6 @@ export const useRegisterForm = () => {
     if (typeof window !== "undefined") {
       const saved = window.sessionStorage.getItem("second");
       if (saved !== null) {
-        console.log("not null");
         return JSON.parse(saved);
       } else {
         return {

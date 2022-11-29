@@ -45,8 +45,6 @@ const ProfileEdit = () => {
 
   const uploadPhoto = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    console.log(e.target.files[0]);
-    console.log(URL.createObjectURL(e.target.files[0]));
     setEditData((prev) => ({
       ...prev,
       profile_photo: URL.createObjectURL(e.target.files[0]),

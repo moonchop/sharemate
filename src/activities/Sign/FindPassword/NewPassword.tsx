@@ -33,12 +33,9 @@ const NewPassword = () => {
         pwd: passwordForm.newPwd,
       })
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         return true;
       })
       .catch((error) => {
-        console.log({ email: Params.email, pwd: passwordForm.newPwd });
         console.log(error);
         return false;
       });

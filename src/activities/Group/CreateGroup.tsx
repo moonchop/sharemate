@@ -39,7 +39,6 @@ const CreateGroup = () => {
   const GroupSubmit = async () => {
     groupForm.hashtags = Object.values(hashtag);
     groupForm.wishLists = Object.values(wishList);
-    console.log(groupForm);
     try {
       const res = await PostGroupApi(groupForm);
       alert("그룹 생성에 성공했습니다.");

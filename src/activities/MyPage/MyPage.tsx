@@ -21,8 +21,6 @@ const MyPage = () => {
     request
       .get("/user/mypage")
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         setUser(response.data.user);
         setHash({ hashtags: response.data.hashtag_list });
         setFavor(response.data.favor);
@@ -65,10 +63,7 @@ const MyPage = () => {
 
   const confirmHandler = () => {
     if (confirm("회원탈퇴를 하시겠습니까?")) {
-      request
-        .post("/user/del")
-        .then((response) => console.log(response))
-        .catch((error) => console.log(error));
+      request.post("/user/del");
       replace("LoginActivity", {});
       sessionStorage.clear();
     } else {

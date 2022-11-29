@@ -26,7 +26,6 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
   useEffect(() => {
     const data = sessionStorage.getItem("second");
     if (data === null) return;
-    console.log(JSON.parse(data).hastags);
     Object.entries(JSON.parse(data).hastags).map(([key, value]) => {
       const element = document.getElementById(key);
       if (element !== null) (element as any).value = value;

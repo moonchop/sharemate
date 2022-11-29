@@ -59,13 +59,9 @@ const DetailProfile = () => {
 
   useEffect(() => {
     const decoded = jwt_decode<Record<"sub", string>>(accessToken);
-    console.log(decoded);
     request
       .get("user/detail", { params: { id: Params.id } })
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
-        console.log(response.data.user);
         setUser(response.data.user);
         setFavor(response.data.favor);
       })
@@ -89,24 +85,17 @@ const DetailProfile = () => {
   }, [likeId]);
 
   const likeHandler = () => {
-    console.log(user);
     if (!like) {
       request
         .post(`user/like/${user.userID}`)
-        .then((response) => {
-          console.log(response.status);
-          console.log(response);
-        })
+        .then((response) => {})
         .catch((error) => {
           console.log(error);
         });
     } else {
       request
         .post(`user/unlike/${user.userID}`)
-        .then((response) => {
-          console.log(response.status);
-          console.log(response);
-        })
+        .then((response) => {})
         .catch((error) => {
           console.log(error);
         });
@@ -142,7 +131,7 @@ const DetailProfile = () => {
               </div>
               <div className="flex w-full justify-between px-5 text-center items-center">
                 <RiAlarmWarningFill
-                  className="h-6 w-6 text-red-500"
+                  className="h-6 w-6 text-red-400"
                   onClick={() =>
                     push("ReportActivity", { userToID: user.userID })
                   }
@@ -174,43 +163,50 @@ const DetailProfile = () => {
       <div className="flex flex-col justify-center pt-[3%] ml-[38px] mr-[38px] ">
         <div className="item-center ">
           <div className=" text-left w-full ">
-            <div className="font-bold text-lg mb-2 text-[#AFADF5] ">
+            <div className="font-bold text-xl mb-3 text-[#AFADF5] text-center">
               나의 생활
             </div>
-            <div className="flex text-base flex-col mb-2 w-full">
-              <div className="flex flex-row items-center mb-1">
-                <VscPerson className="text-orange-200 mr-1" />
-                <div className="flex ">{favor.studyTime} 인간</div>
+            <div className="flex text-base flex-col mb-2 w-full space-y-3">
+              <div className="flex flex-row items-center justify-between">
+                <div className="flex flex-row items-center w-1/2">
+                  <VscPerson className="text-orange-200 mr-1" size={30} />
+                  <div className=" ">{favor.studyTime} 인간</div>
+                </div>
+                <div className="flex flex-row items-center w-1/2 pl-3">
+                  <MdBedtime className="text-yellow-200 mr-1" size={30} />
+                  <div className="">{favor.sleepTime} 자요</div>
+                </div>
               </div>
-              <div className="flex flex-row items-center mb-1">
-                <MdBedtime className="text-yellow-200 mr-1" />
-                <div className="flex">{favor.sleepTime} 자요</div>
+
+              <div className="flex flex-row items-center">
+                <div className="flex flex-row items-center w-1/2">
+                  <IoMdBed className="text-blue-200 mr-1" size={30} />
+                  <div className="flex">{favor.wakeupTime}에 일어나요</div>
+                </div>
+                <div className="flex flex-row items-center w-1/2 pl-3">
+                  <GiNoseFront className="text-red-200 mr-1" size={30} />
+                  <div className="flex">코골이 {favor.snoring}</div>
+                </div>
               </div>
-              <div className="flex flex-row items-center mb-1">
-                <IoMdBed className="text-blue-200 mr-1" />
-                <div className="flex">{favor.wakeupTime}에 일어나요</div>
+
+              <div className="flex flex-row items-center ">
+                <div className="flex flex-row items-center w-1/2">
+                  <GiVacuumCleaner className="text-red-500 mr-1 " size={30} />
+                  <div className="flex">{favor.cleanness}해요</div>
+                </div>
+                <div className="flex flex-row items-center w-1/2 pl-3">
+                  <GiCigarette className="text-gray-300 mr-1 " size={30} />
+                  <div className="flex ">{favor.smoking}</div>
+                </div>
               </div>
-              <div className="flex"></div>
-              <div className="flex flex-row items-center mb-1">
-                <GiNoseFront className="text-red-200 mr-1" />
-                <div className="flex">코골이 능력치 {favor.snoring}</div>
-              </div>
-              <div className="flex flex-row items-center mb-1">
-                <FaBeer className="text-yellow-500 mr-1" />
+
+              <div className="flex flex-row items-center ">
+                <FaBeer className="text-yellow-500 mr-1" size={30} />
                 <div className="flex">주 {favor.drinking}회</div>
               </div>
-              <div className="flex flex-row items-center mb-1">
-                <GiCigarette className="text-gray-300 mr-1" />
-                <div className="flex ">{favor.smoking}</div>
-              </div>
-              <div className="flex flex-row items-center mb-1">
-                <GiVacuumCleaner className="text-red-500 mr-1" />
-                <div className="flex">{favor.cleanness}해요</div>
-              </div>
-              <div className="flex flex-row items-center"></div>
             </div>
-
-            <div className="font-bold text-lg mb-2 text-[#AFADF5] ">
+            <hr className="my-5 bg-[#8784f0]" />
+            <div className="font-bold text-xl mb-2 text-[#AFADF5] text-center ">
               자기 소개
             </div>
             <div className="flex pro:leading-7 font-medium w-full	">

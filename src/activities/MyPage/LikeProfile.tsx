@@ -25,8 +25,6 @@ const LikeProfile = () => {
     request
       .get("/user/likelist", { params: { id: userID } })
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         setFeedData(response.data);
       })
       .catch((error) => {

@@ -4,12 +4,14 @@ import { checkEmail, RegisterApi } from "../../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
 import defaultProfile from "../../../assets/defaultProfile.png";
 import { useAuth } from "../../../stores/auth";
+import { useUser } from "../../../stores/user";
 
 const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   const [emailValidNum, setEmailValidNum] = useState("false");
   const [isValid, setIsValid] = useState(false);
   const checkEmailRef = useRef<HTMLInputElement>(null);
   const { setToken } = useAuth();
+  const { setUser } = useUser();
   const {
     register,
     handleSubmit,
@@ -18,15 +20,12 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   } = useForm<SignUpFormInterface>();
 
   const getEmailValidNum = async () => {
-    console.log(getValues("email"));
     try {
       const response = await checkEmail(getValues("email"));
 
       setEmailValidNum(response.data);
-      console.log(response.data);
       alert("인증번호가 전송되었습니다.");
     } catch (e) {
-      console.log(e);
       alert("인증번호 전송에 실패했습니다.");
     }
   };
@@ -52,13 +51,13 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
     data.age = Number(data.age);
     data.grade = Number(data.grade);
     data.gender = data.gender == "남" ? 1 : 0;
-    console.log("POST data", data);
     RegisterApi(data).then((elem: any) => {
-      console.log(elem);
-      setToken({
-        ...{ accessToken: elem.data.data.accessToken },
-        ...{ refreshToken: elem.data.data.accessToken },
-      });
+      // setToken({
+      //   ...{ accessToken: elem.data.data.accessToken },
+      //   ...{ refreshToken: elem.data.data.accessToken },
+      // });
+      setToken(elem.data.token);
+      setUser(elem.data.user);
     });
 
     handleGoNext();

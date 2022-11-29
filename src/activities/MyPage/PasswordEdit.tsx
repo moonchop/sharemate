@@ -33,8 +33,6 @@ const PasswordEdit = () => {
         newPwd: passwordForm.newPwd,
       })
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         return true;
       })
       .catch((error) => {

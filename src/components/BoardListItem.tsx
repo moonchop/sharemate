@@ -1,6 +1,7 @@
 import { useFlow } from "../stackflow";
 import { IBoard } from "../activities/Community/CommunityFeed";
 import { useMemo } from "react";
+import { RiAlarmWarningFill } from "react-icons/ri";
 const BoardListItem = ({
   category,
   created_at,
@@ -42,11 +43,12 @@ const BoardListItem = ({
           title: title,
           text: text,
           date: postDate,
+          user_id: user_id,
         });
       }}
     >
-      <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg truncate">{title}</p>
+      <div className="flex justify-between items-center mb-1">
+        <p className="font-semibold text-lg truncate w-[70%]">{title}</p>
         <p className="text-right text-sm text-gray-400">{`작성자 : ${username}`}</p>
       </div>
       <p className="truncate mb-2">{text}</p>

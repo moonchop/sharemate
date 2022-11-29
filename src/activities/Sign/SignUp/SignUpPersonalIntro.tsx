@@ -21,12 +21,9 @@ const SignUpPersonalIntro = ({ handleGoPrev, handleGoNext }: any) => {
 
     const result = { ...getThirdData(), ...getSecondData() };
 
-    console.log(result);
-
     if (Object.values(data).every((x) => x !== null && x !== "")) {
       try {
         const res = await FavorApi(result);
-        console.log(res);
         replace("MainActivity", {});
       } catch (e) {
         console.log(e);

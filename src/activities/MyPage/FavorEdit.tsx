@@ -30,12 +30,9 @@ const ModifyFavor = () => {
       selfIntro: intro,
       hashtags: Object.values(hash),
     };
-    console.log(result);
     request
       .put("/favor", result)
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         alert("취향수정이 완료되었습니다.");
         pop();
       })

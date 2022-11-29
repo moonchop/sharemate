@@ -27,7 +27,6 @@ const Feed = () => {
   const { accessToken } = useAuth();
   //console.log("FEED DATA : ", feedData);
   useEffect(() => {
-    console.log(accessToken);
     if (accessToken) {
       history.pushState(null, "", location.href);
     }

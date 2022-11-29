@@ -23,8 +23,6 @@ const PasswordEdit = () => {
     request
       .post("sign/email/new-pwd", { email })
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         setAuthnumber(response.data);
       })
       .catch((error) => {
@@ -43,7 +41,6 @@ const PasswordEdit = () => {
   const submitHandler = () => {
     console.log(authemail.email);
     if (successState) {
-      console.log("진입");
       replace("FindPassword_PasswordActivity", { email: authemail.email });
     } else {
       alert("이메일 인증을 진행해주세요");

@@ -18,11 +18,9 @@ const SignUp: ActivityComponentType = () => {
   const [stage, setStage] = useState(0);
 
   const handleGoPrev = () => {
-    console.log(stage);
     setStage((v) => Math.max(0, v - 1));
   };
   const handleGoNext = () => {
-    console.log(stage);
     setStage((v) => Math.min(MAX_STAGE, v + 1));
   };
 

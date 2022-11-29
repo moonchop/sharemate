@@ -33,7 +33,6 @@ const GroupFeed = () => {
   const fetchControl = useInfinitygroup("/groups");
 
   const feedData = fetchControl.result?.pages;
-  //console.log(fetchControl.result);
 
   let previous_Y = 0;
   let previous_Ratio = 0;
@@ -48,7 +47,6 @@ const GroupFeed = () => {
       current_Ratio > previous_Ratio &&
       current_Y > previous_Y
     ) {
-      //console.log("감지");
       fetchControl.nextFetch();
       previous_Y = current_Y;
       previous_Ratio = current_Ratio;

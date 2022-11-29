@@ -18,6 +18,8 @@ const useInfinitypost = (url: string) => {
         return queryHandler(pageParam, url);
       },
       {
+        // refetchOnWindowFocus: "always",
+        // refetchOnMount: "always",
         getNextPageParam: (lastPage, allPages) => {
           return allPages.length; // 다음 페이지를 호출할 때 사용 될 pageParam
         },
