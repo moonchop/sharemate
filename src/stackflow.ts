@@ -5,8 +5,6 @@ import { historySyncPlugin } from "@stackflow/plugin-history-sync";
 import { createLink } from "@stackflow/link";
 import MakeActivity from "./utils/MakeActivity";
 import SignUpActivity from "./activities/Sign/SignUp";
-import CreateBoardActivity from "./activities/Community/CreateBoard";
-import ReportActivity from "./activities/Report/Report";
 const MainActivity = MakeActivity("Main");
 const GroupActivity = MakeActivity("Group");
 const CommunityActivity = MakeActivity("Community");
@@ -28,6 +26,8 @@ const UserTermActivity = MakeActivity("UserTerm");
 const TermActivity = MakeActivity("Term");
 const SignUpCoverActivity = MakeActivity("SignUpCover");
 const MyBoardActivity = MakeActivity("MyBoard");
+const ReportActivity = MakeActivity("Report");
+const CreateBoardActivity = MakeActivity("CreateBoard");
 
 export type SafeActivityType = typeof activities;
 export const { Link } = createLink<SafeActivityType>();

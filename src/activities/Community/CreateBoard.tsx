@@ -5,7 +5,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { PostCreateApi } from "../../utils/api/community";
 import { useState } from "react";
 
-const CreateBoard: ActivityComponentType = () => {
+const CreateBoard = () => {
   const { pop } = useFlow();
   const [inputs, setInputs] = useState({
     title: "",
@@ -28,7 +28,7 @@ const CreateBoard: ActivityComponentType = () => {
   };
   const { title, text } = inputs;
   return (
-    <AppScreen theme="cupertino">
+    <>
       <header className="flex justify-between margin-0 p-4 pr-3 h-[8%] items-center bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-300">
         <IoMdArrowRoundBack
           className="w-5 h-5"
@@ -53,7 +53,7 @@ const CreateBoard: ActivityComponentType = () => {
         className="w-full h-[60%] p-5 text-lg  outline-none"
         placeholder="내용을 입력하세요."
       />
-    </AppScreen>
+    </>
   );
 };
 

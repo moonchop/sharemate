@@ -8,7 +8,7 @@ import ReportRadioButton from "../../components/ReportRadioButton";
 import { useState } from "react";
 import request from "../../stores/Request";
 
-const Report: ActivityComponentType = () => {
+const Report = () => {
   const { pop } = useFlow();
   const [reason, setReason] = useState<string>("");
   const back = () => {
@@ -45,17 +45,13 @@ const Report: ActivityComponentType = () => {
   };
 
   return (
-    <AppScreen theme="cupertino">
+    <>
       <div>
-        <header className="flex  justify-center  margin-0 p-4 pr-3 h-[7%]">
-          <IoMdArrowRoundBack
-            className="w-5 h-5 absolute left-[4%] top-[2.5%]"
-            onClick={back}
-          ></IoMdArrowRoundBack>
+        <div className="flex  justify-center  margin-0 p-4 pr-3 h-[7%]">
           <h1 className="flex items-center justify-center text-lg font-bold ">
             신고 사유 선택
           </h1>
-        </header>
+        </div>
         <hr />
         <div className="flex flex-col ">
           <label className="items-center justify-center ">
@@ -119,7 +115,7 @@ const Report: ActivityComponentType = () => {
       >
         신고하기{" "}
       </button>
-    </AppScreen>
+    </>
   );
 };
 
