@@ -9,10 +9,14 @@ type topProps = {
 };
 
 const Topnav: React.FC<topProps> = ({ status }) => {
-  const { pop } = useFlow();
+  const { pop, replace } = useFlow();
   const stack_Status = useActivity();
   const onClick = () => {
     pop();
+  };
+
+  const onClickSignUp = () => {
+    replace("LoginActivity", {});
   };
 
   return (
@@ -21,6 +25,11 @@ const Topnav: React.FC<topProps> = ({ status }) => {
         <IoMdArrowRoundBack
           className="w-5 h-5"
           onClick={onClick}
+        ></IoMdArrowRoundBack>
+      ) : status ? (
+        <IoMdArrowRoundBack
+          className="w-5 h-5"
+          onClick={onClickSignUp}
         ></IoMdArrowRoundBack>
       ) : (
         <div className="font-bold text-xl text-white">Share Mate</div>

@@ -28,7 +28,7 @@ const SignUp: ActivityComponentType = () => {
 
   return (
     <AppScreen theme="cupertino">
-      {stage == 1 ? "" : <TopNav />}
+      {stage == 1 ? "" : stage == 0 ? <TopNav status={true} /> : <TopNav />}
       {React.cloneElement(Stage_Map[stage], {
         handleGoNext,
         handleGoPrev,

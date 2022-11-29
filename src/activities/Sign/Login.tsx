@@ -100,7 +100,7 @@ const Login = () => {
           <div
             className="flex text-[#AAAAAA] text-sm mr-2 text  underline underline-offset-4"
             onClick={() => {
-              push("SignUpActivity", {});
+              replace("SignUpActivity", {});
             }}
           >
             회원가입
