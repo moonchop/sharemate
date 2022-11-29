@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useFlow } from "../../stackflow";
 import { useAuth } from "../../stores/auth";
+import { useUser } from "../../stores/user";
 import request from "../../stores/Request";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Logo from "../../assets/Logo.png";
 
 const Login = () => {
   const { setToken } = useAuth();
+  const { setUser } = useUser();
 
   const { replace, push } = useFlow();
   const [loginForm, setLoginForm] = useState({
@@ -20,13 +22,9 @@ const Login = () => {
     request
       .post("/sign/login", loginForm)
       .then((response) => {
-        console.log(
-          "status : ",
-          response.status,
-          "reslut : ",
-          response.data.result
-        );
-        setToken(response.data.data);
+        console.log("status : ", response.status, "reslut : ", response.data);
+        setUser(response.data.user);
+        setToken(response.data.token);
         return true;
       })
       .catch((error) => {

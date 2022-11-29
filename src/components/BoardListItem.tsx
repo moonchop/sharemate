@@ -46,7 +46,7 @@ const BoardListItem = ({
       }}
     >
       <div className="flex justify-between items-center">
-        <p className="font-semibold text-lg ">{title}</p>
+        <p className="font-semibold text-lg truncate">{title}</p>
         <p className="text-right text-sm text-gray-400">{`작성자 : ${username}`}</p>
       </div>
       <p className="truncate mb-2">{text}</p>
