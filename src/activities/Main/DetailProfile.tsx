@@ -7,7 +7,13 @@ import request from "../../stores/Request";
 import jwt_decode from "jwt-decode";
 import { useAuth } from "../../stores/auth";
 import { useFlow } from "../../stackflow";
-
+import CheckText from "../../components/group/CheckText";
+import { RiAlarmWarningFill } from "react-icons/ri";
+import { FaBeer } from "react-icons/fa";
+import { GiCigarette, GiVacuumCleaner, GiNoseFront } from "react-icons/gi";
+import { MdBedtime } from "react-icons/md";
+import { IoMdBed } from "react-icons/io";
+import { VscPerson } from "react-icons/vsc";
 interface LikeProps {
   age: number;
   gender: boolean;
@@ -124,68 +130,95 @@ const DetailProfile = () => {
               <div className="flex mb-[3%] flex-row items-center justify-center">
                 <div className="items-center w-[28%] h-[42px] pro:h-[55px] " />
               </div>
-              <div className="font-bold pro:text-2xl text-xl text-center mb-[3%]">
+              <div className="font-bold pro:text-2xl text-lg text-center pro:mb-[3%]">
                 {user.name}
               </div>
-              <div className="pro:text-xl text-lg pro:mb-[5%] mb-[5px] font-medium text-[rgb(133,129,129)] text-center">
+              <div className="pro:text-xl text-base mb-2 font-medium text-[rgb(133,129,129)] text-center">
                 {user.major} &nbsp;{user.grade}학년 &nbsp;{user.age}살
               </div>
-              <div className=" mb-[24px] pro:text-xl text-lg font-medium text-center">
+              <div className=" pro:text-xl text-base font-medium text-center">
                 <strong className="text-[#AFADF5] font-semibold">MBTI</strong>
                 &nbsp; {favor.mbti}
+              </div>
+              <div className="flex w-full justify-between px-5 text-center items-center">
+                <RiAlarmWarningFill
+                  className="h-6 w-6 text-red-500"
+                  onClick={() =>
+                    push("ReportActivity", { userToID: user.userID })
+                  }
+                />
+                {!like ? (
+                  <AiOutlineHeart
+                    color="#AAAAAA"
+                    className="h-6 w-6"
+                    onClick={() => {
+                      setLike(true);
+                      likeHandler();
+                    }}
+                  />
+                ) : (
+                  <AiFillHeart
+                    color="red"
+                    className="h-6 w-6"
+                    onClick={() => {
+                      setLike(false);
+                      likeHandler();
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col  h-[62%] justify-center ">
-        <div className="h-[80%] pro:mt-[9%] mt-[5%] ml-[38px] mr-[38px] item-center ">
+      <div className="flex flex-col justify-center pt-[3%] ml-[38px] mr-[38px] ">
+        <div className="item-center ">
           <div className=" text-left w-full ">
-            <div className="font-bold pro:text-xl text-lg pro:mb-[30px] mb-[18px] text-[#AFADF5] underline underline-offset-8">
+            <div className="font-bold text-lg mb-2 text-[#AFADF5] ">
               나의 생활
             </div>
-            <div className="flex pro:text-lg text-base flex-row pro:mb-[7%] mb-[5%] w-full justify-between ">
-              <div className="flex">기상 시간 : {favor.wakeupTime}</div>
-              <div className="flex">수면 시간 : {favor.sleepTime}</div>
+            <div className="flex text-base flex-col mb-2 w-full">
+              <div className="flex flex-row items-center mb-1">
+                <VscPerson className="text-orange-200 mr-1" />
+                <div className="flex ">{favor.studyTime} 인간</div>
+              </div>
+              <div className="flex flex-row items-center mb-1">
+                <MdBedtime className="text-yellow-200 mr-1" />
+                <div className="flex">{favor.sleepTime} 자요</div>
+              </div>
+              <div className="flex flex-row items-center mb-1">
+                <IoMdBed className="text-blue-200 mr-1" />
+                <div className="flex">{favor.wakeupTime}에 일어나요</div>
+              </div>
+              <div className="flex"></div>
+              <div className="flex flex-row items-center mb-1">
+                <GiNoseFront className="text-red-200 mr-1" />
+                <div className="flex">코골이 능력치 {favor.snoring}</div>
+              </div>
+              <div className="flex flex-row items-center mb-1">
+                <FaBeer className="text-yellow-500 mr-1" />
+                <div className="flex">주 {favor.drinking}회</div>
+              </div>
+              <div className="flex flex-row items-center mb-1">
+                <GiCigarette className="text-gray-300 mr-1" />
+                <div className="flex ">{favor.smoking}</div>
+              </div>
+              <div className="flex flex-row items-center mb-1">
+                <GiVacuumCleaner className="text-red-500 mr-1" />
+                <div className="flex">{favor.cleanness}해요</div>
+              </div>
+              <div className="flex flex-row items-center"></div>
             </div>
-            <div className="flex pro:text-lg text-base flex-row pro:mb-[7%] mb-[5%] w-full justify-between">
-              <div className="flex">생활 패턴 : {favor.studyTime}</div>
-              <div className="flex">코골이 유무 : {favor.snoring}</div>
-            </div>
-            <div className="flex pro:text-lg text-base flex-row pro:mb-[7%] mb-[5%] w-full justify-between">
-              <div className="flex">주 음주 : {favor.drinking}회</div>
-              <div className="flex">{favor.cleanness}</div>
-              <div className="flex ">{favor.smoking}</div>
-            </div>
-            <div className="font-bold pro:text-xl text-lg pro:mb-[27px] mb-[15px] text-[#AFADF5] underline underline-offset-8">
+
+            <div className="font-bold text-lg mb-2 text-[#AFADF5] ">
               자기 소개
             </div>
-            <div className="pro:text-xl pro:leading-9 text-lg font-medium w-full	">
+            <div className="flex pro:leading-7 font-medium w-full	">
               {favor.selfIntro}
             </div>
           </div>
         </div>
-        <div className="flex justify-between px-[38px] h-[13%] items-center">
-          {!like ? (
-            <AiOutlineHeart
-              color="#AAAAAA"
-              className="h-full w-[10%]"
-              onClick={() => {
-                setLike(true);
-                likeHandler();
-              }}
-            />
-          ) : (
-            <AiFillHeart
-              color="red"
-              className="h-full w-[10%] "
-              onClick={() => {
-                setLike(false);
-                likeHandler();
-              }}
-            />
-          )}
-          <span className="w-[50%]"></span>
+        <button className="absolute bottom-4 -mr-3 right-0 self-center w-[62px] h-[62px] ">
           <img
             src={Kakao}
             className="flex pro:h-[70%] h-[70%]"
@@ -193,16 +226,12 @@ const DetailProfile = () => {
               window.open(user.kakao_link);
             }}
           />
-        </div>
-        <span
-          className="text-xs text-red-300 ml-[33px]"
-          onClick={() => push("ReportActivity", { userToID: user.userID })}
-        >
-          신고하기
-        </span>
+        </button>
       </div>
     </div>
   );
 };
 
 export default DetailProfile;
+
+//{favor.selfIntro}
