@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import HashTag from "../../components/HashTag";
 import Ajou from "../../assets/Ajou.gif";
 import { IoIosCheckmark } from "react-icons/io";
+import { RiAlarmWarningFill } from "react-icons/ri";
 import {
   GetGroupApi,
   JoinGroupApi,
@@ -114,19 +115,19 @@ const DetailGroup = () => {
     <div className="items-center">
       <img src={Ajou} className="absolute z-5 h-[20%] opacity-50 w-full" />
       {/* 하얀색 카드 Form */}
-      <div className="absolute h-[70%] bg-white rounded-3xl top-[20%] w-[90%] right-1/2 left-1/2 -translate-x-1/2 shadow-[0px_2px_2px_rgba(0,0,0,0.25)] overflow-auto">
+      <div className="absolute h-[70%] bg-white rounded-3xl top-[20%] w-[90%] right-1/2 left-1/2 -translate-x-1/2 shadow-[0px_2px_2px_rgba(0,0,0,0.25)] overflow-auto scrollbar-hide">
         <div className=" p-5 z-10 ">
           {/* 카드 내용 */}
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <p className="text-2xl font-bold">
               {group?.groupDetailInfo.building}
             </p>
-            <button
+            <RiAlarmWarningFill
               onClick={() => push("ReportActivity", { postID: Params.num })}
-              className="text-xs text-red-300"
+              className="h-5 w-5 text-red-400"
             >
               신고하기
-            </button>
+            </RiAlarmWarningFill>
           </div>
           <p className="text-md mt-2">{group?.groupDetailInfo.text}</p>
           {/* 해시태그(화면 width 꽉차게 스크롤로 구현) */}
