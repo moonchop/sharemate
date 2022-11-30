@@ -6,18 +6,18 @@ import { PostCreateApi } from "../../utils/api/community";
 import { useState } from "react";
 
 const CreateBoard = () => {
-  const { pop } = useFlow();
+  const { pop, replace } = useFlow();
   const [inputs, setInputs] = useState({
     title: "",
     text: "",
   });
   const back = () => {
-    pop();
+    replace("CommunityActivity", {});
   };
   const onClick = () => {
     if (inputs.text === "" || inputs.title === "") return;
     PostCreateApi(inputs);
-    pop();
+    replace("CommunityActivity", {});
   };
   const onChange = (e: any) => {
     const { value, name } = e.target;

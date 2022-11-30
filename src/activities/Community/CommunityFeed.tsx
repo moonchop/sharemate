@@ -21,7 +21,7 @@ const CommunityFeed = () => {
   // window.onpopstate = function () {
   //   history.go(1);
   // };
-  const { push } = useFlow();
+  const { push, replace } = useFlow();
   const [data, setData] = useState<IBoard[] | null>(null);
   // const [feedData, setFeedData] = useState<any>(null);
   const fetchControl = useInfinityQuery("/posts");
@@ -51,10 +51,17 @@ const CommunityFeed = () => {
     }
   };
 
+  useEffect(() => {
+    if (fetchControl.result?.pages[feedData.length - 1] !== 8) {
+      console.log("reFFFFF");
+      fetchControl.reFetch();
+    }
+  }, [feedData]);
+
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
   const handlerTarget = (index: number) => {
-    if (index % 3 == 0 && index != 0) {
+    if (index % 7 == 0 && index != 0) {
       return setTarget;
     }
   };
@@ -71,7 +78,7 @@ const CommunityFeed = () => {
 
       <button
         onClick={() => {
-          push("CreateBoardActivity", {});
+          replace("CreateBoardActivity", {});
         }}
         className=" absolute bottom-16 right-2 self-center w-[45px] h-[45px] rounded-full m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white ring-opacity-70 bg-opacity-70"
       >
