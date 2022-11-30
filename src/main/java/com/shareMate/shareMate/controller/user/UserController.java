@@ -52,9 +52,9 @@ public class UserController {
     }
     @ApiOperation(value = "회원가입",notes = "회원가입을 진행하고, jwt 토큰을 반환합니다.",tags="User")
     @PostMapping("")
-    public DataResponse<ResponseSignUpDto> signUp(@RequestBody RequestSignUpDto requestSignUpDto){
-        ResponseSignUpDto req = userService.doInsert(requestSignUpDto);
-        return new DataResponse<>(req);
+    public ResponseEntity<Map<String, Object>> signUp(@RequestBody RequestSignUpDto requestSignUpDto){
+        Map map = userService.doInsert(requestSignUpDto);
+        return new ResponseEntity<>(map,HttpStatus.OK);
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청",tags="User")
     @GetMapping("/list")

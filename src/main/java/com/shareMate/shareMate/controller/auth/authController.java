@@ -5,6 +5,7 @@ import com.shareMate.shareMate.dto.ReqSetPwdDto;
 import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.sign.RequestSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
+import com.shareMate.shareMate.dto.sign.TempUserDto;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.repository.UserRepository;
@@ -41,15 +42,17 @@ public class authController {
 
     @ApiOperation(value = "로그인(JWT 토큰 발급)",notes = "id,pw를 이용하여 로그인을 진행하고, jwt토큰을 발급합니다.",tags="Auth")
     @PostMapping("/login")
-    public DataResponse<ResponseSignInDto> UserLogin(@RequestBody RequestSignInDto requestSignInDto){
-        ResponseSignInDto req = signService.doLogin(requestSignInDto);
-        if(req.getAccessToken()==null){
+    public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody RequestSignInDto requestSignInDto){
+        System.out.println("???????");
+        Map map= signService.doLogin(requestSignInDto);
+        if(map.get("user")==null){
             throw new UserNotFoundException();
         }
-        return new DataResponse(req);
+        return new ResponseEntity<>(map,HttpStatus.OK);
+
     }
     @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.",tags="Auth")
-    @PostMapping("/email")
+    @PostMapping("/sign/email")
     public ResponseEntity<String > EmailVerification(@RequestBody Map<String,String> email) throws Exception {
         Boolean IsDup = userService.dupCheck(email.get("email"));
         //중복된 이메일
@@ -65,7 +68,7 @@ public class authController {
         }
     };
     @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.",tags="Auth")
-    @PostMapping("/email/new-pwd")
+    @PostMapping("/sign/email/new-pwd")
     public ResponseEntity<String> EmailNewPwdVerification(@RequestBody Map<String,String> email) throws Exception {
         Boolean IsDup = userService.dupCheck(email.get("email"));
         //중복된 이메일
@@ -82,7 +85,7 @@ public class authController {
         }
     };
     @ApiOperation(value = "비밀번호 찾기",notes = "비밀번호 재설정 인증번호를 위한 api 입니다.",tags="Auth")
-    @PostMapping("/setPwd")
+    @PostMapping("/sign/setPwd")
     public ResponseEntity<String > EmailVerification(@RequestBody ReqSetPwdDto reqSetPwdDto) throws Exception {
 
         UserEntity user =userService.doSelectOneByEmail(reqSetPwdDto.getEmail());
@@ -93,7 +96,7 @@ public class authController {
     };
 
     @ApiOperation(value = "신고하기",notes = "신고하기 기능입니다.",tags="Auth")
-    @PostMapping("/report")
+    @PostMapping("/sign/report")
     public ResponseEntity<String> Report(HttpServletRequest request,@RequestBody ReportDto reportDto) {
 
         final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
