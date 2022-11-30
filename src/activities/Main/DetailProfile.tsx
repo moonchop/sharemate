@@ -103,64 +103,80 @@ const DetailProfile = () => {
   };
 
   return (
-    <div className="flex-col h-[92%] overflow-y-scroll scrollbar-hide">
-      <div className="w-full h-[38%]">
-        <div className="h-full relative">
-          <img src={Ajou} className="absolute h-[87%] z-1 opacity-25" />
-          <div className="absolute h-[87%] w-full z-2 bg-[rgba(86,64,221,0.2)] justify-center items-center" />
-          <div className="flex items-center justify-center h-[57%]">
+    <div className="items-center overflow-y-scroll scrollbar-hide">
+      <img src={Ajou} className="absolute z-5 h-[25%] opacity-50 w-full" />
+
+      <div className="absolute h-[20%] bg-white rounded-3xl top-[15%] w-[80%] right-1/2 left-1/2 -translate-x-1/2 shadow-[0px_2px_2px_rgba(0,0,0,0.25)] overflow-auto scrollbar-hide">
+        <div className="px-4 pt-2 z-10 flex flex-col item-center justify-center h-full">
+          <div className="flex felx-row items-center">
             <img
               src={user.profile_photo}
-              className="flex z-20 rounded-full shadow-xl w-[85px] pro:w-[109px] pro:h-[109px] h-[85px] "
+              className=" z-20 rounded-full shadow-xl w-24 h-24 mr-5"
             />
-          </div>
-          <div className="absolute h-[70%] bg-white rounded-3xl top-[29%] left-[41px] right-[41px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
-            <div className="h-full w-full z-10">
-              <div className="flex mb-[3%] flex-row items-center justify-center">
-                <div className="items-center w-[28%] h-[42px] pro:h-[55px] " />
+            <div className="flex flex-col justify-center">
+              <div className="font-semibold  ">
+                {user.name} ({user.age})
               </div>
-              <div className="font-bold pro:text-2xl text-lg text-center pro:mb-[3%]">
-                {user.name}
+              <div className="flex flex-row">
+                <p className="text-[#AFADF5] mr-2 font-semibold">MBTI</p>
+                <p className=" ">{favor.mbti}</p>
               </div>
-              <div className="pro:text-xl text-base mb-2 font-medium text-[rgb(133,129,129)] text-center">
-                {user.major} &nbsp;{user.grade}학년 &nbsp;{user.age}살
+              <div className="text-base font-medium text-[rgb(133,129,129)] ">
+                {user.major}
               </div>
-              <div className=" pro:text-xl text-base font-medium text-center">
-                <strong className="text-[#AFADF5] font-semibold">MBTI</strong>
-                &nbsp; {favor.mbti}
-              </div>
-              <div className="flex w-full justify-between px-5 text-center items-center">
-                <RiAlarmWarningFill
-                  className="h-6 w-6 text-red-400"
-                  onClick={() =>
-                    push("ReportActivity", { userToID: user.userID })
-                  }
-                />
-                {!like ? (
-                  <AiOutlineHeart
-                    color="#AAAAAA"
-                    className="h-6 w-6"
-                    onClick={() => {
-                      setLike(true);
-                      likeHandler();
-                    }}
-                  />
-                ) : (
-                  <AiFillHeart
-                    color="red"
-                    className="h-6 w-6"
-                    onClick={() => {
-                      setLike(false);
-                      likeHandler();
-                    }}
-                  />
-                )}
+              <div className="text-base  font-medium text-[rgb(133,129,129)] ">
+                {user.grade}학년
               </div>
             </div>
           </div>
+          <div className="flex w-full justify-between text-center items-center mt-1 pb-2">
+            <RiAlarmWarningFill
+              className="h-6 w-6 text-red-400"
+              onClick={() => push("ReportActivity", { userToID: user.userID })}
+            />
+            {!like ? (
+              <AiOutlineHeart
+                color="#AAAAAA"
+                className="h-6 w-6"
+                onClick={() => {
+                  setLike(true);
+                  likeHandler();
+                }}
+              />
+            ) : (
+              <AiFillHeart
+                color="red"
+                className="h-6 w-6"
+                onClick={() => {
+                  setLike(false);
+                  likeHandler();
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
-      <div className="flex flex-col justify-center pt-[3%] ml-[38px] mr-[38px] ">
+      {/* </div>
+          <div className="absolute w-[80%] h-40 bg-white rounded-3xl top-[29%] left-[41px] right-[41px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)]">
+            <div className="flex mb-[3%] flex-row items-center justify-center">
+              <div className="items-center w-[28%] h-[42px] pro:h-[55px] " />
+            </div>
+            <div className="font-bold pro:text-2xl text-lg text-center pro:mb-[3%]">
+              {user.name}
+            </div>
+            <div className="pro:text-xl text-base mb-2 font-medium text-[rgb(133,129,129)] text-center">
+              {user.major} &nbsp;{user.grade}학년 &nbsp;{user.age}살
+            </div>
+            <div className=" pro:text-xl text-base font-medium text-center">
+              <strong className="text-[#AFADF5] font-semibold">MBTI</strong>
+              &nbsp; {favor.mbti}
+            </div>
+            
+          </div>
+        </div>
+      </div> */}
+
+      <div className=" absolute top-[35%] w-full px-5 pt-5">
         <div className="item-center ">
           <div className=" text-left w-full ">
             <div className="font-bold text-xl mb-3 text-[#AFADF5] text-center">
@@ -214,16 +230,16 @@ const DetailProfile = () => {
             </div>
           </div>
         </div>
-        <button className="absolute bottom-4 -mr-3 right-0 self-center w-[62px] h-[62px] ">
-          <img
-            src={Kakao}
-            className="flex pro:h-[70%] h-[70%]"
-            onClick={() => {
-              window.open(user.kakao_link);
-            }}
-          />
-        </button>
       </div>
+      <button className="absolute bottom-4 -mr-3 right-0 self-center w-[62px] h-[62px] ">
+        <img
+          src={Kakao}
+          className="flex pro:h-[70%] h-[70%]"
+          onClick={() => {
+            window.open(user.kakao_link);
+          }}
+        />
+      </button>
     </div>
   );
 };
