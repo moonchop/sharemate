@@ -3,7 +3,7 @@ import { useAuth } from "./auth";
 import { SERVER_URL } from "../config";
 
 const request = axios.create({
-  baseURL: `http://${SERVER_URL}`,
+  baseURL: `http://${SERVER_URL}/api`,
 });
 
 request.interceptors.request.use(async (request) => {
