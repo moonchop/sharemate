@@ -1,11 +1,10 @@
 import { useFlow } from "../../stackflow";
 import BoardListItem from "../../components/BoardListItem";
 import { BsPencil } from "react-icons/bs";
-import { useEffect, useState } from "react";
-import { PostAllApi } from "../../utils/api/community";
+import { useEffect } from "react";
 import useInfinityQuery from "../../hooks/useInfinitypost";
 import useIntersectionObserver from "../../hooks/useIntersectionObserver";
-import { useActivity, useStack } from "@stackflow/react";
+import { Skeleton } from "../../components/Skeleton";
 
 export interface IBoard {
   user_id: number;
@@ -17,24 +16,12 @@ export interface IBoard {
   created_at: string;
 }
 const CommunityFeed = () => {
-  // history.pushState(null, "", location.href);
-  // window.onpopstate = function () {
-  //   history.go(1);
-  // };
   const { push, replace } = useFlow();
-  const [data, setData] = useState<IBoard[] | null>(null);
-  // const [feedData, setFeedData] = useState<any>(null);
   const fetchControl = useInfinityQuery("/posts");
   const feedData = fetchControl.result?.pages;
   let previous_Y = 0;
   let previous_Ratio = 0;
 
-  const activity = useActivity();
-  const stack = useStack();
-  // useEffect(() => {
-  //   console.log("현재 액티비티의 전환 상태:", activity.transitionState);
-  //   setFeedData(fetchControl.result?.pages);
-  // }, [stack]);
   const onIntersect: IntersectionObserverCallback = ([
     { isIntersecting, boundingClientRect, intersectionRatio },
   ]) => {
@@ -53,7 +40,6 @@ const CommunityFeed = () => {
 
   useEffect(() => {
     if (fetchControl.result?.pages[feedData.length - 1] !== 8) {
-      console.log("reFFFFF");
       fetchControl.reFetch();
     }
   }, [feedData]);
@@ -61,32 +47,37 @@ const CommunityFeed = () => {
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
   const handlerTarget = (index: number) => {
-    if (index % 7 == 0 && index != 0) {
+    if (index % 6 == 0 && index != 0) {
       return setTarget;
     }
   };
 
   return (
-    <div className="h-[85%] p-5 overflow-y-scroll scrollbar-hide">
-      {feedData?.map((elem2: []) =>
-        elem2?.map((elem: IBoard, index: number) => (
-          <div ref={handlerTarget(index)} key={elem.post_id}>
-            <BoardListItem {...elem} key={elem.post_id} />
-          </div>
-        ))
-      )}
-
-      <button
-        onClick={() => {
-          replace("CreateBoardActivity", {});
-        }}
-        className=" absolute bottom-16 right-2 self-center w-[45px] h-[45px] rounded-full m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white ring-opacity-70 bg-opacity-70"
-      >
-        <div className="flex items-center justify-center">
-          <BsPencil className="w-7 h-7 opacity-70" />
+    <>
+      {feedData ? (
+        <div className="h-[85%] p-5 overflow-y-scroll scrollbar-hide">
+          {feedData?.map((elem2: []) =>
+            elem2?.map((elem: IBoard, index: number) => (
+              <div ref={handlerTarget(index)} key={elem.post_id}>
+                <BoardListItem {...elem} key={elem.post_id} />
+              </div>
+            ))
+          )}
+          <button
+            onClick={() => {
+              replace("CreateBoardActivity", {});
+            }}
+            className=" absolute bottom-16 right-2 self-center w-[45px] h-[45px] rounded-full m-2 ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white ring-opacity-70 bg-opacity-70"
+          >
+            <div className="flex items-center justify-center">
+              <BsPencil className="w-7 h-7 opacity-70" />
+            </div>
+          </button>
         </div>
-      </button>
-    </div>
+      ) : (
+        <Skeleton />
+      )}
+    </>
   );
 };
 

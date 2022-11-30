@@ -1,10 +1,10 @@
 import { HashTagColor } from "../../utils/HashTagColor";
 import HashTag from "../../components/HashTag";
-import { HiUserGroup } from "react-icons/hi";
 import { useFlow } from "../../stackflow";
 import { IoIosArrowForward } from "react-icons/io";
 import { BiBuildingHouse } from "react-icons/bi";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
+import { Skeleton } from "../../components/Skeleton";
 
 import { BsPencil } from "react-icons/bs";
 import useInfinitygroup from "../../hooks/useInfinitygroup";
@@ -22,18 +22,9 @@ export interface IGroup {
 }
 const ICON_OBJ = ["text-indigo-400", "text-purple-400", "text-pink-300"];
 const GroupFeed = () => {
-  // history.pushState(null, "", location.href);
-  // window.onpopstate = function () {
-  //   history.go(1);
-  // };
-
-  //const [groupData, setGroupData] = useState<any>(null);
-  const { push, replace } = useFlow();
-
+  const { push } = useFlow();
   const fetchControl = useInfinitygroup("/groups");
-
   const feedData = fetchControl.result?.pages;
-
   let previous_Y = 0;
   let previous_Ratio = 0;
 
@@ -53,6 +44,12 @@ const GroupFeed = () => {
     }
   };
 
+  useEffect(() => {
+    if (fetchControl.result?.pages[feedData.length - 1] !== 8) {
+      fetchControl.reFetch();
+    }
+  }, [feedData]);
+
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
   const handlerTarget = (index: number) => {
@@ -60,25 +57,7 @@ const GroupFeed = () => {
       return setTarget;
     }
   };
-  const Skeleton = useMemo(
-    () => (
-      <div className="p-4 max-w-sm w-full mx-auto">
-        <div className="animate-pulse flex space-x-4">
-          <div className="flex-1 space-y-6 py-1">
-            <div className="h-2 bg-slate-300 rounded"></div>
-            <div className="space-y-3">
-              <div className="grid grid-cols-3 gap-4">
-                <div className="h-2 bg-slate-300 rounded col-span-2"></div>
-                <div className="h-2 bg-slate-300 rounded col-span-1"></div>
-              </div>
-              <div className="h-2 bg-slate-300 rounded"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    ),
-    []
-  );
+
   return (
     <>
       {feedData ? (
@@ -139,72 +118,7 @@ const GroupFeed = () => {
           </button>
         </div>
       ) : (
-        <>
-          <div className="p-4 max-w-sm w-full mx-auto">
-            <div className="animate-pulse flex space-x-4">
-              <div className="flex-1 space-y-6 py-1">
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="h-2 bg-slate-300 rounded col-span-2"></div>
-                    <div className="h-2 bg-slate-300 rounded col-span-1"></div>
-                  </div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 max-w-sm w-full mx-auto">
-            <div className="animate-pulse flex space-x-4">
-              <div className="flex-1 space-y-6 py-1">
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="h-2 bg-slate-300 rounded col-span-2"></div>
-                    <div className="h-2 bg-slate-300 rounded col-span-1"></div>
-                  </div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 max-w-sm w-full mx-auto">
-            <div className="animate-pulse flex space-x-4">
-              <div className="flex-1 space-y-6 py-1">
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="h-2 bg-slate-300 rounded col-span-2"></div>
-                    <div className="h-2 bg-slate-300 rounded col-span-1"></div>
-                  </div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 max-w-sm w-full mx-auto">
-            <div className="animate-pulse flex space-x-4">
-              <div className="flex-1 space-y-6 py-1">
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="h-2 bg-slate-300 rounded"></div>
-                <div className="space-y-3">
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="h-2 bg-slate-300 rounded col-span-2"></div>
-                    <div className="h-2 bg-slate-300 rounded col-span-1"></div>
-                  </div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                  <div className="h-2 bg-slate-300 rounded"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </>
+        <Skeleton />
       )}
     </>
   );
