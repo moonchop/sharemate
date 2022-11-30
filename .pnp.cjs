@@ -35,7 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@stackflow/basic-ui", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/core", "npm:0.12.0"],\
-            ["@stackflow/link", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
+            ["@stackflow/link", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.17.1"],\
             ["@stackflow/plugin-history-sync", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/plugin-preload", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/plugin-renderer-basic", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
@@ -715,17 +715,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@stackflow/link", [\
-        ["npm:0.12.0", {\
-          "packageLocation": "./.yarn/cache/@stackflow-link-npm-0.12.0-14c4a84338-eec62b31e5.zip/node_modules/@stackflow/link/",\
+        ["npm:0.17.1", {\
+          "packageLocation": "./.yarn/cache/@stackflow-link-npm-0.17.1-0ed9cad6a0-2ce34cd81e.zip/node_modules/@stackflow/link/",\
           "packageDependencies": [\
-            ["@stackflow/link", "npm:0.12.0"]\
+            ["@stackflow/link", "npm:0.17.1"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0", {\
-          "packageLocation": "./.yarn/__virtual__/@stackflow-link-virtual-4cbafe8386/0/cache/@stackflow-link-npm-0.12.0-14c4a84338-eec62b31e5.zip/node_modules/@stackflow/link/",\
+        ["virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.17.1", {\
+          "packageLocation": "./.yarn/__virtual__/@stackflow-link-virtual-4741747fb7/0/cache/@stackflow-link-npm-0.17.1-0ed9cad6a0-2ce34cd81e.zip/node_modules/@stackflow/link/",\
           "packageDependencies": [\
-            ["@stackflow/link", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
+            ["@stackflow/link", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.17.1"],\
             ["@stackflow/core", "npm:0.12.0"],\
             ["@stackflow/plugin-history-sync", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/plugin-preload", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
@@ -3526,7 +3526,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sharemate-client", "workspace:."],\
             ["@stackflow/basic-ui", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/core", "npm:0.12.0"],\
-            ["@stackflow/link", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
+            ["@stackflow/link", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.17.1"],\
             ["@stackflow/plugin-history-sync", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/plugin-preload", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
             ["@stackflow/plugin-renderer-basic", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:0.12.0"],\
@@ -3802,7 +3802,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],\
       ["typescript", [\
         ["patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-4d824bf818-2222d2382f.zip/node_modules/typescript/",\
+          "packageLocation": "./.yarn/cache/typescript-patch-4d824bf818-fbbc168687.zip/node_modules/typescript/",\
           "packageDependencies": [\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"]\
           ],\

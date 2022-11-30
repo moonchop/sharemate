@@ -40,7 +40,7 @@ const BottomNav = () => {
         <Link
           activityName={action}
           activityParams={{}}
-          replace={true}
+          replace={"true"}
           animate={false}
           key={`bottom-${idx}`}
           className={classNames(
