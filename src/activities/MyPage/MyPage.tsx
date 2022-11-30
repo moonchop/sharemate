@@ -53,8 +53,8 @@ const MyPage = () => {
         snoring: "",
         selfIntro: "",
       });
-      sessionStorage.clear();
       setHash({ hashtags: [] });
+      sessionStorage.clear();
       replace("LoginActivity", {});
     } else {
       alert("로그아웃이 취소되었습니다.");
@@ -64,8 +64,32 @@ const MyPage = () => {
   const confirmHandler = () => {
     if (confirm("회원탈퇴를 하시겠습니까?")) {
       request.post("/user/del");
-      replace("LoginActivity", {});
+      setToken({ accessToken: "", refreshToken: "" });
+      setUser({
+        userID: 0,
+        email: "",
+        gender: false,
+        name: "",
+        major: "",
+        grade: 0,
+        age: 0,
+        kakao_link: "",
+        profile_photo: "",
+      });
+      setFavor({
+        mbti: "",
+        sleepTime: "",
+        smoking: "",
+        wakeupTime: "",
+        drinking: "",
+        studyTime: "",
+        cleanness: "",
+        snoring: "",
+        selfIntro: "",
+      });
+      setHash({ hashtags: [] });
       sessionStorage.clear();
+      replace("LoginActivity", {});
     } else {
       alert("회원탈퇴가 취소되었습니다.");
     }
