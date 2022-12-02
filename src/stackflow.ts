@@ -2,7 +2,7 @@ import "@stackflow/basic-ui/index.css";
 import { stackflow } from "@stackflow/react";
 import { basicRendererPlugin } from "@stackflow/plugin-renderer-basic";
 import { historySyncPlugin } from "@stackflow/plugin-history-sync";
-import { createLink } from "@stackflow/link";
+import { createLinkComponent } from "@stackflow/link";
 import MakeActivity from "./utils/MakeActivity";
 import SignUpActivity from "./activities/Sign/SignUp";
 const MainActivity = MakeActivity("Main");
@@ -30,7 +30,7 @@ const ReportActivity = MakeActivity("Report");
 const CreateBoardActivity = MakeActivity("CreateBoard");
 
 export type SafeActivityType = typeof activities;
-export const { Link } = createLink<SafeActivityType>();
+export const { Link } = createLinkComponent<SafeActivityType>();
 
 const activities = {
   GroupActivity,

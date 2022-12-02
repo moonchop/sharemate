@@ -3802,7 +3802,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       ]],\
       ["typescript", [\
         ["patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5", {\
-          "packageLocation": "./.yarn/cache/typescript-patch-4d824bf818-fbbc168687.zip/node_modules/typescript/",\
+          "packageLocation": "./.yarn/cache/typescript-patch-4d824bf818-2222d2382f.zip/node_modules/typescript/",\
           "packageDependencies": [\
             ["typescript", "patch:typescript@npm%3A4.8.3#~builtin<compat/typescript>::version=4.8.3&hash=a1c5e5"]\
           ],\
