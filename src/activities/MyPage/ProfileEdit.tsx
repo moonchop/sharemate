@@ -3,6 +3,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import request from "../../stores/Request";
 import { useUser } from "../../stores/user";
 import { useFlow } from "../../stackflow";
+import DefaultProfile from "../../assets/DefaultProfile.png";
 
 interface Profile {
   name: string;
@@ -101,8 +102,8 @@ const ProfileEdit = () => {
             />
             <img
               className="rounded-full pro:w-[120px] pro:h-[120px] w-[80px] h-[80px] "
-              src={editData.profile_photo}
-              onClick={onUploadPhoto}
+              src={DefaultProfile}
+              //onClick={onUploadPhoto}
             />
           </div>
         </div>

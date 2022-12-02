@@ -7,6 +7,7 @@ import useInfinityQuery from "../../hooks/useInfinityQuery";
 import { IoIosArrowForward } from "react-icons/io";
 import { useAuth } from "../../stores/auth";
 import { Skeleton } from "../../components/Skeleton";
+import DefaultProfile from "../../assets/DefaultProfile.png";
 
 interface IUser {
   userID: number;
@@ -79,7 +80,7 @@ const Feed = () => {
                   <div className="flex flex-row h-[100%] w-[100%] items-center">
                     <div className="flex w-[20%] items-center">
                       <img
-                        src={elem.profile_photo}
+                        src={DefaultProfile}
                         className="mr-2 w-[58px] h-[58px] rounded-xl object-fill"
                       />
                     </div>

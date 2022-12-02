@@ -14,6 +14,7 @@ import { GiCigarette, GiVacuumCleaner, GiNoseFront } from "react-icons/gi";
 import { MdBedtime } from "react-icons/md";
 import { IoMdBed } from "react-icons/io";
 import { VscPerson } from "react-icons/vsc";
+import DefaultProfile from "../../assets/DefaultProfile.png";
 interface LikeProps {
   age: number;
   gender: boolean;
@@ -110,7 +111,8 @@ const DetailProfile = () => {
         <div className="px-4 pt-2 z-10 flex flex-col item-center justify-center h-full">
           <div className="flex felx-row items-center">
             <img
-              src={user.profile_photo}
+              src={DefaultProfile}
+              //src={user.profile_photo}
               className=" z-20 rounded-full shadow-xl w-24 h-24 mr-5"
             />
             <div className="flex flex-col justify-center">

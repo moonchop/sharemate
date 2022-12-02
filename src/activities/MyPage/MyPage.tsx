@@ -5,6 +5,7 @@ import { useUser, useFavor } from "../../stores/user";
 import { useAuth } from "../../stores/auth";
 import request from "../../stores/Request";
 import ArrowText from "../../components/ArrowText";
+import DefaultProfile from "../../assets/DefaultProfile.png";
 
 const MyPage = () => {
   window.onpageshow = function (event) {
@@ -106,7 +107,7 @@ const MyPage = () => {
             <div className="flex flex-row items-center w-full ml-[24px]">
               <img
                 className="flex rounded-3xl pro:w-[80px] pro:h-[80px] w-[60px] h-[60px] mr-[15px]"
-                src={profile_photo}
+                src={DefaultProfile}
               />
               <div
                 className="flex flex-row w-full items-center"
