@@ -61,10 +61,10 @@ const Login = () => {
         <div className="h-full w-full">
           <div className="flex flex-col items-center h-full w-full">
             <div className="flex h-[50%] w-[63%] items-center justify-center mb-7">
-              <img src={Logo} className="flex mt-[54%] mb-[35%]" />
+              <img src={Logo} className="flex" />
             </div>
-            <div className="flex flex-col pro:h-[13%] h-[15%] w-[81%]">
-              <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[8%] items-center">
+            <div className="flex flex-col h-28 w-[81%]">
+              <div className="flex w-full h-[50%] border-b-2 mb-6 items-center">
                 <input
                   className=" w-full h-full pb-1 outline-0 placeholder:text-base placeholder:font-normal border-none"
                   type={"email"}
@@ -84,7 +84,7 @@ const Login = () => {
                   <></>
                 )}
               </div>
-              <div className="flex w-full h-[50%] border-b-2 pro:mb-[7%] mb-[8%] items-center">
+              <div className="flex w-full h-[50%] border-b-2 mb-6 items-center">
                 <input
                   className=" w-full h-full pb-1 outline-0 placeholder:text-base placeholder:font-normal border-none"
                   type={"password"}
@@ -105,7 +105,7 @@ const Login = () => {
                 )}
               </div>
             </div>
-            <div className="w-[81%] justify-between items-center flex flex-row pro:mb-[15%] mb-[10%]">
+            <div className="w-[81%] justify-between items-center flex flex-row mb-11">
               <div
                 className="flex text-[#AAAAAA] text-sm mr-2 text  underline underline-offset-4"
                 onClick={() => {
@@ -129,7 +129,7 @@ const Login = () => {
             >
               Login
             </button>
-            <div className="flex flex-col w-[60%] pro:mt-[50px] mt-[30px] text-xs text-[#AAAAAA] items-center">
+            <div className="flex flex-col w-[225px] mt-10 mb-3 text-xs text-[#AAAAAA] items-center">
               <span>
                 <span>로그인을 누르는 것으로 </span>
                 <span
