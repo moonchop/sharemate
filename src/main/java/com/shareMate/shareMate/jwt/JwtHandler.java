@@ -21,7 +21,7 @@ public class JwtHandler {
         return   Jwts.builder()
                 .setSubject(subject) //토큰에 저장될 데이터 지정
                 .setIssuedAt(now) //토큰 발급일 지정(초 단위인데 Date는 ms이기에 1000곱함)
-                .setExpiration(new Date(now.getTime() + maxAgeSeconds * 1000L)) //토큰 만료 일자를 지정
+//                .setExpiration(new Date(now.getTime() + maxAgeSeconds * 1000L)) //토큰 만료 일자를 지정
                 .signWith(signatureAlgorithm, encodedKey) //파라미터로 받은 key로 SHA-256알고리즘 사용하여 서명
                 .compact(); //토큰 발급
     }

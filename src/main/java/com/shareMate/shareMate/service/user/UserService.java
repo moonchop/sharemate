@@ -7,6 +7,7 @@ import com.shareMate.shareMate.dto.response.MessageUtils;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
+import com.shareMate.shareMate.dto.sign.TempUserDto;
 import com.shareMate.shareMate.entity.FavorEntity;
 import com.shareMate.shareMate.entity.HashTagEntity;
 import com.shareMate.shareMate.entity.LikeEntity;
@@ -43,6 +44,7 @@ public class UserService {
     private final SignService signService;
     private final LikeRepository likeRepository;
     private final TokenHelper accessTokenHelper;
+    private final TokenHelper refreshTokenHelper;
     private final BCryptPasswordEncoder encoder;
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
@@ -77,11 +79,12 @@ public class UserService {
 
 
 
-    public ResponseSignUpDto doInsert(RequestSignUpDto requestSignUpDto) {
+    public Map doInsert(RequestSignUpDto requestSignUpDto) {
         String originalPwd=requestSignUpDto.getPwd();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String securePwd = encoder.encode(requestSignUpDto.getPwd());
+        Map<String, Object> map = new HashMap<>();
 
         if (userRepository.findByEmail(requestSignUpDto.getEmail()).isPresent()) {
             throw new SignUpFailureException(MessageUtils.INVALID_SIGNUP);
@@ -91,19 +94,23 @@ public class UserService {
             newUser.setPwd(securePwd);
             userRepository.save(newUser);
             String accessToken = accessTokenHelper.createToken(String.valueOf(newUser.getUserID()));
-            Optional<UserEntity> req = userRepository.findUserEntityByEmail(newUser.getEmail());
+            String refreshToken = refreshTokenHelper.createToken( String.valueOf(newUser.getUserID()));
 
-            return new ResponseSignUpDto(
-                    req.get().getUserID(),
-                    req.get().getEmail(),
-                    req.get().getName(),
-                    req.get().getMajor(),
-                    req.get().getGrade(),
-                    req.get().getGender(),
-                    req.get().getAge(),
-                    req.get().getProfile_photo(),
-                    req.get().getKakao_link(),
-                    accessToken);
+            Optional<UserEntity> user = userRepository.findUserEntityByEmail(newUser.getEmail());
+
+            map.put("token", new ResponseSignInDto(accessToken,refreshToken));
+            map.put("user",new TempUserDto(
+                    user.get().getUserID(),
+                    user.get().getEmail(),
+                    user.get().getName(),
+                    user.get().getMajor(),
+                    user.get().getGrade(),
+                    user.get().getGender(),
+                    user.get().getAge(),
+                    user.get().getProfile_photo()
+            ));
+
+            return map;
         }
     }
 

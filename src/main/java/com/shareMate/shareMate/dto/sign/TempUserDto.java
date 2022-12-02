@@ -23,7 +23,6 @@ public class TempUserDto {
 
     private String profile_photo;
 
-
     public UserEntity toEntity(){
         UserEntity userEntity = UserEntity.builder()
                 .userID(userID)
@@ -39,7 +38,7 @@ public class TempUserDto {
     }
 
     @Builder
-    public TempUserDto(Integer userID, String email, String name, String major, Integer grade, Boolean gender, Integer age, String profile_photo, String profilePhoto) {
+    public TempUserDto(Integer userID, String email, String name, String major, Integer grade, Boolean gender, Integer age, String profile_photo) {
         this.userID = userID;
         this.email = email;
         this.name = name;
