@@ -5,6 +5,7 @@ import HashTag from "../../components/HashTag";
 import Ajou from "../../assets/Ajou.gif";
 import { IoIosCheckmark } from "react-icons/io";
 import { RiAlarmWarningFill } from "react-icons/ri";
+import Kakao from "../../assets/kakao.png";
 import {
   GetGroupApi,
   JoinGroupApi,
@@ -147,7 +148,33 @@ const DetailGroup = () => {
             ))}
           </div>
           <hr className="w-full mt-5 mb-5" />
-          <p className="text-lg font-medium mb-5">모집된 룸메이트 정보</p>
+          <div className="flex justify-between items-center mb-3">
+            <p className="text-lg font-medium ">모집된 룸메이트 정보</p>
+            {group &&
+              (participation ? (
+                own ? (
+                  <button className="w-9 h-9">
+                    <img
+                      src={Kakao}
+                      onClick={() => {
+                        window.open(group?.groupDetailInfo.kakaoLink);
+                      }}
+                    />
+                  </button>
+                ) : (
+                  <button className="w-9 h-9">
+                    <img
+                      src={Kakao}
+                      onClick={() => {
+                        window.open(group?.groupDetailInfo.kakaoLink);
+                      }}
+                    />
+                  </button>
+                )
+              ) : (
+                <></>
+              ))}
+          </div>
           <div>
             {group?.joinedUserList.map((elem) => (
               <div className="mb-5">
@@ -194,3 +221,14 @@ const DetailGroup = () => {
 };
 
 export default DetailGroup;
+
+/*<button className="absolute bottom-14 -mr-3 right-0 self-center w-[62px] h-[62px] ">
+        <img
+          src={Kakao}
+          className="flex pro:h-[70%] h-[70%]"
+          onClick={() => {
+            window.open(group?.groupDetailInfo.kakaoLink);
+          }}
+        />
+      </button>
+*/
