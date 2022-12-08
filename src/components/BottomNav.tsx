@@ -35,7 +35,7 @@ const BottomNav = () => {
   //activity.name === "Profile" || activity.name === "DetailGroup" ? return <></> :
 
   return (
-    <nav className="fixed inset-x-0 bottom-0 h-[7%] bg-white flex justify-around border-t-2 items-center">
+    <nav className="fixed inset-x-0 bottom-0 h-[7%] bg-white flex justify-around border-t-2 items-center mb-3">
       {NAVIGATE_OBJ.map(({ action, content, Icon }, idx) => (
         <Link
           activityName={action}

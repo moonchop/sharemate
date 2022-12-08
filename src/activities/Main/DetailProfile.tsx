@@ -7,14 +7,15 @@ import request from "../../stores/Request";
 import jwt_decode from "jwt-decode";
 import { useAuth } from "../../stores/auth";
 import { useFlow } from "../../stackflow";
-import CheckText from "../../components/group/CheckText";
 import { RiAlarmWarningFill } from "react-icons/ri";
 import { FaBeer } from "react-icons/fa";
 import { GiCigarette, GiVacuumCleaner, GiNoseFront } from "react-icons/gi";
 import { MdBedtime } from "react-icons/md";
 import { IoMdBed } from "react-icons/io";
 import { VscPerson } from "react-icons/vsc";
+import { ImEyeBlocked } from "react-icons/im";
 import DefaultProfile from "../../assets/DefaultProfile.png";
+
 interface LikeProps {
   age: number;
   gender: boolean;
@@ -27,7 +28,7 @@ interface LikeProps {
 
 const DetailProfile = () => {
   const kakao_link = "https://open.kakao.com/o/s2qDCFOe";
-  const { push } = useFlow();
+  const { push, pop } = useFlow();
   const Params: { id: string } = useActivityParams();
   const { accessToken } = useAuth();
   const [likeId, setLikeId] = useState<number[] | null>(null);
@@ -131,11 +132,32 @@ const DetailProfile = () => {
               </div>
             </div>
           </div>
-          <div className="flex w-full justify-between text-center items-center mt-1 pb-2">
-            <RiAlarmWarningFill
-              className="h-6 w-6 text-red-400"
-              onClick={() => push("ReportActivity", { userToID: user.userID })}
-            />
+          <div className="flex w-full justify-between text-center items-center mt-2 pb-2">
+            <div className="flex flex-row items-center">
+              <RiAlarmWarningFill
+                className="h-6 w-6 text-red-400 mr-2"
+                onClick={() =>
+                  push("ReportActivity", { userToID: user.userID })
+                }
+              />
+              <ImEyeBlocked
+                className="h-5 w-6 text-gray-500"
+                onClick={() => {
+                  if (confirm(`${user.name}님을 차단하시겠습니까?`)) {
+                    request
+                      .post("user/block", { userToID: user.userID })
+                      .then((response) => {
+                        console.log(response);
+                      })
+                      .catch((error) => console.log(error));
+                    alert("차단이 완료되었습니다.");
+                    pop();
+                  } else {
+                    alert("차단이 취소되었습니다.");
+                  }
+                }}
+              />
+            </div>
             {!like ? (
               <AiOutlineHeart
                 color="#AAAAAA"

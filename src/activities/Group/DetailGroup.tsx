@@ -118,7 +118,7 @@ const DetailGroup = () => {
               {group?.groupDetailInfo.building}
             </p>
             <RiAlarmWarningFill
-              onClick={() => push("ReportActivity", { postID: Params.num })}
+              onClick={() => push("ReportActivity", { userToID: Params.num })}
               className="h-5 w-5 text-red-400"
             >
               신고하기

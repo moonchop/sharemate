@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { HashTagColor } from "../../utils/HashTagColor";
 import HashTag from "../../components/HashTag";
 import { useFlow } from "../../stackflow";
@@ -8,6 +8,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { useAuth } from "../../stores/auth";
 import { Skeleton } from "../../components/Skeleton";
 import DefaultProfile from "../../assets/DefaultProfile.png";
+import { useActivity } from "@stackflow/react";
 
 interface IUser {
   userID: number;
@@ -22,20 +23,17 @@ interface IUser {
 const Feed = () => {
   const { push } = useFlow();
   const { accessToken } = useAuth();
+  const activity = useActivity();
+  const [fedata, setFedata] = useState([]);
   const fetchControl = useInfinityQuery("user/list");
   const feedData = fetchControl.result?.pages;
   let previous_Y = 0;
   let previous_Ratio = 0;
 
-  // useEffect(() => {
-  //   if (accessToken) {
-  //     history.pushState(null, "", location.href);
-  //   }
-  // }, []);
-
-  const onIntersect: IntersectionObserverCallback = ([
-    { isIntersecting, boundingClientRect, intersectionRatio },
-  ]) => {
+  const onIntersect: IntersectionObserverCallback = async (
+    [{ isIntersecting, boundingClientRect, intersectionRatio, target }],
+    io
+  ) => {
     const current_Y = boundingClientRect.y;
     const current_Ratio = intersectionRatio;
     if (
@@ -43,7 +41,9 @@ const Feed = () => {
       current_Ratio > previous_Ratio &&
       current_Y > previous_Y
     ) {
-      fetchControl.nextFetch();
+      io.unobserve(target);
+      await fetchControl.nextFetch();
+      setFedata(fetchControl.result?.pages);
       previous_Y = current_Y;
       previous_Ratio = current_Ratio;
     }
@@ -58,7 +58,7 @@ const Feed = () => {
   const { setTarget } = useIntersectionObserver({ onIntersect });
 
   const handlerTarget = (index: number) => {
-    if (index % 7 == 0 && index != 0) {
+    if (index % 6 == 0 && index != 0) {
       return setTarget;
     }
   };
