@@ -32,6 +32,4 @@ public class FavorEntity {
     private String selfIntro;
 
 
-
-
 }

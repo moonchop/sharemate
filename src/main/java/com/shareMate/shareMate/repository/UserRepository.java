@@ -18,6 +18,9 @@ public interface UserRepository extends JpaRepository<UserEntity,Number> {
     Optional<UserEntity> findUserEntityByEmail(String email);
     Page<UserEntity> findAll(Pageable pageable);
     Page<UserEntity> findAllByGender(Pageable pageable ,boolean gender);
+    @Query(value="select b from user b where b.userID in :list")
+    Optional<List<UserEntity>> findAllByUserID(List list);
+
     Page<UserEntity> findUserEntitiesByGender(Pageable pageable, Boolean gender);
 //    @Query("select u from user u join fetch u.favor where u.userID=:userid")
 //    Optional<UserEntity> findUserEntityByUser_id(int userid);
