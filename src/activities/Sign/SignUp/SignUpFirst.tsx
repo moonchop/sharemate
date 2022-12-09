@@ -64,7 +64,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
   };
 
   return (
-    <div className="px-5 py-8 overflow-y-scroll">
+    <div className="px-5 py-8 overflow-y-scroll h-[93%] scrollbar-hide">
       <h1 className="text-3xl font-semibold text-black mb-7">회원가입</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex">
