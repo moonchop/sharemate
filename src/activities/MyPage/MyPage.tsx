@@ -100,7 +100,7 @@ const MyPage = () => {
     <div className="h-[85%] overflow-auto scrollbar-hide">
       <div className="h-[32%] flex flex-col pro:pt-8 pt-5 border-b-[6px] border-[rgba(170,170,170,0.25)] mb-1">
         <div className="h-[100%] pb-[13%] ">
-          <div className="pro:text-3xl text-2xl font-semibold pro:mb-[25px] mb-[20px] ml-[24px]">
+          <div className="text-2xl font-semibold mb-[20px] ml-[24px]">
             마이페이지
           </div>
           <div className="flex items-center ">

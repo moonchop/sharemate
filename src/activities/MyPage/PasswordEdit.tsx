@@ -66,7 +66,7 @@ const PasswordEdit = () => {
           type={showPass.origin ? "text" : "password"}
           value={passwordForm.currPwd}
           placeholder="기존 비밀번호"
-          className=" w-full outline-0  pl-[5px] text-base"
+          className=" w-full outline-0  pl-3 text-base"
           onChange={changeHandler}
         />
         {passwordForm.currPwd ? (
@@ -101,7 +101,7 @@ const PasswordEdit = () => {
           type={showPass.new ? "text" : "password"}
           value={passwordForm.newPwd}
           placeholder="새 비밀번호"
-          className=" w-full outline-0  pl-[5px] text-base"
+          className=" w-full outline-0  pl-3 text-base"
           onChange={changeHandler}
         />
         {passwordForm.newPwd ? (
@@ -134,7 +134,7 @@ const PasswordEdit = () => {
           type={showPass.verify ? "text" : "password"}
           value={passwordForm.verifyPwd}
           placeholder="새 비밀번호 확인"
-          className=" w-full outline-0  pl-[5px] text-base"
+          className=" w-full outline-0 pl-3 text-base"
           onChange={changeHandler}
         />
         {passwordForm.verifyPwd ? (
