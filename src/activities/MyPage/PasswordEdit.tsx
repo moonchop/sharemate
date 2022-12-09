@@ -56,10 +56,8 @@ const PasswordEdit = () => {
   };
 
   return (
-    <div className="h-[85%] flex flex-col pro:pt-[30px] pt-[20px] mx-[20px] ">
-      <div className="pro:text-2xl text-xl font-bold pro:mb-[25px] mb-[20px] ">
-        비밀번호 수정
-      </div>
+    <div className="h-[85%] flex flex-col pt-[30px] mx-[20px] ">
+      <div className="text-2xl font-bold mb-[25px]">비밀번호 수정</div>
       <div className="flex h-[7%] mb-[3%] border-2 rounded-md items-center">
         <input
           name="currPwd"

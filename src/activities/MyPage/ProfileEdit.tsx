@@ -86,8 +86,8 @@ const ProfileEdit = () => {
 
   return (
     <div className="h-[85%]">
-      <div className="h-[33%] flex flex-col pro:pt-[30px] pt-[20px] ">
-        <div className="pro:text-3xl text-2xl font-bold pro:mb-[25px] mb-[20px] ml-[24px]">
+      <div className="h-[33%] flex flex-col pt-[30px] ">
+        <div className=" text-2xl font-bold mb-[25px] ml-[20px]">
           회원정보 수정
         </div>
         <div className="flex w-full justify-center">

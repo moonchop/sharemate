@@ -34,10 +34,8 @@ const LikeProfile = () => {
 
   return (
     <>
-      <div className="h-[85%] flex flex-col pro:pt-[30px] pt-[20px] mx-[20px] ">
-        <div className="pro:text-3xl text-2xl font-bold pro:mb-[25px] mb-[20px] ">
-          좋아요 누른 프로필
-        </div>
+      <div className="h-[85%] flex flex-col pt-[30px] mx-[20px] ">
+        <div className="text-2xl font-bold mb-[25px]">좋아요 누른 프로필</div>
         {feedData.map((elem: IUser) => (
           <div className="h-[17%]" key={elem.userID}>
             <div

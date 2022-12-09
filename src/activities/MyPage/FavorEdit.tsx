@@ -68,7 +68,7 @@ const ModifyFavor = () => {
   }, []);
 
   return (
-    <div className="px-3 py-8 h-[93%] overflow-y-scroll scrollbar-hide">
+    <div className="px-3 pb-8 h-[93%] overflow-y-scroll scrollbar-hide">
       <ModifyForm />
       <div className="m-2 mb-14">
         <p className="text-base">자신을 표현하는 해시태그를 입력해주세요.</p>

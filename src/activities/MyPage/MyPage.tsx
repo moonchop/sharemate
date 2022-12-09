@@ -98,13 +98,11 @@ const MyPage = () => {
 
   return (
     <div className="h-[85%] overflow-auto scrollbar-hide">
-      <div className="h-[32%] flex flex-col pro:pt-8 pt-5 border-b-[6px] border-[rgba(170,170,170,0.25)] mb-1">
-        <div className="h-[100%] pb-[13%] ">
-          <div className="text-2xl font-semibold mb-[20px] ml-[24px]">
-            마이페이지
-          </div>
+      <div className="h-[28%] flex flex-col pt-[30px] border-b-[6px] border-[rgba(170,170,170,0.25)] mb-1">
+        <div className="h-[100%] pl-[20px] mb-7">
+          <div className="text-2xl font-semibold mb-7">마이페이지</div>
           <div className="flex items-center ">
-            <div className="flex flex-row items-center w-full ml-[24px]">
+            <div className="flex flex-row items-center w-full ">
               <img
                 className="flex rounded-3xl pro:w-[80px] pro:h-[80px] w-[60px] h-[60px] mr-[15px]"
                 src={DefaultProfile}
