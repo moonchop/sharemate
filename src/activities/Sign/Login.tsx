@@ -38,6 +38,10 @@ const Login = () => {
     return setLoginForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const pressHandler = (e) => {
+    if (e.key == "Enter") submitHandler();
+  };
+
   const submitHandler = async () => {
     if (loginForm.email == "" || loginForm.pwd == "") {
       alert("로그인 정보를 입력해 주세요");
@@ -92,6 +96,7 @@ const Login = () => {
                   value={loginForm.pwd}
                   name="pwd"
                   onChange={changeHandler}
+                  onKeyPress={pressHandler}
                 />
                 {loginForm.pwd ? (
                   <AiFillCloseCircle
