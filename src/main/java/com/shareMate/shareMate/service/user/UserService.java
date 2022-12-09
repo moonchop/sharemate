@@ -8,17 +8,11 @@ import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
 import com.shareMate.shareMate.dto.sign.TempUserDto;
-import com.shareMate.shareMate.entity.FavorEntity;
-import com.shareMate.shareMate.entity.HashTagEntity;
-import com.shareMate.shareMate.entity.LikeEntity;
-import com.shareMate.shareMate.entity.UserEntity;
+import com.shareMate.shareMate.entity.*;
 import com.shareMate.shareMate.exception.SignUpFailureException;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.jwt.TokenHelper;
-import com.shareMate.shareMate.repository.FavorRepository;
-import com.shareMate.shareMate.repository.HashtagRepository;
-import com.shareMate.shareMate.repository.LikeRepository;
-import com.shareMate.shareMate.repository.UserRepository;
+import com.shareMate.shareMate.repository.*;
 import com.shareMate.shareMate.service.sign.SignService;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -43,6 +37,8 @@ public class UserService {
     private final HashtagRepository hashtagRepository;
     private final SignService signService;
     private final LikeRepository likeRepository;
+    private final BlockRepository blockRepository;
+
     private final TokenHelper accessTokenHelper;
     private final TokenHelper refreshTokenHelper;
     private final BCryptPasswordEncoder encoder;
@@ -67,11 +63,7 @@ public class UserService {
             userSimpleDto.setMajor(userEntity.get().getMajor());
             userSimpleDto.setHashtags(hashtags);
 
-
-
         }
-
-
         return userSimpleDto;
 
 
@@ -146,6 +138,11 @@ public class UserService {
 
         return postList;
     }
+    public Optional<List<UserEntity>> getUserBlockList(List list){
+        if(list.size()==0) return null;
+        return userRepository.findAllByUserID(list);
+    }
+
     public List<UserSimpleDto> getUserLikeList(Integer id){
         List<LikeEntity> likesID = (likeRepository.findByUserFromID(id));
         List<UserSimpleDto> userSimpleList = new ArrayList<>();
@@ -260,9 +257,23 @@ public class UserService {
     }
 
     public UserEntity doSelectOneByEmail(String email){
-
        Optional<UserEntity> user = userRepository.findByEmail(email);
        return user.get();
+    }
+
+    public List<Integer> getBlockUser(Integer userFromID){
+        Optional<List<BlockEntity>> block = blockRepository.findAllByUserFromID(userFromID);
+        List <Integer> blockList = new ArrayList<>() ;
+        for (BlockEntity b : block.get()){
+            blockList.add(b.getUserToID());
+        }
+        return blockList;
+    }
+    public void saveBlockUser(Integer userFromID, Integer userToID){
+        BlockEntity block = new BlockEntity();
+        block.setUserFromID(userFromID);
+        block.setUserToID(userToID);
+        blockRepository.save(block);
     }
 
 
