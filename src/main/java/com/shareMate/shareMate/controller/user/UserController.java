@@ -1,4 +1,5 @@
 package com.shareMate.shareMate.controller.user;
+import com.shareMate.shareMate.config.S3UploadUtil;
 import com.shareMate.shareMate.dto.*;
 import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.response.Response;
@@ -24,7 +25,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 @RestController
@@ -44,11 +49,13 @@ public class UserController {
     private final SignService signService;
     private final CustomUserDetailService userDetailsService;
     private final HashtagRepository hashtagRepository;
-    public UserController(UserService userService,CustomUserDetailService userDetailsService,HashtagRepository hashtagRepository,SignService signService) {
+    private final S3UploadUtil s3UploadUtil;
+    public UserController(UserService userService,CustomUserDetailService userDetailsService,HashtagRepository hashtagRepository,SignService signService,S3UploadUtil s3UploadUtil) {
         this.userService = userService;
         this.userDetailsService=userDetailsService;
         this.hashtagRepository=hashtagRepository;
         this.signService=signService;
+        this.s3UploadUtil=s3UploadUtil;
     }
     @ApiOperation(value = "회원가입",notes = "회원가입을 진행하고, jwt 토큰을 반환합니다.",tags="User")
     @PostMapping("")
@@ -196,6 +203,14 @@ public class UserController {
         final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
         userService.doDelete(user_id);
         return ResponseEntity.ok(HttpStatus.OK);
+    }
+    @PostMapping("/profile")
+    public String upload(HttpServletRequest request, @RequestParam("file") MultipartFile file) throws IOException {
+        final Integer user_id = Integer.parseInt(request.getAttribute("userid").toString());
+        String fileRealName = file.getOriginalFilename(); //파일명을 얻어낼 수 있는 메서드!
+        String data =s3UploadUtil.upload(file,"test");
+        userService.doUpdateProfile(user_id, data);
+        return data;
     }
 
 

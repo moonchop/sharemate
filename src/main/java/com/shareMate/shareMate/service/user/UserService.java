@@ -30,6 +30,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.swing.text.html.Option;
 import java.sql.SQLOutput;
 import java.util.*;
 
@@ -256,6 +257,14 @@ public class UserService {
 
        Optional<UserEntity> user = userRepository.findByEmail(email);
        return user.get();
+    }
+
+    public Boolean doUpdateProfile(int userID , String url) {
+        Optional<UserEntity> user = userRepository.findById(userID);
+        user.get().setProfile_photo(url);
+        userRepository.save(user.get());
+
+        return Boolean.TRUE;
     }
 
 
