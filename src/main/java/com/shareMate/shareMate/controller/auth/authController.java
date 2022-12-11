@@ -6,6 +6,7 @@ import com.shareMate.shareMate.dto.ReqSetPwdDto;
 import com.shareMate.shareMate.dto.response.DataResponse;
 import com.shareMate.shareMate.dto.sign.RequestSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
+import com.shareMate.shareMate.dto.sign.TempUserDto;
 import com.shareMate.shareMate.entity.UserEntity;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.repository.UserRepository;
@@ -43,12 +44,14 @@ public class authController {
 
     @ApiOperation(value = "로그인(JWT 토큰 발급)",notes = "id,pw를 이용하여 로그인을 진행하고, jwt토큰을 발급합니다.",tags="Auth")
     @PostMapping("/login")
-    public DataResponse<ResponseSignInDto> UserLogin(@RequestBody RequestSignInDto requestSignInDto){
-        ResponseSignInDto req = signService.doLogin(requestSignInDto);
-        if(req.getAccessToken()==null){
+    public ResponseEntity<Map<String, Object>> UserLogin(@RequestBody RequestSignInDto requestSignInDto){
+        System.out.println("???????");
+        Map map= signService.doLogin(requestSignInDto);
+        if(map.get("user")==null){
             throw new UserNotFoundException();
         }
-        return new DataResponse(req);
+        return new ResponseEntity<>(map,HttpStatus.OK);
+
     }
     @ApiOperation(value = "이메일 인증",notes = "아주대 이메일을 입력받아 이메일로 인증번호를 발송합니다.",tags="Auth")
     @PostMapping("/email")

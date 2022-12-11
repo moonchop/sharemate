@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 @Tag(name="",description = "")
 
 @AllArgsConstructor
+
 public class favorController {
     @Autowired
     private FavorService favorService;

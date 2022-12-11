@@ -59,24 +59,40 @@ public class UserController {
     }
     @ApiOperation(value = "회원가입",notes = "회원가입을 진행하고, jwt 토큰을 반환합니다.",tags="User")
     @PostMapping("")
-    public DataResponse<ResponseSignUpDto> signUp(@RequestBody RequestSignUpDto requestSignUpDto){
-        ResponseSignUpDto req = userService.doInsert(requestSignUpDto);
-        return new DataResponse<>(req);
+    public ResponseEntity<Map<String, Object>> signUp(@RequestBody RequestSignUpDto requestSignUpDto){
+        Map map = userService.doInsert(requestSignUpDto);
+        return new ResponseEntity<>(map,HttpStatus.OK);
+    }
+
+    @ApiOperation(value="유저 차단",notes="유저를 차단하는 요청",tags="User")
+    @PostMapping("/block")
+    public ResponseEntity block(HttpServletRequest request, @RequestBody ReqBlockDto reqBlockDto){
+        final Integer userFromID = Integer.parseInt(request.getAttribute("userid").toString());
+        userService.saveBlockUser(userFromID,reqBlockDto.getUserToID());
+        return ResponseEntity.ok(HttpStatus.OK);
     }
     @ApiOperation(value ="1:1매칭 유저 리스트 조회",notes = "메인화면에서 나타낼 유저 리스트를 반환하는 요청",tags="User")
     @GetMapping("/list")
-    public ResponseEntity<ArrayList<UserSimpleDto>> getPostList(HttpServletRequest request , @RequestParam("page") int page,@RequestParam("offset") int offset){
-        final Integer num = Integer.parseInt(request.getAttribute("userid").toString());
+    public ResponseEntity<ArrayList<UserSimpleDto>>  getPostList(HttpServletRequest request , @RequestParam("page") int page,@RequestParam("offset") int offset){
+        final Integer userid = Integer.parseInt(request.getAttribute("userid").toString());
+        List<UserEntity> arrayList = new ArrayList<>();
+        List<UserEntity> arrayList2 = new ArrayList<UserEntity>();
         ResponseEntity<ResUserDetailDto> resUserDetailDto = this.getMyInfo(request);
-        System.out.println("성별"+resUserDetailDto.getBody().getUser().getGender());
         Boolean gender = resUserDetailDto.getBody().getUser().getGender();
-
-
         Page<UserEntity> resultList = userService.getUserList(page, offset,gender);
 
         List<UserEntity> resultDtoList = resultList.getContent();
+        Optional<List<UserEntity>> blockList = userService.getUserBlockList(userService.getBlockUser(userid));
+        for(UserEntity u : resultDtoList ){
+            arrayList.add(u);
+        }
+        if(blockList!=null){
+        for(UserEntity u : blockList.get() ){
+            arrayList2.add(u);
+        }}
+        arrayList.removeAll(arrayList2);
         ArrayList<UserSimpleDto> responseList = new ArrayList<>();
-        for( UserEntity u : resultDtoList){
+        for( UserEntity u : arrayList){
             UserSimpleDto userDto = new UserSimpleDto(u.getUserID(),u.getName(),u.getMajor(), u.getAge(),u.getGender(), u.getProfile_photo());
 
             List<HashTagEntity> hashtag = userService.getHashTagList(u.getUserID());
@@ -108,7 +124,6 @@ public class UserController {
             dtos.add(userDto);
         }
         return ResponseEntity.ok(dtos);
-
 
     }
     @ApiOperation(value = "유저 디테일 조회",notes ="유저 클릭시 유저의 디테일한 데이터를 반환합니다.(취향/유저정보)",tags = "User")

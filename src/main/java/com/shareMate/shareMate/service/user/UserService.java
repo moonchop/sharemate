@@ -7,17 +7,12 @@ import com.shareMate.shareMate.dto.response.MessageUtils;
 import com.shareMate.shareMate.dto.sign.RequestSignUpDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignInDto;
 import com.shareMate.shareMate.dto.sign.ResponseSignUpDto;
-import com.shareMate.shareMate.entity.FavorEntity;
-import com.shareMate.shareMate.entity.HashTagEntity;
-import com.shareMate.shareMate.entity.LikeEntity;
-import com.shareMate.shareMate.entity.UserEntity;
+import com.shareMate.shareMate.dto.sign.TempUserDto;
+import com.shareMate.shareMate.entity.*;
 import com.shareMate.shareMate.exception.SignUpFailureException;
 import com.shareMate.shareMate.exception.UserNotFoundException;
 import com.shareMate.shareMate.jwt.TokenHelper;
-import com.shareMate.shareMate.repository.FavorRepository;
-import com.shareMate.shareMate.repository.HashtagRepository;
-import com.shareMate.shareMate.repository.LikeRepository;
-import com.shareMate.shareMate.repository.UserRepository;
+import com.shareMate.shareMate.repository.*;
 import com.shareMate.shareMate.service.sign.SignService;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.User;
@@ -30,7 +25,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.swing.text.html.Option;
 import java.sql.SQLOutput;
 import java.util.*;
 
@@ -43,7 +37,10 @@ public class UserService {
     private final HashtagRepository hashtagRepository;
     private final SignService signService;
     private final LikeRepository likeRepository;
+    private final BlockRepository blockRepository;
+
     private final TokenHelper accessTokenHelper;
+    private final TokenHelper refreshTokenHelper;
     private final BCryptPasswordEncoder encoder;
     public List<UserEntity> doSelectAll() {
         return userRepository.findAll();
@@ -66,11 +63,7 @@ public class UserService {
             userSimpleDto.setMajor(userEntity.get().getMajor());
             userSimpleDto.setHashtags(hashtags);
 
-
-
         }
-
-
         return userSimpleDto;
 
 
@@ -78,11 +71,12 @@ public class UserService {
 
 
 
-    public ResponseSignUpDto doInsert(RequestSignUpDto requestSignUpDto) {
+    public Map doInsert(RequestSignUpDto requestSignUpDto) {
         String originalPwd=requestSignUpDto.getPwd();
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         String securePwd = encoder.encode(requestSignUpDto.getPwd());
+        Map<String, Object> map = new HashMap<>();
 
         if (userRepository.findByEmail(requestSignUpDto.getEmail()).isPresent()) {
             throw new SignUpFailureException(MessageUtils.INVALID_SIGNUP);
@@ -92,19 +86,23 @@ public class UserService {
             newUser.setPwd(securePwd);
             userRepository.save(newUser);
             String accessToken = accessTokenHelper.createToken(String.valueOf(newUser.getUserID()));
-            Optional<UserEntity> req = userRepository.findUserEntityByEmail(newUser.getEmail());
+            String refreshToken = refreshTokenHelper.createToken( String.valueOf(newUser.getUserID()));
 
-            return new ResponseSignUpDto(
-                    req.get().getUserID(),
-                    req.get().getEmail(),
-                    req.get().getName(),
-                    req.get().getMajor(),
-                    req.get().getGrade(),
-                    req.get().getGender(),
-                    req.get().getAge(),
-                    req.get().getProfile_photo(),
-                    req.get().getKakao_link(),
-                    accessToken);
+            Optional<UserEntity> user = userRepository.findUserEntityByEmail(newUser.getEmail());
+
+            map.put("token", new ResponseSignInDto(accessToken,refreshToken));
+            map.put("user",new TempUserDto(
+                    user.get().getUserID(),
+                    user.get().getEmail(),
+                    user.get().getName(),
+                    user.get().getMajor(),
+                    user.get().getGrade(),
+                    user.get().getGender(),
+                    user.get().getAge(),
+                    user.get().getProfile_photo()
+            ));
+
+            return map;
         }
     }
 
@@ -140,6 +138,11 @@ public class UserService {
 
         return postList;
     }
+    public Optional<List<UserEntity>> getUserBlockList(List list){
+        if(list.size()==0) return null;
+        return userRepository.findAllByUserID(list);
+    }
+
     public List<UserSimpleDto> getUserLikeList(Integer id){
         List<LikeEntity> likesID = (likeRepository.findByUserFromID(id));
         List<UserSimpleDto> userSimpleList = new ArrayList<>();
@@ -254,17 +257,23 @@ public class UserService {
     }
 
     public UserEntity doSelectOneByEmail(String email){
-
        Optional<UserEntity> user = userRepository.findByEmail(email);
        return user.get();
     }
 
-    public Boolean doUpdateProfile(int userID , String url) {
-        Optional<UserEntity> user = userRepository.findById(userID);
-        user.get().setProfile_photo(url);
-        userRepository.save(user.get());
-
-        return Boolean.TRUE;
+    public List<Integer> getBlockUser(Integer userFromID){
+        Optional<List<BlockEntity>> block = blockRepository.findAllByUserFromID(userFromID);
+        List <Integer> blockList = new ArrayList<>() ;
+        for (BlockEntity b : block.get()){
+            blockList.add(b.getUserToID());
+        }
+        return blockList;
+    }
+    public void saveBlockUser(Integer userFromID, Integer userToID){
+        BlockEntity block = new BlockEntity();
+        block.setUserFromID(userFromID);
+        block.setUserToID(userToID);
+        blockRepository.save(block);
     }
 
 
