@@ -276,5 +276,11 @@ public class UserService {
         blockRepository.save(block);
     }
 
+    public Boolean doUpdateProfile(int userID , String url) {
+        Optional<UserEntity> user = userRepository.findById(userID);
+        user.get().setProfile_photo(url);
+        userRepository.save(user.get());
 
+        return Boolean.TRUE;
+    }
 }
