@@ -5,6 +5,7 @@ const queryHandler = async (page: string, url: string) => {
   const response = await request.get(url, {
     params: { page: page, offset: 8 },
   });
+  //console.log("page", page);
   return response.data;
 };
 
@@ -17,9 +18,12 @@ const useInfinityQuery = (url: string) => {
     },
     {
       getNextPageParam: (lastPage, allPages) => {
-        if (lastPage.length !== 8) {
+        if (lastPage.length === 0) {
+          //console.log("aa");
           return;
         }
+        //console.log("lastPage", lastPage);
+        //console.log("Allpage", allPages);
         return allPages.length; // 다음 페이지를 호출할 때 사용 될 pageParam
       },
     }

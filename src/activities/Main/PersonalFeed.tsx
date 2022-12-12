@@ -24,13 +24,13 @@ const Feed = () => {
   const { push } = useFlow();
   const { accessToken } = useAuth();
   const activity = useActivity();
-  const [fedata, setFedata] = useState([]);
+  //const [fedata, setFedata] = useState([]);
   const fetchControl = useInfinityQuery("user/list");
   const feedData = fetchControl.result?.pages;
   let previous_Y = 0;
   let previous_Ratio = 0;
 
-  const onIntersect: IntersectionObserverCallback = async (
+  const onIntersect: IntersectionObserverCallback = (
     [{ isIntersecting, boundingClientRect, intersectionRatio, target }],
     io
   ) => {
@@ -41,18 +41,24 @@ const Feed = () => {
       current_Ratio > previous_Ratio &&
       current_Y > previous_Y
     ) {
-      io.unobserve(target);
-      await fetchControl.nextFetch();
-      setFedata(fetchControl.result?.pages);
+      //io.unobserve(target);
+      fetchControl.nextFetch();
+      //setFedata(fetchControl.result?.pages);
       previous_Y = current_Y;
       previous_Ratio = current_Ratio;
+      //console.log("감지");
     }
   };
+
+  // useEffect(() => {
+  //   if (activity.isActive) fetchControl.reFetch();
+  // }, [activity.isActive]);
 
   useEffect(() => {
     if (fetchControl.result?.pages[feedData.length - 1] !== 8) {
       fetchControl.reFetch();
     }
+    //console.log("12312312", feedData);
   }, [feedData]);
 
   const { setTarget } = useIntersectionObserver({ onIntersect });
@@ -80,7 +86,7 @@ const Feed = () => {
                   <div className="flex flex-row h-[100%] w-[100%] items-center">
                     <div className="flex w-[20%] items-center">
                       <img
-                        src={DefaultProfile}
+                        src={elem.profile_photo}
                         className="mr-2 w-[58px] h-[58px] rounded-xl object-fill"
                       />
                     </div>
