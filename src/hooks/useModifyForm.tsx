@@ -72,9 +72,9 @@ const useModifyForm = () => {
     },
     Component: () => (
       <>
-        <p className="text-2xl  text-semibold text-left text-black mb-14">
+        <div className="text-2xl font-bold mb-[25px] pt-[30px] mx-[8px]">
           취향 정보 수정
-        </p>
+        </div>
         <MbtiSelect />
         <WakeUpTime />
         <SleepTimeSelect />

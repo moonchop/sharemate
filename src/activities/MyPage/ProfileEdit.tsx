@@ -3,13 +3,12 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import request from "../../stores/Request";
 import { useUser } from "../../stores/user";
 import { useFlow } from "../../stackflow";
-import DefaultProfile from "../../assets/DefaultProfile.png";
+import imageCompression from "browser-image-compression";
 
 interface Profile {
   name: string;
   major: string;
   grade: number;
-  profile_photo: string;
   kakao_link: string;
   age: number;
 }
@@ -34,8 +33,13 @@ const ProfileEdit = () => {
     grade: grade,
     age: age,
     kakao_link: kakao_link,
+  });
+
+  const [editPhoto, setEditPhoto] = useState({
     profile_photo: profile_photo,
   });
+
+  let formData = new FormData();
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -44,13 +48,26 @@ const ProfileEdit = () => {
     return setEditData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const uploadPhoto = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    setEditData((prev) => ({
-      ...prev,
-      profile_photo: URL.createObjectURL(e.target.files[0]),
-    }));
-  }, []);
+  const uploadPhoto = useCallback(
+    async (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!e.target.files) return;
+      const newFile = compressImage(e.target.files[0]);
+      //console.log(newFile);
+      formData.append("file", await newFile);
+
+      request
+        .post("/user/profile", formData)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => console.log(error));
+      setEditPhoto((prev) => ({
+        ...prev,
+        profile_photo: URL.createObjectURL(e.target.files[0]),
+      }));
+    },
+    []
+  );
 
   const onUploadPhoto = useCallback(() => {
     if (!inputRef.current) return;
@@ -69,6 +86,22 @@ const ProfileEdit = () => {
         return false;
       });
 
+  const compressImage = async (image: File) => {
+    const options = {
+      maxSizeMb: 1,
+      maxWidthOrHeight: 300,
+    };
+    try {
+      const compressedFile = await imageCompression(image, options);
+      const resultFile = new File([compressedFile], compressedFile.name, {
+        type: compressedFile.type,
+      });
+      return resultFile;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const submitHandler = async () => {
     //const nicknameRegEx = /^([a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]).{1,10}$/;
 
@@ -85,13 +118,13 @@ const ProfileEdit = () => {
   };
 
   return (
-    <div className="h-[85%]">
-      <div className="h-[33%] flex flex-col pt-[30px] ">
+    <div className="h-[93%] overflow-y-scroll scrollbar-hide">
+      <div className="h-52 flex flex-col pt-[30px] mb-4">
         <div className=" text-2xl font-bold mb-[25px] ml-[20px]">
           회원정보 수정
         </div>
-        <div className="flex w-full justify-center">
-          <div className="flex flex-row items-center">
+        <div className="flex w-full pl-[20px]">
+          <div className="flex flex-row items-center mr-5">
             <input
               type="file"
               name="profile_photo"
@@ -101,34 +134,30 @@ const ProfileEdit = () => {
               ref={inputRef}
             />
             <img
-              className="rounded-full pro:w-[120px] pro:h-[120px] w-[80px] h-[80px] "
-              src={DefaultProfile}
-              //onClick={onUploadPhoto}
+              className="rounded-full w-[120px] h-[120px] "
+              src={editPhoto.profile_photo}
+              onClick={onUploadPhoto}
             />
           </div>
-        </div>
-      </div>
-      <div className="pro:h-[16%] h-[19%] pl-[24px] pr-[24px] border-dotted border-b-4 border-gray-300 border-opacity-0">
-        <div className="flex flex-row pro:mb-[26px] mb-[20px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
-            이메일
-          </div>
-          <div className="text-[#AFADF5] text-base font-semibold w-[71%] border-b-2">
-            {email}
-          </div>
-        </div>
-        <div className="flex flex-row pro:mb-[26px] mb-[20px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
-            성별
-          </div>
-          <div className="text-[#AFADF5] text-base font-semibold w-[71%] border-b-2">
-            {gender ? "남성" : "여성"}
+          <div className="flex flex-col">
+            <div className="flex flex-col mb-3">
+              <div className="text-[#db9cda] text-base font-medium">이메일</div>
+              <div className="text-[#AFADF5] text-base font-semibold border-b-2">
+                {email}
+              </div>
+            </div>
+            <div className="flex flex-col mb-3">
+              <div className="text-[#db9cda] text-base font-medium">성별</div>
+              <div className="text-[#AFADF5] text-base font-semibold border-b-2">
+                {gender ? "남성" : "여성"}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div className="h-[40%] pl-[24px] pr-[24px] pt-[25px]">
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
+      <div className="h-48 pl-[24px] pr-[24px]">
+        <div className="flex flex-row mb-3">
+          <div className="text-base text-[#db9cda] font-medium w-[29%]">
             닉네임
           </div>
           <div className="flex w-[71%] border-b-2 items-center">
@@ -148,8 +177,8 @@ const ProfileEdit = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
+        <div className="flex flex-row mb-3">
+          <div className="text-[#db9cda] text-base font-medium w-[29%]">
             학과
           </div>
           <div className="flex w-[71%] border-b-2 items-center">
@@ -169,8 +198,8 @@ const ProfileEdit = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
+        <div className="flex flex-row mb-3">
+          <div className="text-[#db9cda] text-base font-medium w-[29%]">
             학년
           </div>
           <div className="flex w-[71%] border-b-2 items-center">
@@ -190,8 +219,8 @@ const ProfileEdit = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
+        <div className="flex flex-row mb-3">
+          <div className="text-[#db9cda] text-base font-medium w-[29%]">
             나이
           </div>
           <div className="flex w-[71%] border-b-2 items-center">
@@ -212,8 +241,8 @@ const ProfileEdit = () => {
             )}
           </div>
         </div>
-        <div className="flex flex-row pro:mb-[26px] mb-[15px]">
-          <div className="text-[#AFADF5] text-base font-medium w-[29%]">
+        <div className="flex flex-row">
+          <div className="text-[#db9cda] text-base font-medium w-[29%]">
             오픈채팅 링크
           </div>
           <div className="flex w-[71%] border-b-2 items-center">
@@ -236,7 +265,8 @@ const ProfileEdit = () => {
           </div>
         </div>
       </div>
-      <div className="flex w-full h-[9%] justify-center items-end">
+      <div className="h-60"></div>
+      <div className="flex w-full h-[9%] justify-center">
         <button
           className="text-center w-[80%] h-[50%] ring-2 ring-[#9d6ddd] text-[#9d6ddd] bg-white bg-opacity-60 font-extrabold text-sm rounded-md shadow-button"
           onClick={submitHandler}

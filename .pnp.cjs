@@ -54,6 +54,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:2.1.0"],\
             ["autoprefixer", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:10.4.12"],\
             ["axios", "npm:1.1.3"],\
+            ["browser-image-compression", "npm:2.0.0"],\
             ["jwt-decode", "npm:3.1.2"],\
             ["postcss", "npm:8.4.17"],\
             ["react", "npm:18.2.0"],\
@@ -1954,6 +1955,16 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["braces", "npm:3.0.2"],\
             ["fill-range", "npm:7.0.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["browser-image-compression", [\
+        ["npm:2.0.0", {\
+          "packageLocation": "./.yarn/cache/browser-image-compression-npm-2.0.0-d41d5989f6-c95b3ad5d6.zip/node_modules/browser-image-compression/",\
+          "packageDependencies": [\
+            ["browser-image-compression", "npm:2.0.0"],\
+            ["uzip", "npm:0.20201231.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4305,6 +4316,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@vitejs/plugin-react", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:2.1.0"],\
             ["autoprefixer", "virtual:8a7e9b52ee7419f7cd5d8bfc794cc0d1dd6442e8356eca37d2f93380dc23a5658f3458c04ee9acf08061fe123903c2e328b5511d82b5c688b70febadd32563bf#npm:10.4.12"],\
             ["axios", "npm:1.1.3"],\
+            ["browser-image-compression", "npm:2.0.0"],\
             ["jwt-decode", "npm:3.1.2"],\
             ["postcss", "npm:8.4.17"],\
             ["react", "npm:18.2.0"],\
@@ -4670,6 +4682,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/util-deprecate-npm-1.0.2-e3fe1a219c-474acf1146.zip/node_modules/util-deprecate/",\
           "packageDependencies": [\
             ["util-deprecate", "npm:1.0.2"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["uzip", [\
+        ["npm:0.20201231.0", {\
+          "packageLocation": "./.yarn/cache/uzip-npm-0.20201231.0-122f770c6a-34253f4c3d.zip/node_modules/uzip/",\
+          "packageDependencies": [\
+            ["uzip", "npm:0.20201231.0"]\
           ],\
           "linkType": "HARD"\
         }]\
