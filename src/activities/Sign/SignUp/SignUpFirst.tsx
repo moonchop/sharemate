@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { checkEmail, RegisterApi } from "../../../utils/api/auth";
 import { SignUpFormInterface } from "./SignUp.type";
-import defaultProfile from "../../../assets/defaultProfile.png";
 import { useAuth } from "../../../stores/auth";
 import { useUser } from "../../../stores/user";
 
@@ -47,7 +46,8 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
       return;
     }
 
-    data.profile_photo = defaultProfile;
+    data.profile_photo =
+      "https://mysharemate.s3.ap-northeast-2.amazonaws.com/test/8712b293-0d19-41eb-8c95-0557c3a42afe_DefaultProfile.png";
     data.age = Number(data.age);
     data.grade = Number(data.grade);
     data.gender = data.gender == "남" ? 1 : 0;
