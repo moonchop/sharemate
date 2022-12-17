@@ -128,6 +128,7 @@ const ModifyFavor = () => {
           수정하기
         </button>
       </div>
+      <div className="h-96"></div>
     </div>
   );
 };

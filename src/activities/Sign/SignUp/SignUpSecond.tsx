@@ -62,6 +62,7 @@ const SignUpSecond = ({ handleGoPrev, handleGoNext }: any) => {
       >
         다음
       </button>
+      <div className="h-96"></div>
     </div>
   );
 };

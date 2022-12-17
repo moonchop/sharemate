@@ -328,6 +328,7 @@ const SignUpFirst = ({ handleGoNext }: { handleGoNext: () => void }) => {
           ""
         )}
       </form>
+      <div className="h-96"></div>
     </div>
   );
 };
