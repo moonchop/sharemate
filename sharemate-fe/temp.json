@@ -1,0 +1,20 @@
+{
+  "name": "string",
+  "password": "string", //validate pattern : (한글, 영문, 숫자 6~12 자리)
+  "email": "string", //이메일 형식
+  "subject": "enum", //학과 백엔드에서 별도로 매핑을 하는지?
+  "gender": "enum | number", //남,여 emum 아니면 0,1 신분증 처럼 구분 어떤가요?
+  "birth": "number", //2000
+  "grade": "number", //1,2,3,4
+  "foreign": "enum|boolean", //내국인 or 외국인
+  "mbti": "enum", //이것도 백엔드에서 어떻게 처리하실지 궁금해요
+  "sleepTimePattern": "", //5시간 미만 or 5시간 이상
+  "isSmoker": "boolean",
+  "lifePattern": "enum", //올빼미형 or 아침형 추후 확장을 고려하여 boolean은 안될거 같아요.
+  "drinkingDuration": "number|enum|string", //잦은편 or 드문편
+  "cleanliness" : "number", //예민 or 둔감
+  "snoring": "boolean" // 유 or 무
+
+}
+
+
